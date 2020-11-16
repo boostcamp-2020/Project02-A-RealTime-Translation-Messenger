@@ -1,12 +1,3 @@
----
-name: Bug report
-about: Create a report to help us improve
-title: ''
-labels: ''
-assignees: ''
-
----
-
 | Name       | about                              | title | labels | assignees |
 | ---------- | ---------------------------------- | ----- | ------ | --------- |
 | Bug report | Create a report to help us improve |       |        |           |
