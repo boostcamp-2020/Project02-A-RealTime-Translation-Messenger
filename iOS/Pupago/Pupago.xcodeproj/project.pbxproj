@@ -1,0 +1,738 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		153C0A9BABD984E3412BA93A /* Pods_Pupago.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51744D7994175CD6BC8A832E /* Pods_Pupago.framework */; };
+		9705477B2566649D00500D79 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9705477A2566649D00500D79 /* AppDelegate.swift */; };
+		9705477D2566649D00500D79 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9705477C2566649D00500D79 /* SceneDelegate.swift */; };
+		9705477F2566649D00500D79 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9705477E2566649D00500D79 /* ViewController.swift */; };
+		970547822566649D00500D79 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 970547802566649D00500D79 /* Main.storyboard */; };
+		970547842566649E00500D79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 970547832566649E00500D79 /* Assets.xcassets */; };
+		970547872566649E00500D79 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 970547852566649E00500D79 /* LaunchScreen.storyboard */; };
+		970547922566649F00500D79 /* PupagoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970547912566649F00500D79 /* PupagoTests.swift */; };
+		9705479D2566649F00500D79 /* PupagoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9705479C2566649F00500D79 /* PupagoUITests.swift */; };
+		9D3C1EAB4F277EE81902BD99 /* Pods_PupagoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D63A44A3FA54CB79CE0D4AEC /* Pods_PupagoTests.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9705478E2566649F00500D79 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9705476F2566649D00500D79 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 970547762566649D00500D79;
+			remoteInfo = Pupago;
+		};
+		970547992566649F00500D79 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9705476F2566649D00500D79 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 970547762566649D00500D79;
+			remoteInfo = Pupago;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		51744D7994175CD6BC8A832E /* Pods_Pupago.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pupago.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		92C35758055C736769A97F84 /* Pods-Pupago.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pupago.debug.xcconfig"; path = "Target Support Files/Pods-Pupago/Pods-Pupago.debug.xcconfig"; sourceTree = "<group>"; };
+		970547772566649D00500D79 /* Pupago.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pupago.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9705477A2566649D00500D79 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		9705477C2566649D00500D79 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		9705477E2566649D00500D79 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		970547812566649D00500D79 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		970547832566649E00500D79 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		970547862566649E00500D79 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		970547882566649E00500D79 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9705478D2566649F00500D79 /* PupagoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PupagoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		970547912566649F00500D79 /* PupagoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PupagoTests.swift; sourceTree = "<group>"; };
+		970547932566649F00500D79 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		970547982566649F00500D79 /* PupagoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PupagoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9705479C2566649F00500D79 /* PupagoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PupagoUITests.swift; sourceTree = "<group>"; };
+		9705479E2566649F00500D79 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AE1676964940092EB6BDCC83 /* Pods-PupagoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PupagoTests.release.xcconfig"; path = "Target Support Files/Pods-PupagoTests/Pods-PupagoTests.release.xcconfig"; sourceTree = "<group>"; };
+		D63A44A3FA54CB79CE0D4AEC /* Pods_PupagoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PupagoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E1422F18135657696ED5A239 /* Pods-Pupago.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pupago.release.xcconfig"; path = "Target Support Files/Pods-Pupago/Pods-Pupago.release.xcconfig"; sourceTree = "<group>"; };
+		F5681089291DB3A319B9AC7D /* Pods-PupagoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PupagoTests.debug.xcconfig"; path = "Target Support Files/Pods-PupagoTests/Pods-PupagoTests.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		970547742566649D00500D79 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				153C0A9BABD984E3412BA93A /* Pods_Pupago.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9705478A2566649F00500D79 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9D3C1EAB4F277EE81902BD99 /* Pods_PupagoTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		970547952566649F00500D79 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1FD68E6FC90702E2145E58A9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				92C35758055C736769A97F84 /* Pods-Pupago.debug.xcconfig */,
+				E1422F18135657696ED5A239 /* Pods-Pupago.release.xcconfig */,
+				F5681089291DB3A319B9AC7D /* Pods-PupagoTests.debug.xcconfig */,
+				AE1676964940092EB6BDCC83 /* Pods-PupagoTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		9705476E2566649D00500D79 = {
+			isa = PBXGroup;
+			children = (
+				970547792566649D00500D79 /* Pupago */,
+				970547902566649F00500D79 /* PupagoTests */,
+				9705479B2566649F00500D79 /* PupagoUITests */,
+				970547782566649D00500D79 /* Products */,
+				1FD68E6FC90702E2145E58A9 /* Pods */,
+				A106B5FA97F6ACE94592FFFF /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		970547782566649D00500D79 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				970547772566649D00500D79 /* Pupago.app */,
+				9705478D2566649F00500D79 /* PupagoTests.xctest */,
+				970547982566649F00500D79 /* PupagoUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		970547792566649D00500D79 /* Pupago */ = {
+			isa = PBXGroup;
+			children = (
+				9705477A2566649D00500D79 /* AppDelegate.swift */,
+				9705477C2566649D00500D79 /* SceneDelegate.swift */,
+				9705477E2566649D00500D79 /* ViewController.swift */,
+				970547802566649D00500D79 /* Main.storyboard */,
+				970547832566649E00500D79 /* Assets.xcassets */,
+				970547852566649E00500D79 /* LaunchScreen.storyboard */,
+				970547882566649E00500D79 /* Info.plist */,
+			);
+			path = Pupago;
+			sourceTree = "<group>";
+		};
+		970547902566649F00500D79 /* PupagoTests */ = {
+			isa = PBXGroup;
+			children = (
+				970547912566649F00500D79 /* PupagoTests.swift */,
+				970547932566649F00500D79 /* Info.plist */,
+			);
+			path = PupagoTests;
+			sourceTree = "<group>";
+		};
+		9705479B2566649F00500D79 /* PupagoUITests */ = {
+			isa = PBXGroup;
+			children = (
+				9705479C2566649F00500D79 /* PupagoUITests.swift */,
+				9705479E2566649F00500D79 /* Info.plist */,
+			);
+			path = PupagoUITests;
+			sourceTree = "<group>";
+		};
+		A106B5FA97F6ACE94592FFFF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				51744D7994175CD6BC8A832E /* Pods_Pupago.framework */,
+				D63A44A3FA54CB79CE0D4AEC /* Pods_PupagoTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		970547762566649D00500D79 /* Pupago */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 970547A12566649F00500D79 /* Build configuration list for PBXNativeTarget "Pupago" */;
+			buildPhases = (
+				7D91230E2607075F4D798E41 /* [CP] Check Pods Manifest.lock */,
+				970547732566649D00500D79 /* Sources */,
+				970547742566649D00500D79 /* Frameworks */,
+				970547752566649D00500D79 /* Resources */,
+				BE44402C85491C99A3DE6D71 /* [CP] Embed Pods Frameworks */,
+				97D5D97725666883005BE53A /* Swfit Lint Script */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Pupago;
+			productName = Pupago;
+			productReference = 970547772566649D00500D79 /* Pupago.app */;
+			productType = "com.apple.product-type.application";
+		};
+		9705478C2566649F00500D79 /* PupagoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 970547A42566649F00500D79 /* Build configuration list for PBXNativeTarget "PupagoTests" */;
+			buildPhases = (
+				8B191E2F309D55B88AAA014F /* [CP] Check Pods Manifest.lock */,
+				970547892566649F00500D79 /* Sources */,
+				9705478A2566649F00500D79 /* Frameworks */,
+				9705478B2566649F00500D79 /* Resources */,
+				89E64DC6EB22ACC9603FF87D /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9705478F2566649F00500D79 /* PBXTargetDependency */,
+			);
+			name = PupagoTests;
+			productName = PupagoTests;
+			productReference = 9705478D2566649F00500D79 /* PupagoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		970547972566649F00500D79 /* PupagoUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 970547A72566649F00500D79 /* Build configuration list for PBXNativeTarget "PupagoUITests" */;
+			buildPhases = (
+				970547942566649F00500D79 /* Sources */,
+				970547952566649F00500D79 /* Frameworks */,
+				970547962566649F00500D79 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9705479A2566649F00500D79 /* PBXTargetDependency */,
+			);
+			name = PupagoUITests;
+			productName = PupagoUITests;
+			productReference = 970547982566649F00500D79 /* PupagoUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9705476F2566649D00500D79 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1220;
+				LastUpgradeCheck = 1220;
+				TargetAttributes = {
+					970547762566649D00500D79 = {
+						CreatedOnToolsVersion = 12.2;
+					};
+					9705478C2566649F00500D79 = {
+						CreatedOnToolsVersion = 12.2;
+						TestTargetID = 970547762566649D00500D79;
+					};
+					970547972566649F00500D79 = {
+						CreatedOnToolsVersion = 12.2;
+						TestTargetID = 970547762566649D00500D79;
+					};
+				};
+			};
+			buildConfigurationList = 970547722566649D00500D79 /* Build configuration list for PBXProject "Pupago" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 9705476E2566649D00500D79;
+			productRefGroup = 970547782566649D00500D79 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				970547762566649D00500D79 /* Pupago */,
+				9705478C2566649F00500D79 /* PupagoTests */,
+				970547972566649F00500D79 /* PupagoUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		970547752566649D00500D79 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				970547872566649E00500D79 /* LaunchScreen.storyboard in Resources */,
+				970547842566649E00500D79 /* Assets.xcassets in Resources */,
+				970547822566649D00500D79 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9705478B2566649F00500D79 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		970547962566649F00500D79 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7D91230E2607075F4D798E41 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Pupago-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		89E64DC6EB22ACC9603FF87D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PupagoTests/Pods-PupagoTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PupagoTests/Pods-PupagoTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PupagoTests/Pods-PupagoTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8B191E2F309D55B88AAA014F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PupagoTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		97D5D97725666883005BE53A /* Swfit Lint Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Swfit Lint Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
+		};
+		BE44402C85491C99A3DE6D71 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Pupago/Pods-Pupago-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Pupago/Pods-Pupago-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Pupago/Pods-Pupago-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		970547732566649D00500D79 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9705477F2566649D00500D79 /* ViewController.swift in Sources */,
+				9705477B2566649D00500D79 /* AppDelegate.swift in Sources */,
+				9705477D2566649D00500D79 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		970547892566649F00500D79 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				970547922566649F00500D79 /* PupagoTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		970547942566649F00500D79 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9705479D2566649F00500D79 /* PupagoUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9705478F2566649F00500D79 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 970547762566649D00500D79 /* Pupago */;
+			targetProxy = 9705478E2566649F00500D79 /* PBXContainerItemProxy */;
+		};
+		9705479A2566649F00500D79 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 970547762566649D00500D79 /* Pupago */;
+			targetProxy = 970547992566649F00500D79 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		970547802566649D00500D79 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				970547812566649D00500D79 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		970547852566649E00500D79 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				970547862566649E00500D79 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		9705479F2566649F00500D79 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		970547A02566649F00500D79 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		970547A22566649F00500D79 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 92C35758055C736769A97F84 /* Pods-Pupago.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = EKU567YQE4;
+				INFOPLIST_FILE = Pupago/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.boostcamp.Pupago;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		970547A32566649F00500D79 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E1422F18135657696ED5A239 /* Pods-Pupago.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = EKU567YQE4;
+				INFOPLIST_FILE = Pupago/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.boostcamp.Pupago;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		970547A52566649F00500D79 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F5681089291DB3A319B9AC7D /* Pods-PupagoTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = EKU567YQE4;
+				INFOPLIST_FILE = PupagoTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.boostcamp.PupagoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pupago.app/Pupago";
+			};
+			name = Debug;
+		};
+		970547A62566649F00500D79 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AE1676964940092EB6BDCC83 /* Pods-PupagoTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = EKU567YQE4;
+				INFOPLIST_FILE = PupagoTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.boostcamp.PupagoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pupago.app/Pupago";
+			};
+			name = Release;
+		};
+		970547A82566649F00500D79 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = EKU567YQE4;
+				INFOPLIST_FILE = PupagoUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.boostcamp.PupagoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Pupago;
+			};
+			name = Debug;
+		};
+		970547A92566649F00500D79 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = EKU567YQE4;
+				INFOPLIST_FILE = PupagoUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.boostcamp.PupagoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Pupago;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		970547722566649D00500D79 /* Build configuration list for PBXProject "Pupago" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9705479F2566649F00500D79 /* Debug */,
+				970547A02566649F00500D79 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		970547A12566649F00500D79 /* Build configuration list for PBXNativeTarget "Pupago" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				970547A22566649F00500D79 /* Debug */,
+				970547A32566649F00500D79 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		970547A42566649F00500D79 /* Build configuration list for PBXNativeTarget "PupagoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				970547A52566649F00500D79 /* Debug */,
+				970547A62566649F00500D79 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		970547A72566649F00500D79 /* Build configuration list for PBXNativeTarget "PupagoUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				970547A82566649F00500D79 /* Debug */,
+				970547A92566649F00500D79 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9705476F2566649D00500D79 /* Project object */;
+}
