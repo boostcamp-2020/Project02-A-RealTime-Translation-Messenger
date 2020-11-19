@@ -5,7 +5,7 @@
 <img width = 900 src = "https://i.imgur.com/MA6DaoS.png">
 
 ![Swift](https://img.shields.io/badge/swift-v5.1-orange?logo=swift)
-![Xcode](https://img.shields.io/badge/xcode-v12.1-blue?logo=xcode)
+![Xcode](https://img.shields.io/badge/xcode-v12.2-blue?logo=xcode)
 ![Typescript](https://img.shields.io/badge/typescript-v4.0.2-yellow?logo=typescript)
 ![react](https://img.shields.io/badge/react-16.13-1cf?logo=react)
 ![NodeJS](https://img.shields.io/badge/node.js-v12.18.3-green?logo=node.js)
