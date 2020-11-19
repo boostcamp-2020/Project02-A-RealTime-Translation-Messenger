@@ -76,12 +76,12 @@
 </br>
 
 ### BE
-
-| Spec | <img width= 50 src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1566913457/noticon/eh4d0dnic4n1neth3fui.png"> | <img width= 50 src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1597622806/noticon/avedhz3pvaij65k3ztar.png"> | <img width= 50 src="https://i.imgur.com/pfnOdTD.png"> | <img width= 50 src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1581824691/noticon/hmvqgvug8zl7etwmabuq.png"> | <img width= 50 src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1566913679/noticon/xlnsjihvjxllech0hawu.png"> |
-| :--: | :--: | :--: | :--: | :--: | :--: |
-| **Description** | TypeScript | Express | SocketIO | MongoDB | Redis |
+| Spec | <img width= 50 src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1566913457/noticon/eh4d0dnic4n1neth3fui.png"> | <img width= 50 src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1597622806/noticon/avedhz3pvaij65k3ztar.png"> | <img width= 50 src="https://i.imgur.com/pfnOdTD.png"> | <img width= 50 src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1581824691/noticon/hmvqgvug8zl7etwmabuq.png"> | <img width= 50 src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1566913679/noticon/xlnsjihvjxllech0hawu.png"> | <img width= 50 src="https://i.imgur.com/1lgBkrb.png"> |
+| :--: | :--: | :--: | :--: | :--: | :--: | :--: |
+| **Description** | TypeScript | Express | SocketIO | MongoDB | Redis | PM2 |
 
 </br>
+
 
 ### Infra
 | Spec | <img width= 50 src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1566778391/noticon/l0uiouhpeiq31huqu7ft.jpg"> | <img width= 50 src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1566798146/noticon/lku5cppzh8r7awwsmmko.png"> | <img width= 50 src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1568175385/noticon/iodu1jssf0kwe4oie2dt.png">|
