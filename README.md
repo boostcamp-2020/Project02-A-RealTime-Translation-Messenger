@@ -83,7 +83,7 @@
 
 </br>
 
-### 인프라
+### Infra
 | Spec | <img width= 50 src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1566778391/noticon/l0uiouhpeiq31huqu7ft.jpg"> | <img width= 50 src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1566798146/noticon/lku5cppzh8r7awwsmmko.png"> | <img width= 50 src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1568175385/noticon/iodu1jssf0kwe4oie2dt.png">|
 | :--: | :--: | :--: | :--: |
 | **Description** | Jenkins | Nginx | Docker |
