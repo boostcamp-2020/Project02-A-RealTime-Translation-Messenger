@@ -122,12 +122,11 @@
 		970547792566649D00500D79 /* Pupago */ = {
 			isa = PBXGroup;
 			children = (
-				9705477A2566649D00500D79 /* AppDelegate.swift */,
-				9705477C2566649D00500D79 /* SceneDelegate.swift */,
-				9705477E2566649D00500D79 /* ViewController.swift */,
-				970547802566649D00500D79 /* Main.storyboard */,
-				970547832566649E00500D79 /* Assets.xcassets */,
-				970547852566649E00500D79 /* LaunchScreen.storyboard */,
+				975C53E7256B5A5000739DCA /* Application */,
+				975C53EC256B5B2900739DCA /* Common */,
+				975C53E9256B5A7500739DCA /* Module */,
+				975C53E8256B5A5C00739DCA /* Model */,
+				975C53EA256B5A8B00739DCA /* Resource */,
 				970547882566649E00500D79 /* Info.plist */,
 			);
 			path = Pupago;
@@ -149,6 +148,55 @@
 				9705479E2566649F00500D79 /* Info.plist */,
 			);
 			path = PupagoUITests;
+			sourceTree = "<group>";
+		};
+		975C53E7256B5A5000739DCA /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				9705477A2566649D00500D79 /* AppDelegate.swift */,
+				9705477C2566649D00500D79 /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		975C53E8256B5A5C00739DCA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		975C53E9256B5A7500739DCA /* Module */ = {
+			isa = PBXGroup;
+			children = (
+				9705477E2566649D00500D79 /* ViewController.swift */,
+				975C53EB256B5AF600739DCA /* Main */,
+			);
+			path = Module;
+			sourceTree = "<group>";
+		};
+		975C53EA256B5A8B00739DCA /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				970547832566649E00500D79 /* Assets.xcassets */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		975C53EB256B5AF600739DCA /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				970547802566649D00500D79 /* Main.storyboard */,
+				970547852566649E00500D79 /* LaunchScreen.storyboard */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		975C53EC256B5B2900739DCA /* Common */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		A106B5FA97F6ACE94592FFFF /* Frameworks */ = {
