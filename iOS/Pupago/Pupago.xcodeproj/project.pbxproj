@@ -10,12 +10,15 @@
 		153C0A9BABD984E3412BA93A /* Pods_Pupago.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51744D7994175CD6BC8A832E /* Pods_Pupago.framework */; };
 		9705477B2566649D00500D79 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9705477A2566649D00500D79 /* AppDelegate.swift */; };
 		9705477D2566649D00500D79 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9705477C2566649D00500D79 /* SceneDelegate.swift */; };
-		9705477F2566649D00500D79 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9705477E2566649D00500D79 /* ViewController.swift */; };
+		9705477F2566649D00500D79 /* LanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9705477E2566649D00500D79 /* LanguageViewController.swift */; };
 		970547822566649D00500D79 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 970547802566649D00500D79 /* Main.storyboard */; };
 		970547842566649E00500D79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 970547832566649E00500D79 /* Assets.xcassets */; };
 		970547872566649E00500D79 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 970547852566649E00500D79 /* LaunchScreen.storyboard */; };
 		970547922566649F00500D79 /* PupagoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970547912566649F00500D79 /* PupagoTests.swift */; };
 		9705479D2566649F00500D79 /* PupagoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9705479C2566649F00500D79 /* PupagoUITests.swift */; };
+		975C53F5256B6DFF00739DCA /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975C53F4256B6DFF00739DCA /* Button.swift */; };
+		975C53FA256B7CD100739DCA /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975C53F9256B7CD100739DCA /* GradientView.swift */; };
+		975C53FF256B844C00739DCA /* SelectableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975C53FE256B844C00739DCA /* SelectableButton.swift */; };
 		9D3C1EAB4F277EE81902BD99 /* Pods_PupagoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D63A44A3FA54CB79CE0D4AEC /* Pods_PupagoTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -42,7 +45,7 @@
 		970547772566649D00500D79 /* Pupago.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pupago.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9705477A2566649D00500D79 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9705477C2566649D00500D79 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		9705477E2566649D00500D79 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		9705477E2566649D00500D79 /* LanguageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageViewController.swift; sourceTree = "<group>"; };
 		970547812566649D00500D79 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		970547832566649E00500D79 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		970547862566649E00500D79 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -53,6 +56,9 @@
 		970547982566649F00500D79 /* PupagoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PupagoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9705479C2566649F00500D79 /* PupagoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PupagoUITests.swift; sourceTree = "<group>"; };
 		9705479E2566649F00500D79 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		975C53F4256B6DFF00739DCA /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		975C53F9256B7CD100739DCA /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		975C53FE256B844C00739DCA /* SelectableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableButton.swift; sourceTree = "<group>"; };
 		AE1676964940092EB6BDCC83 /* Pods-PupagoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PupagoTests.release.xcconfig"; path = "Target Support Files/Pods-PupagoTests/Pods-PupagoTests.release.xcconfig"; sourceTree = "<group>"; };
 		D63A44A3FA54CB79CE0D4AEC /* Pods_PupagoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PupagoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1422F18135657696ED5A239 /* Pods-Pupago.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pupago.release.xcconfig"; path = "Target Support Files/Pods-Pupago/Pods-Pupago.release.xcconfig"; sourceTree = "<group>"; };
@@ -169,7 +175,7 @@
 		975C53E9256B5A7500739DCA /* Module */ = {
 			isa = PBXGroup;
 			children = (
-				9705477E2566649D00500D79 /* ViewController.swift */,
+				975C53ED256B5C1500739DCA /* Setting Language */,
 				975C53EB256B5AF600739DCA /* Main */,
 			);
 			path = Module;
@@ -195,8 +201,19 @@
 		975C53EC256B5B2900739DCA /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				975C53F4256B6DFF00739DCA /* Button.swift */,
+				975C53F9256B7CD100739DCA /* GradientView.swift */,
+				975C53FE256B844C00739DCA /* SelectableButton.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		975C53ED256B5C1500739DCA /* Setting Language */ = {
+			isa = PBXGroup;
+			children = (
+				9705477E2566649D00500D79 /* LanguageViewController.swift */,
+			);
+			path = "Setting Language";
 			sourceTree = "<group>";
 		};
 		A106B5FA97F6ACE94592FFFF /* Frameworks */ = {
@@ -442,9 +459,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9705477F2566649D00500D79 /* ViewController.swift in Sources */,
+				9705477F2566649D00500D79 /* LanguageViewController.swift in Sources */,
 				9705477B2566649D00500D79 /* AppDelegate.swift in Sources */,
+				975C53FA256B7CD100739DCA /* GradientView.swift in Sources */,
+				975C53FF256B844C00739DCA /* SelectableButton.swift in Sources */,
 				9705477D2566649D00500D79 /* SceneDelegate.swift in Sources */,
+				975C53F5256B6DFF00739DCA /* Button.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

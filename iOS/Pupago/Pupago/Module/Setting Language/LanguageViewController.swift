@@ -6,10 +6,17 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
-class ViewController: UIViewController {
+class LanguageViewController: UIViewController {
+    @IBOutlet weak var introLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var engButton: SelectableButton!
+    @IBOutlet weak var korButton: SelectableButton!
+    @IBOutlet weak var nextButton: Button!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
     }
 }

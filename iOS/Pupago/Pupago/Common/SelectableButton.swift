@@ -7,14 +7,13 @@
 
 import UIKit
 
-class SelectableButton: UIButton {
+class SelectableButton: Button {
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    override var isSelected: Bool {
+        didSet {
+            backgroundColor = isSelected ? .white : .clear
+            setTitleColor(isSelected ? .systemGray : .white, for: .normal)
+        }
     }
-    */
 
 }
