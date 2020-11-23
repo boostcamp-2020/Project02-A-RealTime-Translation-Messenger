@@ -11,7 +11,7 @@
     // ts, tsx, json 파일은 확장자 없이 import 가능
     "no-console": "off",
     // 콘솔 허용이 필요할 때는 위의 코드에 주석을 달아서 지워주세요!
-    "end_of_line": "warn",
+    "end_of_line": "auto",
     "import/extensions": [
       "off",
       "ignorePackages",
