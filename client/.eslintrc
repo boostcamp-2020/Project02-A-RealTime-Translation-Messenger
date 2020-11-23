@@ -1,0 +1,41 @@
+{
+    "parser": "@typescript-eslint/parser",
+    "plugins": ["@typescript-eslint"],
+    "extends": [
+      "prettier",
+      "airbnb",
+      "airbnb/hooks",
+      "prettier/react",
+      "plugin:@typescript-eslint/recommended",
+      "prettier/@typescript-eslint",
+      "plugin:prettier/recommended"
+    ],
+    "env": {
+      "node": true,
+      "es2020": true,
+      "jest": true
+    },
+    "rules": {
+      // import 부분에서 뜨던 에러 해결
+      "no-use-before-define": "off",
+      "@typescript-eslint/no-use-before-define": ["error"],
+      "import/no-unresolved": "off",
+      // ts, tsx, json 파일은 확장자 없이 import 가능
+      "no-console": "off",
+      // 콘솔 허용이 필요할 때는 위의 코드에 주석을 달아서 지워주세요!
+      "end_of_line": "auto",
+      "import/extensions": [
+        "off",
+        "ignorePackages",
+        {
+          "ts": "never",
+          "tsx": "never",
+          "json": "never"
+        }
+      ],
+      // jsx 포함할 수 없다고 하는 이슈 해결
+      "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
+      "no-restricted-exports": ["error", { "restrictedNamedExports": ["default"] }],
+      "no-var": "error"
+    }
+  }
