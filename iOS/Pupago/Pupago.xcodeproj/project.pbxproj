@@ -147,7 +147,6 @@
 				975C53E7256B5A5000739DCA /* Application */,
 				975C53EC256B5B2900739DCA /* Common */,
 				975C53E9256B5A7500739DCA /* Module */,
-				975C53E8256B5A5C00739DCA /* Model */,
 				97B4BE72256BE921009A3825 /* Extensions */,
 				975C53EA256B5A8B00739DCA /* Resource */,
 				970547882566649E00500D79 /* Info.plist */,
@@ -181,13 +180,6 @@
 				97B4BE91256BEE7F009A3825 /* Navigator.swift */,
 			);
 			path = Application;
-			sourceTree = "<group>";
-		};
-		975C53E8256B5A5C00739DCA /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		975C53E9256B5A7500739DCA /* Module */ = {

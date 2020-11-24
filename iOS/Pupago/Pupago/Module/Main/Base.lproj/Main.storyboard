@@ -5,7 +5,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -180,31 +179,112 @@
             <point key="canvasLocation" x="82.608695652173921" y="76.339285714285708"/>
         </scene>
         <!--Nickname View Controller-->
-        <scene sceneID="HMK-LA-mZL">
+        <scene sceneID="0ag-pZ-hbv">
             <objects>
-                <viewController storyboardIdentifier="NicknameViewController" id="92b-Lk-Nqe" customClass="NicknameViewController" customModule="Pupago" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="JKc-kO-wQx">
+                <viewController storyboardIdentifier="NicknameViewController" id="S1a-HM-hIu" customClass="NicknameViewController" customModule="Pupago" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="s8N-Cg-a1I" customClass="GradientView" customModule="Pupago" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="View for Nickname Setting" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1xV-tq-R9c">
-                                <rect key="frame" x="106.5" y="437.5" width="201.5" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wkx-4t-E4G">
+                                <rect key="frame" x="40" y="248.5" width="334" height="41"/>
+                                <string key="text">다음으로
+닉네임을 입력해주세요.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="graphicSprinkle" translatesAutoresizingMaskIntoConstraints="NO" id="std-Pw-k5j">
+                                <rect key="frame" x="40" y="179.5" width="334" height="178.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="std-Pw-k5j" secondAttribute="height" multiplier="15:8" id="jkN-JH-tJj"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c14-eN-GRe" customClass="Button" customModule="Pupago" customModuleProvider="target">
+                                <rect key="frame" x="32" y="732" width="350" height="50"/>
+                                <color key="backgroundColor" name="ButtonColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Uek-hH-qwb"/>
+                                </constraints>
+                                <state key="normal" title="시작하기">
+                                    <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                        <real key="value" value="0.29999999999999999"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                        <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                        <size key="value" width="0.0" height="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BQn-C9-mt0">
+                                <rect key="frame" x="48" y="447.5" width="318" height="1"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="6vg-FA-O8m"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="닉네임은 2-12자여야 합니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JOg-XW-i3r">
+                                <rect key="frame" x="49" y="456.5" width="317" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="닉네임을 입력해주세요." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cAT-8Y-EXi">
+                                <rect key="frame" x="48" y="421.5" width="318" height="21"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="EtV-0C-lIJ"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <viewLayoutGuide key="safeArea" id="4eC-lh-lEL"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="1xV-tq-R9c" firstAttribute="centerY" secondItem="JKc-kO-wQx" secondAttribute="centerY" id="Mth-PB-n1K"/>
-                            <constraint firstItem="1xV-tq-R9c" firstAttribute="centerX" secondItem="JKc-kO-wQx" secondAttribute="centerX" id="Ph0-ji-Syt"/>
+                            <constraint firstItem="cAT-8Y-EXi" firstAttribute="width" secondItem="BQn-C9-mt0" secondAttribute="width" id="62O-ml-NzI"/>
+                            <constraint firstItem="std-Pw-k5j" firstAttribute="width" secondItem="wkx-4t-E4G" secondAttribute="width" id="6Ry-Sj-goq"/>
+                            <constraint firstItem="4eC-lh-lEL" firstAttribute="trailing" secondItem="BQn-C9-mt0" secondAttribute="trailing" constant="48" id="9C7-rM-4m5"/>
+                            <constraint firstItem="std-Pw-k5j" firstAttribute="centerX" secondItem="s8N-Cg-a1I" secondAttribute="centerX" id="NVk-KU-KPN"/>
+                            <constraint firstItem="JOg-XW-i3r" firstAttribute="width" secondItem="BQn-C9-mt0" secondAttribute="width" multiplier="0.996855" id="Qef-oE-8DR"/>
+                            <constraint firstItem="BQn-C9-mt0" firstAttribute="centerY" secondItem="s8N-Cg-a1I" secondAttribute="centerY" id="RL7-4y-KIZ"/>
+                            <constraint firstItem="c14-eN-GRe" firstAttribute="leading" secondItem="4eC-lh-lEL" secondAttribute="leading" constant="32" id="Syg-MY-8wO"/>
+                            <constraint firstItem="wkx-4t-E4G" firstAttribute="leading" secondItem="s8N-Cg-a1I" secondAttribute="leading" constant="40" id="TFf-N9-x8d"/>
+                            <constraint firstItem="BQn-C9-mt0" firstAttribute="leading" secondItem="4eC-lh-lEL" secondAttribute="leading" constant="48" id="asZ-KZ-V8w"/>
+                            <constraint firstItem="4eC-lh-lEL" firstAttribute="bottom" secondItem="c14-eN-GRe" secondAttribute="bottom" constant="80" id="bC0-z7-T6I"/>
+                            <constraint firstItem="BQn-C9-mt0" firstAttribute="top" secondItem="cAT-8Y-EXi" secondAttribute="bottom" constant="5" id="dVL-iQ-oaU"/>
+                            <constraint firstItem="JOg-XW-i3r" firstAttribute="top" secondItem="BQn-C9-mt0" secondAttribute="bottom" constant="8" id="eeA-ad-KPp"/>
+                            <constraint firstItem="wkx-4t-E4G" firstAttribute="centerY" secondItem="s8N-Cg-a1I" secondAttribute="centerY" multiplier="0.6" id="hPQ-IL-Qd3"/>
+                            <constraint firstItem="4eC-lh-lEL" firstAttribute="trailing" secondItem="c14-eN-GRe" secondAttribute="trailing" constant="32" id="haN-9W-uDx"/>
+                            <constraint firstItem="JOg-XW-i3r" firstAttribute="trailing" secondItem="BQn-C9-mt0" secondAttribute="trailing" id="jPg-Fh-s4m"/>
+                            <constraint firstItem="std-Pw-k5j" firstAttribute="centerY" secondItem="s8N-Cg-a1I" secondAttribute="centerY" multiplier="0.6" id="mu5-Ls-EYy"/>
+                            <constraint firstAttribute="trailing" secondItem="wkx-4t-E4G" secondAttribute="trailing" constant="40" id="qBT-hg-qRb"/>
+                            <constraint firstItem="cAT-8Y-EXi" firstAttribute="leading" secondItem="BQn-C9-mt0" secondAttribute="leading" id="z2M-tV-XsB"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="firstColor">
+                                <color key="value" name="GreenColor"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="secondColor">
+                                <color key="value" name="BlueColor"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="UQ5-uU-OhX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZeI-0J-dqE" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="984" y="76"/>
+            <point key="canvasLocation" x="972" y="76"/>
         </scene>
     </scenes>
     <designables>
@@ -213,6 +293,9 @@
         </designable>
         <designable name="PEt-Pc-nuO">
             <size key="intrinsicContentSize" width="30" height="30"/>
+        </designable>
+        <designable name="c14-eN-GRe">
+            <size key="intrinsicContentSize" width="52" height="30"/>
         </designable>
         <designable name="rKw-lr-5j4">
             <size key="intrinsicContentSize" width="30" height="30"/>
@@ -229,8 +312,5 @@
         <namedColor name="GreenColor">
             <color red="0.18400000035762787" green="0.77300000190734863" blue="0.61599999666213989" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>
