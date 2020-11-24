@@ -18,10 +18,12 @@ class Navigator {
     enum Scene {
         case language(viewModel: LanguageViewModel)
         case nickname(viewModel: NicknameViewModel)
+        case chatlist(viewModel: ChattingListViewModel)
     }
     
     enum Transition {
         case root(in: UIWindow)
+        case rootWithNavigation(in: UIWindow)
         case navigation
     }
     
@@ -40,6 +42,8 @@ class Navigator {
             return instantiateFromStoryBoard(type: LanguageViewController.self, viewModel: viewModel)
         case .nickname(let viewModel):
             return instantiateFromStoryBoard(type: NicknameViewController.self, viewModel: viewModel)
+        case .chatlist(let viewModel):
+            return instantiateFromStoryBoard(type: ChattingListViewController.self, viewModel: viewModel)
         }
     }
     
@@ -58,6 +62,14 @@ class Navigator {
                               animations: nil,
                               completion: nil)
             return
+        case .rootWithNavigation(in: let window):
+            let navigationController = NavigationController(rootViewController: target)
+            window.rootViewController = navigationController
+            UIView.transition(with: window,
+                              duration: 0.5,
+                              options: .transitionCrossDissolve,
+                              animations: nil,
+                              completion: nil)
         default: break
         }
         

@@ -24,8 +24,10 @@ class NicknameViewController: ViewController {
     override func bindViewModel() {
         guard let viewModel = viewModel as? NicknameViewModel else { return }
         let nameText = nameTextField.rx.text.asObservable()
+        let nextSelection = startButton.rx.tap.map { _ in }
         
-        let input = NicknameViewModel.Input(nicknameText: nameText)
+        let input = NicknameViewModel.Input(nicknameText: nameText,
+                                            nextTrigger: nextSelection)
         let output = viewModel.transform(input)
         
         output.viewTexts
@@ -48,6 +50,13 @@ class NicknameViewController: ViewController {
             .drive(onNext: { [weak self] activate in
                 self?.startButton.isUserInteractionEnabled = activate
                 self?.startButton.backgroundColor = activate ? UIColor(named: "ButtonColor") : .systemGray6
+            })
+            .disposed(by: rx.disposeBag)
+        
+        output.nextButtonSelected
+            .drive(onNext: { [weak self] viewModel in
+                guard let window = self?.view.window else { return }
+                self?.navigator.show(segue: .chatlist(viewModel: viewModel), sender: self, transition: .rootWithNavigation(in: window))
             })
             .disposed(by: rx.disposeBag)
     }

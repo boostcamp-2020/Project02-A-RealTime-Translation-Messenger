@@ -13,12 +13,14 @@ class NicknameViewModel: ViewModel, ViewModelType {
     
     struct Input {
         let nicknameText: Observable<String?>
+        let nextTrigger: Observable<Void>
     }
     
     struct Output {
         let viewTexts: Driver<Localize.SettingNicknameViewText>
         let isNicknameValid: Driver<Bool>
         let activate: Driver<Bool>
+        let nextButtonSelected: Driver<ChattingListViewModel>
     }
     
     let isEmpty = BehaviorRelay<Bool>(value: true)
@@ -46,9 +48,21 @@ class NicknameViewModel: ViewModel, ViewModelType {
             .map { !$0 && $1 }
             .asDriver(onErrorJustReturn: false)
         
+        input.nextTrigger
+                    .withLatestFrom(input.nicknameText)
+                    .subscribe(onNext: { text in
+                        Application.shared.userName = text ?? ""
+                    })
+                    .disposed(by: rx.disposeBag)
+        
+        let nextButtonSelected = input.nextTrigger
+            .map { ChattingListViewModel() }
+            .asDriver(onErrorJustReturn: ChattingListViewModel())
+        
         return Output(viewTexts: viewText,
                       isNicknameValid: isNicknameValid,
-                      activate: activate)
+                      activate: activate,
+                      nextButtonSelected: nextButtonSelected)
     }
     
     private func validate(nickname: String) -> Bool {
