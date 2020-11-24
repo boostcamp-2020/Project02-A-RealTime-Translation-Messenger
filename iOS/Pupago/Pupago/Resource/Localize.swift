@@ -7,10 +7,6 @@
 
 import Foundation
 
-struct User {
-    var nickname: String
-    
-}
 enum Localize {
     case korean
     case english
