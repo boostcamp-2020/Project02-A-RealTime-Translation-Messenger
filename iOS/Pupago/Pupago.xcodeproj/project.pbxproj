@@ -31,6 +31,7 @@
 		97F534FA256CD087005998EE /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F534F9256CD087005998EE /* View.swift */; };
 		97F534FF256CE947005998EE /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F534FE256CE947005998EE /* Application.swift */; };
 		9D3C1EAB4F277EE81902BD99 /* Pods_PupagoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D63A44A3FA54CB79CE0D4AEC /* Pods_PupagoTests.framework */; };
+		BD4B5A9B256D094F00BAE1D8 /* String+Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4B5A9A256D094F00BAE1D8 /* String+Regex.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +83,7 @@
 		97F534F9256CD087005998EE /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		97F534FE256CE947005998EE /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		AE1676964940092EB6BDCC83 /* Pods-PupagoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PupagoTests.release.xcconfig"; path = "Target Support Files/Pods-PupagoTests/Pods-PupagoTests.release.xcconfig"; sourceTree = "<group>"; };
+		BD4B5A9A256D094F00BAE1D8 /* String+Regex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Regex.swift"; sourceTree = "<group>"; };
 		D63A44A3FA54CB79CE0D4AEC /* Pods_PupagoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PupagoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1422F18135657696ED5A239 /* Pods-Pupago.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pupago.release.xcconfig"; path = "Target Support Files/Pods-Pupago/Pods-Pupago.release.xcconfig"; sourceTree = "<group>"; };
 		F5681089291DB3A319B9AC7D /* Pods-PupagoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PupagoTests.debug.xcconfig"; path = "Target Support Files/Pods-PupagoTests/Pods-PupagoTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 			isa = PBXGroup;
 			children = (
 				97B4BE73256BE935009A3825 /* NSObject+Rx.swift */,
+				BD4B5A9A256D094F00BAE1D8 /* String+Regex.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -502,6 +505,7 @@
 			files = (
 				97F534FA256CD087005998EE /* View.swift in Sources */,
 				9705477F2566649D00500D79 /* LanguageViewController.swift in Sources */,
+				BD4B5A9B256D094F00BAE1D8 /* String+Regex.swift in Sources */,
 				97F534FF256CE947005998EE /* Application.swift in Sources */,
 				9705477B2566649D00500D79 /* AppDelegate.swift in Sources */,
 				975C5409256B8FC500739DCA /* LanguageViewModel.swift in Sources */,
