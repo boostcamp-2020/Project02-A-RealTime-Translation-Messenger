@@ -17,5 +17,5 @@ protocol ViewModelType {
 }
 
 class ViewModel: NSObject {
-    let localize = BehaviorRelay<Localize>(value: .korean)
+    let localize = BehaviorRelay<Localize>(value: Application.shared.localize)
 }

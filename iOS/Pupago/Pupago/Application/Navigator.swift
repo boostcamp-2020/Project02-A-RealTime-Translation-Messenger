@@ -13,6 +13,8 @@ protocol Navigatable {
 
 class Navigator {
     
+    static let `default` = Navigator()
+    
     enum Scene {
         case language(viewModel: LanguageViewModel)
         case nickname(viewModel: NicknameViewModel)
