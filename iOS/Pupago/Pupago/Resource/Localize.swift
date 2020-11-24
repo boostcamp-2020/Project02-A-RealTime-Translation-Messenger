@@ -20,6 +20,13 @@ enum Localize {
         let description: String
         let nextButton: String
     }
+    
+    struct SettingNicknameViewText {
+        var intro: String
+        var inputPlaceholder: String
+        var inputConstraint: String
+        var nextButton: String
+    }
 }
 
 extension Localize {
@@ -34,6 +41,21 @@ extension Localize {
             return .init(intro: "Hello!\nWelcome to Realtime Chat\nEnjoy Global Chatting!",
                             description: "Select your Language",
                             nextButton: "Next")
+        }
+    }
+    
+    var nicknameViewText: SettingNicknameViewText {
+        switch self {
+        case .korean:
+            return .init(intro: "다음으로\n닉네임을 입력해주세요.",
+                         inputPlaceholder: "닉네임을 입력해주세요.",
+                         inputConstraint: "닉네임은 2-12자여야 합니다.",
+                         nextButton: "시작하기")
+        case .english:
+            return .init(intro: "Next,\nEnter your nickname.",
+                         inputPlaceholder: "Enter your nickname",
+                         inputConstraint: "Nickname must be 2-12 characters.",
+                         nextButton: "Start")
         }
     }
 }
