@@ -2,8 +2,7 @@ excluded:
   - Carthage
   - Pods
   - DerivedData
-  - Pupago/AppDelegate.swift
-  - Pupago/SceneDelegate.swift
+  - Pupago/Application
   - PupagoTests
   - PupagoUITests
 
@@ -16,6 +15,8 @@ disabled_rules:
   - missing_docs
   - unused_closure_parameter
   - cyclomatic_complexity
+  - leading_whitespace
+  - trailing_whitespace
   
 opt_in_rules:
   - empty_count

@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Language View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController storyboardIdentifier="LanguageViewController" id="BYZ-38-t0r" customClass="LanguageViewController" customModule="Pupago" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="GradientView" customModule="Pupago" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HCK-bE-oQX">
+                                <rect key="frame" x="40" y="238.5" width="334" height="61"/>
+                                <string key="text">안녕하세요!
+실시간 번역 채팅 서비스입니다.
+글로벌 채팅을 즐겨보세요!</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="graphicSprinkle" translatesAutoresizingMaskIntoConstraints="NO" id="gqb-xe-un4">
+                                <rect key="frame" x="40" y="179.5" width="334" height="178.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="gqb-xe-un4" secondAttribute="height" multiplier="15:8" id="9Tq-Q6-xhh"/>
+                                </constraints>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="E6s-u8-oxS">
+                                <rect key="frame" x="132" y="401" width="150" height="94.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="언어를 선택해주세요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="68R-to-YX6">
+                                        <rect key="frame" x="6.5" y="0.0" width="137" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="f3u-ww-VcU">
+                                        <rect key="frame" x="0.0" y="44.5" width="150" height="50"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rKw-lr-5j4" customClass="SelectableButton" customModule="Pupago" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="50" id="02B-Sg-1vF"/>
+                                                    <constraint firstAttribute="width" secondItem="rKw-lr-5j4" secondAttribute="height" multiplier="1:1" id="MLk-En-dRg"/>
+                                                </constraints>
+                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="A">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <state key="selected" title="A">
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                        <real key="value" value="1"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                        <real key="value" value="0.0"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                                        <size key="value" width="0.0" height="0.0"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                        <real key="value" value="0.0"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mfe-6A-Hu4" customClass="SelectableButton" customModule="Pupago" customModuleProvider="target">
+                                                <rect key="frame" x="100" y="0.0" width="50" height="50"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="Mfe-6A-Hu4" secondAttribute="height" multiplier="1:1" id="EPc-Hw-4Gy"/>
+                                                    <constraint firstAttribute="width" constant="50" id="hhp-8i-aaS"/>
+                                                </constraints>
+                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="가">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <state key="selected" title="가">
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                        <real key="value" value="1"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="68R-to-YX6" firstAttribute="width" secondItem="E6s-u8-oxS" secondAttribute="width" multiplier="0.913333" id="wt1-B1-hFL"/>
+                                </constraints>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PEt-Pc-nuO" customClass="Button" customModule="Pupago" customModuleProvider="target">
+                                <rect key="frame" x="32" y="732" width="350" height="50"/>
+                                <color key="backgroundColor" name="ButtonColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="OdO-00-2lC"/>
+                                </constraints>
+                                <state key="normal" title="다음">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                        <real key="value" value="0.29999999999999999"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                        <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                        <size key="value" width="0.0" height="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="E6s-u8-oxS" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0KB-0b-Ib6"/>
+                            <constraint firstAttribute="trailing" secondItem="HCK-bE-oQX" secondAttribute="trailing" constant="40" id="2vv-ZI-sVT"/>
+                            <constraint firstItem="HCK-bE-oQX" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="0.6" id="4cU-5x-gu0"/>
+                            <constraint firstItem="E6s-u8-oxS" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="GPx-HW-P0h"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="PEt-Pc-nuO" secondAttribute="bottom" constant="80" id="VwS-mT-VjI"/>
+                            <constraint firstItem="gqb-xe-un4" firstAttribute="width" secondItem="HCK-bE-oQX" secondAttribute="width" id="bb5-iF-98a"/>
+                            <constraint firstItem="gqb-xe-un4" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="0.6" id="djG-aP-NWt"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="PEt-Pc-nuO" secondAttribute="trailing" constant="32" id="hpa-fC-Tlx"/>
+                            <constraint firstItem="PEt-Pc-nuO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="j9Z-nX-p72"/>
+                            <constraint firstItem="gqb-xe-un4" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="rdA-iw-DxP"/>
+                            <constraint firstItem="HCK-bE-oQX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="40" id="z3E-gc-MRF"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="firstColor">
+                                <color key="value" name="GreenColor"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="secondColor">
+                                <color key="value" name="BlueColor"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <connections>
+                        <outlet property="descriptionLabel" destination="68R-to-YX6" id="VAR-H1-kWv"/>
+                        <outlet property="engButton" destination="rKw-lr-5j4" id="yKc-ig-9Xj"/>
+                        <outlet property="introLabel" destination="HCK-bE-oQX" id="Mtc-0B-fum"/>
+                        <outlet property="korButton" destination="Mfe-6A-Hu4" id="3Ni-85-0Mp"/>
+                        <outlet property="nextButton" destination="PEt-Pc-nuO" id="UFt-cb-9M0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="82.608695652173921" y="76.339285714285708"/>
+        </scene>
+        <!--Nickname View Controller-->
+        <scene sceneID="0ag-pZ-hbv">
+            <objects>
+                <viewController storyboardIdentifier="NicknameViewController" id="S1a-HM-hIu" customClass="NicknameViewController" customModule="Pupago" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="s8N-Cg-a1I" customClass="GradientView" customModule="Pupago" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wkx-4t-E4G">
+                                <rect key="frame" x="40" y="248.5" width="334" height="41"/>
+                                <string key="text">다음으로
+닉네임을 입력해주세요.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="graphicSprinkle" translatesAutoresizingMaskIntoConstraints="NO" id="std-Pw-k5j">
+                                <rect key="frame" x="40" y="179.5" width="334" height="178.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="std-Pw-k5j" secondAttribute="height" multiplier="15:8" id="jkN-JH-tJj"/>
+                                </constraints>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="suM-7b-kNK">
+                                <rect key="frame" x="32" y="378" width="350" height="72"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5gg-Wq-yCe" customClass="View" customModule="Pupago" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="350" height="50"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="JAr-sM-xwT">
+                                                <rect key="frame" x="30" y="10.5" width="290" height="29"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="fZa-Nj-1FJ">
+                                                        <rect key="frame" x="0.0" y="0.0" width="32" height="29"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="32" id="FeD-yL-bYI"/>
+                                                            <constraint firstAttribute="width" secondItem="fZa-Nj-1FJ" secondAttribute="height" multiplier="256:231" id="jjX-yV-Qni"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="닉네임을 입력해주세요" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="KKZ-u6-060" customClass="ValidatingTextField" customModule="Pupago" customModuleProvider="target">
+                                                        <rect key="frame" x="48" y="0.0" width="242" height="29"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="JAr-sM-xwT" secondAttribute="trailing" constant="30" id="0O5-CF-5DI"/>
+                                            <constraint firstItem="JAr-sM-xwT" firstAttribute="leading" secondItem="5gg-Wq-yCe" secondAttribute="leading" constant="30" id="Gn2-qC-W6k"/>
+                                            <constraint firstItem="JAr-sM-xwT" firstAttribute="centerY" secondItem="5gg-Wq-yCe" secondAttribute="centerY" id="GtW-ob-eUQ"/>
+                                            <constraint firstAttribute="height" constant="50" id="wEw-WZ-sW2"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                <real key="value" value="0.29999999999999999"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                                <size key="value" width="0.0" height="2"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="닉네임은 2-12자여야 합니다" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jxl-NG-DSk">
+                                        <rect key="frame" x="0.0" y="58" width="350" height="14"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Jxl-NG-DSk" secondAttribute="trailing" id="BID-su-We7"/>
+                                    <constraint firstItem="5gg-Wq-yCe" firstAttribute="leading" secondItem="suM-7b-kNK" secondAttribute="leading" id="ZeX-sj-Hea"/>
+                                    <constraint firstAttribute="trailing" secondItem="5gg-Wq-yCe" secondAttribute="trailing" id="ae4-Q8-hGW"/>
+                                    <constraint firstAttribute="height" constant="72" id="eTT-xJ-B4B"/>
+                                    <constraint firstItem="Jxl-NG-DSk" firstAttribute="leading" secondItem="suM-7b-kNK" secondAttribute="leading" id="rsx-Dv-3Y8"/>
+                                </constraints>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c14-eN-GRe" customClass="Button" customModule="Pupago" customModuleProvider="target">
+                                <rect key="frame" x="32" y="732" width="350" height="50"/>
+                                <color key="backgroundColor" name="ButtonColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Uek-hH-qwb"/>
+                                </constraints>
+                                <state key="normal" title="시작하기">
+                                    <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                        <real key="value" value="0.29999999999999999"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                        <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                        <size key="value" width="0.0" height="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="starSprinkle" translatesAutoresizingMaskIntoConstraints="NO" id="yZf-zB-2Ta">
+                                <rect key="frame" x="40" y="478" width="334" height="226"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="4eC-lh-lEL"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="std-Pw-k5j" firstAttribute="width" secondItem="wkx-4t-E4G" secondAttribute="width" id="6Ry-Sj-goq"/>
+                            <constraint firstItem="c14-eN-GRe" firstAttribute="top" secondItem="yZf-zB-2Ta" secondAttribute="bottom" constant="28" id="8Ll-VM-xct"/>
+                            <constraint firstItem="suM-7b-kNK" firstAttribute="top" secondItem="std-Pw-k5j" secondAttribute="bottom" constant="20" id="MR1-Gu-2GK"/>
+                            <constraint firstItem="std-Pw-k5j" firstAttribute="centerX" secondItem="s8N-Cg-a1I" secondAttribute="centerX" id="NVk-KU-KPN"/>
+                            <constraint firstItem="suM-7b-kNK" firstAttribute="leading" secondItem="4eC-lh-lEL" secondAttribute="leading" constant="32" id="Qzq-O9-vfu"/>
+                            <constraint firstItem="c14-eN-GRe" firstAttribute="leading" secondItem="4eC-lh-lEL" secondAttribute="leading" constant="32" id="Syg-MY-8wO"/>
+                            <constraint firstItem="wkx-4t-E4G" firstAttribute="leading" secondItem="s8N-Cg-a1I" secondAttribute="leading" constant="40" id="TFf-N9-x8d"/>
+                            <constraint firstItem="4eC-lh-lEL" firstAttribute="bottom" secondItem="c14-eN-GRe" secondAttribute="bottom" constant="80" id="bC0-z7-T6I"/>
+                            <constraint firstItem="yZf-zB-2Ta" firstAttribute="top" secondItem="suM-7b-kNK" secondAttribute="bottom" constant="28" id="fi5-hJ-V6Y"/>
+                            <constraint firstItem="yZf-zB-2Ta" firstAttribute="leading" secondItem="4eC-lh-lEL" secondAttribute="leading" constant="40" id="fy6-t9-iih"/>
+                            <constraint firstItem="wkx-4t-E4G" firstAttribute="centerY" secondItem="s8N-Cg-a1I" secondAttribute="centerY" multiplier="0.6" id="hPQ-IL-Qd3"/>
+                            <constraint firstItem="4eC-lh-lEL" firstAttribute="trailing" secondItem="c14-eN-GRe" secondAttribute="trailing" constant="32" id="haN-9W-uDx"/>
+                            <constraint firstItem="std-Pw-k5j" firstAttribute="centerY" secondItem="s8N-Cg-a1I" secondAttribute="centerY" multiplier="0.6" id="mu5-Ls-EYy"/>
+                            <constraint firstItem="4eC-lh-lEL" firstAttribute="trailing" secondItem="suM-7b-kNK" secondAttribute="trailing" constant="32" id="nBb-mb-iiy"/>
+                            <constraint firstAttribute="trailing" secondItem="wkx-4t-E4G" secondAttribute="trailing" constant="40" id="qBT-hg-qRb"/>
+                            <constraint firstItem="4eC-lh-lEL" firstAttribute="trailing" secondItem="yZf-zB-2Ta" secondAttribute="trailing" constant="40" id="zqk-5q-v22"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="firstColor">
+                                <color key="value" name="GreenColor"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="secondColor">
+                                <color key="value" name="BlueColor"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <connections>
+                        <outlet property="descriptionLabel" destination="Jxl-NG-DSk" id="m73-iD-n5o"/>
+                        <outlet property="introLabel" destination="wkx-4t-E4G" id="FhW-WD-NwO"/>
+                        <outlet property="nameTextField" destination="KKZ-u6-060" id="L90-AD-BHP"/>
+                        <outlet property="startButton" destination="c14-eN-GRe" id="tZf-oh-0M0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZeI-0J-dqE" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="971.01449275362324" y="75.669642857142847"/>
+        </scene>
+        <!--Pupago-->
+        <scene sceneID="Mto-D8-YkV">
+            <objects>
+                <viewController storyboardIdentifier="ChattingListViewController" id="WwO-lh-g7n" customClass="ChattingListViewController" customModule="Pupago" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="eGx-N0-irZ" customClass="GradientView" customModule="Pupago" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="cgq-tF-0Ms"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="firstColor">
+                                <color key="value" name="GreenColor"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="secondColor">
+                                <color key="value" name="BlueColor"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <navigationItem key="navigationItem" title="Pupago" id="Kni-hu-I5m"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XA3-ui-dOS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2681" y="76"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="J2Q-n3-cfV">
+            <objects>
+                <navigationController storyboardIdentifier="NavigationController" automaticallyAdjustsScrollViewInsets="NO" id="ee0-9g-FMA" customClass="NavigationController" customModule="Pupago" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1g5-Is-lzv">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="WwO-lh-g7n" kind="relationship" relationship="rootViewController" id="VrX-cH-rbQ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3YX-Vw-Tdi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1843" y="76"/>
+        </scene>
+    </scenes>
+    <designables>
+        <designable name="Mfe-6A-Hu4">
+            <size key="intrinsicContentSize" width="30" height="30"/>
+        </designable>
+        <designable name="PEt-Pc-nuO">
+            <size key="intrinsicContentSize" width="30" height="30"/>
+        </designable>
+        <designable name="c14-eN-GRe">
+            <size key="intrinsicContentSize" width="52" height="30"/>
+        </designable>
+        <designable name="rKw-lr-5j4">
+            <size key="intrinsicContentSize" width="30" height="30"/>
+        </designable>
+    </designables>
+    <resources>
+        <image name="graphicSprinkle" width="750" height="213"/>
+        <image name="logo" width="256" height="231"/>
+        <image name="starSprinkle" width="129" height="112"/>
+        <namedColor name="BlueColor">
+            <color red="0.26600000262260437" green="0.65499997138977051" blue="0.93699997663497925" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="ButtonColor">
+            <color red="1" green="0.84299999475479126" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="GreenColor">
+            <color red="0.18400000035762787" green="0.77300000190734863" blue="0.61599999666213989" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
