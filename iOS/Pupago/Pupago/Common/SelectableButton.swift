@@ -9,10 +9,10 @@ import UIKit
 
 class SelectableButton: Button {
 
-    override var isSelected: Bool {
+    override open var isSelected: Bool {
         didSet {
             backgroundColor = isSelected ? .white : .clear
-            setTitleColor(isSelected ? .systemGray : .white, for: .normal)
+            setTitleColor(isSelected ? .systemGray : .white, for: isSelected ? .selected : .normal)
         }
     }
 
