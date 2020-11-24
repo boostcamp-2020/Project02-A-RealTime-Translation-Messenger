@@ -26,12 +26,12 @@ class LanguageViewController: ViewController {
         super.bindViewModel()
 
         guard let viewModel = viewModel as? LanguageViewModel else { return }
-        let engSelected = engButton.rx.tap.map { _ in }
-        let korSelected = korButton.rx.tap.map { _ in }
+        let engSelected = engButton.rx.tap.map { Localize.english }
+        let korSelected = korButton.rx.tap.map { Localize.korean }
+        let languageSelected = Observable.of(engSelected, korSelected).merge()
         let nextSelection = nextButton.rx.tap.map { _ in }
         
-        let input = LanguageViewModel.Input(englishTrigger: engSelected,
-                                            koreanTrigger: korSelected,
+        let input = LanguageViewModel.Input(languageChangeTrigger: languageSelected,
                                             nextTrigger: nextSelection)
         
         let output = viewModel.transform(input)
@@ -44,12 +44,12 @@ class LanguageViewController: ViewController {
             })
             .disposed(by: rx.disposeBag)
         
-        output.korSelected
-            .drive(korButton.rx.isSelected)
-            .disposed(by: rx.disposeBag)
-        
-        output.engSelected
-            .drive(engButton.rx.isSelected)
+        output.languageSelected
+            .drive(onNext: { [weak self] localize in
+                let korSelected = localize == .korean
+                self?.korButton.isSelected = korSelected
+                self?.engButton.isSelected = !korSelected
+            })
             .disposed(by: rx.disposeBag)
         
         output.nextButtonSelected
