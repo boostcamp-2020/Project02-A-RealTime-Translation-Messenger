@@ -27,6 +27,8 @@
 		97B4BE98256BEFBC009A3825 /* NicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B4BE97256BEFBC009A3825 /* NicknameViewController.swift */; };
 		97B4BEA0256BEFD9009A3825 /* NicknameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B4BE9F256BEFD9009A3825 /* NicknameViewModel.swift */; };
 		97B4BEA5256BF5B0009A3825 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B4BEA4256BF5B0009A3825 /* ViewController.swift */; };
+		97F534F5256CC008005998EE /* ValidatingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F534F4256CC008005998EE /* ValidatingTextField.swift */; };
+		97F534FA256CD087005998EE /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F534F9256CD087005998EE /* View.swift */; };
 		9D3C1EAB4F277EE81902BD99 /* Pods_PupagoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D63A44A3FA54CB79CE0D4AEC /* Pods_PupagoTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +77,8 @@
 		97B4BE97256BEFBC009A3825 /* NicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameViewController.swift; sourceTree = "<group>"; };
 		97B4BE9F256BEFD9009A3825 /* NicknameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameViewModel.swift; sourceTree = "<group>"; };
 		97B4BEA4256BF5B0009A3825 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		97F534F4256CC008005998EE /* ValidatingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatingTextField.swift; sourceTree = "<group>"; };
+		97F534F9256CD087005998EE /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		AE1676964940092EB6BDCC83 /* Pods-PupagoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PupagoTests.release.xcconfig"; path = "Target Support Files/Pods-PupagoTests/Pods-PupagoTests.release.xcconfig"; sourceTree = "<group>"; };
 		D63A44A3FA54CB79CE0D4AEC /* Pods_PupagoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PupagoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1422F18135657696ED5A239 /* Pods-Pupago.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pupago.release.xcconfig"; path = "Target Support Files/Pods-Pupago/Pods-Pupago.release.xcconfig"; sourceTree = "<group>"; };
@@ -218,6 +222,8 @@
 				975C53FE256B844C00739DCA /* SelectableButton.swift */,
 				975C540D256B907D00739DCA /* ViewModel.swift */,
 				97B4BEA4256BF5B0009A3825 /* ViewController.swift */,
+				97F534F4256CC008005998EE /* ValidatingTextField.swift */,
+				97F534F9256CD087005998EE /* View.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -491,6 +497,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97F534FA256CD087005998EE /* View.swift in Sources */,
 				9705477F2566649D00500D79 /* LanguageViewController.swift in Sources */,
 				9705477B2566649D00500D79 /* AppDelegate.swift in Sources */,
 				975C5409256B8FC500739DCA /* LanguageViewModel.swift in Sources */,
@@ -505,6 +512,7 @@
 				975C540E256B907D00739DCA /* ViewModel.swift in Sources */,
 				97B4BE74256BE935009A3825 /* NSObject+Rx.swift in Sources */,
 				97B4BEA0256BEFD9009A3825 /* NicknameViewModel.swift in Sources */,
+				97F534F5256CC008005998EE /* ValidatingTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

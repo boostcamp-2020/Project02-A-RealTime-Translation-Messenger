@@ -5,6 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -200,6 +201,76 @@
                                     <constraint firstAttribute="width" secondItem="std-Pw-k5j" secondAttribute="height" multiplier="15:8" id="jkN-JH-tJj"/>
                                 </constraints>
                             </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="suM-7b-kNK">
+                                <rect key="frame" x="32" y="378" width="350" height="72"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5gg-Wq-yCe" customClass="View" customModule="Pupago" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="350" height="50"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="JAr-sM-xwT">
+                                                <rect key="frame" x="30" y="10.5" width="290" height="29"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="fZa-Nj-1FJ">
+                                                        <rect key="frame" x="0.0" y="0.0" width="32" height="29"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="32" id="FeD-yL-bYI"/>
+                                                            <constraint firstAttribute="width" secondItem="fZa-Nj-1FJ" secondAttribute="height" multiplier="256:231" id="jjX-yV-Qni"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="닉네임을 입력해주세요" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="KKZ-u6-060" customClass="ValidatingTextField" customModule="Pupago" customModuleProvider="target">
+                                                        <rect key="frame" x="48" y="0.0" width="242" height="29"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="JAr-sM-xwT" secondAttribute="trailing" constant="30" id="0O5-CF-5DI"/>
+                                            <constraint firstItem="JAr-sM-xwT" firstAttribute="leading" secondItem="5gg-Wq-yCe" secondAttribute="leading" constant="30" id="Gn2-qC-W6k"/>
+                                            <constraint firstItem="JAr-sM-xwT" firstAttribute="centerY" secondItem="5gg-Wq-yCe" secondAttribute="centerY" id="GtW-ob-eUQ"/>
+                                            <constraint firstAttribute="height" constant="50" id="wEw-WZ-sW2"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                <real key="value" value="0.29999999999999999"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                                <size key="value" width="0.0" height="2"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="닉네임은 2-12자여야 합니다" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jxl-NG-DSk">
+                                        <rect key="frame" x="0.0" y="58" width="350" height="14"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Jxl-NG-DSk" secondAttribute="trailing" id="BID-su-We7"/>
+                                    <constraint firstItem="5gg-Wq-yCe" firstAttribute="leading" secondItem="suM-7b-kNK" secondAttribute="leading" id="ZeX-sj-Hea"/>
+                                    <constraint firstAttribute="trailing" secondItem="5gg-Wq-yCe" secondAttribute="trailing" id="ae4-Q8-hGW"/>
+                                    <constraint firstAttribute="height" constant="72" id="eTT-xJ-B4B"/>
+                                    <constraint firstItem="Jxl-NG-DSk" firstAttribute="leading" secondItem="suM-7b-kNK" secondAttribute="leading" id="rsx-Dv-3Y8"/>
+                                </constraints>
+                            </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c14-eN-GRe" customClass="Button" customModule="Pupago" customModuleProvider="target">
                                 <rect key="frame" x="32" y="732" width="350" height="50"/>
                                 <color key="backgroundColor" name="ButtonColor"/>
@@ -230,47 +301,29 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BQn-C9-mt0">
-                                <rect key="frame" x="48" y="447.5" width="318" height="1"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="6vg-FA-O8m"/>
-                                </constraints>
-                            </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="닉네임은 2-12자여야 합니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JOg-XW-i3r">
-                                <rect key="frame" x="49" y="456.5" width="317" height="16"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="닉네임을 입력해주세요." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cAT-8Y-EXi">
-                                <rect key="frame" x="48" y="421.5" width="318" height="21"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="starSprinkle" translatesAutoresizingMaskIntoConstraints="NO" id="yZf-zB-2Ta">
+                                <rect key="frame" x="40" y="478" width="334" height="226"/>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="4eC-lh-lEL"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="cAT-8Y-EXi" firstAttribute="width" secondItem="BQn-C9-mt0" secondAttribute="width" id="62O-ml-NzI"/>
                             <constraint firstItem="std-Pw-k5j" firstAttribute="width" secondItem="wkx-4t-E4G" secondAttribute="width" id="6Ry-Sj-goq"/>
-                            <constraint firstItem="4eC-lh-lEL" firstAttribute="trailing" secondItem="BQn-C9-mt0" secondAttribute="trailing" constant="48" id="9C7-rM-4m5"/>
+                            <constraint firstItem="c14-eN-GRe" firstAttribute="top" secondItem="yZf-zB-2Ta" secondAttribute="bottom" constant="28" id="8Ll-VM-xct"/>
+                            <constraint firstItem="suM-7b-kNK" firstAttribute="top" secondItem="std-Pw-k5j" secondAttribute="bottom" constant="20" id="MR1-Gu-2GK"/>
                             <constraint firstItem="std-Pw-k5j" firstAttribute="centerX" secondItem="s8N-Cg-a1I" secondAttribute="centerX" id="NVk-KU-KPN"/>
-                            <constraint firstItem="JOg-XW-i3r" firstAttribute="width" secondItem="BQn-C9-mt0" secondAttribute="width" multiplier="0.996855" id="Qef-oE-8DR"/>
-                            <constraint firstItem="BQn-C9-mt0" firstAttribute="centerY" secondItem="s8N-Cg-a1I" secondAttribute="centerY" id="RL7-4y-KIZ"/>
+                            <constraint firstItem="suM-7b-kNK" firstAttribute="leading" secondItem="4eC-lh-lEL" secondAttribute="leading" constant="32" id="Qzq-O9-vfu"/>
                             <constraint firstItem="c14-eN-GRe" firstAttribute="leading" secondItem="4eC-lh-lEL" secondAttribute="leading" constant="32" id="Syg-MY-8wO"/>
                             <constraint firstItem="wkx-4t-E4G" firstAttribute="leading" secondItem="s8N-Cg-a1I" secondAttribute="leading" constant="40" id="TFf-N9-x8d"/>
-                            <constraint firstItem="BQn-C9-mt0" firstAttribute="leading" secondItem="4eC-lh-lEL" secondAttribute="leading" constant="48" id="asZ-KZ-V8w"/>
                             <constraint firstItem="4eC-lh-lEL" firstAttribute="bottom" secondItem="c14-eN-GRe" secondAttribute="bottom" constant="80" id="bC0-z7-T6I"/>
-                            <constraint firstItem="BQn-C9-mt0" firstAttribute="top" secondItem="cAT-8Y-EXi" secondAttribute="bottom" constant="5" id="dVL-iQ-oaU"/>
-                            <constraint firstItem="JOg-XW-i3r" firstAttribute="top" secondItem="BQn-C9-mt0" secondAttribute="bottom" constant="8" id="eeA-ad-KPp"/>
+                            <constraint firstItem="yZf-zB-2Ta" firstAttribute="top" secondItem="suM-7b-kNK" secondAttribute="bottom" constant="28" id="fi5-hJ-V6Y"/>
+                            <constraint firstItem="yZf-zB-2Ta" firstAttribute="leading" secondItem="4eC-lh-lEL" secondAttribute="leading" constant="40" id="fy6-t9-iih"/>
                             <constraint firstItem="wkx-4t-E4G" firstAttribute="centerY" secondItem="s8N-Cg-a1I" secondAttribute="centerY" multiplier="0.6" id="hPQ-IL-Qd3"/>
                             <constraint firstItem="4eC-lh-lEL" firstAttribute="trailing" secondItem="c14-eN-GRe" secondAttribute="trailing" constant="32" id="haN-9W-uDx"/>
-                            <constraint firstItem="JOg-XW-i3r" firstAttribute="trailing" secondItem="BQn-C9-mt0" secondAttribute="trailing" id="jPg-Fh-s4m"/>
                             <constraint firstItem="std-Pw-k5j" firstAttribute="centerY" secondItem="s8N-Cg-a1I" secondAttribute="centerY" multiplier="0.6" id="mu5-Ls-EYy"/>
+                            <constraint firstItem="4eC-lh-lEL" firstAttribute="trailing" secondItem="suM-7b-kNK" secondAttribute="trailing" constant="32" id="nBb-mb-iiy"/>
                             <constraint firstAttribute="trailing" secondItem="wkx-4t-E4G" secondAttribute="trailing" constant="40" id="qBT-hg-qRb"/>
-                            <constraint firstItem="cAT-8Y-EXi" firstAttribute="leading" secondItem="BQn-C9-mt0" secondAttribute="leading" id="z2M-tV-XsB"/>
+                            <constraint firstItem="4eC-lh-lEL" firstAttribute="trailing" secondItem="yZf-zB-2Ta" secondAttribute="trailing" constant="40" id="zqk-5q-v22"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="color" keyPath="firstColor">
@@ -281,10 +334,16 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
+                    <connections>
+                        <outlet property="descriptionLabel" destination="Jxl-NG-DSk" id="m73-iD-n5o"/>
+                        <outlet property="introLabel" destination="wkx-4t-E4G" id="FhW-WD-NwO"/>
+                        <outlet property="nameTextField" destination="KKZ-u6-060" id="L90-AD-BHP"/>
+                        <outlet property="startButton" destination="c14-eN-GRe" id="tZf-oh-0M0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZeI-0J-dqE" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="972" y="76"/>
+            <point key="canvasLocation" x="971.01449275362324" y="75.669642857142847"/>
         </scene>
     </scenes>
     <designables>
@@ -303,6 +362,8 @@
     </designables>
     <resources>
         <image name="graphicSprinkle" width="750" height="213"/>
+        <image name="logo" width="256" height="231"/>
+        <image name="starSprinkle" width="129" height="112"/>
         <namedColor name="BlueColor">
             <color red="0.26600000262260437" green="0.65499997138977051" blue="0.93699997663497925" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -312,5 +373,8 @@
         <namedColor name="GreenColor">
             <color red="0.18400000035762787" green="0.77300000190734863" blue="0.61599999666213989" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
