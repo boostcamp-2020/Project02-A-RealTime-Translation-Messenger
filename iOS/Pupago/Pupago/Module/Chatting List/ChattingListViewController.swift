@@ -82,6 +82,10 @@ class ChattingListViewController: ViewController {
             .disposed(by: rx.disposeBag)
     }
     
+}
+
+private extension ChattingListViewController {
+    
     func configureCollectionView() {
         let size = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                           heightDimension: .estimated(33))
@@ -95,4 +99,5 @@ class ChattingListViewController: ViewController {
         
         self.collectionView.collectionViewLayout = layout
     }
+    
 }
