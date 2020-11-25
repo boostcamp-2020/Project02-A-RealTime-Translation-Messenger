@@ -27,6 +27,14 @@
 		97B4BE98256BEFBC009A3825 /* NicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B4BE97256BEFBC009A3825 /* NicknameViewController.swift */; };
 		97B4BEA0256BEFD9009A3825 /* NicknameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B4BE9F256BEFD9009A3825 /* NicknameViewModel.swift */; };
 		97B4BEA5256BF5B0009A3825 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B4BEA4256BF5B0009A3825 /* ViewController.swift */; };
+		97CB75A6256E204800FE052A /* ChattingListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CB75A5256E204800FE052A /* ChattingListCell.swift */; };
+		97CB75AB256E2CB900FE052A /* CollectionViewBaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CB75AA256E2CB900FE052A /* CollectionViewBaseCell.swift */; };
+		97CB75B5256E3E3C00FE052A /* CreateRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CB75B4256E3E3C00FE052A /* CreateRoomViewController.swift */; };
+		97CB75BA256E3E5B00FE052A /* CreateRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CB75B9256E3E5B00FE052A /* CreateRoomViewModel.swift */; };
+		97CB75BF256E3E9D00FE052A /* JoinRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CB75BE256E3E9D00FE052A /* JoinRoomViewController.swift */; };
+		97CB75C4256E3EA700FE052A /* JoinRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CB75C3256E3EA700FE052A /* JoinRoomViewModel.swift */; };
+		97CB75CD256E411F00FE052A /* ChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CB75CC256E411F00FE052A /* ChattingViewController.swift */; };
+		97CB75D2256E412700FE052A /* ChattingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CB75D1256E412700FE052A /* ChattingViewModel.swift */; };
 		97F534F5256CC008005998EE /* ValidatingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F534F4256CC008005998EE /* ValidatingTextField.swift */; };
 		97F534FA256CD087005998EE /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F534F9256CD087005998EE /* View.swift */; };
 		97F534FF256CE947005998EE /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F534FE256CE947005998EE /* Application.swift */; };
@@ -82,6 +90,14 @@
 		97B4BE97256BEFBC009A3825 /* NicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameViewController.swift; sourceTree = "<group>"; };
 		97B4BE9F256BEFD9009A3825 /* NicknameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameViewModel.swift; sourceTree = "<group>"; };
 		97B4BEA4256BF5B0009A3825 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		97CB75A5256E204800FE052A /* ChattingListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingListCell.swift; sourceTree = "<group>"; };
+		97CB75AA256E2CB900FE052A /* CollectionViewBaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewBaseCell.swift; sourceTree = "<group>"; };
+		97CB75B4256E3E3C00FE052A /* CreateRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRoomViewController.swift; sourceTree = "<group>"; };
+		97CB75B9256E3E5B00FE052A /* CreateRoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRoomViewModel.swift; sourceTree = "<group>"; };
+		97CB75BE256E3E9D00FE052A /* JoinRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinRoomViewController.swift; sourceTree = "<group>"; };
+		97CB75C3256E3EA700FE052A /* JoinRoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinRoomViewModel.swift; sourceTree = "<group>"; };
+		97CB75CC256E411F00FE052A /* ChattingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingViewController.swift; sourceTree = "<group>"; };
+		97CB75D1256E412700FE052A /* ChattingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingViewModel.swift; sourceTree = "<group>"; };
 		97F534F4256CC008005998EE /* ValidatingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatingTextField.swift; sourceTree = "<group>"; };
 		97F534F9256CD087005998EE /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		97F534FE256CE947005998EE /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
@@ -204,6 +220,9 @@
 				975C53ED256B5C1500739DCA /* Setting Language */,
 				97B4BE96256BEF93009A3825 /* Setting Nickname */,
 				BD5F615E256D202E00D63CCD /* Chatting List */,
+				97CB75B2256E3E0000FE052A /* Create Chatroom */,
+				97CB75B3256E3E1000FE052A /* Join Chatroom */,
+				97CB75CB256E410000FE052A /* Chatting */,
 				975C53EB256B5AF600739DCA /* Main */,
 			);
 			path = Module;
@@ -233,6 +252,7 @@
 				975C53F4256B6DFF00739DCA /* Button.swift */,
 				975C53F9256B7CD100739DCA /* GradientView.swift */,
 				975C53FE256B844C00739DCA /* SelectableButton.swift */,
+				97CB75AA256E2CB900FE052A /* CollectionViewBaseCell.swift */,
 				975C540D256B907D00739DCA /* ViewModel.swift */,
 				97F534F4256CC008005998EE /* ValidatingTextField.swift */,
 				97F534F9256CD087005998EE /* View.swift */,
@@ -268,6 +288,33 @@
 			path = "Setting Nickname";
 			sourceTree = "<group>";
 		};
+		97CB75B2256E3E0000FE052A /* Create Chatroom */ = {
+			isa = PBXGroup;
+			children = (
+				97CB75B4256E3E3C00FE052A /* CreateRoomViewController.swift */,
+				97CB75B9256E3E5B00FE052A /* CreateRoomViewModel.swift */,
+			);
+			path = "Create Chatroom";
+			sourceTree = "<group>";
+		};
+		97CB75B3256E3E1000FE052A /* Join Chatroom */ = {
+			isa = PBXGroup;
+			children = (
+				97CB75BE256E3E9D00FE052A /* JoinRoomViewController.swift */,
+				97CB75C3256E3EA700FE052A /* JoinRoomViewModel.swift */,
+			);
+			path = "Join Chatroom";
+			sourceTree = "<group>";
+		};
+		97CB75CB256E410000FE052A /* Chatting */ = {
+			isa = PBXGroup;
+			children = (
+				97CB75CC256E411F00FE052A /* ChattingViewController.swift */,
+				97CB75D1256E412700FE052A /* ChattingViewModel.swift */,
+			);
+			path = Chatting;
+			sourceTree = "<group>";
+		};
 		A106B5FA97F6ACE94592FFFF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -282,6 +329,7 @@
 			children = (
 				BD5F6164256D207600D63CCD /* ChattingListViewController.swift */,
 				BD5F615F256D204400D63CCD /* ChattingListViewModel.swift */,
+				97CB75A5256E204800FE052A /* ChattingListCell.swift */,
 			);
 			path = "Chatting List";
 			sourceTree = "<group>";
@@ -521,26 +569,34 @@
 			buildActionMask = 2147483647;
 			files = (
 				97F534FA256CD087005998EE /* View.swift in Sources */,
+				97CB75B5256E3E3C00FE052A /* CreateRoomViewController.swift in Sources */,
 				9705477F2566649D00500D79 /* LanguageViewController.swift in Sources */,
 				BD5F6165256D207600D63CCD /* ChattingListViewController.swift in Sources */,
 				BD4B5A9B256D094F00BAE1D8 /* String+Regex.swift in Sources */,
+				97CB75D2256E412700FE052A /* ChattingViewModel.swift in Sources */,
 				97F534FF256CE947005998EE /* Application.swift in Sources */,
 				9705477B2566649D00500D79 /* AppDelegate.swift in Sources */,
 				975C5409256B8FC500739DCA /* LanguageViewModel.swift in Sources */,
+				97CB75CD256E411F00FE052A /* ChattingViewController.swift in Sources */,
 				975C53FA256B7CD100739DCA /* GradientView.swift in Sources */,
 				97B4BEA5256BF5B0009A3825 /* ViewController.swift in Sources */,
+				97CB75A6256E204800FE052A /* ChattingListCell.swift in Sources */,
 				97B4BE98256BEFBC009A3825 /* NicknameViewController.swift in Sources */,
 				975C53FF256B844C00739DCA /* SelectableButton.swift in Sources */,
 				97B4BE92256BEE7F009A3825 /* Navigator.swift in Sources */,
+				97CB75BA256E3E5B00FE052A /* CreateRoomViewModel.swift in Sources */,
 				BD5F616D256D23E300D63CCD /* NavigationController.swift in Sources */,
+				97CB75AB256E2CB900FE052A /* CollectionViewBaseCell.swift in Sources */,
 				9705477D2566649D00500D79 /* SceneDelegate.swift in Sources */,
 				975C53F5256B6DFF00739DCA /* Button.swift in Sources */,
 				975C5404256B8D3F00739DCA /* Localize.swift in Sources */,
 				975C540E256B907D00739DCA /* ViewModel.swift in Sources */,
 				97B4BE74256BE935009A3825 /* NSObject+Rx.swift in Sources */,
 				97B4BEA0256BEFD9009A3825 /* NicknameViewModel.swift in Sources */,
+				97CB75BF256E3E9D00FE052A /* JoinRoomViewController.swift in Sources */,
 				BD5F6160256D204400D63CCD /* ChattingListViewModel.swift in Sources */,
 				97F534F5256CC008005998EE /* ValidatingTextField.swift in Sources */,
+				97CB75C4256E3EA700FE052A /* JoinRoomViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

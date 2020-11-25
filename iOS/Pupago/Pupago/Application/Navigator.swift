@@ -19,12 +19,16 @@ class Navigator {
         case language(viewModel: LanguageViewModel)
         case nickname(viewModel: NicknameViewModel)
         case chatlist(viewModel: ChattingListViewModel)
+        case createRoom(viewModel: CreateRoomViewModel)
+        case joinRoom(viewModel: JoinRoomViewModel)
+        case chatting(viewModel: ChattingViewModel)
     }
     
     enum Transition {
         case root(in: UIWindow)
         case rootWithNavigation(in: UIWindow)
         case navigation
+        case present
     }
     
     lazy var transition: CATransition = {
@@ -44,6 +48,12 @@ class Navigator {
             return instantiateFromStoryBoard(type: NicknameViewController.self, viewModel: viewModel)
         case .chatlist(let viewModel):
             return instantiateFromStoryBoard(type: ChattingListViewController.self, viewModel: viewModel)
+        case .createRoom(let viewModel):
+            return instantiateFromStoryBoard(type: CreateRoomViewController.self, viewModel: viewModel)
+        case .joinRoom(let viewModel):
+            return instantiateFromStoryBoard(type: JoinRoomViewController.self, viewModel: viewModel)
+        case .chatting(let viewModel):
+            return instantiateFromStoryBoard(type: ChattingViewController.self, viewModel: viewModel)
         }
     }
     
@@ -79,6 +89,10 @@ class Navigator {
         case .navigation:
             guard let navigationController = sender.navigationController else { return }
             navigationController.pushViewController(target, animated: true)
+        case .present:
+            target.modalTransitionStyle = .crossDissolve
+            target.modalPresentationStyle = .overCurrentContext
+            sender.present(target, animated: true, completion: nil)
         default: break
         }
     }

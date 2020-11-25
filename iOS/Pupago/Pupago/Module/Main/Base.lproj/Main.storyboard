@@ -356,7 +356,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tem-DC-u3z" customClass="GradientView" customModule="Pupago" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="332"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="262"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="firstColor">
@@ -440,7 +440,7 @@
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="zrV-nG-ezD">
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ChattingListCell" id="zrV-nG-ezD" customClass="ChattingListCell" customModule="Pupago" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="122"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Vgw-Cl-vZP">
@@ -448,7 +448,7 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="9w2-bR-pbo">
-                                                            <rect key="frame" x="20" y="29" width="374" height="64.5"/>
+                                                            <rect key="frame" x="20" y="20" width="374" height="82"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="PhI-R6-6D3">
                                                                     <rect key="frame" x="0.0" y="0.0" width="374" height="25"/>
@@ -501,7 +501,7 @@
                                                                     </constraints>
                                                                 </stackView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="어서와 환영해 파파고의 세상" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q89-Ur-al6">
-                                                                    <rect key="frame" x="0.0" y="44" width="374" height="20.5"/>
+                                                                    <rect key="frame" x="0.0" y="44" width="374" height="38"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
@@ -516,17 +516,25 @@
                                                         </stackView>
                                                     </subviews>
                                                     <constraints>
+                                                        <constraint firstItem="9w2-bR-pbo" firstAttribute="top" secondItem="Vgw-Cl-vZP" secondAttribute="top" constant="20" id="8AG-6Q-FS8"/>
                                                         <constraint firstItem="9w2-bR-pbo" firstAttribute="leading" secondItem="Vgw-Cl-vZP" secondAttribute="leading" constant="20" id="Fu2-CL-Wgz"/>
                                                         <constraint firstItem="9w2-bR-pbo" firstAttribute="centerY" secondItem="Vgw-Cl-vZP" secondAttribute="centerY" id="H2f-yW-GuX"/>
+                                                        <constraint firstAttribute="bottom" secondItem="9w2-bR-pbo" secondAttribute="bottom" constant="20" id="LwR-WE-pAv"/>
                                                         <constraint firstAttribute="trailing" secondItem="9w2-bR-pbo" secondAttribute="trailing" constant="20" id="slP-cx-OvM"/>
                                                     </constraints>
                                                 </collectionViewCellContentView>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <size key="customSize" width="414" height="122"/>
+                                                <connections>
+                                                    <outlet property="createAtLabel" destination="swG-N0-RyY" id="m8i-GB-hDS"/>
+                                                    <outlet property="numberOfPeopleLabel" destination="Sjg-va-7jY" id="D9V-SC-zWo"/>
+                                                    <outlet property="roomNameLabel" destination="q89-Ur-al6" id="6vs-0g-Tde"/>
+                                                </connections>
                                             </collectionViewCell>
                                         </cells>
                                     </collectionView>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.94999999999999996" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" systemColor="systemGray6Color"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="U0P-mo-qaE" secondAttribute="trailing" constant="24" id="0ab-nC-JZJ"/>
                                     <constraint firstItem="U0P-mo-qaE" firstAttribute="leading" secondItem="9M2-Ug-YDM" secondAttribute="leading" constant="24" id="58P-Iu-NHv"/>
@@ -563,7 +571,7 @@
                             <constraint firstItem="E7A-l8-cj2" firstAttribute="top" secondItem="cgq-tF-0Ms" secondAttribute="top" constant="20" id="UvP-K2-t1F"/>
                             <constraint firstItem="Tem-DC-u3z" firstAttribute="top" secondItem="eGx-N0-irZ" secondAttribute="top" id="XAx-Di-Uwk"/>
                             <constraint firstItem="9M2-Ug-YDM" firstAttribute="top" secondItem="E7A-l8-cj2" secondAttribute="bottom" constant="20" id="XR1-Ja-dHA"/>
-                            <constraint firstItem="9M2-Ug-YDM" firstAttribute="top" secondItem="Tem-DC-u3z" secondAttribute="bottom" constant="-100" id="cY2-nf-SNk"/>
+                            <constraint firstItem="9M2-Ug-YDM" firstAttribute="top" secondItem="Tem-DC-u3z" secondAttribute="bottom" constant="-30" id="cY2-nf-SNk"/>
                             <constraint firstItem="cgq-tF-0Ms" firstAttribute="trailing" secondItem="Tem-DC-u3z" secondAttribute="trailing" id="h4j-8h-fBu"/>
                             <constraint firstItem="E7A-l8-cj2" firstAttribute="centerX" secondItem="cgq-tF-0Ms" secondAttribute="centerX" id="hvJ-6g-lZQ"/>
                             <constraint firstItem="9M2-Ug-YDM" firstAttribute="trailing" secondItem="cgq-tF-0Ms" secondAttribute="trailing" id="jGL-1x-XkC"/>
@@ -579,10 +587,46 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <navigationItem key="navigationItem" title="Pupago" id="Kni-hu-I5m"/>
+                    <connections>
+                        <outlet property="chatroomLabel" destination="YOr-co-qxF" id="ay0-AC-DBH"/>
+                        <outlet property="collectionView" destination="D4u-3c-SH0" id="at3-Db-JdW"/>
+                        <outlet property="createButton" destination="8on-eL-CeY" id="aMN-EF-UCo"/>
+                        <outlet property="joinButton" destination="KI0-Kr-eco" id="Bvq-VZ-e2a"/>
+                        <outlet property="languageLabel" destination="rFv-pS-SAZ" id="6qr-l9-ALE"/>
+                        <outlet property="nicknameLabel" destination="ela-jb-BBV" id="Jdm-wQ-cme"/>
+                        <outlet property="thumbnailImageView" destination="hYt-sT-mta" id="8DY-to-jfl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XA3-ui-dOS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2679.7101449275365" y="75.669642857142847"/>
+        </scene>
+        <!--Chatting View Controller-->
+        <scene sceneID="zEt-Qa-bQ7">
+            <objects>
+                <viewController storyboardIdentifier="ChattingViewController" id="kCN-9Y-att" customClass="ChattingViewController" customModule="Pupago" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="wTn-wJ-TF7">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Preparing Chatting.." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TR8-vm-Zfu">
+                                <rect key="frame" x="130.5" y="437.5" width="153" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="dHP-NA-TA6"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="TR8-vm-Zfu" firstAttribute="centerY" secondItem="wTn-wJ-TF7" secondAttribute="centerY" id="2wT-MS-3cR"/>
+                            <constraint firstItem="TR8-vm-Zfu" firstAttribute="centerX" secondItem="wTn-wJ-TF7" secondAttribute="centerX" id="g49-Es-2sG"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dvl-PQ-I8k" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3561" y="76"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="J2Q-n3-cfV">
@@ -604,6 +648,60 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3YX-Vw-Tdi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1843" y="76"/>
+        </scene>
+        <!--Create Room View Controller-->
+        <scene sceneID="W69-K8-coE">
+            <objects>
+                <viewController storyboardIdentifier="CreateRoomViewController" id="KI1-1p-qt4" customClass="CreateRoomViewController" customModule="Pupago" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Yq9-fP-VLy">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Preparing Create Chatting room..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5aA-93-F0Q">
+                                <rect key="frame" x="79" y="437.5" width="256" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="frp-Dn-gvk"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="5aA-93-F0Q" firstAttribute="centerY" secondItem="Yq9-fP-VLy" secondAttribute="centerY" id="9Xo-mM-HIA"/>
+                            <constraint firstItem="5aA-93-F0Q" firstAttribute="centerX" secondItem="Yq9-fP-VLy" secondAttribute="centerX" id="Lug-Rz-YsO"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qcU-hd-SF6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1842" y="755"/>
+        </scene>
+        <!--Join Room View Controller-->
+        <scene sceneID="Mnb-NY-91k">
+            <objects>
+                <viewController storyboardIdentifier="JoinRoomViewController" id="Xwx-aK-XGL" customClass="JoinRoomViewController" customModule="Pupago" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Sag-Dm-gN8">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Preparing Join chatting room..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nKV-iR-lB6">
+                                <rect key="frame" x="90" y="437.5" width="234" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="7Y5-Zc-a7d"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="nKV-iR-lB6" firstAttribute="centerX" secondItem="Sag-Dm-gN8" secondAttribute="centerX" id="fQC-kP-6f6"/>
+                            <constraint firstItem="nKV-iR-lB6" firstAttribute="centerY" secondItem="Sag-Dm-gN8" secondAttribute="centerY" id="s0u-fx-br0"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hBJ-Vq-fT0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2680" y="755"/>
         </scene>
     </scenes>
     <designables>
@@ -640,6 +738,9 @@
         </systemColor>
         <systemColor name="systemGray4Color">
             <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

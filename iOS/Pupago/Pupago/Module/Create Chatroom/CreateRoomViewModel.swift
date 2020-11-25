@@ -6,3 +6,15 @@
 //
 
 import Foundation
+
+class CreateRoomViewModel: ViewModel, ViewModelType {
+    struct Input {
+    }
+    
+    struct Output {
+    }
+    
+    func transform(_ input: Input) -> Output {
+        return Output()
+    }
+}

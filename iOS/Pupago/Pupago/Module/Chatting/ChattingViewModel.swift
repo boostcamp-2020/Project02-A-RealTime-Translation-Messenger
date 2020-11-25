@@ -6,3 +6,14 @@
 //
 
 import Foundation
+
+class ChattingViewModel: ViewModel, ViewModelType {
+    
+    struct Input {}
+    struct Output {}
+    
+    func transform(_ input: Input) -> Output {
+        return Output()
+    }
+    
+}

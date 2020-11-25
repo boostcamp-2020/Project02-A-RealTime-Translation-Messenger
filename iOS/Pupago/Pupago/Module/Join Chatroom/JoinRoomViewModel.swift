@@ -6,3 +6,16 @@
 //
 
 import Foundation
+
+class JoinRoomViewModel: ViewModel, ViewModelType {
+    
+    struct Input {
+    }
+    
+    struct Output {
+    }
+    
+    func transform(_ input: Input) -> Output {
+        return Output()
+    }
+}
