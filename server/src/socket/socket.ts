@@ -1,5 +1,5 @@
 import express from 'express';
-import * as http from 'http';
+import http from 'http';
 import socketIO from 'socket.io';
 import { userDataType, participantsListType, sendChatType, receiveChatType } from '../types/socketTypes';
 import socketControllers from './socketController';
