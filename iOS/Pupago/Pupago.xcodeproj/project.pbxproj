@@ -280,8 +280,8 @@
 		BD5F615E256D202E00D63CCD /* Chatting List */ = {
 			isa = PBXGroup;
 			children = (
-				BD5F615F256D204400D63CCD /* ChattingListViewModel.swift */,
 				BD5F6164256D207600D63CCD /* ChattingListViewController.swift */,
+				BD5F615F256D204400D63CCD /* ChattingListViewModel.swift */,
 			);
 			path = "Chatting List";
 			sourceTree = "<group>";
