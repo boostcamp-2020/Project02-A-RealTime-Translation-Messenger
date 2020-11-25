@@ -23,6 +23,12 @@ enum Localize {
         var inputConstraint: String
         var nextButton: String
     }
+    
+    struct ChatListViewText {
+        var title: String
+        var language: String
+        var chatroom: String
+    }
 }
 
 extension Localize {
@@ -52,6 +58,19 @@ extension Localize {
                          inputPlaceholder: "Enter your nickname",
                          inputConstraint: "Nickname must be 2-12 characters.",
                          nextButton: "Start")
+        }
+    }
+    
+    var chattingListViewText: ChatListViewText {
+        switch self {
+        case .korean:
+            return .init(title: "푸파고",
+                         language: "한국어",
+                         chatroom: "채팅방")
+        case .english:
+            return .init(title: "Pupago",
+                         language: "English",
+                         chatroom: "Chats")
         }
     }
 }
