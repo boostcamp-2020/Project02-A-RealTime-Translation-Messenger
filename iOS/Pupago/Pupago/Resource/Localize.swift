@@ -29,6 +29,17 @@ enum Localize {
         var language: String
         var chatroom: String
     }
+    
+    struct CreateRoomViewText {
+        var title: String
+        var description: String
+        var createButton: String
+    }
+    
+    struct JoinRoomViewText {
+        var title: String
+        var joinButton: String
+    }
 }
 
 extension Localize {
@@ -71,6 +82,30 @@ extension Localize {
             return .init(title: "Pupago",
                          language: "English",
                          chatroom: "Chats")
+        }
+    }
+    
+    var createRoomViewText: CreateRoomViewText {
+        switch self {
+        case .korean:
+            return .init(title: "방 생성하기",
+                         description: "방 이름은 2-30자여야 합니다.",
+                         createButton: "생성하기")
+        case .english:
+            return .init(title: "Room Create",
+                         description: "Room must be 2-30 characters.",
+                         createButton: "Create")
+        }
+    }
+    
+    var joinRoomViewText: JoinRoomViewText {
+        switch self {
+        case .korean:
+            return .init(title: "방 참가하기",
+                         joinButton: "참가하기")
+        case .english:
+            return .init(title: "Join Room",
+                         joinButton: "Join")
         }
     }
 }
