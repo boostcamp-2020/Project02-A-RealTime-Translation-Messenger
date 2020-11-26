@@ -5,10 +5,28 @@ import Database from '../types/databaseNames';
 const setSocketInfo = (socketId: string, socketInfo: string) => {};
 
 // 룸에 속한 소켓 리스트 뽑아주기
-const getSocketsByRoom = (roomCode: string) => {};
+const getSocketsByRoom = (roomCode: string) => {
+  return new Promise((resolve, reject) => {
+    client.select(Database.ROOM_SOCKETS_INFO, () => {
+      client.hgetall(roomCode, (err, res) => {
+        if (err) return reject(err);
+        return resolve(res);
+      });
+    });
+  });
+};
 
 // 룸에 나간 소켓 삭제하기
-const removeSocketByRoom = (roomCode: string, socketId: string) => {};
+const removeSocketByRoom = (roomCode: string, socketId: string) => {
+  return new Promise((resolve, reject) => {
+    client.select(Database.ROOM_SOCKETS_INFO, () => {
+      client.hdel(roomCode, socketId, (err, res) => {
+        if (err) return reject(err);
+        return resolve(res);
+      });
+    });
+  });
+};
 
 // 룸이 비어있는지 체크
 const isRoomEmpty = (roomCode: string) => {};
