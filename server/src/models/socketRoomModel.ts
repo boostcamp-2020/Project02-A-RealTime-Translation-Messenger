@@ -1,10 +1,8 @@
 import client from './redisConnection';
 import Database from '../types/databaseNames';
 
-// 2번 DB
-
 const setRoomBySocket = (socketId: string, roomCode: string) => {
-  return new Promise((resolve, reject) => {
+  return new Promise<'OK'>((resolve, reject) => {
     client.select(Database.SOCKET_ROOM, () => {
       client.set(socketId, roomCode, (err, res) => {
         if (err) return reject(err);
@@ -15,7 +13,7 @@ const setRoomBySocket = (socketId: string, roomCode: string) => {
 };
 
 const getRoomBySocket = (socketId: string) => {
-  return new Promise((resolve, reject) => {
+  return new Promise<string | null>((resolve, reject) => {
     client.select(Database.SOCKET_ROOM, () => {
       client.get(socketId, (err, res) => {
         if (err) return reject(err);
@@ -26,7 +24,14 @@ const getRoomBySocket = (socketId: string) => {
 };
 
 const removeSocket = (socketId: string) => {
-  // 나간 소켓의 정보 삭제
+  return new Promise<number>((resolve, reject) => {
+    client.select(Database.SOCKET_ROOM, () => {
+      client.del(socketId, (err, res) => {
+        if (err) return reject(err);
+        return resolve(res);
+      });
+    });
+  });
 };
 
 const socketRoomModel = {
