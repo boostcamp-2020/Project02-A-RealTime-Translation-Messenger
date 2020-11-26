@@ -40,11 +40,11 @@ final class ChattingListViewController: ViewController {
         let output = viewModel.transform(input)
         
         output.viewTexts
-            .drive(onNext: { [weak self] (localized, nickname) in
-                self?.nicknameLabel.text = nickname
-                self?.navigationItem.title = localized.title
-                self?.languageLabel.text = localized.language
-                self?.chatroomLabel.text = localized.chatroom
+            .drive(onNext: { [unowned self] (localized, nickname) in
+                self.nicknameLabel.text = nickname
+                self.navigationItem.title = localized.title
+                self.languageLabel.text = localized.language
+                self.chatroomLabel.text = localized.chatroom
             })
             .disposed(by: rx.disposeBag)
         
@@ -58,24 +58,24 @@ final class ChattingListViewController: ViewController {
             .disposed(by: rx.disposeBag)
         
         output.created
-            .drive(onNext: { [weak self] viewModel in
-                self?.navigator.show(segue: .createRoom(viewModel: viewModel),
+            .drive(onNext: { [unowned self] viewModel in
+                self.navigator.show(segue: .createRoom(viewModel: viewModel),
                                      sender: self,
                                      transition: .present)
             })
             .disposed(by: rx.disposeBag)
         
         output.joined
-            .drive(onNext: { [weak self] viewModel in
-                self?.navigator.show(segue: .joinRoom(viewModel: viewModel),
+            .drive(onNext: { [unowned self] viewModel in
+                self.navigator.show(segue: .joinRoom(viewModel: viewModel),
                                      sender: self,
                                      transition: .present)
             })
             .disposed(by: rx.disposeBag)
         
         output.selected
-            .drive(onNext: { [weak self] viewModel in
-                self?.navigator.show(segue: .chatting(viewModel: viewModel),
+            .drive(onNext: { [unowned self] viewModel in
+                self.navigator.show(segue: .chatting(viewModel: viewModel),
                                      sender: self,
                                      transition: .navigation)
             })

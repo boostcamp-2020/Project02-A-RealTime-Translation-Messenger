@@ -25,8 +25,8 @@ final class LanguageViewModel: ViewModel, ViewModelType {
     func transform(_ input: Input) -> Output {
         
         input.selection
-            .bind(onNext: { [weak self] localize in
-                self?.localize.accept(localize)
+            .bind(onNext: { [unowned self] localize in
+                self.localize.accept(localize)
                 Application.shared.localize = localize
             })
             .disposed(by: rx.disposeBag)

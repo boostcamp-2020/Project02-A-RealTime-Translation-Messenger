@@ -35,25 +35,25 @@ class LanguageViewController: ViewController {
         let output = viewModel.transform(input)
         
         output.viewTexts
-            .drive(onNext: { [weak self] texts in
-                self?.introLabel.text = texts.intro
-                self?.descriptionLabel.text = texts.description
-                self?.nextButton.setTitle(texts.nextButton, for: .normal)
+            .drive(onNext: { [unowned self] texts in
+                self.introLabel.text = texts.intro
+                self.descriptionLabel.text = texts.description
+                self.nextButton.setTitle(texts.nextButton, for: .normal)
             })
             .disposed(by: rx.disposeBag)
         
         output.selected
-            .drive(onNext: { [weak self] localize in
+            .drive(onNext: { [unowned self] localize in
                 let korSelected = localize == .korean
-                self?.korButton.isSelected = korSelected
-                self?.engButton.isSelected = !korSelected
+                self.korButton.isSelected = korSelected
+                self.engButton.isSelected = !korSelected
             })
             .disposed(by: rx.disposeBag)
         
         output.saved
-            .drive(onNext: { [weak self] viewModel in
-                guard let window = self?.view.window else { return }
-                self?.navigator.show(segue: .nickname(viewModel: viewModel), sender: self, transition: .root(in: window))
+            .drive(onNext: { [unowned self] viewModel in
+                guard let window = self.view.window else { return }
+                self.navigator.show(segue: .nickname(viewModel: viewModel), sender: self, transition: .root(in: window))
             })
             .disposed(by: rx.disposeBag)
     }

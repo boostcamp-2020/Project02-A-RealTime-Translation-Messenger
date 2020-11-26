@@ -35,36 +35,36 @@ final class CreateRoomViewController: ViewController {
         let output = viewModel.transform(input)
         
         output.viewTexts
-            .drive(onNext: { [weak self] texts in
-                self?.titleLabel.text = texts.title
-                self?.descriptionLabel.text = texts.description
-                self?.createButton.setTitle(texts.createButton, for: .normal)
+            .drive(onNext: { [unowned self] texts in
+                self.titleLabel.text = texts.title
+                self.descriptionLabel.text = texts.description
+                self.createButton.setTitle(texts.createButton, for: .normal)
             })
             .disposed(by: rx.disposeBag)
         
         output.hasValidRoomName
-            .drive(onNext: { [weak self] isValid in
-                self?.roomTextField.isValid = isValid
-                self?.descriptionLabel.textColor = isValid ? .darkGray : .red
+            .drive(onNext: { [unowned self] isValid in
+                self.roomTextField.isValid = isValid
+                self.descriptionLabel.textColor = isValid ? .darkGray : .red
             })
             .disposed(by: rx.disposeBag)
         
         output.activate
-            .drive(onNext: { [weak self] activate in
-                self?.createButton.isUserInteractionEnabled = activate
-                self?.createButton.backgroundColor = activate ? UIColor(named: "ButtonColor") : .systemGray6
+            .drive(onNext: { [unowned self] activate in
+                self.createButton.isUserInteractionEnabled = activate
+                self.createButton.backgroundColor = activate ? UIColor(named: "ButtonColor") : .systemGray6
             })
             .disposed(by: rx.disposeBag)
         
         output.created
-            .drive(onNext: { [weak self] viewModel in
-                self?.navigator.dismiss(sender: self)
+            .drive(onNext: { [unowned self] viewModel in
+                self.navigator.dismiss(sender: self)
             })
             .disposed(by: rx.disposeBag)
         
         output.dismiss
-            .drive(onNext: { [weak self] () in
-                self?.navigator.dismiss(sender: self)
+            .drive(onNext: { [unowned self] () in
+                self.navigator.dismiss(sender: self)
             })
             .disposed(by: rx.disposeBag)
     }

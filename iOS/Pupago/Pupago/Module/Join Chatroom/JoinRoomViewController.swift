@@ -39,22 +39,22 @@ final class JoinRoomViewController: ViewController {
         let output = viewModel.transform(input)
         
         output.viewTexts
-            .drive(onNext: { [weak self] texts in
-                self?.titleLabel.text = texts.title
-                self?.joinButton.setTitle(texts.joinButton, for: .normal)
+            .drive(onNext: { [unowned self] texts in
+                self.titleLabel.text = texts.title
+                self.joinButton.setTitle(texts.joinButton, for: .normal)
             })
             .disposed(by: rx.disposeBag)
         
         output.activate
-            .drive(onNext: { [weak self] activate in
-                self?.joinButton.isUserInteractionEnabled = activate
-                self?.joinButton.backgroundColor = activate ? UIColor(named: "ButtonColor") : .systemGray6
+            .drive(onNext: { [unowned self] activate in
+                self.joinButton.isUserInteractionEnabled = activate
+                self.joinButton.backgroundColor = activate ? UIColor(named: "ButtonColor") : .systemGray6
             })
             .disposed(by: rx.disposeBag)
         
         output.dismiss
-            .drive(onNext: { [weak self] () in
-                self?.navigator.dismiss(sender: self)
+            .drive(onNext: { [unowned self] () in
+                self.navigator.dismiss(sender: self)
             })
             .disposed(by: rx.disposeBag)
     }
@@ -67,10 +67,10 @@ private extension JoinRoomViewController {
         codeTextFields.forEach { textField in
             textField.rx.controlEvent(.editingChanged)
                 .asObservable()
-                .bind(onNext: { [weak self] in
-                    let idx = ((self?.codeTextFields.firstIndex(of: textField) ?? 0) + 1) % 4
-                    let nextResponder = self?.codeTextFields[idx]
-                    _ = idx == 0 ? textField.resignFirstResponder() : nextResponder?.becomeFirstResponder()
+                .bind(onNext: { [unowned self] in
+                    let idx = ((self.codeTextFields.firstIndex(of: textField) ?? 0) + 1) % 4
+                    let nextResponder = self.codeTextFields[idx]
+                    _ = idx == 0 ? textField.resignFirstResponder() : nextResponder.becomeFirstResponder()
                 })
                 .disposed(by: rx.disposeBag)
         }

@@ -29,9 +29,9 @@ final class JoinRoomViewModel: ViewModel, ViewModelType {
         
         input.roomCode
             .map { $0.joined() }
-            .subscribe(onNext: { [weak self] code in
-                self?.isFull.accept(code.count == 4)
-                self?.isValid.accept(self?.validate(code) ?? false)
+            .subscribe(onNext: { [unowned self] code in
+                self.isFull.accept(code.count == 4)
+                self.isValid.accept(self.validate(code))
             })
             .disposed(by: rx.disposeBag)
         
