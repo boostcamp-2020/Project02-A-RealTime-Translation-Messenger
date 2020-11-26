@@ -27,6 +27,14 @@ const getRoomBySocket = (socketId: string) => {
 
 const removeSocket = (socketId: string) => {
   // 나간 소켓의 정보 삭제
+  return new Promise<number>((resolve, reject) => {
+    client.select(Database.SOCKET_ROOM, () => {
+      client.del(socketId, (err, res) => {
+        if (err) return reject(err);
+        return resolve(res);
+      });
+    });
+  });
 };
 
 const socketRoomModel = {
