@@ -57,6 +57,10 @@ class Navigator {
         }
     }
     
+    func dismiss(sender: UIViewController?) {
+        sender?.dismiss(animated: true, completion: nil)
+    }
+    
     func show(segue: Scene, sender: UIViewController?, transition: Transition) {
         guard let target = get(segue: segue) else { return }
         show(target: target, sender: sender, transition: transition)
