@@ -206,7 +206,6 @@
 			isa = PBXGroup;
 			children = (
 				9705477A2566649D00500D79 /* AppDelegate.swift */,
-				97B4BEA4256BF5B0009A3825 /* ViewController.swift */,
 				97F534FE256CE947005998EE /* Application.swift */,
 				9705477C2566649D00500D79 /* SceneDelegate.swift */,
 				97B4BE91256BEE7F009A3825 /* Navigator.swift */,
@@ -254,6 +253,7 @@
 				975C53FE256B844C00739DCA /* SelectableButton.swift */,
 				97CB75AA256E2CB900FE052A /* CollectionViewBaseCell.swift */,
 				975C540D256B907D00739DCA /* ViewModel.swift */,
+				97B4BEA4256BF5B0009A3825 /* ViewController.swift */,
 				97F534F4256CC008005998EE /* ValidatingTextField.swift */,
 				97F534F9256CD087005998EE /* View.swift */,
 				BD5F616C256D23E300D63CCD /* NavigationController.swift */,
