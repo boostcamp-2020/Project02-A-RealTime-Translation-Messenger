@@ -1,0 +1,18 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+use_frameworks!
+
+# RxSwift, Swift Lint
+target 'Pupago' do
+    pod 'RxSwift', '6.0.0-rc.1'
+    pod 'RxCocoa', '6.0.0-rc.1'
+    pod "SwiftLint"
+end
+
+# RxTest
+target 'PupagoTests' do
+    inherit! :search_paths
+    pod 'RxBlocking', '6.0.0-rc.1'
+    pod 'RxTest', '6.0.0-rc.1'
+end
