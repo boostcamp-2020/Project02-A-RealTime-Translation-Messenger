@@ -39,7 +39,7 @@ class ChattingListViewModel: ViewModel, ViewModelType {
             .map { CreateRoomViewModel() }
             .asDriver(onErrorJustReturn: CreateRoomViewModel())
         
-        let joinSelected = input.createRoomTrigger
+        let joinSelected = input.joinRoomTrigger
             .map { JoinRoomViewModel() }
             .asDriver(onErrorJustReturn: JoinRoomViewModel())
         
