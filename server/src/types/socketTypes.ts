@@ -4,8 +4,14 @@ type userDataType = {
   language: string;
 };
 
+type participantsType = {
+  socketId: string;
+  nickname: string;
+  language: string;
+};
+
 type participantsListType = {
-  participantsList: string[];
+  participantsList: participantsType[];
   type: string;
 };
 
@@ -20,4 +26,4 @@ type receiveChatType = {
   senderId: string;
 };
 
-export { userDataType, participantsListType, sendChatType, receiveChatType };
+export { userDataType, participantsType, participantsListType, sendChatType, receiveChatType };
