@@ -11,7 +11,17 @@ const getSocketsByRoom = (roomCode: string) => {};
 const removeSocketByRoom = (roomCode: string, socketId: string) => {};
 
 // 룸이 비어있는지 체크
-const isRoomEmpty = (roomCode: string) => {};
+const isRoomEmpty = (roomCode: string) => {
+  return new Promise<boolean>((resolve, reject) => {
+    client.select(Database.ROOM_SOCKETS_INFO, () => {
+      client.hlen(roomCode, (err, res) => {
+        if (err) return reject(err);
+        if (res === 0) return resolve(true);
+        return resolve(false);
+      });
+    });
+  });
+};
 
 const roomSocketsInfoModel = {
   setSocketInfo,
