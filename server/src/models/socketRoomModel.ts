@@ -13,10 +13,10 @@ const setRoomBySocket = (socketId: string, roomCode: string) => {
 };
 
 const getRoomBySocket = (socketId: string) => {
-  return new Promise<string | null>((resolve, reject) => {
+  return new Promise<string>((resolve, reject) => {
     client.select(Database.SOCKET_ROOM, () => {
       client.get(socketId, (err, res) => {
-        if (err) return reject(err);
+        if (err || res === null) return reject(err);
         return resolve(res);
       });
     });
