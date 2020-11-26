@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class ChattingListViewController: ViewController {
+final class ChattingListViewController: ViewController {
     
     @IBOutlet weak var nicknameLabel: UILabel!
     @IBOutlet weak var languageLabel: UILabel!

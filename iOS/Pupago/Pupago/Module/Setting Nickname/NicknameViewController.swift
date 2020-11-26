@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class NicknameViewController: ViewController {
+final class NicknameViewController: ViewController {
     
     @IBOutlet weak var introLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -18,10 +18,11 @@ class NicknameViewController: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        bindViewModel()
     }
     
     override func bindViewModel() {
+        super.bindViewModel()
+        
         guard let viewModel = viewModel as? NicknameViewModel else { return }
         let nameText = nameTextField.rx.text.asObservable()
         let nextSelection = startButton.rx.tap.map { _ in }

@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class JoinRoomViewController: ViewController {
+final class JoinRoomViewController: ViewController {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var closeButton: UIButton!

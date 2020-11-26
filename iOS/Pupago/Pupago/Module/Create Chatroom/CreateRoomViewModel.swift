@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class CreateRoomViewModel: ViewModel, ViewModelType {
+final class CreateRoomViewModel: ViewModel, ViewModelType {
     struct Input {
         let roomNameText: Observable<String?>
         let createRoomTrigger: Observable<Void>

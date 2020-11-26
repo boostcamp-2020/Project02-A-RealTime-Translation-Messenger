@@ -11,7 +11,7 @@ protocol Navigatable {
     var navigator: Navigator! { get set }
 }
 
-class Navigator {
+final class Navigator {
     
     static let `default` = Navigator()
     

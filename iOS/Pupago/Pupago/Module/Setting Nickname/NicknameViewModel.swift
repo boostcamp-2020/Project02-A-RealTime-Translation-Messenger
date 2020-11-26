@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class NicknameViewModel: ViewModel, ViewModelType {
+final class NicknameViewModel: ViewModel, ViewModelType {
     
     struct Input {
         let nicknameText: Observable<String?>

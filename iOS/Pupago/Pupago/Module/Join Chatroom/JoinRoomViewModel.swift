@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class JoinRoomViewModel: ViewModel, ViewModelType {
+final class JoinRoomViewModel: ViewModel, ViewModelType {
     
     struct Input {
         let roomCode: Observable<[String]>

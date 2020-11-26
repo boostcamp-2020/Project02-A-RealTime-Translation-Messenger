@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class ChattingListViewModel: ViewModel, ViewModelType {
+final class ChattingListViewModel: ViewModel, ViewModelType {
     
     struct Input {
         let createRoomTrigger: Observable<Void>

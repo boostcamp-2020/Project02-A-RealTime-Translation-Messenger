@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class LanguageViewModel: ViewModel, ViewModelType {
+final class LanguageViewModel: ViewModel, ViewModelType {
     
     struct Input {
         let languageChangeTrigger: Observable<Localize>

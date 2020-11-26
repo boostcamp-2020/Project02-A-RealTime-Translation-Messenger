@@ -18,8 +18,6 @@ class LanguageViewController: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        bindViewModel()
     }
     
     override func bindViewModel() {
