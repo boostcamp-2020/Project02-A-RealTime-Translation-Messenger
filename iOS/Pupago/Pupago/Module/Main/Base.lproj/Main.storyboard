@@ -874,6 +874,10 @@
                     </view>
                     <connections>
                         <outlet property="closeButton" destination="wUq-SI-mhM" id="PTC-dy-pE4"/>
+                        <outlet property="createButton" destination="bYc-3w-0hz" id="D5N-1G-p4V"/>
+                        <outlet property="descriptionLabel" destination="Ncz-2n-flo" id="BxI-Hw-beY"/>
+                        <outlet property="roomTextField" destination="Bqk-sa-4T0" id="bKs-2D-iSq"/>
+                        <outlet property="titleLabel" destination="md1-ij-vxg" id="i1M-Uy-0WE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qcU-hd-SF6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

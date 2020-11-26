@@ -92,7 +92,8 @@ extension Localize {
                          description: "방 이름은 2-30자여야 합니다.",
                          createButton: "생성하기")
         case .english:
-            return .init(title: "Room Create",
+
+            return .init(title: "Create Room",
                          description: "Room must be 2-30 characters.",
                          createButton: "Create")
         }
