@@ -29,12 +29,12 @@ final class ChattingListViewController: ViewController {
         
         guard let viewModel = viewModel as? ChattingListViewModel else { return }
         
-        let joinSelected = joinButton.rx.tap.map { _ in }
-        let createSelected = createButton.rx.tap.map { _ in }
+        let createTrigger = createButton.rx.tap.map { _ in }
+        let joinTrigger = joinButton.rx.tap.map { _ in }
         let selection = collectionView.rx.itemSelected.map { _ in }
         
-        let input = ChattingListViewModel.Input(createRoomTrigger: createSelected,
-                                                joinRoomTrigger: joinSelected,
+        let input = ChattingListViewModel.Input(createTrigger: createTrigger,
+                                                joinTrigger: joinTrigger,
                                                 selection: selection)
         
         let output = viewModel.transform(input)
@@ -48,7 +48,7 @@ final class ChattingListViewController: ViewController {
             })
             .disposed(by: rx.disposeBag)
         
-        output.roomItem
+        output.item
             .asObservable()
             .bind(to: collectionView.rx
                     .items(cellIdentifier: ChattingListCell.identifier,
@@ -57,7 +57,7 @@ final class ChattingListViewController: ViewController {
             }
             .disposed(by: rx.disposeBag)
         
-        output.createSelected
+        output.created
             .drive(onNext: { [weak self] viewModel in
                 self?.navigator.show(segue: .createRoom(viewModel: viewModel),
                                      sender: self,
@@ -65,7 +65,7 @@ final class ChattingListViewController: ViewController {
             })
             .disposed(by: rx.disposeBag)
         
-        output.joinSelected
+        output.joined
             .drive(onNext: { [weak self] viewModel in
                 self?.navigator.show(segue: .joinRoom(viewModel: viewModel),
                                      sender: self,
@@ -73,7 +73,7 @@ final class ChattingListViewController: ViewController {
             })
             .disposed(by: rx.disposeBag)
         
-        output.selection
+        output.selected
             .drive(onNext: { [weak self] viewModel in
                 self?.navigator.show(segue: .chatting(viewModel: viewModel),
                                      sender: self,

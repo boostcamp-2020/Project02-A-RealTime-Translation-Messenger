@@ -12,17 +12,17 @@ import RxCocoa
 final class ChattingListViewModel: ViewModel, ViewModelType {
     
     struct Input {
-        let createRoomTrigger: Observable<Void>
-        let joinRoomTrigger: Observable<Void>
+        let createTrigger: Observable<Void>
+        let joinTrigger: Observable<Void>
         let selection: Observable<Void>
     }
     
     struct Output {
         let viewTexts: Driver<(localizeTexts: Localize.ChatListViewText, nickname: String)>
-        let roomItem: Driver<[Int]> // Mock for UI
-        let createSelected: Driver<CreateRoomViewModel>
-        let joinSelected: Driver<JoinRoomViewModel>
-        let selection: Driver<ChattingViewModel>
+        let item: Driver<[Int]> // Mock for UI
+        let created: Driver<CreateRoomViewModel>
+        let joined: Driver<JoinRoomViewModel>
+        let selected: Driver<ChattingViewModel>
     }
     
     // Mock for UI
@@ -35,23 +35,23 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
         
         let roomItem = rooms.asDriver(onErrorJustReturn: [])
         
-        let createSelected = input.createRoomTrigger
+        let created = input.createTrigger
             .map { CreateRoomViewModel() }
             .asDriver(onErrorJustReturn: CreateRoomViewModel())
         
-        let joinSelected = input.joinRoomTrigger
+        let joined = input.joinTrigger
             .map { JoinRoomViewModel() }
             .asDriver(onErrorJustReturn: JoinRoomViewModel())
         
-        let selection = input.selection
+        let selected = input.selection
             .map { ChattingViewModel() }
             .asDriver(onErrorJustReturn: ChattingViewModel())
         
         return Output(viewTexts: viewText,
-                      roomItem: roomItem,
-                      createSelected: createSelected,
-                      joinSelected: joinSelected,
-                      selection: selection)
+                      item: roomItem,
+                      created: created,
+                      joined: joined,
+                      selected: selected)
     }
     
 }

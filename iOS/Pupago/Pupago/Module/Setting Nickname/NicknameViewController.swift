@@ -25,10 +25,10 @@ final class NicknameViewController: ViewController {
         
         guard let viewModel = viewModel as? NicknameViewModel else { return }
         let nameText = nameTextField.rx.text.asObservable()
-        let nextSelection = startButton.rx.tap.map { _ in }
+        let saveTrigger = startButton.rx.tap.map { _ in }
         
         let input = NicknameViewModel.Input(nicknameText: nameText,
-                                            nextTrigger: nextSelection)
+                                            saveTrigger: saveTrigger)
         let output = viewModel.transform(input)
         
         output.viewTexts
@@ -40,7 +40,7 @@ final class NicknameViewController: ViewController {
             })
             .disposed(by: rx.disposeBag)
         
-        output.isNicknameValid
+        output.hasValidNickname
             .drive(onNext: { [weak self] isValid in
                 self?.nameTextField.isValid = isValid
                 self?.descriptionLabel.textColor = isValid ? .white : .red
@@ -54,7 +54,7 @@ final class NicknameViewController: ViewController {
             })
             .disposed(by: rx.disposeBag)
         
-        output.nextButtonSelected
+        output.saved
             .drive(onNext: { [weak self] viewModel in
                 guard let window = self?.view.window else { return }
                 self?.navigator.show(segue: .chatlist(viewModel: viewModel), sender: self, transition: .rootWithNavigation(in: window))

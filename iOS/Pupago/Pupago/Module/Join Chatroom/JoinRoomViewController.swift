@@ -26,15 +26,15 @@ final class JoinRoomViewController: ViewController {
         
         guard let viewModel = viewModel as? JoinRoomViewModel else { return }
         
-        let closeSelected = closeButton.rx.tap.map { _ in }
         let roomCode: Observable<[String]> =  {
             let observers = codeTextFields
                 .map { $0.rx.text.orEmpty.asObservable() }
             return Observable.combineLatest(observers)
         }()
+        let cancelTrigger = closeButton.rx.tap.map { _ in }
         
         let input = JoinRoomViewModel.Input(roomCode: roomCode,
-                                            closeRoomTrigger: closeSelected)
+                                            cancelTrigger: cancelTrigger)
         
         let output = viewModel.transform(input)
         

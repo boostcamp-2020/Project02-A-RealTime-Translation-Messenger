@@ -22,18 +22,18 @@ class LanguageViewController: ViewController {
     
     override func bindViewModel() {
         super.bindViewModel()
-
-        guard let viewModel = viewModel as? LanguageViewModel else { return }
-        let engSelected = engButton.rx.tap.map { Localize.english }
-        let korSelected = korButton.rx.tap.map { Localize.korean }
-        let languageSelected = Observable.of(engSelected, korSelected).merge()
-        let nextSelection = nextButton.rx.tap.map { _ in }
         
-        let input = LanguageViewModel.Input(languageChangeTrigger: languageSelected,
-                                            nextTrigger: nextSelection)
+        guard let viewModel = viewModel as? LanguageViewModel else { return }
+        let engSelection = engButton.rx.tap.map { Localize.english }
+        let korSelection = korButton.rx.tap.map { Localize.korean }
+        let selection = Observable.of(engSelection, korSelection).merge()
+        let saveTrigger = nextButton.rx.tap.map { _ in }
+        
+        let input = LanguageViewModel.Input(selection: selection,
+                                            saveTrigger: saveTrigger)
         
         let output = viewModel.transform(input)
-
+        
         output.viewTexts
             .drive(onNext: { [weak self] texts in
                 self?.introLabel.text = texts.intro
@@ -42,7 +42,7 @@ class LanguageViewController: ViewController {
             })
             .disposed(by: rx.disposeBag)
         
-        output.languageSelected
+        output.selected
             .drive(onNext: { [weak self] localize in
                 let korSelected = localize == .korean
                 self?.korButton.isSelected = korSelected
@@ -50,7 +50,7 @@ class LanguageViewController: ViewController {
             })
             .disposed(by: rx.disposeBag)
         
-        output.nextButtonSelected
+        output.saved
             .drive(onNext: { [weak self] viewModel in
                 guard let window = self?.view.window else { return }
                 self?.navigator.show(segue: .nickname(viewModel: viewModel), sender: self, transition: .root(in: window))

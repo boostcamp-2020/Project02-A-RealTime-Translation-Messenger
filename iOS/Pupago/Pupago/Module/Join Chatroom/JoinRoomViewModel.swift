@@ -13,7 +13,7 @@ final class JoinRoomViewModel: ViewModel, ViewModelType {
     
     struct Input {
         let roomCode: Observable<[String]>
-        let closeRoomTrigger: Observable<Void>
+        let cancelTrigger: Observable<Void>
     }
     
     struct Output {
@@ -38,18 +38,19 @@ final class JoinRoomViewModel: ViewModel, ViewModelType {
         let viewText = localize.asDriver()
             .map { $0.joinRoomViewText }
         
-        let activateButton = Observable.combineLatest(isFull, isValid)
+        let activate = Observable.combineLatest(isFull, isValid)
             .map { $0 && $1 }
             .asDriver(onErrorJustReturn: false)
         
-        let closeSelected = input.closeRoomTrigger
+        let dismiss = input.cancelTrigger
             .map { _ in }
             .asDriver(onErrorJustReturn: ())
         
         return Output(viewTexts: viewText,
-                      activate: activateButton,
-                      dismiss: closeSelected)
+                      activate: activate,
+                      dismiss: dismiss)
     }
+    
 }
 
 private extension JoinRoomViewModel {

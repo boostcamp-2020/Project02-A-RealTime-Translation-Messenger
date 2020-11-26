@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 final class CreateRoomViewController: ViewController {
-
+    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var roomTextField: ValidatingTextField!
@@ -20,18 +20,18 @@ final class CreateRoomViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
+    
     override func bindViewModel() {
         super.bindViewModel()
         
         guard let viewModel = viewModel as? CreateRoomViewModel else { return }
-        let roomText = roomTextField.rx.text.asObservable()
-        let closeSelected = closeButton.rx.tap.map { _ in }
-        let createSelected = createButton.rx.tap.map { _ in }
+        let roomName = roomTextField.rx.text.asObservable()
+        let createTrigger = createButton.rx.tap.map { _ in }
+        let cancelTrigger = closeButton.rx.tap.map { _ in }
         
-        let input = CreateRoomViewModel.Input(roomNameText: roomText,
-                                              createRoomTrigger: createSelected,
-                                              closeRoomTrigger: closeSelected)
+        let input = CreateRoomViewModel.Input(roomName: roomName,
+                                              createTrigger: createTrigger,
+                                              cancelTrigger: cancelTrigger)
         let output = viewModel.transform(input)
         
         output.viewTexts
@@ -42,7 +42,7 @@ final class CreateRoomViewController: ViewController {
             })
             .disposed(by: rx.disposeBag)
         
-        output.isRoomNameValid
+        output.hasValidRoomName
             .drive(onNext: { [weak self] isValid in
                 self?.roomTextField.isValid = isValid
                 self?.descriptionLabel.textColor = isValid ? .darkGray : .red
@@ -56,7 +56,7 @@ final class CreateRoomViewController: ViewController {
             })
             .disposed(by: rx.disposeBag)
         
-        output.createButtonSelected
+        output.created
             .drive(onNext: { [weak self] viewModel in
                 self?.navigator.dismiss(sender: self)
             })
@@ -68,5 +68,5 @@ final class CreateRoomViewController: ViewController {
             })
             .disposed(by: rx.disposeBag)
     }
-
+    
 }

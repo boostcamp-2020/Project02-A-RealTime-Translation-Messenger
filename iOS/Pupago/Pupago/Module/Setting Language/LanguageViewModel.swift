@@ -12,19 +12,19 @@ import RxCocoa
 final class LanguageViewModel: ViewModel, ViewModelType {
     
     struct Input {
-        let languageChangeTrigger: Observable<Localize>
-        let nextTrigger: Observable<Void>
+        let selection: Observable<Localize>
+        let saveTrigger: Observable<Void>
     }
     
     struct Output {
         let viewTexts: Driver<Localize.SettingLanguageViewText>
-        let languageSelected: Driver<Localize>
-        let nextButtonSelected: Driver<NicknameViewModel>
+        let selected: Driver<Localize>
+        let saved: Driver<NicknameViewModel>
     }
     
     func transform(_ input: Input) -> Output {
         
-        input.languageChangeTrigger
+        input.selection
             .bind(onNext: { [weak self] localize in
                 self?.localize.accept(localize)
                 Application.shared.localize = localize
@@ -34,14 +34,14 @@ final class LanguageViewModel: ViewModel, ViewModelType {
         let viewText = localize.asDriver()
             .map { $0.languageViewText }
         
-        let languageSelected = localize.asDriver()
+        let selected = localize.asDriver()
         
-        let nextButtonSelected = input.nextTrigger
+        let saved = input.saveTrigger
             .map { NicknameViewModel() }
             .asDriver(onErrorJustReturn: NicknameViewModel())
         
         return Output(viewTexts: viewText,
-                      languageSelected: languageSelected,
-                      nextButtonSelected: nextButtonSelected)
+                      selected: selected,
+                      saved: saved)
     }
 }
