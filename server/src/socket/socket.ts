@@ -1,12 +1,14 @@
-import express from 'express';
 import http from 'http';
 import socketIO from 'socket.io';
 import { userDataType, participantsListType, sendChatType, receiveChatType } from '../types/socketTypes';
 import socketControllers from './socketController';
 
-const socketLoader = (app: express.Application) => {
-  const server = http.createServer(app);
-  const io = new socketIO.Server(server);
+const socketLoader = (server: http.Server) => {
+  const io = new socketIO.Server(server, {
+    cors: {
+      origin: '*',
+    },
+  });
 
   io.on('connection', (socket) => {
     socket.on('enter chatroom', (userData: userDataType) => {
