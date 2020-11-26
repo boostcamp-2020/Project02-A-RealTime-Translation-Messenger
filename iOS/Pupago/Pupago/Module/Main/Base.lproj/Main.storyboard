@@ -960,7 +960,9 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="DjN-Ov-jzT"/>
                                         </constraints>
-                                        <state key="normal" title="참가하기"/>
+                                        <state key="normal" title="참가하기">
+                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                 <real key="value" value="10"/>
@@ -982,7 +984,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="JGb-2g-qqD">
                                         <rect key="frame" x="41.333333333333343" y="221.66666666666669" width="180" height="47"/>
                                         <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GAF-io-Shw">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GAF-io-Shw">
                                                 <rect key="frame" x="0.0" y="0.0" width="36" height="47"/>
                                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                                 <constraints>
@@ -990,14 +992,14 @@
                                                     <constraint firstAttribute="width" constant="36" id="WMB-QR-y6Y"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="alphabet" returnKeyType="next"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                         <integer key="value" value="5"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="coH-G4-8K1">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="coH-G4-8K1">
                                                 <rect key="frame" x="47.999999999999986" y="0.0" width="36" height="47"/>
                                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                                 <constraints>
@@ -1005,14 +1007,14 @@
                                                     <constraint firstAttribute="height" constant="47" id="PAg-1P-sOw"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="alphabet" returnKeyType="next"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                         <integer key="value" value="5"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mik-QG-06j">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mik-QG-06j">
                                                 <rect key="frame" x="95.999999999999986" y="0.0" width="36.000000000000014" height="47"/>
                                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                                 <constraints>
@@ -1020,14 +1022,14 @@
                                                     <constraint firstAttribute="height" constant="47" id="xAt-Db-TNS"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="alphabet" returnKeyType="next"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                         <integer key="value" value="5"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EzQ-3P-eRi">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EzQ-3P-eRi">
                                                 <rect key="frame" x="144" y="0.0" width="36" height="47"/>
                                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                                 <constraints>
@@ -1035,7 +1037,7 @@
                                                     <constraint firstAttribute="height" constant="47" id="mhp-ZP-M3J"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="alphabet" returnKeyType="done"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                         <integer key="value" value="5"/>
@@ -1084,6 +1086,12 @@
                     </view>
                     <connections>
                         <outlet property="closeButton" destination="9Ho-uW-wJe" id="0Kh-Ze-wjz"/>
+                        <outlet property="joinButton" destination="5Hn-sa-Vhi" id="ezl-bR-VQD"/>
+                        <outlet property="titleLabel" destination="PAb-a4-nU2" id="dNQ-4v-9hu"/>
+                        <outletCollection property="codeTextFields" destination="GAF-io-Shw" collectionClass="NSMutableArray" id="0vG-Vq-RpI"/>
+                        <outletCollection property="codeTextFields" destination="coH-G4-8K1" collectionClass="NSMutableArray" id="F5j-JI-P0T"/>
+                        <outletCollection property="codeTextFields" destination="mik-QG-06j" collectionClass="NSMutableArray" id="Ktf-lC-FGQ"/>
+                        <outletCollection property="codeTextFields" destination="EzQ-3P-eRi" collectionClass="NSMutableArray" id="QeG-85-c7B"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="72V-4g-1F0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
