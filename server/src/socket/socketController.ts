@@ -1,7 +1,7 @@
 import { userDataType, participantsListType, sendChatType, receiveChatType } from '../types/socketTypes';
-import SocketIO from 'socket.io';
+import SocketIO, { Socket } from 'socket.io';
 
-const enterChatroom = (socket: any, io: SocketIO.Server, userData: userDataType) => {
+const enterChatroom = (socket: Socket, io: SocketIO.Server, userData: userDataType) => {
   const { roomCode, nickname, language } = userData;
   socket.join(roomCode);
   // TODO: db1, 2 소켓 정보 저장
@@ -13,7 +13,7 @@ const enterChatroom = (socket: any, io: SocketIO.Server, userData: userDataType)
   io.to(roomCode).emit('receive participants list', participantsList);
 };
 
-const sendChat = (socket: any, io: SocketIO.Server, sendChat: sendChatType) => {
+const sendChat = (socket: Socket, io: SocketIO.Server, sendChat: sendChatType) => {
   const { Korean, English } = sendChat;
   const receiveChat: receiveChatType = {
     Korean,
@@ -25,7 +25,7 @@ const sendChat = (socket: any, io: SocketIO.Server, sendChat: sendChatType) => {
   io.to(roomCode).emit('receive chat', receiveChat);
 };
 
-const disconnect = (socket: any, io: SocketIO.Server) => {
+const disconnect = (socket: Socket, io: SocketIO.Server) => {
   // TODO: 현재 소켓이 속해있는 방 id 받아오기
   const roomCode = '1'; // db를 통해 받아오기
   const participantsList: participantsListType = {

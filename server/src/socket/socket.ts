@@ -1,6 +1,6 @@
 import express from 'express';
 import http from 'http';
-import socketIO from 'socket.io';
+import socketIO, { Socket } from 'socket.io';
 import { userDataType, participantsListType, sendChatType, receiveChatType } from '../types/socketTypes';
 import socketControllers from './socketController';
 
@@ -8,7 +8,7 @@ const socketLoader = (app: express.Application) => {
   const server = http.createServer(app);
   const io = new socketIO.Server(server);
 
-  io.on('connection', (socket) => {
+  io.on('connection', (socket: Socket) => {
     socket.on('enter chatroom', (userData: userDataType) => {
       socketControllers.enterChatroom(socket, io, userData);
     });
