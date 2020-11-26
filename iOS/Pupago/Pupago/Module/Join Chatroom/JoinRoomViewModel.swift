@@ -53,11 +53,13 @@ final class JoinRoomViewModel: ViewModel, ViewModelType {
 }
 
 private extension JoinRoomViewModel {
+    
     func validate(_ code: String) -> Bool {
         guard code.count == 4,
-              getSyntaxAfterRegex(newText: code, filter: "[a-zA-Z0-9]")
+              RegexManager.validate(of: code, for: .roomCode)
         else { return false }
         
         return true
     }
+    
 }

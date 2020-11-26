@@ -65,10 +65,16 @@ final class NicknameViewModel: ViewModel, ViewModelType {
                       nextButtonSelected: nextButtonSelected)
     }
     
+}
+
+private extension NicknameViewModel {
+    
     private func validate(nickname: String) -> Bool {
-        guard nickname.count <= 12 && nickname.count >= 2 else { return false }
-        guard getSyntaxAfterRegex(newText: nickname) else { return false }
+        guard nickname.count <= 12 && nickname.count >= 2,
+              RegexManager.validate(of: nickname, for: .nickname)
+        else { return false }
         
         return true
     }
+    
 }

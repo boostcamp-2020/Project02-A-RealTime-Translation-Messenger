@@ -63,11 +63,17 @@ final class CreateRoomViewModel: ViewModel, ViewModelType {
                       createButtonSelected: createButtonSelected,
                       dismiss: closeSelected)
     }
+       
+}
+
+private extension CreateRoomViewModel {
     
     private func validate(roomName: String) -> Bool {
-        guard roomName.count >= 2 && roomName.count <= 30 else { return false }
-        guard getSyntaxAfterRegex(newText: roomName) else { return false }
+        guard roomName.count >= 2 && roomName.count <= 30,
+              RegexManager.validate(of: roomName, for: .roomName)
+        else { return false }
         
         return true
     }
+    
 }
