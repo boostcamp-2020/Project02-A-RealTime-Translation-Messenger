@@ -5,10 +5,19 @@ import Database from '../types/databaseNames';
 const setSocketInfo = (socketId: string, socketInfo: string) => {};
 
 // 룸에 속한 소켓 리스트 뽑아주기
-const getSocketsByRoom = (roomId: string) => {};
+const getSocketsByRoom = (roomCode: string) => {};
 
 // 룸에 나간 소켓 삭제하기
-const removeSocketByRoom = (roomId: string, socketId: string) => {};
+const removeSocketByRoom = (roomCode: string, socketId: string) => {};
 
 // 룸이 비어있는지 체크
-const isRoomEmpty = (roomId: string) => {};
+const isRoomEmpty = (roomCode: string) => {};
+
+const roomSocketsInfoModel = {
+  setSocketInfo,
+  getSocketsByRoom,
+  removeSocketByRoom,
+  isRoomEmpty,
+};
+
+export default roomSocketsInfoModel;

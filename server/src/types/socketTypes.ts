@@ -1,7 +1,7 @@
 type userDataType = {
+  roomCode: string;
   nickname: string;
   language: string;
-  roomId: string;
 };
 
 type participantsListType = {

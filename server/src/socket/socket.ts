@@ -26,4 +26,4 @@ const socketLoader = (app: express.Application) => {
   });
 };
 
-export default expressLoader;
+export default socketLoader;
