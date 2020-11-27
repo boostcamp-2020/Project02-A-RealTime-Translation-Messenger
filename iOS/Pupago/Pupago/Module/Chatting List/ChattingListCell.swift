@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ChattingListCell: CollectionViewBaseCell {
+final class ChattingListCell: CollectionViewBaseCell {
     
     static let identifier = "ChattingListCell"
     

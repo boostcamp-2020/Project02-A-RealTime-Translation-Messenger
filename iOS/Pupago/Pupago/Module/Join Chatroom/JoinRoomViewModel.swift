@@ -9,11 +9,11 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class JoinRoomViewModel: ViewModel, ViewModelType {
+final class JoinRoomViewModel: ViewModel, ViewModelType {
     
     struct Input {
         let roomCode: Observable<[String]>
-        let closeRoomTrigger: Observable<Void>
+        let cancelTrigger: Observable<Void>
     }
     
     struct Output {
@@ -29,35 +29,38 @@ class JoinRoomViewModel: ViewModel, ViewModelType {
         
         input.roomCode
             .map { $0.joined() }
-            .subscribe(onNext: { [weak self] code in
-                self?.isFull.accept(code.count == 4)
-                self?.isValid.accept(self?.validate(code) ?? false)
+            .subscribe(onNext: { [unowned self] code in
+                self.isFull.accept(code.count == 4)
+                self.isValid.accept(self.validate(code))
             })
             .disposed(by: rx.disposeBag)
         
         let viewText = localize.asDriver()
             .map { $0.joinRoomViewText }
         
-        let activateButton = Observable.combineLatest(isFull, isValid)
+        let activate = Observable.combineLatest(isFull, isValid)
             .map { $0 && $1 }
             .asDriver(onErrorJustReturn: false)
         
-        let closeSelected = input.closeRoomTrigger
+        let dismiss = input.cancelTrigger
             .map { _ in }
             .asDriver(onErrorJustReturn: ())
         
         return Output(viewTexts: viewText,
-                      activate: activateButton,
-                      dismiss: closeSelected)
+                      activate: activate,
+                      dismiss: dismiss)
     }
+    
 }
 
 private extension JoinRoomViewModel {
+    
     func validate(_ code: String) -> Bool {
         guard code.count == 4,
-              getSyntaxAfterRegex(newText: code, filter: "[a-zA-Z0-9]")
+              RegexManager.validate(of: code, for: .roomCode)
         else { return false }
         
         return true
     }
+    
 }

@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class ChattingListViewController: ViewController {
+final class ChattingListViewController: ViewController {
     
     @IBOutlet weak var nicknameLabel: UILabel!
     @IBOutlet weak var languageLabel: UILabel!
@@ -29,26 +29,26 @@ class ChattingListViewController: ViewController {
         
         guard let viewModel = viewModel as? ChattingListViewModel else { return }
         
-        let joinSelected = joinButton.rx.tap.map { _ in }
-        let createSelected = createButton.rx.tap.map { _ in }
+        let createTrigger = createButton.rx.tap.map { _ in }
+        let joinTrigger = joinButton.rx.tap.map { _ in }
         let selection = collectionView.rx.itemSelected.map { _ in }
         
-        let input = ChattingListViewModel.Input(createRoomTrigger: createSelected,
-                                                joinRoomTrigger: joinSelected,
+        let input = ChattingListViewModel.Input(createTrigger: createTrigger,
+                                                joinTrigger: joinTrigger,
                                                 selection: selection)
         
         let output = viewModel.transform(input)
         
         output.viewTexts
-            .drive(onNext: { [weak self] (localized, nickname) in
-                self?.nicknameLabel.text = nickname
-                self?.navigationItem.title = localized.title
-                self?.languageLabel.text = localized.language
-                self?.chatroomLabel.text = localized.chatroom
+            .drive(onNext: { [unowned self] (localized, nickname) in
+                self.nicknameLabel.text = nickname
+                self.navigationItem.title = localized.title
+                self.languageLabel.text = localized.language
+                self.chatroomLabel.text = localized.chatroom
             })
             .disposed(by: rx.disposeBag)
         
-        output.roomItem
+        output.item
             .asObservable()
             .bind(to: collectionView.rx
                     .items(cellIdentifier: ChattingListCell.identifier,
@@ -57,25 +57,25 @@ class ChattingListViewController: ViewController {
             }
             .disposed(by: rx.disposeBag)
         
-        output.createSelected
-            .drive(onNext: { [weak self] viewModel in
-                self?.navigator.show(segue: .createRoom(viewModel: viewModel),
+        output.created
+            .drive(onNext: { [unowned self] viewModel in
+                self.navigator.show(segue: .createRoom(viewModel: viewModel),
                                      sender: self,
                                      transition: .present)
             })
             .disposed(by: rx.disposeBag)
         
-        output.joinSelected
-            .drive(onNext: { [weak self] viewModel in
-                self?.navigator.show(segue: .joinRoom(viewModel: viewModel),
+        output.joined
+            .drive(onNext: { [unowned self] viewModel in
+                self.navigator.show(segue: .joinRoom(viewModel: viewModel),
                                      sender: self,
                                      transition: .present)
             })
             .disposed(by: rx.disposeBag)
         
-        output.selection
-            .drive(onNext: { [weak self] viewModel in
-                self?.navigator.show(segue: .chatting(viewModel: viewModel),
+        output.selected
+            .drive(onNext: { [unowned self] viewModel in
+                self.navigator.show(segue: .chatting(viewModel: viewModel),
                                      sender: self,
                                      transition: .navigation)
             })

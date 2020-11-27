@@ -18,44 +18,42 @@ class LanguageViewController: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        bindViewModel()
     }
     
     override func bindViewModel() {
         super.bindViewModel()
-
-        guard let viewModel = viewModel as? LanguageViewModel else { return }
-        let engSelected = engButton.rx.tap.map { Localize.english }
-        let korSelected = korButton.rx.tap.map { Localize.korean }
-        let languageSelected = Observable.of(engSelected, korSelected).merge()
-        let nextSelection = nextButton.rx.tap.map { _ in }
         
-        let input = LanguageViewModel.Input(languageChangeTrigger: languageSelected,
-                                            nextTrigger: nextSelection)
+        guard let viewModel = viewModel as? LanguageViewModel else { return }
+        let engSelection = engButton.rx.tap.map { Localize.english }
+        let korSelection = korButton.rx.tap.map { Localize.korean }
+        let selection = Observable.of(engSelection, korSelection).merge()
+        let saveTrigger = nextButton.rx.tap.map { _ in }
+        
+        let input = LanguageViewModel.Input(selection: selection,
+                                            saveTrigger: saveTrigger)
         
         let output = viewModel.transform(input)
-
+        
         output.viewTexts
-            .drive(onNext: { [weak self] texts in
-                self?.introLabel.text = texts.intro
-                self?.descriptionLabel.text = texts.description
-                self?.nextButton.setTitle(texts.nextButton, for: .normal)
+            .drive(onNext: { [unowned self] texts in
+                self.introLabel.text = texts.intro
+                self.descriptionLabel.text = texts.description
+                self.nextButton.setTitle(texts.nextButton, for: .normal)
             })
             .disposed(by: rx.disposeBag)
         
-        output.languageSelected
-            .drive(onNext: { [weak self] localize in
+        output.selected
+            .drive(onNext: { [unowned self] localize in
                 let korSelected = localize == .korean
-                self?.korButton.isSelected = korSelected
-                self?.engButton.isSelected = !korSelected
+                self.korButton.isSelected = korSelected
+                self.engButton.isSelected = !korSelected
             })
             .disposed(by: rx.disposeBag)
         
-        output.nextButtonSelected
-            .drive(onNext: { [weak self] viewModel in
-                guard let window = self?.view.window else { return }
-                self?.navigator.show(segue: .nickname(viewModel: viewModel), sender: self, transition: .root(in: window))
+        output.saved
+            .drive(onNext: { [unowned self] viewModel in
+                guard let window = self.view.window else { return }
+                self.navigator.show(segue: .nickname(viewModel: viewModel), sender: self, transition: .root(in: window))
             })
             .disposed(by: rx.disposeBag)
     }
