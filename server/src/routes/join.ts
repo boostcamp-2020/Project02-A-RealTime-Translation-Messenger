@@ -14,7 +14,7 @@ router.post('/private', async (req: Request, res: Response) => {
       return res.status(200).json(createdRoom);
     }
   }
-  return res.status(400);
+  return res.status(400).json();
 });
 
 router.post('/public', async (req: Request, res: Response) => {
@@ -27,5 +27,7 @@ router.post('/public', async (req: Request, res: Response) => {
       return res.status(200).json(createdRoom);
     }
   }
-  return res.status(400);
+  return res.status(400).json();
 });
+
+export default router;

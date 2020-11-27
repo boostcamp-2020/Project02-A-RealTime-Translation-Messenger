@@ -24,12 +24,14 @@ type roomInfoType = {
   roomCode: string;
   title: string;
   createdAt: string;
+  isPrivate: string;
 };
 
 type roomListType = {
   roomCode: string;
   title: string;
   createdAt: string;
+  isPrivate: string;
   participantCount: number;
 };
 

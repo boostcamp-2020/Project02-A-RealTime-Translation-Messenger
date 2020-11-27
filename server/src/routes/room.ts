@@ -1,13 +1,18 @@
 import express, { Request, Response } from 'express';
 import roomInfoModel from '../models/roomInfoModel';
 import roomSocketsInfoModel from '../models/roomSocketsInfoModel';
-import { createdRoomType, roomListType } from '../types/socketTypes';
+import { createdRoomType, roomInfoType, roomListType } from '../types/socketTypes';
 
 const router = express.Router();
 
 router.get('/', async (req: Request, res: Response) => {
   try {
-    const roomInfos = await roomInfoModel.getRoomList();
+    const roomCodeList = await roomInfoModel.getRoomCodeList();
+
+    const roomInfos: roomInfoType[] = [];
+    for (const roomCode of roomCodeList) {
+      roomInfos.push(await roomInfoModel.getRoomInfo(roomCode));
+    }
 
     const roomLists: roomListType[] = [];
     for (const roomInfo of roomInfos) {
@@ -16,9 +21,14 @@ router.get('/', async (req: Request, res: Response) => {
       roomLists.push({ ...roomInfo, participantCount: count });
     }
 
-    return res.status(200).json({ roomLists });
+    const filteredRoomLists = roomLists.filter((room) => {
+      if (room.isPrivate === 'false') return true;
+      return false;
+    });
+
+    return res.status(200).json({ roomList: filteredRoomLists });
   } catch (err) {
-    return res.status(400);
+    return res.status(400).json();
   }
 });
 
@@ -41,5 +51,7 @@ router.post('/', async (req: Request, res: Response) => {
     return res.status(200).json(createdRoom);
   }
 
-  return res.status(400);
+  return res.status(400).json();
 });
+
+export default router;

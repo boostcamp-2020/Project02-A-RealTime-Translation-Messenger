@@ -14,19 +14,22 @@ const removeRoom = (roomCode: string) => {
   });
 };
 
-const getRoomList = () => {
-  return new Promise<roomInfoType[]>((resolve, reject) => {
+const getRoomCodeList = () => {
+  return new Promise<string[]>((resolve, reject) => {
     client.select(Database.ROOM_INFO, () => {
       client.keys('*', (err, codes) => {
-        const roomInfos: roomInfoType[] = [];
-        for (const key of codes) {
-          client.hgetall(key, (err, infos) => {
-            const roomInfo: roomInfoType = { roomCode: key, ...Object.assign(infos) };
-            roomInfos.push(roomInfo);
-          });
-        }
-        return resolve(roomInfos);
+        if (err) return reject(err);
+        return resolve(codes);
       });
+    });
+  });
+};
+
+const getRoomInfo = (roomCode: string) => {
+  return new Promise<roomInfoType>((resolve, reject) => {
+    client.hgetall(roomCode, (err, res) => {
+      if (err) return reject(err);
+      return resolve({ roomCode, ...Object.assign(res) });
     });
   });
 };
@@ -80,7 +83,8 @@ const getTitle = (roomCode: string) => {
 
 const roomInfoModel = {
   removeRoom,
-  getRoomList,
+  getRoomCodeList,
+  getRoomInfo,
   isRoomCodeExisting,
   setRoom,
   isRoomPrivate,
