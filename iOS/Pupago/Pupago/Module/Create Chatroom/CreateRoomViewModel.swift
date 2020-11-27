@@ -9,18 +9,18 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class CreateRoomViewModel: ViewModel, ViewModelType {
+final class CreateRoomViewModel: ViewModel, ViewModelType {
     struct Input {
-        let roomNameText: Observable<String?>
-        let createRoomTrigger: Observable<Void>
-        let closeRoomTrigger: Observable<Void>
+        let roomName: Observable<String?>
+        let createTrigger: Observable<Void>
+        let cancelTrigger: Observable<Void>
     }
     
     struct Output {
         let viewTexts: Driver<Localize.CreateRoomViewText>
-        let isRoomNameValid: Driver<Bool>
+        let hasValidRoomName: Driver<Bool>
         let activate: Driver<Bool>
-        let createButtonSelected: Driver<ChattingViewModel>
+        let created: Driver<ChattingViewModel>
         let dismiss: Driver<Void>
     }
     
@@ -28,12 +28,12 @@ class CreateRoomViewModel: ViewModel, ViewModelType {
     let isValid = BehaviorRelay<Bool>(value: false)
     
     func transform(_ input: Input) -> Output {
-        input.roomNameText
+        input.roomName
             .map { $0?.isEmpty ?? true }
             .bind(to: isEmpty)
             .disposed(by: rx.disposeBag)
         
-        input.roomNameText
+        input.roomName
             .map { self.validate(roomName: $0 ?? "") }
             .bind(to: isValid)
             .disposed(by: rx.disposeBag)
@@ -41,7 +41,7 @@ class CreateRoomViewModel: ViewModel, ViewModelType {
         let viewText = localize.asDriver()
             .map { $0.createRoomViewText }
         
-        let isRoomNameValid = Observable.zip(isEmpty, isValid)
+        let validate = Observable.zip(isEmpty, isValid)
             .map { $0 || $1 }
             .asDriver(onErrorJustReturn: false)
         
@@ -49,25 +49,31 @@ class CreateRoomViewModel: ViewModel, ViewModelType {
             .map { !$0 && $1 }
             .asDriver(onErrorJustReturn: false)
         
-        let createButtonSelected = input.createRoomTrigger
+        let created = input.createTrigger
             .map { ChattingViewModel() }
             .asDriver(onErrorJustReturn: ChattingViewModel())
         
-        let closeSelected = input.closeRoomTrigger
+        let dismiss = input.cancelTrigger
             .map { _ in }
             .asDriver(onErrorJustReturn: ())
         
         return Output(viewTexts: viewText,
-                      isRoomNameValid: isRoomNameValid,
+                      hasValidRoomName: validate,
                       activate: activate,
-                      createButtonSelected: createButtonSelected,
-                      dismiss: closeSelected)
+                      created: created,
+                      dismiss: dismiss)
     }
     
+}
+
+private extension CreateRoomViewModel {
+    
     private func validate(roomName: String) -> Bool {
-        guard roomName.count >= 2 && roomName.count <= 30 else { return false }
-        guard getSyntaxAfterRegex(newText: roomName) else { return false }
+        guard roomName.count >= 2 && roomName.count <= 30,
+              RegexManager.validate(of: roomName, for: .roomName)
+        else { return false }
         
         return true
     }
+    
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class Application: NSObject {
+final class Application: NSObject {
     
     static let shared = Application()
     

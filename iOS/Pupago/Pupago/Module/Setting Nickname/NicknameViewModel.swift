@@ -9,18 +9,18 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class NicknameViewModel: ViewModel, ViewModelType {
+final class NicknameViewModel: ViewModel, ViewModelType {
     
     struct Input {
         let nicknameText: Observable<String?>
-        let nextTrigger: Observable<Void>
+        let saveTrigger: Observable<Void>
     }
     
     struct Output {
         let viewTexts: Driver<Localize.SettingNicknameViewText>
-        let isNicknameValid: Driver<Bool>
+        let hasValidNickname: Driver<Bool>
         let activate: Driver<Bool>
-        let nextButtonSelected: Driver<ChattingListViewModel>
+        let saved: Driver<ChattingListViewModel>
     }
     
     let isEmpty = BehaviorRelay<Bool>(value: true)
@@ -40,7 +40,7 @@ class NicknameViewModel: ViewModel, ViewModelType {
         let viewText = localize.asDriver()
             .map { $0.nicknameViewText }
         
-        let isNicknameValid = Observable.zip(isEmpty, isValid)
+        let validate = Observable.zip(isEmpty, isValid)
             .map { $0 || $1 }
             .asDriver(onErrorJustReturn: false)
         
@@ -48,27 +48,33 @@ class NicknameViewModel: ViewModel, ViewModelType {
             .map { !$0 && $1 }
             .asDriver(onErrorJustReturn: false)
         
-        input.nextTrigger
-                    .withLatestFrom(input.nicknameText)
-                    .subscribe(onNext: { text in
-                        Application.shared.userName = text ?? ""
-                    })
-                    .disposed(by: rx.disposeBag)
+        input.saveTrigger
+            .withLatestFrom(input.nicknameText)
+            .subscribe(onNext: { text in
+                Application.shared.userName = text ?? ""
+            })
+            .disposed(by: rx.disposeBag)
         
-        let nextButtonSelected = input.nextTrigger
+        let saved = input.saveTrigger
             .map { ChattingListViewModel() }
             .asDriver(onErrorJustReturn: ChattingListViewModel())
         
         return Output(viewTexts: viewText,
-                      isNicknameValid: isNicknameValid,
+                      hasValidNickname: validate,
                       activate: activate,
-                      nextButtonSelected: nextButtonSelected)
+                      saved: saved)
     }
     
+}
+
+private extension NicknameViewModel {
+    
     private func validate(nickname: String) -> Bool {
-        guard nickname.count <= 12 && nickname.count >= 2 else { return false }
-        guard getSyntaxAfterRegex(newText: nickname) else { return false }
+        guard nickname.count <= 12 && nickname.count >= 2,
+              RegexManager.validate(of: nickname, for: .nickname)
+        else { return false }
         
         return true
     }
+    
 }
