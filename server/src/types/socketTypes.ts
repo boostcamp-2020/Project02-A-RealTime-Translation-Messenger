@@ -24,6 +24,7 @@ type receiveChatType = {
   Korean: string;
   English: string;
   senderId: string;
+  nickname: string;
 };
 
 type roomInfoType = {
@@ -55,4 +56,5 @@ export {
   roomInfoType,
   roomListType,
   createdRoomType,
+  participantsType,
 };
