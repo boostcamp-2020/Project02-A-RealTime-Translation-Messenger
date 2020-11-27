@@ -24,7 +24,9 @@ const socketLoader = (server: http.Server) => {
       socketControllers.disconnect(socket, io);
     });
 
-    // socket.on('leave chatroom')
+    socket.on('leave chatroom', () => {
+      socketControllers.disconnect(socket, io);
+    });
   });
 };
 

@@ -34,10 +34,22 @@ const removeSocket = (socketId: string) => {
   });
 };
 
+const flushAll = () => {
+  return new Promise<string>((resolve, reject) => {
+    client.select(Database.SOCKET_ROOM, () => {
+      client.flushall((err, res) => {
+        if (err) return reject(err);
+        return resolve(res);
+      });
+    });
+  });
+};
+
 const socketRoomModel = {
   setRoomBySocket,
   getRoomBySocket,
   removeSocket,
+  flushAll,
 };
 
 export default socketRoomModel;

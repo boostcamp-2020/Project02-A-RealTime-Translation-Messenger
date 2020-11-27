@@ -81,6 +81,17 @@ const getTitle = (roomCode: string) => {
   });
 };
 
+const flushAll = () => {
+  return new Promise<string>((resolve, reject) => {
+    client.select(Database.ROOM_INFO, () => {
+      client.flushall((err, res) => {
+        if (err) return reject(err);
+        return resolve(res);
+      });
+    });
+  });
+};
+
 const roomInfoModel = {
   removeRoom,
   getRoomCodeList,
@@ -89,6 +100,7 @@ const roomInfoModel = {
   setRoom,
   isRoomPrivate,
   getTitle,
+  flushAll,
 };
 
 export default roomInfoModel;
