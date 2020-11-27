@@ -25,6 +25,7 @@ type receiveChatType = {
   English: string;
   senderId: string;
   nickname: string;
+  createdAt: string;
 };
 
 type roomInfoType = {

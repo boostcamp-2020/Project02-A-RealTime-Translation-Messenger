@@ -6,6 +6,7 @@ import {
   receiveChatType,
 } from '../types/socketTypes';
 import SocketIO, { Socket } from 'socket.io';
+import moment from 'moment';
 import roomInfoModel from '../models/roomInfoModel';
 import roomSocketsInfoModel from '../models/roomSocketsInfoModel';
 import socketRoomModel from '../models/socketRoomModel';
@@ -41,6 +42,7 @@ const sendChat = async (socket: Socket, io: SocketIO.Server, sendChat: sendChatT
     English,
     senderId: socket.id,
     nickname,
+    createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
   };
   io.to(roomCode).emit('receive chat', receiveChat);
 };
