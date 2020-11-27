@@ -4,8 +4,14 @@ type userDataType = {
   language: string;
 };
 
+type participantsType = {
+  socketId: string;
+  nickname: string;
+  language: string;
+};
+
 type participantsListType = {
-  participantsList: string[];
+  participantsList: participantsType[];
   type: string;
 };
 

@@ -1,7 +1,6 @@
 import client from './redisConnection';
 import Database from '../types/databaseNames';
 
-// 소켓 정보 저장 (룸의 소켓 리스트에 소켓 추가) 합격!
 const setSocketInfo = (roomCode: string, socketId: string, socketInfo: string) => {
   return new Promise<number>((resolve, reject) => {
     client.select(Database.ROOM_SOCKETS_INFO, () => {
@@ -13,7 +12,6 @@ const setSocketInfo = (roomCode: string, socketId: string, socketInfo: string) =
   });
 };
 
-// 룸에 속한 소켓 리스트 뽑아주기 합격!
 const getSocketsByRoom = (roomCode: string) => {
   return new Promise<{ [key: string]: string }>((resolve, reject) => {
     client.select(Database.ROOM_SOCKETS_INFO, () => {
