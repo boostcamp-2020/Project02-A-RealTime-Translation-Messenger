@@ -48,11 +48,23 @@ const isRoomEmpty = (roomCode: string) => {
   });
 };
 
+const getSocketCountByRoom = (roomCode: string) => {
+  return new Promise<number>((resolve, reject) => {
+    client.select(Database.ROOM_SOCKETS_INFO, () => {
+      client.hlen(roomCode, (err, res) => {
+        if (err) return reject(err);
+        return resolve(res);
+      });
+    });
+  });
+};
+
 const roomSocketsInfoModel = {
   setSocketInfo,
   getSocketsByRoom,
   removeSocketByRoom,
   isRoomEmpty,
+  getSocketCountByRoom,
 };
 
 export default roomSocketsInfoModel;
