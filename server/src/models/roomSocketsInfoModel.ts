@@ -57,6 +57,17 @@ const getSocketCountByRoom = (roomCode: string) => {
   });
 };
 
+const getSocketInfo = (roomCode: string, socketId: string) => {
+  return new Promise<string>((resolve, reject) => {
+    client.select(Database.ROOM_SOCKETS_INFO, () => {
+      client.hget(roomCode, socketId, (err, res) => {
+        if (err) return reject(err);
+        return resolve(res);
+      });
+    });
+  });
+};
+
 const flushAll = () => {
   return new Promise<string>((resolve, reject) => {
     client.select(Database.ROOM_SOCKETS_INFO, () => {
@@ -74,6 +85,7 @@ const roomSocketsInfoModel = {
   removeSocketByRoom,
   isRoomEmpty,
   getSocketCountByRoom,
+  getSocketInfo,
   flushAll,
 };
 
