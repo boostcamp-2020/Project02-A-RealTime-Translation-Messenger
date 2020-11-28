@@ -1,26 +1,26 @@
-type userDataType = {
+type UserDataType = {
   roomCode: string;
   nickname: string;
   language: string;
 };
 
-type participantsType = {
+type ParticipantsType = {
   socketId: string;
   nickname: string;
   language: string;
 };
 
-type participantsListType = {
-  participantsList: participantsType[];
+type ParticipantsListType = {
+  participantsList: ParticipantsType[];
   type: string;
 };
 
-type sendChatType = {
+type SendChatType = {
   Korean: string;
   English: string;
 };
 
-type receiveChatType = {
+type ReceiveChatType = {
   Korean: string;
   English: string;
   senderId: string;
@@ -28,14 +28,14 @@ type receiveChatType = {
   createdAt: string;
 };
 
-type roomInfoType = {
+type RoomInfoType = {
   roomCode: string;
   title: string;
   createdAt: string;
   isPrivate: string;
 };
 
-type roomListType = {
+type RoomListType = {
   roomCode: string;
   title: string;
   createdAt: string;
@@ -43,19 +43,19 @@ type roomListType = {
   participantCount: number;
 };
 
-type createdRoomType = {
+type CreatedRoomType = {
   roomCode: string;
   title: string;
   isPrivate: string;
 };
 
 export {
-  userDataType,
-  participantsListType,
-  sendChatType,
-  receiveChatType,
-  roomInfoType,
-  roomListType,
-  createdRoomType,
-  participantsType,
+  UserDataType,
+  ParticipantsListType,
+  SendChatType,
+  ReceiveChatType,
+  RoomInfoType,
+  RoomListType,
+  CreatedRoomType,
+  ParticipantsType,
 };
