@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 import roomInfoModel from '../models/roomInfoModel';
 import roomSocketsInfoModel from '../models/roomSocketsInfoModel';
-import { createdRoomType, roomInfoType, roomListType } from '../types/socketTypes';
+import { CreatedRoomType, RoomInfoType, RoomListType } from '../types/socketTypes';
 
 const router = express.Router();
 
@@ -9,12 +9,12 @@ router.get('/', async (req: Request, res: Response) => {
   try {
     const roomCodeList = await roomInfoModel.getRoomCodeList();
 
-    const roomInfos: roomInfoType[] = [];
+    const roomInfos: RoomInfoType[] = [];
     for (const roomCode of roomCodeList) {
       roomInfos.push(await roomInfoModel.getRoomInfo(roomCode));
     }
 
-    const roomLists: roomListType[] = [];
+    const roomLists: RoomListType[] = [];
     for (const roomInfo of roomInfos) {
       const key = roomInfo.roomCode;
       const count = await roomSocketsInfoModel.getSocketCountByRoom(key);
@@ -47,7 +47,7 @@ router.post('/', async (req: Request, res: Response) => {
   }
 
   if (await roomInfoModel.setRoom(roomCode, title, isPrivate)) {
-    const createdRoom: createdRoomType = { roomCode, title, isPrivate };
+    const createdRoom: CreatedRoomType = { roomCode, title, isPrivate };
     return res.status(200).json(createdRoom);
   }
 

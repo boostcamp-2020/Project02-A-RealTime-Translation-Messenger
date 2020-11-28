@@ -1,6 +1,6 @@
 import client from './redisConnection';
 import Database from '../types/databaseNames';
-import { roomInfoType } from '../types/socketTypes';
+import { RoomInfoType } from '../types/socketTypes';
 import moment from 'moment';
 
 const removeRoom = (roomCode: string) => {
@@ -26,7 +26,7 @@ const getRoomCodeList = () => {
 };
 
 const getRoomInfo = (roomCode: string) => {
-  return new Promise<roomInfoType>((resolve, reject) => {
+  return new Promise<RoomInfoType>((resolve, reject) => {
     client.hgetall(roomCode, (err, res) => {
       if (err) return reject(err);
       return resolve({ roomCode, ...Object.assign(res) });
