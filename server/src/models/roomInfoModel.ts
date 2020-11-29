@@ -47,10 +47,9 @@ const isRoomCodeExisting = (roomCode: string) => {
 };
 
 const setRoom = (roomCode: string, title: string, isPrivate: string) => {
-  return new Promise<number>((resolve, reject) => {
+  return new Promise<'OK'>((resolve, reject) => {
     client.select(Database.ROOM_INFO, () => {
-      const date = getNow();
-      client.hset(roomCode, 'title', title, 'createdAt', date, 'isPrivate', isPrivate, (err, res) => {
+      client.hmset(roomCode, 'title', title, 'createdAt', getNow(), 'isPrivate', isPrivate, (err, res) => {
         if (err) return reject(err);
         return resolve(res);
       });

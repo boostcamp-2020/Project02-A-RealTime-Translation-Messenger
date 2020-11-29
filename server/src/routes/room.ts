@@ -39,12 +39,15 @@ router.post('/', async (req: Request, res: Response) => {
 
   const roomCode = await getRandomCode();
 
-  if (await roomInfoModel.setRoom(roomCode, title, isPrivate)) {
-    const createdRoom: CreatedRoomType = { roomCode, title, isPrivate };
-    return res.status(StatusCode.OK).json(createdRoom);
+  try {
+    if (await roomInfoModel.setRoom(roomCode, title, isPrivate)) {
+      const createdRoom: CreatedRoomType = { roomCode, title, isPrivate };
+      return res.status(StatusCode.OK).json(createdRoom);
+    }
+  } catch (e) {
+    console.log(e);
+    return res.status(StatusCode.CLIENT_ERROR).json();
   }
-
-  return res.status(StatusCode.CLIENT_ERROR).json();
 });
 
 export default router;
