@@ -11,22 +11,19 @@ router.get('/', async (req: Request, res: Response) => {
   try {
     const roomCodeList = await roomInfoModel.getRoomCodeList();
 
-    const roomInfos: RoomInfoType[] = [];
-    for (const roomCode of roomCodeList) {
-      roomInfos.push(await roomInfoModel.getRoomInfo(roomCode));
-    }
+    const roomInfos: RoomInfoType[] = await Promise.all(
+      roomCodeList.map(async (roomCode) => await roomInfoModel.getRoomInfo(roomCode)),
+    );
 
-    const roomLists: RoomListType[] = [];
-    for (const roomInfo of roomInfos) {
-      const key = roomInfo.roomCode;
-      const count = await roomSocketsInfoModel.getSocketCountByRoom(key);
-      roomLists.push({ ...roomInfo, participantCount: count });
-    }
+    const roomLists = await Promise.all(
+      roomInfos.map(async (roomInfo) => {
+        const key = roomInfo.roomCode;
+        const count = await roomSocketsInfoModel.getSocketCountByRoom(key);
+        return { ...roomInfo, participantCount: count };
+      }),
+    );
 
-    const filteredRoomLists = roomLists.filter((room) => {
-      if (room.isPrivate === 'false') return true;
-      return false;
-    });
+    const filteredRoomLists = roomLists.filter((room) => room.isPrivate === 'false');
 
     return res.status(StatusCode.OK).json({ roomList: filteredRoomLists });
   } catch (err) {
@@ -36,16 +33,14 @@ router.get('/', async (req: Request, res: Response) => {
 
 router.post('/', async (req: Request, res: Response) => {
   const { title, isPrivate } = req.body;
-
-  const roomCode = await getRandomCode();
-
   try {
+    const roomCode = await getRandomCode();
+
     if (await roomInfoModel.setRoom(roomCode, title, isPrivate)) {
       const createdRoom: CreatedRoomType = { roomCode, title, isPrivate };
       return res.status(StatusCode.OK).json(createdRoom);
     }
-  } catch (e) {
-    console.log(e);
+  } catch (err) {
     return res.status(StatusCode.CLIENT_ERROR).json();
   }
 });
