@@ -13,6 +13,7 @@ router.post('/private', async (req: Request, res: Response) => {
     const createdRoom: CreatedRoomType = { roomCode, title, isPrivate: 'true' };
     return res.status(200).json(createdRoom);
   }
+
   return res.status(400).json();
 });
 
