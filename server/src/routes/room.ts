@@ -3,6 +3,7 @@ import roomInfoModel from '../models/roomInfoModel';
 import roomSocketsInfoModel from '../models/roomSocketsInfoModel';
 import { CreatedRoomType, RoomInfoType, RoomListType } from '../types/socketTypes';
 import { getRandomCode } from '../utils/roomCode';
+import { StatusCode } from '../types/statusCode';
 
 const router = express.Router();
 
@@ -27,9 +28,9 @@ router.get('/', async (req: Request, res: Response) => {
       return false;
     });
 
-    return res.status(200).json({ roomList: filteredRoomLists });
+    return res.status(StatusCode.OK).json({ roomList: filteredRoomLists });
   } catch (err) {
-    return res.status(400).json();
+    return res.status(StatusCode.CLIENT_ERROR).json();
   }
 });
 
@@ -40,10 +41,10 @@ router.post('/', async (req: Request, res: Response) => {
 
   if (await roomInfoModel.setRoom(roomCode, title, isPrivate)) {
     const createdRoom: CreatedRoomType = { roomCode, title, isPrivate };
-    return res.status(200).json(createdRoom);
+    return res.status(StatusCode.OK).json(createdRoom);
   }
 
-  return res.status(400).json();
+  return res.status(StatusCode.CLIENT_ERROR).json();
 });
 
 export default router;
