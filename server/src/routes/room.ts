@@ -2,7 +2,7 @@ import express, { Request, Response } from 'express';
 import roomInfoModel from '../models/roomInfoModel';
 import roomSocketsInfoModel from '../models/roomSocketsInfoModel';
 import { CreatedRoomType, RoomInfoType, RoomListType } from '../types/socketTypes';
-import { getRandomCode } from '../utils/roomCode';
+import { getRandomCode } from '../utils/room';
 import { StatusCode } from '../types/statusCode';
 
 const router = express.Router();
