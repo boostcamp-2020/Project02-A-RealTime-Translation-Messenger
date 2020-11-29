@@ -4,7 +4,7 @@ import socketRoomModel from '../models/socketRoomModel';
 import { getNow } from '../utils/date';
 import { getParticipantsListFromRoomCode } from '../utils/room';
 
-import { ParticipantsType, ParticipantsListType, ReceiveChatType } from '../types/socketTypes';
+import { ParticipantsListType, ReceiveChatType } from '../types/socketTypes';
 
 const enterChatRoom = async (socketId: string, roomCode: string, nickname: string, language: string) => {
   await roomSocketsInfoModel.setSocketInfo(roomCode, socketId, JSON.stringify({ nickname, language }));
