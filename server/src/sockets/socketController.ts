@@ -11,11 +11,11 @@ import { UserDataType, SendChatType } from '../@types/dataType';
 const enterChatroom = async (socket: Socket, io: SocketIO.Server, userData: UserDataType) => {
   const { roomCode, nickname, language } = userData;
 
-  if (validationUtil.isRoomCodeValid(roomCode))
+  if (!validationUtil.isRoomCodeValid(roomCode))
     return socketService.emitSocketError(socket, SocketErrorMessage.ROOM_CODE);
-  if (validationUtil.isNicknameValid(nickname))
+  if (!validationUtil.isNicknameValid(nickname))
     return socketService.emitSocketError(socket, SocketErrorMessage.NICKNAME);
-  if (validationUtil.isLanguageValid(language))
+  if (!validationUtil.isLanguageValid(language))
     return socketService.emitSocketError(socket, SocketErrorMessage.LANGUAGE);
 
   socket.join(roomCode);
