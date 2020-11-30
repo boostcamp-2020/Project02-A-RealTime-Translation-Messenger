@@ -1,33 +1,34 @@
 import express, { Request, Response } from 'express';
+
 import roomInfoModel from '../models/roomInfoModel';
-import { createdRoomType } from '../types/socketTypes';
+import validationUtils from '../utils/validation';
+import { StatusCode } from '../types/statusCode';
+import { CreatedRoomType } from '../types/socketTypes';
 
 const router = express.Router();
 
 router.post('/private', async (req: Request, res: Response) => {
-  const roomCode = req.body.roomCode;
+  const { roomCode } = req.body;
 
-  if (/[A-Z0-9]{4}/.test(roomCode)) {
-    if ((await roomInfoModel.isRoomCodeExisting(roomCode)) && (await roomInfoModel.isRoomPrivate(roomCode))) {
-      const title: string = await roomInfoModel.getTitle(roomCode);
-      const createdRoom: createdRoomType = { roomCode, title, isPrivate: 'true' };
-      return res.status(200).json(createdRoom);
-    }
+  if (await validationUtils.isRoomCodeValid(roomCode, 'private')) {
+    const title = await roomInfoModel.getTitle(roomCode);
+    const createdRoom: CreatedRoomType = { roomCode, title, isPrivate: 'true' };
+    return res.status(StatusCode.OK).json(createdRoom);
   }
-  return res.status(400).json();
+
+  return res.status(StatusCode.CLIENT_ERROR).json();
 });
 
 router.post('/public', async (req: Request, res: Response) => {
-  const roomCode = req.body.roomCode;
+  const { roomCode } = req.body;
 
-  if (/[A-Z0-9]{4}/.test(roomCode)) {
-    if ((await roomInfoModel.isRoomCodeExisting(roomCode)) && !(await roomInfoModel.isRoomPrivate(roomCode))) {
-      const title: string = await roomInfoModel.getTitle(roomCode);
-      const createdRoom: createdRoomType = { roomCode, title, isPrivate: 'false' };
-      return res.status(200).json(createdRoom);
-    }
+  if (await validationUtils.isRoomCodeValid(roomCode, 'public')) {
+    const title = await roomInfoModel.getTitle(roomCode);
+    const createdRoom: CreatedRoomType = { roomCode, title, isPrivate: 'false' };
+    return res.status(StatusCode.OK).json(createdRoom);
   }
-  return res.status(400).json();
+
+  return res.status(StatusCode.CLIENT_ERROR).json();
 });
 
 export default router;
