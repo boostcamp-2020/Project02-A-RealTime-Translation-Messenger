@@ -1,6 +1,6 @@
 import roomInfoModel from '../models/roomInfoModel';
 
-export const isRoomCodeValidate = async (roomCode: string, isPrivate: string) => {
+const isRoomCodeValid = async (roomCode: string, isPrivate: string) => {
   if (!/[A-Z0-9]{4}/.test(roomCode)) return false;
   if (!(await roomInfoModel.isRoomCodeExisting(roomCode))) return false;
 
@@ -16,3 +16,9 @@ export const isRoomCodeValidate = async (roomCode: string, isPrivate: string) =>
   }
   return true;
 };
+
+const validationUtils = {
+  isRoomCodeValid,
+};
+
+export default validationUtils;

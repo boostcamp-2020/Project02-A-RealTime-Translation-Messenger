@@ -1,9 +1,10 @@
 import express, { Request, Response } from 'express';
+
 import roomInfoModel from '../models/roomInfoModel';
 import roomSocketsInfoModel from '../models/roomSocketsInfoModel';
-import { CreatedRoomType, RoomInfoType, RoomListType } from '../types/socketTypes';
-import { getRandomCode } from '../utils/room';
+import roomCodeUtils from '../utils/roomCode';
 import { StatusCode } from '../types/statusCode';
+import { CreatedRoomType, RoomInfoType } from '../types/socketTypes';
 
 const router = express.Router();
 
@@ -34,7 +35,7 @@ router.get('/', async (req: Request, res: Response) => {
 router.post('/', async (req: Request, res: Response) => {
   const { title, isPrivate } = req.body;
   try {
-    const roomCode = await getRandomCode();
+    const roomCode = await roomCodeUtils.getRandomCode();
 
     if (await roomInfoModel.setRoom(roomCode, title, isPrivate)) {
       const createdRoom: CreatedRoomType = { roomCode, title, isPrivate };

@@ -1,6 +1,7 @@
 import express from 'express';
-import loader from './loaders';
 import http from 'http';
+
+import loader from './loaders';
 
 const startServer = async () => {
   const app = express();

@@ -1,7 +1,7 @@
 import client from './redisConnection';
 import Database from '../types/databaseNames';
+import dateUtils from '../utils/date';
 import { RoomInfoType } from '../types/socketTypes';
-import { getNow } from '../utils/date';
 
 const removeRoom = (roomCode: string) => {
   return new Promise<number>((resolve, reject) => {
@@ -49,7 +49,7 @@ const isRoomCodeExisting = (roomCode: string) => {
 const setRoom = (roomCode: string, title: string, isPrivate: string) => {
   return new Promise<'OK'>((resolve, reject) => {
     client.select(Database.ROOM_INFO, () => {
-      client.hmset(roomCode, 'title', title, 'createdAt', getNow(), 'isPrivate', isPrivate, (err, res) => {
+      client.hmset(roomCode, 'title', title, 'createdAt', dateUtils.getNow(), 'isPrivate', isPrivate, (err, res) => {
         if (err) return reject(err);
         return resolve(res);
       });

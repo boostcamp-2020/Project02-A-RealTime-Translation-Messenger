@@ -1,7 +1,8 @@
 import http from 'http';
 import socketIO, { Socket } from 'socket.io';
-import { UserDataType, ParticipantsListType, SendChatType, ReceiveChatType } from '../types/socketTypes';
+
 import socketControllers from './socketController';
+import { UserDataType, SendChatType } from '../types/socketTypes';
 
 const socketLoader = (server: http.Server) => {
   const socketServerOption = {

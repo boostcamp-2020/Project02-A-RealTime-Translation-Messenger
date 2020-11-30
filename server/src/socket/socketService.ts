@@ -1,24 +1,28 @@
-import roomInfoModel from '../models/roomInfoModel';
 import roomSocketsInfoModel from '../models/roomSocketsInfoModel';
 import socketRoomModel from '../models/socketRoomModel';
-import { getNow } from '../utils/date';
-import { getParticipantsListFromRoomCode } from '../utils/room';
+import dateUtils from '../utils/date';
+import { ReceiveChatType, ParticipantsType } from '../types/socketTypes';
 
-import { ParticipantsListType, ReceiveChatType } from '../types/socketTypes';
+const getParticipantsListFromRoomCode = async (roomCode: string, type: string) => {
+  const rawParticipantsData = await roomSocketsInfoModel.getSocketsByRoom(roomCode);
+  const participantsList: ParticipantsType[] = Object.entries(rawParticipantsData).map(([key, value]) => {
+    const { nickname, language }: { nickname: string; language: string } = JSON.parse(value);
+    return { socketId: key, nickname, language };
+  });
 
-const enterChatRoom = async (socketId: string, roomCode: string, nickname: string, language: string) => {
-  await roomSocketsInfoModel.setSocketInfo(roomCode, socketId, JSON.stringify({ nickname, language }));
-  await socketRoomModel.setRoomBySocket(socketId, roomCode);
-
-  const renewedParticipants: ParticipantsListType = {
-    participantsList: await getParticipantsListFromRoomCode(roomCode),
-    type: 'enter',
+  return {
+    participantsList: participantsList,
+    type,
   };
-
-  return renewedParticipants;
 };
 
-const sendChat = async (socketId: string, Korean: string, English: string) => {
+const insertSocketInfoIntoDB = async (socketId: string, roomCode: string, nickname: string, language: string) => {
+  await roomSocketsInfoModel.setSocketInfo(roomCode, socketId, JSON.stringify({ nickname, language }));
+  await socketRoomModel.setRoomBySocket(socketId, roomCode);
+  return true;
+};
+
+const createReceiveChatType = async (socketId: string, Korean: string, English: string) => {
   const roomCode = await socketRoomModel.getRoomBySocket(socketId);
 
   const socketInfo = await roomSocketsInfoModel.getSocketInfo(roomCode, socketId);
@@ -29,35 +33,23 @@ const sendChat = async (socketId: string, Korean: string, English: string) => {
     English,
     senderId: socketId,
     nickname,
-    createdAt: getNow(),
+    createdAt: dateUtils.getNow(),
   };
 
   return { roomCode, receiveChat };
 };
 
-const disconnect = async (socketId: string) => {
-  const roomCode: string = await socketRoomModel.getRoomBySocket(socketId);
-
+const removeSocketInfoFromDB = async (socketId: string, roomCode: string) => {
   await roomSocketsInfoModel.removeSocketByRoom(roomCode, socketId);
   await socketRoomModel.removeSocket(socketId);
-
-  if (await roomSocketsInfoModel.isRoomEmpty(roomCode)) {
-    await roomInfoModel.removeRoom(roomCode);
-    return { roomCode, renewedParticipants: null };
-  }
-
-  const renewedParticipants: ParticipantsListType = {
-    participantsList: await getParticipantsListFromRoomCode(roomCode),
-    type: 'leave',
-  };
-
-  return { roomCode, renewedParticipants };
+  return true;
 };
 
 const socketService = {
-  enterChatRoom,
-  sendChat,
-  disconnect,
+  getParticipantsListFromRoomCode,
+  insertSocketInfoIntoDB,
+  createReceiveChatType,
+  removeSocketInfoFromDB,
 };
 
 export default socketService;

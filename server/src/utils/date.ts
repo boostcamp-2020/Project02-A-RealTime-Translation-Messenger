@@ -1,3 +1,9 @@
 import moment from 'moment';
 
-export const getNow = () => moment().format('YYYY-MM-DD HH:mm:ss');
+const getNow = () => moment().format('YYYY-MM-DD HH:mm:ss');
+
+const dateUtils = {
+  getNow,
+};
+
+export default dateUtils;
