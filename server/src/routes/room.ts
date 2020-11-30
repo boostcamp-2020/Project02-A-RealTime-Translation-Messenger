@@ -1,49 +1,11 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 
-import roomInfoModel from '../models/roomInfoModel';
-import roomSocketsInfoModel from '../models/roomSocketsInfoModel';
-import roomCodeUtils from '../utils/roomCode';
-import { StatusCode } from '../types/statusCode';
-import { CreatedRoomType, RoomInfoType } from '../types/socketTypes';
+import roomController from '../controllers/roomController';
 
 const router = express.Router();
 
-router.get('/', async (req: Request, res: Response) => {
-  try {
-    const roomCodeList = await roomInfoModel.getRoomCodeList();
+router.get('/', roomController.getPublicRoomList);
 
-    const roomInfos: RoomInfoType[] = await Promise.all(
-      roomCodeList.map(async (roomCode) => await roomInfoModel.getRoomInfo(roomCode)),
-    );
-
-    const roomLists = await Promise.all(
-      roomInfos.map(async (roomInfo) => {
-        const key = roomInfo.roomCode;
-        const count = await roomSocketsInfoModel.getSocketCountByRoom(key);
-        return { ...roomInfo, participantCount: count };
-      }),
-    );
-
-    const filteredRoomLists = roomLists.filter((room) => room.isPrivate === 'false');
-
-    return res.status(StatusCode.OK).json({ roomList: filteredRoomLists });
-  } catch (err) {
-    return res.status(StatusCode.CLIENT_ERROR).json();
-  }
-});
-
-router.post('/', async (req: Request, res: Response) => {
-  const { title, isPrivate } = req.body;
-  try {
-    const roomCode = await roomCodeUtils.getRandomCode();
-
-    if (await roomInfoModel.setRoom(roomCode, title, isPrivate)) {
-      const createdRoom: CreatedRoomType = { roomCode, title, isPrivate };
-      return res.status(StatusCode.OK).json(createdRoom);
-    }
-  } catch (err) {
-    return res.status(StatusCode.CLIENT_ERROR).json();
-  }
-});
+router.post('/', roomController.createRoom);
 
 export default router;

@@ -4,7 +4,7 @@ import socketService from './socketService';
 import socketRoomModel from '../models/socketRoomModel';
 import roomSocketsInfoModel from '../models/roomSocketsInfoModel';
 import roomInfoModel from '../models/roomInfoModel';
-import { UserDataType, SendChatType } from '../types/socketTypes';
+import { UserDataType, SendChatType } from '../@types/socketType';
 
 const enterChatroom = async (socket: Socket, io: SocketIO.Server, userData: UserDataType) => {
   const { roomCode, nickname, language } = userData;
@@ -33,10 +33,10 @@ const disconnect = async (socket: Socket, io: SocketIO.Server) => {
   io.to(roomCode).emit('receive participants list', participantsList);
 };
 
-const socketControllers = {
+const socketController = {
   enterChatroom,
   sendChat,
   disconnect,
 };
 
-export default socketControllers;
+export default socketController;

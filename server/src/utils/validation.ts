@@ -17,8 +17,8 @@ const isRoomCodeValid = async (roomCode: string, isPrivate: string) => {
   return true;
 };
 
-const validationUtils = {
+const validationUtil = {
   isRoomCodeValid,
 };
 
-export default validationUtils;
+export default validationUtil;
