@@ -12,8 +12,8 @@ const getRandomCode = async () => {
   return roomCode;
 };
 
-const roomCodeUtils = {
+const roomCodeUtil = {
   getRandomCode,
 };
 
-export default roomCodeUtils;
+export default roomCodeUtil;

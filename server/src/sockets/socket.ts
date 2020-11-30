@@ -1,8 +1,8 @@
 import http from 'http';
 import socketIO, { Socket } from 'socket.io';
 
-import socketControllers from './socketController';
-import { UserDataType, SendChatType } from '../types/socketTypes';
+import socketController from './socketController';
+import { UserDataType, SendChatType } from '../@types/socketType';
 
 const socketLoader = (server: http.Server) => {
   const socketServerOption = {
@@ -15,19 +15,19 @@ const socketLoader = (server: http.Server) => {
 
   io.on('connection', (socket: Socket) => {
     socket.on('enter chatroom', (userData: UserDataType) => {
-      socketControllers.enterChatroom(socket, io, userData);
+      socketController.enterChatroom(socket, io, userData);
     });
 
     socket.on('send chat', (sendChat: SendChatType) => {
-      socketControllers.sendChat(socket, io, sendChat);
+      socketController.sendChat(socket, io, sendChat);
     });
 
     socket.on('disconnect', () => {
-      socketControllers.disconnect(socket, io);
+      socketController.disconnect(socket, io);
     });
 
     socket.on('leave chatroom', () => {
-      socketControllers.disconnect(socket, io);
+      socketController.disconnect(socket, io);
     });
   });
 };

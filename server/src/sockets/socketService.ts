@@ -1,7 +1,7 @@
 import roomSocketsInfoModel from '../models/roomSocketsInfoModel';
 import socketRoomModel from '../models/socketRoomModel';
-import dateUtils from '../utils/date';
-import { ReceiveChatType, ParticipantsType } from '../types/socketTypes';
+import dateUtil from '../utils/date';
+import { ReceiveChatType, ParticipantsType } from '../@types/socketType';
 
 const getParticipantsListFromRoomCode = async (roomCode: string, type: string) => {
   const rawParticipantsData = await roomSocketsInfoModel.getSocketsByRoom(roomCode);
@@ -33,7 +33,7 @@ const createReceiveChatType = async (socketId: string, Korean: string, English: 
     English,
     senderId: socketId,
     nickname,
-    createdAt: dateUtils.getNow(),
+    createdAt: dateUtil.getNow(),
   };
 
   return { roomCode, receiveChat };
