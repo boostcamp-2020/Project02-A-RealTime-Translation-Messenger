@@ -53,7 +53,7 @@ final class ChattingListViewController: ViewController {
             .bind(to: collectionView.rx
                     .items(cellIdentifier: ChattingListCell.identifier,
                            cellType: ChattingListCell.self)) { row, item, cell in
-                
+                cell.confiture(with: item)
             }
             .disposed(by: rx.disposeBag)
         
