@@ -18,6 +18,7 @@ type ParticipantsListType = {
 type SendChatType = {
   Korean: string;
   English: string;
+  origin: string;
 };
 
 type ReceiveChatType = {

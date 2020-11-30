@@ -1,7 +1,7 @@
 import client from './redisConnection';
 import Database from '../@types/databaseName';
 import dateUtil from '../utils/date';
-import { RoomInfoType } from '../@types/socketType';
+import { RoomInfoType } from '../@types/dataType';
 
 const removeRoom = (roomCode: string) => {
   return new Promise<number>((resolve, reject) => {
