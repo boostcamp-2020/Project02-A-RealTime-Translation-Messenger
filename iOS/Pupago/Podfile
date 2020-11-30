@@ -5,14 +5,16 @@ use_frameworks!
 
 # RxSwift, Swift Lint
 target 'Pupago' do
-    pod 'RxSwift', '6.0.0-rc.1'
-    pod 'RxCocoa', '6.0.0-rc.1'
+    pod 'RxSwift', '~> 5.0'
+    pod 'RxCocoa', '~> 5.0'
+    pod 'RxKeyboard'
+    pod 'RxDataSources', '~> 4.0'
     pod "SwiftLint"
 end
 
 # RxTest
 target 'PupagoTests' do
     inherit! :search_paths
-    pod 'RxBlocking', '6.0.0-rc.1'
-    pod 'RxTest', '6.0.0-rc.1'
+    pod 'RxBlocking', '~> 5.0'
+    pod 'RxTest', '~> 5.0'
 end

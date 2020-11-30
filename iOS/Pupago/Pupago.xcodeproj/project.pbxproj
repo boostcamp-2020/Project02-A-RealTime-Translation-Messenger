@@ -43,6 +43,11 @@
 		BD5F6160256D204400D63CCD /* ChattingListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5F615F256D204400D63CCD /* ChattingListViewModel.swift */; };
 		BD5F6165256D207600D63CCD /* ChattingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5F6164256D207600D63CCD /* ChattingListViewController.swift */; };
 		BD5F616D256D23E300D63CCD /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5F616C256D23E300D63CCD /* NavigationController.swift */; };
+		BD626FF82570997B00569277 /* StackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD626FF72570997B00569277 /* StackView.swift */; };
+		BD62700025709A1D00569277 /* MyChattingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD626FFF25709A1D00569277 /* MyChattingCell.swift */; };
+		BD62700825709AC500569277 /* OthersChattingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD62700725709AC500569277 /* OthersChattingCell.swift */; };
+		BD65A7FE25729A6700EE43BC /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD65A7FD25729A6700EE43BC /* Message.swift */; };
+		BD65A8062572A06500EE43BC /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD65A8052572A06500EE43BC /* Label.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +111,11 @@
 		BD5F615F256D204400D63CCD /* ChattingListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingListViewModel.swift; sourceTree = "<group>"; };
 		BD5F6164256D207600D63CCD /* ChattingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingListViewController.swift; sourceTree = "<group>"; };
 		BD5F616C256D23E300D63CCD /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
+		BD626FF72570997B00569277 /* StackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackView.swift; sourceTree = "<group>"; };
+		BD626FFF25709A1D00569277 /* MyChattingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyChattingCell.swift; sourceTree = "<group>"; };
+		BD62700725709AC500569277 /* OthersChattingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OthersChattingCell.swift; sourceTree = "<group>"; };
+		BD65A7FD25729A6700EE43BC /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		BD65A8052572A06500EE43BC /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		D63A44A3FA54CB79CE0D4AEC /* Pods_PupagoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PupagoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1422F18135657696ED5A239 /* Pods-Pupago.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pupago.release.xcconfig"; path = "Target Support Files/Pods-Pupago/Pods-Pupago.release.xcconfig"; sourceTree = "<group>"; };
 		F5681089291DB3A319B9AC7D /* Pods-PupagoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PupagoTests.debug.xcconfig"; path = "Target Support Files/Pods-PupagoTests/Pods-PupagoTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -177,6 +187,7 @@
 				975C53E7256B5A5000739DCA /* Application */,
 				975C53EC256B5B2900739DCA /* Common */,
 				975C53E9256B5A7500739DCA /* Module */,
+				BD65A7F425729A2900EE43BC /* Model */,
 				97FB232B256FE90500F7E21E /* Util */,
 				97B4BE72256BE921009A3825 /* Extensions */,
 				975C53EA256B5A8B00739DCA /* Resource */,
@@ -250,6 +261,7 @@
 			isa = PBXGroup;
 			children = (
 				975C53F4256B6DFF00739DCA /* Button.swift */,
+				BD65A8052572A06500EE43BC /* Label.swift */,
 				975C53F9256B7CD100739DCA /* GradientView.swift */,
 				975C53FE256B844C00739DCA /* SelectableButton.swift */,
 				97CB75AA256E2CB900FE052A /* CollectionViewBaseCell.swift */,
@@ -257,6 +269,7 @@
 				97B4BEA4256BF5B0009A3825 /* ViewController.swift */,
 				97F534F4256CC008005998EE /* ValidatingTextField.swift */,
 				97F534F9256CD087005998EE /* View.swift */,
+				BD626FF72570997B00569277 /* StackView.swift */,
 				BD5F616C256D23E300D63CCD /* NavigationController.swift */,
 			);
 			path = Common;
@@ -309,6 +322,8 @@
 		97CB75CB256E410000FE052A /* Chatting */ = {
 			isa = PBXGroup;
 			children = (
+				BD626FFF25709A1D00569277 /* MyChattingCell.swift */,
+				BD62700725709AC500569277 /* OthersChattingCell.swift */,
 				97CB75CC256E411F00FE052A /* ChattingViewController.swift */,
 				97CB75D1256E412700FE052A /* ChattingViewModel.swift */,
 			);
@@ -340,6 +355,14 @@
 				97CB75A5256E204800FE052A /* ChattingListCell.swift */,
 			);
 			path = "Chatting List";
+			sourceTree = "<group>";
+		};
+		BD65A7F425729A2900EE43BC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BD65A7FD25729A6700EE43BC /* Message.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -578,6 +601,7 @@
 			files = (
 				97F534FA256CD087005998EE /* View.swift in Sources */,
 				97CB75B5256E3E3C00FE052A /* CreateRoomViewController.swift in Sources */,
+				BD62700025709A1D00569277 /* MyChattingCell.swift in Sources */,
 				9705477F2566649D00500D79 /* LanguageViewController.swift in Sources */,
 				BD5F6165256D207600D63CCD /* ChattingListViewController.swift in Sources */,
 				97CB75D2256E412700FE052A /* ChattingViewModel.swift in Sources */,
@@ -586,6 +610,7 @@
 				975C5409256B8FC500739DCA /* LanguageViewModel.swift in Sources */,
 				97CB75CD256E411F00FE052A /* ChattingViewController.swift in Sources */,
 				975C53FA256B7CD100739DCA /* GradientView.swift in Sources */,
+				BD65A7FE25729A6700EE43BC /* Message.swift in Sources */,
 				97B4BEA5256BF5B0009A3825 /* ViewController.swift in Sources */,
 				97CB75A6256E204800FE052A /* ChattingListCell.swift in Sources */,
 				97B4BE98256BEFBC009A3825 /* NicknameViewController.swift in Sources */,
@@ -601,10 +626,13 @@
 				97B4BE74256BE935009A3825 /* NSObject+Rx.swift in Sources */,
 				97B4BEA0256BEFD9009A3825 /* NicknameViewModel.swift in Sources */,
 				97FB232D256FE93000F7E21E /* RegexManager.swift in Sources */,
+				BD62700825709AC500569277 /* OthersChattingCell.swift in Sources */,
 				97CB75BF256E3E9D00FE052A /* JoinRoomViewController.swift in Sources */,
 				BD5F6160256D204400D63CCD /* ChattingListViewModel.swift in Sources */,
 				97F534F5256CC008005998EE /* ValidatingTextField.swift in Sources */,
 				97CB75C4256E3EA700FE052A /* JoinRoomViewModel.swift in Sources */,
+				BD626FF82570997B00569277 /* StackView.swift in Sources */,
+				BD65A8062572A06500EE43BC /* Label.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
