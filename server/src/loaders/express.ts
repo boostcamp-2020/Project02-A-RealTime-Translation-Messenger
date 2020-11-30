@@ -7,7 +7,7 @@ import router from '../routes';
 const expressLoader = (app: express.Application) => {
   app.use(cors());
   app.use(bodyParser.json());
-  app.use('/api/v1', router);
+  app.use('/api', router);
 };
 
 export default expressLoader;
