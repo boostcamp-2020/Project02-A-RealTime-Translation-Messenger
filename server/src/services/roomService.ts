@@ -1,6 +1,6 @@
 import roomInfoModel from '../models/roomInfoModel';
 import roomSocketsInfoModel from '../models/roomSocketsInfoModel';
-import { RoomInfoType } from '../@types/socketType';
+import { RoomInfoType } from '../@types/dataType';
 
 const getRoomInfoList = async (roomCodeList: string[]) => {
   const roomInfos: RoomInfoType[] = await Promise.all(

@@ -1,5 +1,5 @@
 import roomInfoModel from '../models/roomInfoModel';
-import { CreatedRoomType } from '../@types/socketType';
+import { CreatedRoomType } from '../@types/dataType';
 
 const getRoomInfo = async (roomCode: string, isPrivate: string) => {
   const title = await roomInfoModel.getTitle(roomCode);
