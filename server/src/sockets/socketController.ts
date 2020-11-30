@@ -32,7 +32,7 @@ const enterChatroom = async (socket: Socket, io: SocketIO.Server, userData: User
 const sendChat = async (socket: Socket, io: SocketIO.Server, sendChat: SendChatType) => {
   const { Korean, English } = sendChat;
 
-  if (validationUtil.isMessageValid(sendChat)) return socketService.emitSocketError(socket, SocketErrorMessage.CHAT);
+  if (!validationUtil.isMessageValid(sendChat)) return socketService.emitSocketError(socket, SocketErrorMessage.CHAT);
 
   try {
     const { roomCode, receiveChat } = await socketService.createReceiveChatType(socket.id, Korean, English);
