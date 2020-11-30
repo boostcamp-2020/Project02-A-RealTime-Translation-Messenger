@@ -1,7 +1,8 @@
 import roomSocketsInfoModel from '../models/roomSocketsInfoModel';
 import socketRoomModel from '../models/socketRoomModel';
 import dateUtil from '../utils/date';
-import { ReceiveChatType, ParticipantsType } from '../@types/socketType';
+import { ReceiveChatType, ParticipantsType } from '../@types/dataType';
+import { Socket } from 'socket.io';
 
 const getParticipantsListFromRoomCode = async (roomCode: string, type: string) => {
   const rawParticipantsData = await roomSocketsInfoModel.getSocketsByRoom(roomCode);
@@ -45,11 +46,16 @@ const removeSocketInfoFromDB = async (socketId: string, roomCode: string) => {
   return true;
 };
 
+const emitSocketError = (socket: Socket, errorMessage: string) => {
+  socket.emit('socket error', JSON.stringify({ errorMessage }));
+};
+
 const socketService = {
   getParticipantsListFromRoomCode,
   insertSocketInfoIntoDB,
   createReceiveChatType,
   removeSocketInfoFromDB,
+  emitSocketError,
 };
 
 export default socketService;
