@@ -11,8 +11,7 @@ import Alamofire
 enum RoomEndpoint {
     case create(title: String, isPrivate: Bool)
     case get
-    case joinPrivate(code: String)
-    case joinPublic(code: String)
+    case join(code: String, isPrivate: Bool)
 }
 
 extension RoomEndpoint: EndpointType {
@@ -21,16 +20,14 @@ extension RoomEndpoint: EndpointType {
         switch self {
         case .create, .get:
             return "room"
-        case .joinPublic:
-            return "join/public"
-        case .joinPrivate:
-            return "join/private"
+        case .join:
+            return "join"
         }
     }
     
     var method: HTTPMethod {
         switch self {
-        case .create, .joinPrivate, .joinPublic:
+        case .create, .join:
             return .post
         case .get:
             return .get
@@ -41,8 +38,9 @@ extension RoomEndpoint: EndpointType {
         switch self {
         case .get:
             return [String: Any]()
-        case .joinPublic(let code), .joinPrivate(let code):
-            return ["roomCode": code]
+        case .join(let code, let isPrivate):
+            let isPrivate = isPrivate ? "true" : "false"
+            return ["roomCode": code, "isPrivate": isPrivate]
         case .create(let title, let isPrivate):
             let isPrivate = isPrivate ? "true" : "false"
             return ["title": title, "isPrivate": isPrivate]
