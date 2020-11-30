@@ -2,7 +2,7 @@ import http from 'http';
 import socketIO, { Socket } from 'socket.io';
 
 import socketController from './socketController';
-import { UserDataType, SendChatType } from '../@types/socketType';
+import { UserDataType, SendChatType } from '../@types/dataType';
 
 const socketLoader = (server: http.Server) => {
   const socketServerOption = {
@@ -28,6 +28,10 @@ const socketLoader = (server: http.Server) => {
 
     socket.on('leave chatroom', () => {
       socketController.disconnect(socket, io);
+    });
+
+    socket.on('error', () => {
+      socketController.socketError(socket, io);
     });
   });
 };
