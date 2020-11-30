@@ -20,6 +20,12 @@ final class ChattingListCell: CollectionViewBaseCell {
         configureShadow()
     }
     
+    func confiture(with room: Room) {
+        roomNameLabel.text = room.title
+        numberOfPeopleLabel.text = "\(room.participantCount ?? 0)/8"
+        createAtLabel.text = room.createdAt
+    }
+    
     private func configureShadow() {
         self.layer.cornerRadius = 10
         self.layer.masksToBounds = false

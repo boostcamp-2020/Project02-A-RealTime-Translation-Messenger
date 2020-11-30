@@ -19,16 +19,25 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
     
     struct Output {
         let viewTexts: Driver<(localizeTexts: Localize.ChatListViewText, nickname: String)>
-        let item: Driver<[Int]> // Mock for UI
+        let item: Driver<[Room]>
         let created: Driver<CreateRoomViewModel>
         let joined: Driver<JoinRoomViewModel>
         let selected: Driver<ChattingViewModel>
     }
     
-    // Mock for UI
-    let rooms = BehaviorRelay<[Int]>(value: Array(1...5))
+    let rooms = BehaviorRelay<[Room]>(value: [])
     
     func transform(_ input: Input) -> Output {
+        
+        let mockAPI = MockAPI()
+        
+        mockAPI.rooms().asObservable()
+            .subscribe(onNext: { [weak self] rooms in
+                self?.rooms.accept(rooms)
+            }, onError: { error in
+                print(error)
+            })
+            .disposed(by: rx.disposeBag)
         
         let viewText = localize.asDriver()
             .map { (localizeTexts: $0.chattingListViewText, nickname: Application.shared.userName) }

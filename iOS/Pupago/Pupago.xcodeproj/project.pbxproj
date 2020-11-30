@@ -35,6 +35,14 @@
 		97CB75C4256E3EA700FE052A /* JoinRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CB75C3256E3EA700FE052A /* JoinRoomViewModel.swift */; };
 		97CB75CD256E411F00FE052A /* ChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CB75CC256E411F00FE052A /* ChattingViewController.swift */; };
 		97CB75D2256E412700FE052A /* ChattingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CB75D1256E412700FE052A /* ChattingViewModel.swift */; };
+		97DAC7BD2574C5BE009B76B5 /* EndpointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DAC7BC2574C5BE009B76B5 /* EndpointType.swift */; };
+		97DAC7D22574D174009B76B5 /* PupagoAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DAC7D12574D174009B76B5 /* PupagoAPI.swift */; };
+		97DAC7D72574DF8F009B76B5 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DAC7D62574DF8F009B76B5 /* Room.swift */; };
+		97DAC7F72574E5D0009B76B5 /* NetworkProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DAC7F62574E5D0009B76B5 /* NetworkProviding.swift */; };
+		97DAC7FD2574E608009B76B5 /* RoomEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DAC7FC2574E608009B76B5 /* RoomEndpoint.swift */; };
+		97E8B57D2574EDE90009C938 /* MockAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E8B57C2574EDE90009C938 /* MockAPI.swift */; };
+		97E8B5852574EE210009C938 /* MockEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E8B5842574EE210009C938 /* MockEndpoint.swift */; };
+		97E8B58A2574EE930009C938 /* room.json in Resources */ = {isa = PBXBuildFile; fileRef = 97E8B5892574EE920009C938 /* room.json */; };
 		97F534F5256CC008005998EE /* ValidatingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F534F4256CC008005998EE /* ValidatingTextField.swift */; };
 		97F534FA256CD087005998EE /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F534F9256CD087005998EE /* View.swift */; };
 		97F534FF256CE947005998EE /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F534FE256CE947005998EE /* Application.swift */; };
@@ -103,6 +111,14 @@
 		97CB75C3256E3EA700FE052A /* JoinRoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinRoomViewModel.swift; sourceTree = "<group>"; };
 		97CB75CC256E411F00FE052A /* ChattingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingViewController.swift; sourceTree = "<group>"; };
 		97CB75D1256E412700FE052A /* ChattingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingViewModel.swift; sourceTree = "<group>"; };
+		97DAC7BC2574C5BE009B76B5 /* EndpointType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointType.swift; sourceTree = "<group>"; };
+		97DAC7D12574D174009B76B5 /* PupagoAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PupagoAPI.swift; sourceTree = "<group>"; };
+		97DAC7D62574DF8F009B76B5 /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
+		97DAC7F62574E5D0009B76B5 /* NetworkProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProviding.swift; sourceTree = "<group>"; };
+		97DAC7FC2574E608009B76B5 /* RoomEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomEndpoint.swift; sourceTree = "<group>"; };
+		97E8B57C2574EDE90009C938 /* MockAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAPI.swift; sourceTree = "<group>"; };
+		97E8B5842574EE210009C938 /* MockEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockEndpoint.swift; sourceTree = "<group>"; };
+		97E8B5892574EE920009C938 /* room.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = room.json; sourceTree = "<group>"; };
 		97F534F4256CC008005998EE /* ValidatingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatingTextField.swift; sourceTree = "<group>"; };
 		97F534F9256CD087005998EE /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		97F534FE256CE947005998EE /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
@@ -188,9 +204,11 @@
 				975C53EC256B5B2900739DCA /* Common */,
 				975C53E9256B5A7500739DCA /* Module */,
 				BD65A7F425729A2900EE43BC /* Model */,
+				97DAC7BB2574C5A5009B76B5 /* Network */,
 				97FB232B256FE90500F7E21E /* Util */,
 				97B4BE72256BE921009A3825 /* Extensions */,
 				975C53EA256B5A8B00739DCA /* Resource */,
+				97E8B57B2574EDCF0009C938 /* Mock */,
 				970547882566649E00500D79 /* Info.plist */,
 			);
 			path = Pupago;
@@ -330,6 +348,43 @@
 			path = Chatting;
 			sourceTree = "<group>";
 		};
+		97DAC7BB2574C5A5009B76B5 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				97DAC7BC2574C5BE009B76B5 /* EndpointType.swift */,
+				97DAC7F62574E5D0009B76B5 /* NetworkProviding.swift */,
+				97DAC7FB2574E5FB009B76B5 /* Endpoint */,
+				97DAC8012574E68B009B76B5 /* Service */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		97DAC7FB2574E5FB009B76B5 /* Endpoint */ = {
+			isa = PBXGroup;
+			children = (
+				97DAC7FC2574E608009B76B5 /* RoomEndpoint.swift */,
+			);
+			path = Endpoint;
+			sourceTree = "<group>";
+		};
+		97DAC8012574E68B009B76B5 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				97DAC7D12574D174009B76B5 /* PupagoAPI.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		97E8B57B2574EDCF0009C938 /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				97E8B57C2574EDE90009C938 /* MockAPI.swift */,
+				97E8B5842574EE210009C938 /* MockEndpoint.swift */,
+				97E8B5892574EE920009C938 /* room.json */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
 		97FB232B256FE90500F7E21E /* Util */ = {
 			isa = PBXGroup;
 			children = (
@@ -361,6 +416,7 @@
 			isa = PBXGroup;
 			children = (
 				BD65A7FD25729A6700EE43BC /* Message.swift */,
+				97DAC7D62574DF8F009B76B5 /* Room.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -475,6 +531,7 @@
 			files = (
 				970547872566649E00500D79 /* LaunchScreen.storyboard in Resources */,
 				970547842566649E00500D79 /* Assets.xcassets in Resources */,
+				97E8B58A2574EE930009C938 /* room.json in Resources */,
 				970547822566649D00500D79 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -599,10 +656,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97DAC7BD2574C5BE009B76B5 /* EndpointType.swift in Sources */,
 				97F534FA256CD087005998EE /* View.swift in Sources */,
 				97CB75B5256E3E3C00FE052A /* CreateRoomViewController.swift in Sources */,
+				97E8B5852574EE210009C938 /* MockEndpoint.swift in Sources */,
 				BD62700025709A1D00569277 /* MyChattingCell.swift in Sources */,
 				9705477F2566649D00500D79 /* LanguageViewController.swift in Sources */,
+				97DAC7F72574E5D0009B76B5 /* NetworkProviding.swift in Sources */,
 				BD5F6165256D207600D63CCD /* ChattingListViewController.swift in Sources */,
 				97CB75D2256E412700FE052A /* ChattingViewModel.swift in Sources */,
 				97F534FF256CE947005998EE /* Application.swift in Sources */,
@@ -610,8 +670,11 @@
 				975C5409256B8FC500739DCA /* LanguageViewModel.swift in Sources */,
 				97CB75CD256E411F00FE052A /* ChattingViewController.swift in Sources */,
 				975C53FA256B7CD100739DCA /* GradientView.swift in Sources */,
+				97DAC7D72574DF8F009B76B5 /* Room.swift in Sources */,
+				97DAC7D22574D174009B76B5 /* PupagoAPI.swift in Sources */,
 				BD65A7FE25729A6700EE43BC /* Message.swift in Sources */,
 				97B4BEA5256BF5B0009A3825 /* ViewController.swift in Sources */,
+				97DAC7FD2574E608009B76B5 /* RoomEndpoint.swift in Sources */,
 				97CB75A6256E204800FE052A /* ChattingListCell.swift in Sources */,
 				97B4BE98256BEFBC009A3825 /* NicknameViewController.swift in Sources */,
 				975C53FF256B844C00739DCA /* SelectableButton.swift in Sources */,
@@ -622,6 +685,7 @@
 				9705477D2566649D00500D79 /* SceneDelegate.swift in Sources */,
 				975C53F5256B6DFF00739DCA /* Button.swift in Sources */,
 				975C5404256B8D3F00739DCA /* Localize.swift in Sources */,
+				97E8B57D2574EDE90009C938 /* MockAPI.swift in Sources */,
 				975C540E256B907D00739DCA /* ViewModel.swift in Sources */,
 				97B4BE74256BE935009A3825 /* NSObject+Rx.swift in Sources */,
 				97B4BEA0256BEFD9009A3825 /* NicknameViewModel.swift in Sources */,
