@@ -14,3 +14,7 @@ struct Room: Codable {
     let participantCount: Int?
     let isPrivate: String?
 }
+
+struct RoomList: Codable {
+    let roomList: [Room]
+}
