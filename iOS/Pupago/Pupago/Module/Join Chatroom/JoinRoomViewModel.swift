@@ -13,6 +13,7 @@ final class JoinRoomViewModel: ViewModel, ViewModelType {
     
     struct Input {
         let roomCode: Observable<[String]>
+        let joinTrigger: Observable<Void>
         let cancelTrigger: Observable<Void>
     }
     
@@ -24,6 +25,7 @@ final class JoinRoomViewModel: ViewModel, ViewModelType {
     
     let isFull = BehaviorRelay<Bool>(value: false)
     let isValid = BehaviorRelay<Bool>(value: false)
+    let roomInfo = PublishSubject<(code: String, isPrivate: Bool)>()
     
     func transform(_ input: Input) -> Output {
         
@@ -35,6 +37,12 @@ final class JoinRoomViewModel: ViewModel, ViewModelType {
             })
             .disposed(by: rx.disposeBag)
         
+        input.joinTrigger
+            .withLatestFrom(input.roomCode)
+            .map { ($0.joined(), true) }
+            .bind(to: self.roomInfo)
+            .disposed(by: rx.disposeBag)
+        
         let viewText = localize.asDriver()
             .map { $0.joinRoomViewText }
         
@@ -42,7 +50,7 @@ final class JoinRoomViewModel: ViewModel, ViewModelType {
             .map { $0 && $1 }
             .asDriver(onErrorJustReturn: false)
         
-        let dismiss = input.cancelTrigger
+        let dismiss = Observable.of(input.cancelTrigger, input.joinTrigger).merge()
             .map { _ in }
             .asDriver(onErrorJustReturn: ())
         

@@ -31,9 +31,11 @@ final class JoinRoomViewController: ViewController {
                 .map { $0.rx.text.orEmpty.asObservable() }
             return Observable.combineLatest(observers)
         }()
+        let joinTrigger = joinButton.rx.tap.map { _ in }
         let cancelTrigger = closeButton.rx.tap.map { _ in }
         
         let input = JoinRoomViewModel.Input(roomCode: roomCode,
+                                            joinTrigger: joinTrigger,
                                             cancelTrigger: cancelTrigger)
         
         let output = viewModel.transform(input)
@@ -53,7 +55,7 @@ final class JoinRoomViewController: ViewController {
             .disposed(by: rx.disposeBag)
         
         output.dismiss
-            .drive(onNext: { [unowned self] () in
+            .drive(onNext: { [unowned self] in
                 self.navigator.dismiss(sender: self)
             })
             .disposed(by: rx.disposeBag)
