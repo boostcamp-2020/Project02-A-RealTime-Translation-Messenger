@@ -764,7 +764,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="저도 만나서 반가워요!" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ucX-gZ-Qch" customClass="Label" customModule="Pupago" customModuleProvider="target">
-                                                    <rect key="frame" x="246.66666666666663" y="10" width="161.33333333333337" height="36.666666666666664"/>
+                                                    <rect key="frame" x="278.66666666666669" y="10" width="129.33333333333331" height="36.666666666666664"/>
                                                     <color key="backgroundColor" name="BlueColor"/>
                                                     <fontDescription key="fontDescription" name=".SFUI-Regular" family=".AppleSystemUIFont" pointSize="15"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -920,8 +920,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YV0-3q-qkN" customClass="View" customModule="Pupago" customModuleProvider="target">
                                 <rect key="frame" x="32" y="190" width="364" height="546"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="36" translatesAutoresizingMaskIntoConstraints="NO" id="Xrh-jP-Xdh">
-                                        <rect key="frame" x="36.333333333333343" y="99.333333333333314" width="291.33333333333326" height="292.66666666666669"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="Xrh-jP-Xdh">
+                                        <rect key="frame" x="36.333333333333343" y="83.333333333333314" width="291.33333333333326" height="324.66666666666669"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="bKo-Wq-G6w">
                                                 <rect key="frame" x="0.0" y="0.0" width="291.33333333333331" height="190.33333333333334"/>
@@ -934,11 +934,28 @@
                                                     </imageView>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="hxr-vh-Q78">
-                                                <rect key="frame" x="0.0" y="226.33333333333334" width="291.33333333333331" height="66.333333333333343"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="hxr-vh-Q78">
+                                                <rect key="frame" x="0.0" y="214.3333333333334" width="291.33333333333331" height="110.33333333333334"/>
                                                 <subviews>
+                                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="gpw-rI-zEV" customClass="SegmentControl" customModule="Pupago" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="291.33333333333331" height="33"/>
+                                                        <color key="backgroundColor" name="BlueColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="32" id="FR3-aA-0Yl"/>
+                                                        </constraints>
+                                                        <segments>
+                                                            <segment title="공개 채팅방"/>
+                                                            <segment title="비밀 채팅방"/>
+                                                        </segments>
+                                                        <color key="tintColor" systemColor="labelColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </segmentedControl>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bqk-sa-4T0" customClass="ValidatingTextField" customModule="Pupago" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="291.33333333333331" height="44"/>
+                                                        <rect key="frame" x="0.0" y="41.999999999999943" width="291.33333333333331" height="44"/>
                                                         <color key="backgroundColor" systemColor="systemGray6Color"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="44" id="4nm-gU-OBc"/>
@@ -952,7 +969,7 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="spf-Mw-0x6">
-                                                        <rect key="frame" x="0.0" y="52" width="165.66666666666666" height="14.333333333333329"/>
+                                                        <rect key="frame" x="0.0" y="95.999999999999943" width="165.66666666666666" height="14.333333333333329"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconNotification" translatesAutoresizingMaskIntoConstraints="NO" id="WFC-Nl-vDa">
                                                                 <rect key="frame" x="0.0" y="0.0" width="14" height="14.333333333333334"/>
@@ -967,8 +984,10 @@
                                                     </stackView>
                                                 </subviews>
                                                 <constraints>
+                                                    <constraint firstItem="gpw-rI-zEV" firstAttribute="leading" secondItem="hxr-vh-Q78" secondAttribute="leading" id="JSF-VM-HMa"/>
                                                     <constraint firstItem="Bqk-sa-4T0" firstAttribute="leading" secondItem="hxr-vh-Q78" secondAttribute="leading" id="ie8-W9-YiS"/>
                                                     <constraint firstAttribute="trailing" secondItem="Bqk-sa-4T0" secondAttribute="trailing" id="pf7-5r-c6x"/>
+                                                    <constraint firstAttribute="trailing" secondItem="gpw-rI-zEV" secondAttribute="trailing" id="z6C-fj-GJ3"/>
                                                 </constraints>
                                             </stackView>
                                         </subviews>
@@ -1080,6 +1099,7 @@
                         <outlet property="createButton" destination="bYc-3w-0hz" id="D5N-1G-p4V"/>
                         <outlet property="descriptionLabel" destination="Ncz-2n-flo" id="BxI-Hw-beY"/>
                         <outlet property="roomTextField" destination="Bqk-sa-4T0" id="bKs-2D-iSq"/>
+                        <outlet property="segmentedControl" destination="gpw-rI-zEV" id="etW-U6-piZ"/>
                         <outlet property="titleLabel" destination="md1-ij-vxg" id="i1M-Uy-0WE"/>
                     </connections>
                 </viewController>
@@ -1304,11 +1324,14 @@
         <designable name="c14-eN-GRe">
             <size key="intrinsicContentSize" width="52" height="30"/>
         </designable>
+        <designable name="gpw-rI-zEV">
+            <size key="intrinsicContentSize" width="157" height="31"/>
+        </designable>
         <designable name="rKw-lr-5j4">
             <size key="intrinsicContentSize" width="30" height="30"/>
         </designable>
         <designable name="ucX-gZ-Qch">
-            <size key="intrinsicContentSize" width="161.33333333333334" height="36.666666666666671"/>
+            <size key="intrinsicContentSize" width="129.33333333333334" height="16.666666666666668"/>
         </designable>
         <designable name="vI2-2T-qaj">
             <size key="intrinsicContentSize" width="38" height="30"/>
