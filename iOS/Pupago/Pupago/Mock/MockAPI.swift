@@ -14,6 +14,15 @@ class MockAPI: NetworkProviding {
         return request(endpoint: MockEndpoint.get)
     }
     
+    func createRoom(roomCode: String, isPrivate: Bool) -> Observable<Room> {
+        let room = Room(roomCode: roomCode, title: nil, createdAt: nil, participantCount: nil, isPrivate: nil)
+        return Observable<Room>.of(room)
+    }
+    
+    func join(roomCode: String, isPrivate: Bool) -> Observable<Bool> {
+        return Observable.of(true)
+    }
+    
 }
 
 extension MockAPI {
