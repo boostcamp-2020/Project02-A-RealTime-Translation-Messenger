@@ -14,7 +14,7 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
     struct Input {
         let createTrigger: Observable<Void>
         let joinTrigger: Observable<Void>
-        let selection: Observable<Void>
+        let selection: Observable<IndexPath>
     }
     
     struct Output {
@@ -22,18 +22,46 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
         let item: Driver<[Room]>
         let created: Driver<CreateRoomViewModel>
         let joined: Driver<JoinRoomViewModel>
-        let selected: Driver<ChattingViewModel>
+        let entered: Driver<ChattingViewModel>
     }
     
     let rooms = BehaviorRelay<[Room]>(value: [])
+    let roomInfo = PublishRelay<(code: String, isPrivate: Bool)>()
+    let apiJoinValid = PublishRelay<Bool>()
+    let socketConnected = PublishRelay<Bool>()
     
     func transform(_ input: Input) -> Output {
         
-        let mockAPI = MockAPI()
+        let pupagoAPI = PupagoAPI()
         
-        mockAPI.rooms().asObservable()
-            .subscribe(onNext: { [weak self] rooms in
-                self?.rooms.accept(rooms)
+        pupagoAPI.rooms().asObservable()
+            .subscribe(onNext: { [weak self] result in
+                self?.rooms.accept(result.roomList)
+            }, onError: { error in
+                print(error)
+            })
+            .disposed(by: rx.disposeBag)
+        
+        input.selection
+            .map { [unowned self] indexPath -> (String, Bool) in
+                let idx = indexPath.row
+                return (self.rooms.value[idx].roomCode ?? "", false)
+            }
+            .bind(to: roomInfo)
+            .disposed(by: rx.disposeBag)
+        
+        roomInfo.asObservable()
+            .subscribe(onNext: { [unowned self] info in
+                pupagoAPI.join(code: info.code, isPrivate: info.isPrivate)
+                    .map { $0.roomCode }
+                    .subscribe(onNext: { code in
+                        print("Socket connection logic needed with \(code ?? "")")
+                    }, onError: { error in
+                        if let error = error as? APIError {
+                            error == .roomNotExist ? print("Alert logic needed") : print("Alert logic needed")
+                        }
+                    })
+                    .disposed(by: rx.disposeBag)
             }, onError: { error in
                 print(error)
             })
@@ -45,22 +73,35 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
         let roomItem = rooms.asDriver(onErrorJustReturn: [])
         
         let created = input.createTrigger
-            .map { CreateRoomViewModel() }
+            .map { [unowned self] in
+                let viewModel = CreateRoomViewModel()
+                viewModel.roomInfo.asObserver()
+                    .bind(to: self.roomInfo)
+                    .disposed(by: rx.disposeBag)
+                return viewModel
+            }
             .asDriver(onErrorJustReturn: CreateRoomViewModel())
         
         let joined = input.joinTrigger
-            .map { JoinRoomViewModel() }
+            .map { [unowned self] in
+                let viewModel = JoinRoomViewModel()
+                viewModel.roomInfo.asObserver()
+                    .bind(to: self.roomInfo)
+                    .disposed(by: rx.disposeBag)
+                return viewModel
+            }
             .asDriver(onErrorJustReturn: JoinRoomViewModel())
         
-        let selected = input.selection
-            .map { ChattingViewModel() }
-            .asDriver(onErrorJustReturn: ChattingViewModel())
+        let entered = apiJoinValid
+            .delay(.milliseconds(500), scheduler: MainScheduler.instance)
+            .map { _ in ChattingViewModel() }
+            .asDriver(onErrorJustReturn: ChattingViewModel() )
         
         return Output(viewTexts: viewText,
                       item: roomItem,
                       created: created,
                       joined: joined,
-                      selected: selected)
+                      entered: entered)
     }
     
 }

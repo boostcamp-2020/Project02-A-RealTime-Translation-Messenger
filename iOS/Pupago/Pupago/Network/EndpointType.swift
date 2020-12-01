@@ -13,11 +13,11 @@ protocol EndpointType {
     var baseUrl: String { get }
     var path: String { get }
     var method: HTTPMethod { get }
-    var parameter: [String: Any] { get }
+    var parameter: [String: Any]? { get }
 }
 
 extension EndpointType {
     var baseUrl: String {
-        return "/api/v1/"
+        return "http://118.67.129.44:3000/api/"
     }
 }

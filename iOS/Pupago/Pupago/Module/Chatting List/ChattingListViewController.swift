@@ -31,7 +31,7 @@ final class ChattingListViewController: ViewController {
         
         let createTrigger = createButton.rx.tap.map { _ in }
         let joinTrigger = joinButton.rx.tap.map { _ in }
-        let selection = collectionView.rx.itemSelected.map { _ in }
+        let selection = collectionView.rx.itemSelected.map { $0 }
         
         let input = ChattingListViewModel.Input(createTrigger: createTrigger,
                                                 joinTrigger: joinTrigger,
@@ -73,7 +73,7 @@ final class ChattingListViewController: ViewController {
             })
             .disposed(by: rx.disposeBag)
         
-        output.selected
+        output.entered
             .drive(onNext: { [unowned self] viewModel in
                 self.navigator.show(segue: .chatting(viewModel: viewModel),
                                      sender: self,

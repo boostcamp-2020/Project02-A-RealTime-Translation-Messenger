@@ -25,7 +25,7 @@ extension MockEndpoint: EndpointType {
         return .get
     }
     
-    var parameter: [String: Any] {
-        return [String: Any]()
+    var parameter: [String: Any]? {
+        return nil
     }
 }

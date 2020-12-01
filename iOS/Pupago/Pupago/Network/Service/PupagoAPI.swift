@@ -10,7 +10,7 @@ import RxSwift
 
 class PupagoAPI: NetworkProviding {
     
-    func rooms() -> Observable<Room> {
+    func rooms() -> Observable<RoomList> {
         return request(endpoint: RoomEndpoint.get)
     }
     
@@ -19,8 +19,7 @@ class PupagoAPI: NetworkProviding {
     }
     
     func join(code: String, isPrivate: Bool) -> Observable<Room> {
-        return isPrivate ? request(endpoint: RoomEndpoint.joinPrivate(code: code)) :
-            request(endpoint: RoomEndpoint.joinPublic(code: code))
+        return request(endpoint: RoomEndpoint.join(code: code, isPrivate: isPrivate))
     }
     
 }
