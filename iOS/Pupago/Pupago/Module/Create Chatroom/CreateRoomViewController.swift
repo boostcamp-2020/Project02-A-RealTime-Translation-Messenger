@@ -25,7 +25,7 @@ final class CreateRoomViewController: ViewController {
         super.bindViewModel()
         
         guard let viewModel = viewModel as? CreateRoomViewModel else { return }
-        let roomName = roomTextField.rx.text.asObservable()
+        let roomName = roomTextField.rx.text.orEmpty.asObservable()
         let createTrigger = createButton.rx.tap.map { _ in }
         let cancelTrigger = closeButton.rx.tap.map { _ in }
         

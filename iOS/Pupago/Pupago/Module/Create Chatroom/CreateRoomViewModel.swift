@@ -11,7 +11,7 @@ import RxCocoa
 
 final class CreateRoomViewModel: ViewModel, ViewModelType {
     struct Input {
-        let roomName: Observable<String?>
+        let roomName: Observable<String>
         let createTrigger: Observable<Void>
         let cancelTrigger: Observable<Void>
     }
@@ -20,21 +20,25 @@ final class CreateRoomViewModel: ViewModel, ViewModelType {
         let viewTexts: Driver<Localize.CreateRoomViewText>
         let hasValidRoomName: Driver<Bool>
         let activate: Driver<Bool>
-        let created: Driver<ChattingViewModel>
+        let created: Driver<Void>
         let dismiss: Driver<Void>
     }
     
     let isEmpty = BehaviorRelay<Bool>(value: true)
     let isValid = BehaviorRelay<Bool>(value: false)
+    let roomInfo = PublishSubject<(code: String, isPrivate: Bool)>()
     
     func transform(_ input: Input) -> Output {
+        
+        let provider = PupagoAPI()
+        
         input.roomName
-            .map { $0?.isEmpty ?? true }
+            .map { $0.isEmpty }
             .bind(to: isEmpty)
             .disposed(by: rx.disposeBag)
         
         input.roomName
-            .map { self.validate(roomName: $0 ?? "") }
+            .map { self.validate(roomName: $0) }
             .bind(to: isValid)
             .disposed(by: rx.disposeBag)
         
@@ -50,8 +54,14 @@ final class CreateRoomViewModel: ViewModel, ViewModelType {
             .asDriver(onErrorJustReturn: false)
         
         let created = input.createTrigger
-            .map { ChattingViewModel() }
-            .asDriver(onErrorJustReturn: ChattingViewModel())
+            .withLatestFrom(input.roomName)
+            .map { [unowned self] name in
+                provider.createRoom(title: name, isPrivate: false).asObservable()
+                    .map { ($0.roomCode ?? "", false) }
+                    .bind(to: roomInfo)
+                    .disposed(by: rx.disposeBag)
+            }
+            .asDriver(onErrorJustReturn: ())
         
         let dismiss = input.cancelTrigger
             .map { _ in }
