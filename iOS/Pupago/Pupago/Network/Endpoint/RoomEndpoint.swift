@@ -34,10 +34,10 @@ extension RoomEndpoint: EndpointType {
         }
     }
     
-    var parameter: [String: Any] {
+    var parameter: [String: Any]? {
         switch self {
         case .get:
-            return [String: Any]()
+            return nil
         case .join(let code, let isPrivate):
             let isPrivate = isPrivate ? "true" : "false"
             return ["roomCode": code, "isPrivate": isPrivate]
