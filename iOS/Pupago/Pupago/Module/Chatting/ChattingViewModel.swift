@@ -13,7 +13,7 @@ import RxDataSources
 class ChattingViewModel: ViewModel, ViewModelType {
     
     struct Input {
-        let chatText: Observable<String?>
+        let chatText: Observable<String>
         let registTrigger: Observable<Void>
     }
     struct Output {
@@ -30,7 +30,7 @@ class ChattingViewModel: ViewModel, ViewModelType {
             .subscribe(onNext: { text in
                 
                 self.chats.accept(self.chats.value +
-                                    [MessageSection(header: "Chat", items: [Message(user: .mine, messageItems: MessageItem(text: "testtest", chattingAt: ""))
+                                    [MessageSection(header: "Chat", items: [Message(user: .mine, messageItems: MessageItem(text: text, chattingAt: ""))
                                     ])])
             })
             .disposed(by: rx.disposeBag)
