@@ -29,13 +29,45 @@ class ChattingViewController: ViewController {
         
         guard let viewModel = viewModel as? ChattingViewModel else { return }
         
-        let chatText = inputText.rx.text.asObservable()
+        let chatText = inputText.rx.text.orEmpty.asObservable()
         let registTrigger = registButton.rx.tap.map { _ in }
         
         let input = ChattingViewModel.Input(chatText: chatText,
                                         registTrigger: registTrigger)
         
         let output = viewModel.transform(input)
+        
+        RxKeyboard.instance.visibleHeight.drive(onNext: { [unowned self] visibleHeight in
+      
+            if visibleHeight == 0 {
+                self.bottomConstraint.constant = 0
+            } else {
+                let height = visibleHeight - self.view.safeAreaInsets.bottom
+                self.bottomConstraint.constant = height
+            }
+            
+            self.view.setNeedsLayout()
+            self.view.layoutIfNeeded()
+        }).disposed(by: rx.disposeBag)
+        
+        let dataSource = RxCollectionViewSectionedReloadDataSource<MessageSection>(configureCell: { _, collectionView, indexPath, item in
+            switch item.user {
+            case .mine:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.user.rawValue, for: indexPath) as! MyChattingCell
+                cell.chattingLabel.text = item.messageItems.text
+                
+                return cell
+            case .others:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.user.rawValue, for: indexPath) as! OthersChattingCell
+                cell.originChatLabel.text = item.messageItems.text
+                
+                return cell
+            }
+        })
+        
+        output.items.asObservable()
+            .bind(to: self.collectionView.rx.items(dataSource: dataSource))
+            .disposed(by: rx.disposeBag)
         
     }
 }
