@@ -34,6 +34,10 @@ class SocketIOManager {
         socket.emit(SocketEndpoint.enter.eventName, item)
     }
     
+    func leavChatroom() {
+        socket.emit(SocketEndpoint.leave.eventName)
+    }
+    
     func sendMessage(korean: String, english: String, origin: String) {
         let item = ["Korean": korean, "English": english, "origin": origin]
         socket.emit(SocketEndpoint.sendMessage.eventName, item)

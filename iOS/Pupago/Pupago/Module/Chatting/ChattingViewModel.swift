@@ -17,7 +17,9 @@ class ChattingViewModel: ViewModel, ViewModelType {
     struct Input {
         let chatText: Observable<String>
         let registTrigger: Observable<Void>
+        let willLeave: Observable<Void>
     }
+    
     struct Output {
         let viewText: Driver<Localize.ChatroomViewText>
         let roomInfo: Driver<RoomInfo>
@@ -43,6 +45,12 @@ class ChattingViewModel: ViewModel, ViewModelType {
             .withLatestFrom(input.chatText)
             .subscribe(onNext: { msg in
                 socketManager.sendMessage(korean: msg, english: msg, origin: "Korean")
+            })
+            .disposed(by: rx.disposeBag)
+        
+        input.willLeave
+            .subscribe(onNext: {
+                socketManager.leavChatroom()
             })
             .disposed(by: rx.disposeBag)
         

@@ -32,9 +32,10 @@ class ChattingViewController: ViewController {
         
         let chatText = inputText.rx.text.orEmpty.asObservable()
         let registTrigger = registButton.rx.tap.map { _ in }
-        
+        let willLeave = rx.viewWillDisappear.map { _ in }
         let input = ChattingViewModel.Input(chatText: chatText,
-                                        registTrigger: registTrigger)
+                                            registTrigger: registTrigger,
+                                            willLeave: willLeave)
         
         let output = viewModel.transform(input)
         
