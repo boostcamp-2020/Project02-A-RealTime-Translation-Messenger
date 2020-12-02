@@ -5,7 +5,7 @@ export type MainPageBoxPropsType = {
   children: React.ReactNode;
 };
 
-const StyledMainpageBox = styled.div`
+const StyledMainpageBox = styled.div<MainPageBoxPropsType>`
   width: 400px;
   height: 720px;
   border-radius: 30px;
