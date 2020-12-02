@@ -65,16 +65,17 @@ class ChattingViewController: ViewController {
         }).disposed(by: rx.disposeBag)
         
         let dataSource = RxCollectionViewSectionedReloadDataSource<MessageSection>(configureCell: { _, collectionView, indexPath, item in
-            switch item.user {
-            case .mine:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.user.rawValue, for: indexPath) as! MyChattingCell
-                cell.chattingLabel.text = item.messageItems.text
-                
+            if item.senderId == SocketIOManager.shared.socket.sid {
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyChattingCell.identifier,
+                                                                    for: indexPath) as? MyChattingCell
+                else { return UICollectionViewCell() }
+                cell.chattingLabel.text = item.korean
                 return cell
-            case .others:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.user.rawValue, for: indexPath) as! OthersChattingCell
-                cell.originChatLabel.text = item.messageItems.text
-                
+            } else {
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OthersChattingCell.identifier,
+                                                                    for: indexPath) as? OthersChattingCell
+                else { return UICollectionViewCell() }
+                cell.originChatLabel.text = item.korean
                 return cell
             }
         })
