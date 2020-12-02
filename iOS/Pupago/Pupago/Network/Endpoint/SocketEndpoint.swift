@@ -8,11 +8,12 @@
 import Foundation
 
 protocol SocketEndpointType {
-    var baseUrl: URL { get }
     var eventName: String { get }
 }
 
 enum SocketEndpoint {
+    static let baseUrl = URL(string: "http://118.67.134.11:3000") ?? URL(fileURLWithPath: "")
+    
     case connect
     case enter
     case leave
@@ -23,11 +24,6 @@ enum SocketEndpoint {
 }
 
 extension SocketEndpoint: SocketEndpointType {
-    var baseUrl: URL {
-        let urlString = "192.0.0.1:3000"
-        let url = URL(string: urlString) ?? URL(fileURLWithPath: "")
-        return url
-    }
     
     var eventName: String {
         switch self {
@@ -47,6 +43,5 @@ extension SocketEndpoint: SocketEndpointType {
             return "socketError"
         }
     }
-    
     
 }
