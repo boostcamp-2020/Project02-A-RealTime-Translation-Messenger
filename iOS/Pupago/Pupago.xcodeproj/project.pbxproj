@@ -53,6 +53,7 @@
 		97F534FF256CE947005998EE /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F534FE256CE947005998EE /* Application.swift */; };
 		97FB232D256FE93000F7E21E /* RegexManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97FB232C256FE93000F7E21E /* RegexManager.swift */; };
 		9D3C1EAB4F277EE81902BD99 /* Pods_PupagoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D63A44A3FA54CB79CE0D4AEC /* Pods_PupagoTests.framework */; };
+		BD5928612577E4A800F091F1 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5928602577E4A800F091F1 /* DateManager.swift */; };
 		BD5F6160256D204400D63CCD /* ChattingListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5F615F256D204400D63CCD /* ChattingListViewModel.swift */; };
 		BD5F6165256D207600D63CCD /* ChattingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5F6164256D207600D63CCD /* ChattingListViewController.swift */; };
 		BD5F616D256D23E300D63CCD /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5F616C256D23E300D63CCD /* NavigationController.swift */; };
@@ -134,6 +135,7 @@
 		97F534FE256CE947005998EE /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		97FB232C256FE93000F7E21E /* RegexManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegexManager.swift; sourceTree = "<group>"; };
 		AE1676964940092EB6BDCC83 /* Pods-PupagoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PupagoTests.release.xcconfig"; path = "Target Support Files/Pods-PupagoTests/Pods-PupagoTests.release.xcconfig"; sourceTree = "<group>"; };
+		BD5928602577E4A800F091F1 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 		BD5F615F256D204400D63CCD /* ChattingListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingListViewModel.swift; sourceTree = "<group>"; };
 		BD5F6164256D207600D63CCD /* ChattingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingListViewController.swift; sourceTree = "<group>"; };
 		BD5F616C256D23E300D63CCD /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
@@ -404,6 +406,7 @@
 			isa = PBXGroup;
 			children = (
 				97FB232C256FE93000F7E21E /* RegexManager.swift */,
+				BD5928602577E4A800F091F1 /* DateManager.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -702,6 +705,7 @@
 				BD5F616D256D23E300D63CCD /* NavigationController.swift in Sources */,
 				976C373625762EDA00BD8094 /* SocketManager.swift in Sources */,
 				97CB75AB256E2CB900FE052A /* CollectionViewBaseCell.swift in Sources */,
+				BD5928612577E4A800F091F1 /* DateManager.swift in Sources */,
 				9705477D2566649D00500D79 /* SceneDelegate.swift in Sources */,
 				975C53F5256B6DFF00739DCA /* Button.swift in Sources */,
 				975C5404256B8D3F00739DCA /* Localize.swift in Sources */,

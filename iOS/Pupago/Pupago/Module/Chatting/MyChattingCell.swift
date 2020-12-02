@@ -11,7 +11,7 @@ final class MyChattingCell: CollectionViewBaseCell {
     
     static let identifier = "MyChattingCell"
     
-    @IBOutlet weak var chattingLabel: UILabel!
+    @IBOutlet weak var chatTextField: UITextView!
     @IBOutlet weak var createAtLabel: UILabel!
     
     func bind() {

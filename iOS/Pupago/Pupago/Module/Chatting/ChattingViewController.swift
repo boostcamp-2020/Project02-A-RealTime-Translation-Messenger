@@ -59,6 +59,7 @@ class ChattingViewController: ViewController {
             } else {
                 let height = visibleHeight - self.view.safeAreaInsets.bottom
                 self.bottomConstraint.constant = height
+                self.collectionView.frame.size.height -= height
             }
             
             self.view.setNeedsLayout()
@@ -70,7 +71,8 @@ class ChattingViewController: ViewController {
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyChattingCell.identifier,
                                                                     for: indexPath) as? MyChattingCell
                 else { return UICollectionViewCell() }
-                cell.chattingLabel.text = item.korean
+                cell.chatTextField.text = item.korean
+                cell.createAtLabel.text = DateManager.dateFormat(of: Date())
                 return cell
             } else {
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OthersChattingCell.identifier,
@@ -91,7 +93,7 @@ class ChattingViewController: ViewController {
 extension ChattingViewController {
     func configureCollectionView() {
         let size = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                          heightDimension: .estimated(33))
+                                        heightDimension: .estimated(33))
         let item = NSCollectionLayoutItem(layoutSize: size)
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: size, subitem: item, count: 1)
         let section = NSCollectionLayoutSection(group: group)
@@ -103,5 +105,7 @@ extension ChattingViewController {
         self.collectionView.collectionViewLayout = layout
         self.collectionView.alwaysBounceVertical = true
         self.collectionView.keyboardDismissMode = .interactive
+        
     }
+    
 }
