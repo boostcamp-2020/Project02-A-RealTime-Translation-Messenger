@@ -14,19 +14,20 @@ struct MessageSection {
     var items: [Item]
 }
 
-struct Message {
-    var user: User
-    var messageItems: MessageItem
-}
-
-struct MessageItem {
-    var text: String
-    var chattingAt: String
-}
-
-enum User: String {
-    case others = "OthersChattingCell"
-    case mine = "MyChattingCell"
+struct Message: Decodable {
+    let korean: String
+    let english: String
+    let senderId: String
+    let nickname: String
+    let createdAt: String
+    
+    enum CodingKeys: String, CodingKey {
+        case korean = "Korean"
+        case english = "English"
+        case senderId = "senderId"
+        case nickname = "nickname"
+        case createdAt = "createdAt"
+    }
 }
 
 extension MessageSection: SectionModelType {
