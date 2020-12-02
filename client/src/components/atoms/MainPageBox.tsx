@@ -1,6 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
+export type MainPageBoxPropsType = {
+  children: React.ReactNode;
+};
+
 const StyledMainpageBox = styled.div`
   width: 400px;
   height: 720px;
@@ -9,8 +13,8 @@ const StyledMainpageBox = styled.div`
   background-color: rgba(255, 255, 255, 0.6);
 `;
 
-export function MainPageBox() {
-  return <StyledMainpageBox />;
+export function MainPageBox({ children }: MainPageBoxPropsType) {
+  return <StyledMainpageBox>{children}</StyledMainpageBox>;
 }
 
 export default MainPageBox;
