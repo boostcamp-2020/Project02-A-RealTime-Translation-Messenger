@@ -18,6 +18,9 @@ PODS:
   - RxSwift (5.1.1)
   - RxTest (5.1.1):
     - RxSwift (~> 5)
+  - Socket.IO-Client-Swift (15.2.0):
+    - Starscream (~> 3.1)
+  - Starscream (3.1.1)
   - SwiftLint (0.41.0)
 
 DEPENDENCIES:
@@ -28,6 +31,7 @@ DEPENDENCIES:
   - RxKeyboard
   - RxSwift (~> 5.0)
   - RxTest (~> 5.0)
+  - Socket.IO-Client-Swift (~> 15.2.0)
   - SwiftLint
 
 SPEC REPOS:
@@ -41,6 +45,8 @@ SPEC REPOS:
     - RxRelay
     - RxSwift
     - RxTest
+    - Socket.IO-Client-Swift
+    - Starscream
     - SwiftLint
 
 SPEC CHECKSUMS:
@@ -53,8 +59,10 @@ SPEC CHECKSUMS:
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
   RxTest: 711632d5644dffbeb62c936a521b5b008a1e1faa
+  Socket.IO-Client-Swift: 1e3e3a1f09f3312a167f0d781eb2f383d477357c
+  Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
   SwiftLint: c585ebd615d9520d7fbdbe151f527977b0534f1e
 
-PODFILE CHECKSUM: ec41d126312269759f9edea85f227616a6ea571e
+PODFILE CHECKSUM: c86a7afad3c0a5527e6462d2a582d39e17a9c191
 
 COCOAPODS: 1.9.3
