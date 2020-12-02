@@ -33,6 +33,8 @@ enum Localize {
     struct CreateRoomViewText {
         var title: String
         var description: String
+        var publicRoom: String
+        var privateRoom: String
         var createButton: String
     }
     
@@ -103,11 +105,15 @@ extension Localize {
         case .korean:
             return .init(title: "방 생성하기",
                          description: "방 이름은 2-30자여야 합니다.",
+                         publicRoom: "공개 채팅방",
+                         privateRoom: "비공개 채팅방",
                          createButton: "생성하기")
         case .english:
 
             return .init(title: "Create Room",
                          description: "Room must be 2-30 characters.",
+                         publicRoom: "Public Chat",
+                         privateRoom: "Private Chat",
                          createButton: "Create")
         }
     }
