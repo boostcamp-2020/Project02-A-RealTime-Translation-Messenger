@@ -12,11 +12,11 @@ export type IconButtonPropsType = {
 
 export function IconButton({ iconType = 'Edit', color = 'black' }: IconButtonPropsType) {
   let icon;
-  if (iconType === 'Edit') icon = <EditIcon style={{ fontSize: 16, color: color }} />;
-  else if (iconType === 'ArrowBack') icon = <ArrowBackIcon style={{ fontSize: 16, color: color }} />;
-  else if (iconType === 'Send') icon = <SendIcon style={{ fontSize: 16, color: color }} />;
-  else if (iconType === 'Mic') icon = <MicIcon style={{ fontSize: 16, color: color }} />;
-  else if (iconType === 'Leave') icon = <LeaveIcon style={{ fontSize: 16, color: color }} />;
+  if (iconType === 'Edit') icon = <EditIcon style={{ fontSize: 24, color: color }} />;
+  else if (iconType === 'ArrowBack') icon = <ArrowBackIcon style={{ fontSize: 24, color: color }} />;
+  else if (iconType === 'Send') icon = <SendIcon style={{ fontSize: 24, color: color }} />;
+  else if (iconType === 'Mic') icon = <MicIcon style={{ fontSize: 24, color: color }} />;
+  else if (iconType === 'Leave') icon = <LeaveIcon style={{ fontSize: 24, color: color }} />;
 
   return <>{icon}</>;
 }
