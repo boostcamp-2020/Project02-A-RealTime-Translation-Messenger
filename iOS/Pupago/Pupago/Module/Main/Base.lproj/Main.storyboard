@@ -802,6 +802,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="ucX-gZ-Qch" secondAttribute="trailing" constant="20" id="832-8u-eTj"/>
                                                 <constraint firstItem="6j0-iA-NTO" firstAttribute="top" secondItem="ucX-gZ-Qch" secondAttribute="bottom" constant="6" id="CNB-SS-CaF"/>
                                                 <constraint firstItem="6j0-iA-NTO" firstAttribute="trailing" secondItem="ucX-gZ-Qch" secondAttribute="trailing" id="ELA-Wk-IGg"/>
+                                                <constraint firstItem="ucX-gZ-Qch" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="aV5-pE-YwI" secondAttribute="leading" constant="20" id="Phx-S0-TZl"/>
                                                 <constraint firstAttribute="bottom" secondItem="6j0-iA-NTO" secondAttribute="bottom" constant="7" id="g7y-81-OXb"/>
                                                 <constraint firstItem="ucX-gZ-Qch" firstAttribute="top" secondItem="aV5-pE-YwI" secondAttribute="top" constant="10" id="nte-Kd-hC0"/>
                                             </constraints>
@@ -878,6 +879,7 @@
                     </view>
                     <connections>
                         <outlet property="bottomConstraint" destination="CzC-7F-Zfo" id="nUr-CA-oE1"/>
+                        <outlet property="codeButton" destination="vI2-2T-qaj" id="OVU-CK-3G0"/>
                         <outlet property="collectionView" destination="Zsf-eg-09v" id="Hua-Y6-ZTe"/>
                         <outlet property="inputText" destination="qBh-LD-tVb" id="0gP-u8-bkQ"/>
                         <outlet property="languageLabel" destination="Q3s-bi-oq7" id="tz7-3f-ki9"/>

@@ -363,9 +363,9 @@
 			children = (
 				97DAC7BC2574C5BE009B76B5 /* EndpointType.swift */,
 				97DAC7F62574E5D0009B76B5 /* NetworkProviding.swift */,
+				976C373525762EDA00BD8094 /* SocketManager.swift */,
 				97DAC7FB2574E5FB009B76B5 /* Endpoint */,
 				97DAC8012574E68B009B76B5 /* Service */,
-				976C373525762EDA00BD8094 /* SocketManager.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
