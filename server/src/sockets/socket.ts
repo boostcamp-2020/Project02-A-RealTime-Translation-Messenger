@@ -5,15 +5,11 @@ import socketController from './socketController';
 import { UserDataType, SendChatType } from '../@types/dataType';
 
 const socketLoader = (server: http.Server) => {
-  const socketServerOption = {
-    cors: {
-      origin: '*',
-    },
-  };
-
-  const io = new socketIO.Server(server, socketServerOption);
+  const io = socketIO(server);
 
   io.on('connection', (socket: Socket) => {
+    console.log(socket.id);
+
     socket.on('enter chatroom', (userData: UserDataType) => {
       socketController.enterChatroom(socket, io, userData);
     });
