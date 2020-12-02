@@ -14,9 +14,10 @@ const StyledButton = styled.button<LanguageSelectButtonPropsType>`
   height: 56px;
   border-radius: 10px;
   border: solid 3px #ffffff;
-  font-size: 28px;
-  color: ${(props) => (props.selected ? Palette.DARK_GREY : 'white')};
   background-color: ${(props) => (props.selected ? 'white' : 'transparent')};
+  color: ${(props) => (props.selected ? Palette.DARK_GREY : 'white')};
+  font-size: 28px;
+  cursor: pointer;
 `;
 
 export function LanguageSelectButton({
