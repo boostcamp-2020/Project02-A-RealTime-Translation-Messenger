@@ -764,7 +764,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="저도 만나서 반가워요!" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ucX-gZ-Qch" customClass="Label" customModule="Pupago" customModuleProvider="target">
-                                                    <rect key="frame" x="278.66666666666669" y="10" width="129.33333333333331" height="36.666666666666664"/>
+                                                    <rect key="frame" x="246.66666666666663" y="10" width="161.33333333333337" height="36.666666666666664"/>
                                                     <color key="backgroundColor" name="BlueColor"/>
                                                     <fontDescription key="fontDescription" name=".SFUI-Regular" family=".AppleSystemUIFont" pointSize="15"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1099,7 +1099,6 @@
                         <outlet property="createButton" destination="bYc-3w-0hz" id="D5N-1G-p4V"/>
                         <outlet property="descriptionLabel" destination="Ncz-2n-flo" id="BxI-Hw-beY"/>
                         <outlet property="roomTextField" destination="Bqk-sa-4T0" id="bKs-2D-iSq"/>
-                        <outlet property="segmentedControl" destination="gpw-rI-zEV" id="etW-U6-piZ"/>
                         <outlet property="titleLabel" destination="md1-ij-vxg" id="i1M-Uy-0WE"/>
                     </connections>
                 </viewController>
@@ -1297,10 +1296,10 @@
                         <outlet property="closeButton" destination="9Ho-uW-wJe" id="0Kh-Ze-wjz"/>
                         <outlet property="joinButton" destination="5Hn-sa-Vhi" id="ezl-bR-VQD"/>
                         <outlet property="titleLabel" destination="PAb-a4-nU2" id="dNQ-4v-9hu"/>
-                        <outletCollection property="codeTextFields" destination="EzQ-3P-eRi" collectionClass="NSMutableArray" id="QeG-85-c7B"/>
-                        <outletCollection property="codeTextFields" destination="mik-QG-06j" collectionClass="NSMutableArray" id="Ktf-lC-FGQ"/>
-                        <outletCollection property="codeTextFields" destination="coH-G4-8K1" collectionClass="NSMutableArray" id="F5j-JI-P0T"/>
-                        <outletCollection property="codeTextFields" destination="GAF-io-Shw" collectionClass="NSMutableArray" id="0vG-Vq-RpI"/>
+                        <outletCollection property="codeTextFields" destination="GAF-io-Shw" collectionClass="NSMutableArray" id="9Px-Aj-Z2A"/>
+                        <outletCollection property="codeTextFields" destination="coH-G4-8K1" collectionClass="NSMutableArray" id="59R-gI-cYb"/>
+                        <outletCollection property="codeTextFields" destination="mik-QG-06j" collectionClass="NSMutableArray" id="GWS-eN-2Dz"/>
+                        <outletCollection property="codeTextFields" destination="EzQ-3P-eRi" collectionClass="NSMutableArray" id="6HO-jl-2XQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="72V-4g-1F0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1331,7 +1330,7 @@
             <size key="intrinsicContentSize" width="30" height="30"/>
         </designable>
         <designable name="ucX-gZ-Qch">
-            <size key="intrinsicContentSize" width="129.33333333333334" height="16.666666666666668"/>
+            <size key="intrinsicContentSize" width="161.33333333333334" height="36.666666666666671"/>
         </designable>
         <designable name="vI2-2T-qaj">
             <size key="intrinsicContentSize" width="38" height="30"/>
