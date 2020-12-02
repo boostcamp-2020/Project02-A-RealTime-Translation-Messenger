@@ -14,6 +14,7 @@ import RxDataSources
 class ChattingViewController: ViewController {
 
     @IBOutlet weak var languageLabel: UILabel!
+    @IBOutlet weak var codeButton: Button!
     @IBOutlet weak var inputText: UITextView!
     @IBOutlet weak var registButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -36,6 +37,19 @@ class ChattingViewController: ViewController {
                                         registTrigger: registTrigger)
         
         let output = viewModel.transform(input)
+        
+        output.viewText
+            .drive(onNext: { [unowned self] text in
+                self.languageLabel.text = text.language
+            })
+            .disposed(by: rx.disposeBag)
+        
+        output.roomInfo
+            .drive(onNext: { [unowned self] info in
+                self.navigationItem.title = info.title
+                self.codeButton.setTitle(info.code, for: .normal)
+            })
+            .disposed(by: rx.disposeBag)
         
         RxKeyboard.instance.visibleHeight.drive(onNext: { [unowned self] visibleHeight in
       

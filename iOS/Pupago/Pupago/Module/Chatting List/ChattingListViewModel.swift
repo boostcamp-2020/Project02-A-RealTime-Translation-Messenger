@@ -28,11 +28,12 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
     
     let rooms = BehaviorRelay<[Room]>(value: [])
     let roomInfo = PublishRelay<(code: String, isPrivate: Bool)>()
-    let apiJoinValid = PublishRelay<Bool>()
+    let socketEntered = PublishRelay<Room?>()
     
     func transform(_ input: Input) -> Output {
         
         let pupagoAPI = PupagoAPI()
+        let socketManager = SocketIOManager.shared
         
         pupagoAPI.rooms().asObservable()
             .subscribe(onNext: { [unowned self] result in
@@ -53,9 +54,9 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
         roomInfo.asObservable()
             .subscribe(onNext: { [unowned self] info in
                 pupagoAPI.join(code: info.code, isPrivate: info.isPrivate)
-                    .map { $0.roomCode }
-                    .subscribe(onNext: { code in
-                        print("Room enter soceck emit needed with \(code ?? "")")
+                    .subscribe(onNext: { room in
+                        socketManager.enterChatroom(roomCode: room.roomCode ?? "")
+                        self.socketEntered.accept(room)
                     }, onError: { error in
                         if let error = error as? APIError {
                             error == .roomNotExist ? print("Alert logic needed room not exist") : print("Alert logic needed")
@@ -92,10 +93,14 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
                 return viewModel
             }
         
-        let entered = apiJoinValid
-            .asDriver(onErrorJustReturn: false)
+        let entered = socketEntered
+            .asDriver(onErrorJustReturn: nil)
             .delay(.milliseconds(500))
-            .map { _ in ChattingViewModel() }
+            .map { room -> ChattingViewModel in
+                let viewModel = ChattingViewModel()
+                viewModel.roomInfo.accept((title: room?.title, code: room?.roomCode))
+                return viewModel
+            }
         
         return Output(viewTexts: viewText,
                       item: roomItem,
