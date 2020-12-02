@@ -2,8 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import RefreshIcon from '@material-ui/icons/Refresh';
 
-import Palette from '../../@types/Palette';
-
 const StyledProfileChangeButton = styled.button`
   width: 32px;
   height: 32px;
