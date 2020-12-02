@@ -103,6 +103,11 @@ final class Navigator {
         }
     }
     
+    func pop(sender: UIViewController) {
+        guard let navigationController = sender.navigationController else { return }
+        navigationController.popViewController(animated: true)
+    }
+    
     private func instantiateFromStoryBoard<T>(type: T.Type, viewModel: ViewModel) -> UIViewController? {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let identifier = String(describing: T.self)
