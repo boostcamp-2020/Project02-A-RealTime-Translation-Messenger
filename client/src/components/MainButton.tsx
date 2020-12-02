@@ -17,11 +17,11 @@ const Button = styled.button<ButtonPropsType>`
   filter: drop-shadow(3px 3px 10px rgba(0, 0, 0, 0.25));
 `;
 
-export function MainButton({ disabled = true, label = 'button', ...props }) {
+export function MainButton({ disabled = true, children = 'button', ...props }) {
   return (
     <div>
       <Button type="button" disabled={disabled}>
-        {label}
+        {children}
       </Button>
     </div>
   );
