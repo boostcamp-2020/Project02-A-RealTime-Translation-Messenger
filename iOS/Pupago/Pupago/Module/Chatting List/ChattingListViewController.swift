@@ -29,8 +29,8 @@ final class ChattingListViewController: ViewController {
         
         guard let viewModel = viewModel as? ChattingListViewModel else { return }
         
-        let createTrigger = createButton.rx.tap.map { _ in }
-        let joinTrigger = joinButton.rx.tap.map { _ in }
+        let createTrigger = createButton.rx.tap.asObservable()
+        let joinTrigger = joinButton.rx.tap.asObservable()
         let selection = collectionView.rx.itemSelected.map { $0 }
         
         let input = ChattingListViewModel.Input(createTrigger: createTrigger,

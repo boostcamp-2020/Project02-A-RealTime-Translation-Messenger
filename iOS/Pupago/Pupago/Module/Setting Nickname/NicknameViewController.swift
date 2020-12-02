@@ -25,7 +25,7 @@ final class NicknameViewController: ViewController {
         
         guard let viewModel = viewModel as? NicknameViewModel else { return }
         let nameText = nameTextField.rx.text.asObservable()
-        let saveTrigger = startButton.rx.tap.map { _ in }
+        let saveTrigger = startButton.rx.tap.asObservable()
         
         let input = NicknameViewModel.Input(nicknameText: nameText,
                                             saveTrigger: saveTrigger)
