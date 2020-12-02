@@ -12,6 +12,7 @@ import RxCocoa
 final class CreateRoomViewModel: ViewModel, ViewModelType {
     struct Input {
         let roomName: Observable<String>
+        let privateSelection: Observable<Bool>
         let createTrigger: Observable<Void>
         let cancelTrigger: Observable<Void>
     }
@@ -20,7 +21,6 @@ final class CreateRoomViewModel: ViewModel, ViewModelType {
         let viewTexts: Driver<Localize.CreateRoomViewText>
         let hasValidRoomName: Driver<Bool>
         let activate: Driver<Bool>
-        let created: Driver<Void>
         let dismiss: Driver<Void>
     }
     
@@ -54,23 +54,20 @@ final class CreateRoomViewModel: ViewModel, ViewModelType {
             .asDriver(onErrorJustReturn: false)
         
         let created = input.createTrigger
-            .withLatestFrom(input.roomName)
-            .map { [unowned self] name in
-                provider.createRoom(title: name, isPrivate: false).asObservable()
-                    .map { ($0.roomCode ?? "", false) }
+            .withLatestFrom(Observable.combineLatest(input.roomName, input.privateSelection))
+            .map { [unowned self] (name, isPrivate) in
+                provider.createRoom(title: name, isPrivate: isPrivate).asObservable()
+                    .map { ($0.roomCode ?? "", isPrivate) }
                     .bind(to: roomInfo)
                     .disposed(by: rx.disposeBag)
             }
-            .asDriver(onErrorJustReturn: ())
         
-        let dismiss = input.cancelTrigger
-            .map { _ in }
+        let dismiss = Observable.of(created, input.cancelTrigger).merge()
             .asDriver(onErrorJustReturn: ())
         
         return Output(viewTexts: viewText,
                       hasValidRoomName: validate,
                       activate: activate,
-                      created: created,
                       dismiss: dismiss)
     }
     

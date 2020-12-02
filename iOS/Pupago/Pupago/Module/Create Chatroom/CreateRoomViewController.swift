@@ -16,6 +16,7 @@ final class CreateRoomViewController: ViewController {
     @IBOutlet weak var roomTextField: ValidatingTextField!
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var createButton: Button!
+    @IBOutlet weak var privateSegment: SegmentControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,10 +27,12 @@ final class CreateRoomViewController: ViewController {
         
         guard let viewModel = viewModel as? CreateRoomViewModel else { return }
         let roomName = roomTextField.rx.text.orEmpty.asObservable()
-        let createTrigger = createButton.rx.tap.map { _ in }
-        let cancelTrigger = closeButton.rx.tap.map { _ in }
-        
+        let segmentSelection = privateSegment.rx.selectedSegmentIndex.map { $0 == 1 }
+        let createTrigger = createButton.rx.tap.asObservable()
+        let cancelTrigger = closeButton.rx.tap.asObservable()
+
         let input = CreateRoomViewModel.Input(roomName: roomName,
+                                              privateSelection: segmentSelection,
                                               createTrigger: createTrigger,
                                               cancelTrigger: cancelTrigger)
         let output = viewModel.transform(input)
@@ -53,12 +56,6 @@ final class CreateRoomViewController: ViewController {
             .drive(onNext: { [unowned self] activate in
                 self.createButton.isUserInteractionEnabled = activate
                 self.createButton.backgroundColor = activate ? UIColor(named: "ButtonColor") : .systemGray6
-            })
-            .disposed(by: rx.disposeBag)
-        
-        output.created
-            .drive(onNext: { [unowned self] viewModel in
-                self.navigator.dismiss(sender: self)
             })
             .disposed(by: rx.disposeBag)
         
