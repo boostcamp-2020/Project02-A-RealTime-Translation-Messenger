@@ -18,6 +18,6 @@ protocol EndpointType {
 
 extension EndpointType {
     var baseUrl: String {
-        return "http://118.67.129.44:3000/api/"
+        return "http://118.67.134.11:3000/api/"
     }
 }
