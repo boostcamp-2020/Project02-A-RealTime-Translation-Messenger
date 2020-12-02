@@ -26,4 +26,12 @@ class SocketIOManager {
         socket.disconnect()
     }
     
+    func enterChatroom(roomCode: String) {
+        let nickname = Application.shared.userName
+        let language = Application.shared.localize.toString
+        let item = ["roomCode": roomCode, "nickname": nickname, "language": language]
+        
+        socket.emit(SocketEndpoint.enter.eventName, item)
+    }
+    
 }
