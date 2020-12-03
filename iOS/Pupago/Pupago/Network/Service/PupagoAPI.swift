@@ -22,4 +22,12 @@ class PupagoAPI: NetworkProviding {
         return request(endpoint: RoomEndpoint.join(code: code, isPrivate: isPrivate))
     }
     
+    func langDetect(_ str: String) -> Observable<Language> {
+        return request(endpoint: PapagoEndpoint.detect(text: str))
+    }
+    
+    func translate(source: String, target: String, text: String) -> Observable<TranslationData> {
+        return request(endpoint: PapagoEndpoint.translate(source: source, target: target, text: text))
+    }
+    
 }
