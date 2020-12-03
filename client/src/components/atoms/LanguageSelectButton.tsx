@@ -3,11 +3,11 @@ import styled from 'styled-components';
 
 import Palette from '../../@types/Palette';
 
-export interface LanguageSelectButtonPropsType {
+export type LanguageSelectButtonPropsType = {
   selected?: boolean;
   language: string;
-  onClick?: () => void;
-}
+  onClick?: ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) & (() => void);
+};
 
 const StyledButton = styled.button<LanguageSelectButtonPropsType>`
   width: 56px;
