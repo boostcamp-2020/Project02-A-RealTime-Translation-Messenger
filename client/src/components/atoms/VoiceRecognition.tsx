@@ -68,7 +68,7 @@ const BigCircle = styled.div`
 
   background-color: rgba(92, 167, 228, 0.6);
 
-  animation: bigCircle 4s linear infinite;
+  animation: bigCircle 2s linear infinite;
   animation-direction: alternate;
   border-radius: 50%;
 
@@ -86,7 +86,7 @@ const MiddleCircle = styled.div`
   z-index: 2;
   opacity: 1;
 
-  animation: middleCircle 4s linear infinite;
+  animation: middleCircle 2s linear infinite;
   animation-direction: alternate;
   border-radius: 50%;
 
