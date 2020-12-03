@@ -5,7 +5,7 @@ import Palette from '../../@types/Palette';
 
 export type CheckBoxTypes = {
   isChecked: boolean;
-  children?: string;
+  children?: React.ReactNode;
   onClick?: () => (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 };
 
@@ -33,7 +33,7 @@ const CheckBoxWrapper = styled.div`
   align-items: center;
 `;
 
-export function CheckBox({ isChecked = false, children = '선택지', ...props }: CheckBoxTypes) {
+export function CheckBox({ isChecked = false, children, ...props }: CheckBoxTypes) {
   return (
     <CheckBoxWrapper>
       <StyledCheckBox isChecked={isChecked} {...props} />

@@ -13,9 +13,11 @@ const Template: Story<CheckBoxTypes> = (args) => <CheckBox {...args} />;
 export const Selected = Template.bind({});
 Selected.args = {
   isChecked: true,
+  children: '선택지',
 };
 
 export const UnSelected = Template.bind({});
 UnSelected.args = {
   isChecked: false,
+  children: 'choice',
 };
