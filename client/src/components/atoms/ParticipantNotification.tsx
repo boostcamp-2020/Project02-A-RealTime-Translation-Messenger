@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import palette from '../../@types/Palette';
+import Palette from '../../@types/Palette';
 
 const StyledParticipantNotification = styled.div`
   display: flex;
@@ -13,7 +13,7 @@ const StyledParticipantNotification = styled.div`
   min-width: 240px;
   max-width: 400px;
 
-  background-color: ${palette.MIDDLE_GRAY};
+  background-color: ${Palette.MIDDLE_GRAY};
 
   color: white;
   border-radius: 10px;
