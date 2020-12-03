@@ -4,20 +4,29 @@ import styled from 'styled-components';
 import Palette from '../../@types/Palette';
 
 export type LanguageTagPropsType = {
-  children: React.ReactNode;
+  language: 'Korean' | 'English';
+  isMe: boolean;
 };
 
 const StyledLanguageTag = styled.div<LanguageTagPropsType>`
-  width: 24.7px;
-  height: 24.7px;
-  padding: 3.1px 4.5px 5.9px 4.5px;
+  display: flex;
+  width: 24px;
+  height: 24px;
   border-radius: 10px;
-  border: solid 3px WHITE;
-  background-color: ${Palette.PUPAGO_BLUE};
+  border: solid 3px white;
+  background-color: ${(props) => (props.isMe ? Palette.PUPAGO_BLUE : 'none')};
+  font-size: 10px;
+  color: white;
+  justify-content: center;
+  align-items: center;
 `;
 
-export function LanguageTag({ children }: LanguageTagPropsType) {
-  return <StyledLanguageTag>{children}</StyledLanguageTag>;
+export function LanguageTag({ language, isMe }: LanguageTagPropsType) {
+  return (
+    <StyledLanguageTag language={language} isMe={isMe}>
+      {language === 'Korean' ? '가' : 'A'}
+    </StyledLanguageTag>
+  );
 }
 
 export default LanguageTag;
