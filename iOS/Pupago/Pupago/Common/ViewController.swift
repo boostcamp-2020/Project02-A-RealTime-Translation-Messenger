@@ -15,8 +15,13 @@ class ViewController: UIViewController, Navigatable {
     override func viewDidLoad() {
         super.viewDidLoad()
         bindViewModel()
+        registerForKeyboardNotifications()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     
     func bindViewModel() {}
-    
+    func registerForKeyboardNotifications() {}
 }

@@ -15,6 +15,11 @@ final class NicknameViewController: ViewController {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var nameTextField: ValidatingTextField!
     @IBOutlet weak var startButton: Button!
+    @IBOutlet weak var inputConstraint: NSLayoutConstraint!
+    @IBOutlet weak var topConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    
+    private var keyboardShown: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()

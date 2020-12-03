@@ -25,10 +25,14 @@ class ChattingViewModel: ViewModel, ViewModelType {
         let roomInfo: Driver<RoomInfo>
         let items: Driver<[MessageSection]>
         let reset: Driver<Void>
+        let scroll: Driver<Void>
+        let activate: Driver<Bool>
     }
     
     let chats = BehaviorRelay<[MessageSection]>(value: [MessageSection(header: "Chat", items: [])])
     let roomInfo = BehaviorRelay<RoomInfo>(value: (nil, nil))
+    let downScroll = PublishRelay<Void>()
+    let isValid = BehaviorRelay<Bool>(value: false)
     
     func transform(_ input: Input) -> Output {
         
@@ -38,6 +42,7 @@ class ChattingViewModel: ViewModel, ViewModelType {
             .subscribe(onNext: { [unowned self] data in
                 if let msg = self.parse(data) {
                     updateMessage(message: msg)
+                    downScroll.accept(())
                 }
             })
             .disposed(by: rx.disposeBag)
@@ -61,20 +66,30 @@ class ChattingViewModel: ViewModel, ViewModelType {
             })
             .disposed(by: rx.disposeBag)
         
+        input.chatText
+            .map { self.validate(chat: $0) }
+            .bind(to: isValid)
+            .disposed(by: rx.disposeBag)
+        
         let viewText = localize.asDriver()
             .map { $0.chatroomViewText }
         
         let info = roomInfo.asDriver(onErrorJustReturn: (nil, nil))
-        
-        let chatItem = chats.asDriver(onErrorJustReturn: [])
-        
         let reset = input.registTrigger.asDriver(onErrorJustReturn: ())
+        let activate = isValid.asDriver(onErrorJustReturn: false)
+        let chatItem = chats.asDriver(onErrorJustReturn: [])
         
         return Output(viewText: viewText,
                       roomInfo: info,
                       items: chatItem,
-                      reset: reset)
+                      reset: reset,
+                      scroll: downScroll.asDriver(onErrorJustReturn: ()),
+                      activate: activate)
     }
+    
+}
+
+private extension ChattingViewModel {
     
     private func updateMessage(message: Message) {
         guard var section = chats.value.first else { return }
@@ -90,6 +105,12 @@ class ChattingViewModel: ViewModel, ViewModelType {
         else { return nil }
 
         return message
+    }
+    
+    private func validate(chat: String) -> Bool {
+        guard chat.count <= 80 && !chat.isEmpty else { return false }
+        
+        return true
     }
     
 }
