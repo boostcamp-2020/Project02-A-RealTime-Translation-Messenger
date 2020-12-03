@@ -13,7 +13,7 @@ const StyledParticipantNotification = styled.div`
   min-width: 240px;
   max-width: 400px;
 
-  background-color: ${Palette.MIDDLE_GRAY};
+  background-color: ${Palette.MIDDLE_GREY};
 
   color: white;
   border-radius: 10px;
