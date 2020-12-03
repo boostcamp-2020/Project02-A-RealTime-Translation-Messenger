@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 export type RoomItemBoxTypes = {
-  size: string;
+  size: 'big' | 'small';
 };
 
 const StyledRoomItemBox = styled.div<RoomItemBoxTypes>`
