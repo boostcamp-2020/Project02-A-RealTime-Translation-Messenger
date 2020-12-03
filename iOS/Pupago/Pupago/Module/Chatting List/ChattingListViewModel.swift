@@ -35,7 +35,7 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
         let pupagoAPI = PupagoAPI()
         let socketManager = SocketIOManager.shared
         
-        pupagoAPI.rooms().asObservable()
+        pupagoAPI.rooms()
             .subscribe(onNext: { [unowned self] result in
                 self.rooms.accept(result.roomList)
             }, onError: { error in
