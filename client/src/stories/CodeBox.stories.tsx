@@ -12,5 +12,11 @@ const Template: Story<CodeBoxPropsType> = (args) => <CodeBox {...args} />;
 
 export const Active = Template.bind({});
 Active.args = {
-  disabled: false,
+  isEntered: true,
+  children: '9',
+};
+
+export const Disabled = Template.bind({});
+Disabled.args = {
+  isEntered: false,
 };
