@@ -29,10 +29,16 @@ class ChattingViewModel: ViewModel, ViewModelType {
     
     let chats = BehaviorRelay<[MessageSection]>(value: [MessageSection(header: "Chat", items: [])])
     let roomInfo = BehaviorRelay<RoomInfo>(value: (nil, nil))
+    let langCode = PublishRelay<(lang: Language, text: String)>()
+    let activate = BehaviorRelay<Bool>(value: false)
     
     func transform(_ input: Input) -> Output {
         
         let socketManager = SocketIOManager.shared
+        let provider = PupagoAPI()
+        let translator = Translator(provider: provider)
+        
+        // MARK: - Observing Socket Events
         
         socketManager.socket.rx.event(.receiveMessage)
             .subscribe(onNext: { [unowned self] data in
@@ -47,6 +53,16 @@ class ChattingViewModel: ViewModel, ViewModelType {
                 print("Participant changed!")
             })
             .disposed(by: rx.disposeBag)
+        
+        input.chatText
+            .distinctUntilChanged()
+            .filter { !$0.isEmpty }
+            .debounce(.milliseconds(500), scheduler: MainScheduler.instance)
+            .flatMap { translator.translate(with: $0) }
+            .subscribe(onNext: { (korean, english) in
+                print("korean: \(korean), english: \(english)")
+            })
+            .disposed(by: rx.disposeBag)
 
         input.registTrigger
             .withLatestFrom(input.chatText)
@@ -58,6 +74,7 @@ class ChattingViewModel: ViewModel, ViewModelType {
         input.willLeave
             .subscribe(onNext: {
                 socketManager.leavChatroom()
+                socketManager.socket.removeAllHandlers()
             })
             .disposed(by: rx.disposeBag)
         
