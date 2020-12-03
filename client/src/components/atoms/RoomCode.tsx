@@ -4,36 +4,32 @@ import styled from 'styled-components';
 import Palette from '../../@types/Palette';
 
 export type RoomCodeTextPropsType = {
-  children: React.ReactNode;
+  code: string;
 };
 
 const StyledRoomCode = styled.div`
   width: 72px;
   height: 24px;
-  padding: 4px 0px 0px 8px;
   border-radius: 10px;
   border: solid 1px ${Palette.DARK_GREY};
   background-color: rgba(196, 196, 196, 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
-const StyledRoomCodeText = styled.div<RoomCodeTextPropsType>`
-  width: 64px;
-  height: 20px;
-  font-family: NotoSansKR;
+const StyledRoomCodeText = styled.p`
   font-size: 14px;
-  font-weight: 500;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
   letter-spacing: 1.4px;
-  text-align: center;
-  color: #808080;
+  color: ${Palette.DARK_GREY};
+  margin: 0;
+  margin-bottom: 2px;
 `;
 
-export function RoomCode({ children }: RoomCodeTextPropsType) {
+export function RoomCode({ code }: RoomCodeTextPropsType) {
   return (
     <StyledRoomCode>
-      <StyledRoomCodeText>{children}</StyledRoomCodeText>
+      <StyledRoomCodeText>{code}</StyledRoomCodeText>
     </StyledRoomCode>
   );
 }

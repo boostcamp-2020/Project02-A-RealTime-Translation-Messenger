@@ -12,5 +12,5 @@ const Template: Story<RoomCodeTextPropsType> = (args) => <RoomCode {...args} />;
 
 export const Active = Template.bind({});
 Active.args = {
-  children: '1234',
+  code: 'A12B',
 };
