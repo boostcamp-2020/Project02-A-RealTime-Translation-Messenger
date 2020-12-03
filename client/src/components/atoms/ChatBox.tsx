@@ -20,7 +20,6 @@ const StyledChatBox = styled.div<StyledChatBoxPropsType>`
   height: 88px;
 
   background-color: ${(props) => (props.isMe ? Palette.PUPAGO_BLUE : Palette.LIGHT_GREY)};
-  box-sizing: border-box;
 
   color: ${(props) => (props.isMe ? 'white' : 'black')};
   font-size: 14px;

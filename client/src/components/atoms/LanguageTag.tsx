@@ -15,7 +15,7 @@ const StyledLanguageTag = styled.div<LanguageTagPropsType>`
   border-radius: 10px;
   border: solid 3px white;
   background-color: ${(props) => (props.isMe ? Palette.PUPAGO_BLUE : 'none')};
-  font-size: 10px;
+  font-size: 14px;
   color: white;
   justify-content: center;
   align-items: center;

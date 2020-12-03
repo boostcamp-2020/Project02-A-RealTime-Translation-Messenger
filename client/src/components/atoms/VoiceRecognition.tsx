@@ -8,23 +8,23 @@ const Wrapper = styled.div`
   position: relative;
   @keyframes bigCircle {
     0% {
-      transform: scale(0.7);
-    }
-
-    50% {
       transform: scale(0.75);
     }
 
-    60% {
+    50% {
       transform: scale(0.8);
     }
 
-    70% {
+    60% {
       transform: scale(0.85);
     }
 
-    80% {
+    70% {
       transform: scale(0.9);
+    }
+
+    80% {
+      transform: scale(0.95);
     }
 
     100% {
@@ -46,11 +46,11 @@ const Wrapper = styled.div`
     }
 
     80% {
-      transform: scale(0.85);
+      transform: scale(0.75);
     }
 
     100% {
-      transform: scale(1);
+      transform: scale(0.8);
     }
   }
 `;
@@ -68,11 +68,9 @@ const BigCircle = styled.div`
 
   background-color: rgba(92, 167, 228, 0.6);
 
-  animation: bigCircle 2s linear infinite;
+  animation: bigCircle 0.8s linear infinite;
   animation-direction: alternate;
   border-radius: 50%;
-
-  box-sizing: border-box;
 `;
 
 const MiddleCircle = styled.div`
@@ -86,19 +84,17 @@ const MiddleCircle = styled.div`
   z-index: 2;
   opacity: 1;
 
-  animation: middleCircle 2s linear infinite;
+  animation: middleCircle 0.8s linear infinite;
   animation-direction: alternate;
   border-radius: 50%;
 
   background-color: rgba(92, 167, 228, 0.8);
-
-  box-sizing: border-box;
 `;
 
 const SmallCircle = styled.div`
   position: absolute;
-  top: 52px;
-  left: 52px;
+  top: 60px;
+  left: 60px;
 
   z-index: 3;
 
@@ -106,8 +102,8 @@ const SmallCircle = styled.div`
   justify-content: center;
   align-items: center;
 
-  width: 136px;
-  height: 136px;
+  width: 120px;
+  height: 120px;
 
   z-index: 3;
   opacity: 1;
@@ -115,8 +111,6 @@ const SmallCircle = styled.div`
   border-radius: 50%;
 
   background-color: white;
-
-  box-sizing: border-box;
 
   animation: none;
 `;

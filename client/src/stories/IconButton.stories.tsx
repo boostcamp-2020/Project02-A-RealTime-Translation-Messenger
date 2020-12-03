@@ -38,3 +38,9 @@ Leave.args = {
   iconType: 'Leave',
   color: Palette.PUPAGO_BLUE,
 };
+
+export const Close = Template.bind({});
+Close.args = {
+  iconType: 'Close',
+  color: Palette.DARK_GREY,
+};
