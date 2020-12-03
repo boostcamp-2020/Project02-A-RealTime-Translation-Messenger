@@ -13,8 +13,8 @@ class OthersChattingCell: CollectionViewBaseCell {
     
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
-    @IBOutlet weak var originChatLabel: UILabel!
-    @IBOutlet weak var translationChatLabel: UILabel!
+    @IBOutlet weak var originChatTextView: UITextView!
+    @IBOutlet weak var translationChatTextView: UITextView!
     @IBOutlet weak var createAtLabel: UILabel!
     
     func bind() {

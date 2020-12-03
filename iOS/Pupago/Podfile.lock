@@ -10,14 +10,14 @@ PODS:
     - Differentiator (~> 4.0)
     - RxCocoa (~> 5.0)
     - RxSwift (~> 5.0)
-  - RxKeyboard (0.9.0):
-    - RxCocoa (>= 4.3.1)
-    - RxSwift (>= 4.3.1)
   - RxRelay (5.1.1):
     - RxSwift (~> 5)
   - RxSwift (5.1.1)
   - RxTest (5.1.1):
     - RxSwift (~> 5)
+  - Socket.IO-Client-Swift (15.2.0):
+    - Starscream (~> 3.1)
+  - Starscream (3.1.1)
   - SwiftLint (0.41.0)
 
 DEPENDENCIES:
@@ -25,9 +25,9 @@ DEPENDENCIES:
   - RxBlocking (~> 5.0)
   - RxCocoa (~> 5.0)
   - RxDataSources (~> 4.0)
-  - RxKeyboard
   - RxSwift (~> 5.0)
   - RxTest (~> 5.0)
+  - Socket.IO-Client-Swift (~> 15.2.0)
   - SwiftLint
 
 SPEC REPOS:
@@ -37,10 +37,11 @@ SPEC REPOS:
     - RxBlocking
     - RxCocoa
     - RxDataSources
-    - RxKeyboard
     - RxRelay
     - RxSwift
     - RxTest
+    - Socket.IO-Client-Swift
+    - Starscream
     - SwiftLint
 
 SPEC CHECKSUMS:
@@ -49,12 +50,13 @@ SPEC CHECKSUMS:
   RxBlocking: 5f700a78cad61ce253ebd37c9a39b5ccc76477b4
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxDataSources: efee07fa4de48477eca0a4611e6d11e2da9c1114
-  RxKeyboard: 4f782303f499f41577b41c96c6a9a5d7acd51a47
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
   RxTest: 711632d5644dffbeb62c936a521b5b008a1e1faa
+  Socket.IO-Client-Swift: 1e3e3a1f09f3312a167f0d781eb2f383d477357c
+  Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
   SwiftLint: c585ebd615d9520d7fbdbe151f527977b0534f1e
 
-PODFILE CHECKSUM: ec41d126312269759f9edea85f227616a6ea571e
+PODFILE CHECKSUM: 4ec803caf47fc9a318f0e3cad4f7a31321a6d112
 
 COCOAPODS: 1.9.3

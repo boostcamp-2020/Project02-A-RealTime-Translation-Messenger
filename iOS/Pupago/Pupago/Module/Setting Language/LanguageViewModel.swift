@@ -36,9 +36,8 @@ final class LanguageViewModel: ViewModel, ViewModelType {
         
         let selected = localize.asDriver()
         
-        let saved = input.saveTrigger
+        let saved = input.saveTrigger.asDriver(onErrorJustReturn: ())
             .map { NicknameViewModel() }
-            .asDriver(onErrorJustReturn: NicknameViewModel())
         
         return Output(viewTexts: viewText,
                       selected: selected,

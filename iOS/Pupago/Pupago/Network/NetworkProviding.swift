@@ -44,7 +44,7 @@ extension NetworkProviding {
                     }
                        }
             return Disposables.create()
-        }.share()
+        }
     }
     
 }

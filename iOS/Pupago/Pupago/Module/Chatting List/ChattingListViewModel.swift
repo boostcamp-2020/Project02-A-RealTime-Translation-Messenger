@@ -8,6 +8,7 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import SocketIO
 
 final class ChattingListViewModel: ViewModel, ViewModelType {
     
@@ -27,16 +28,16 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
     
     let rooms = BehaviorRelay<[Room]>(value: [])
     let roomInfo = PublishRelay<(code: String, isPrivate: Bool)>()
-    let apiJoinValid = PublishRelay<Bool>()
-    let socketConnected = PublishRelay<Bool>()
+    let socketEntered = PublishRelay<Room?>()
     
     func transform(_ input: Input) -> Output {
         
         let pupagoAPI = PupagoAPI()
+        let socketManager = SocketIOManager.shared
         
-        pupagoAPI.rooms().asObservable()
-            .subscribe(onNext: { [weak self] result in
-                self?.rooms.accept(result.roomList)
+        pupagoAPI.rooms()
+            .subscribe(onNext: { [unowned self] result in
+                self.rooms.accept(result.roomList)
             }, onError: { error in
                 print(error)
             })
@@ -53,12 +54,12 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
         roomInfo.asObservable()
             .subscribe(onNext: { [unowned self] info in
                 pupagoAPI.join(code: info.code, isPrivate: info.isPrivate)
-                    .map { $0.roomCode }
-                    .subscribe(onNext: { code in
-                        print("Socket connection logic needed with \(code ?? "")")
+                    .subscribe(onNext: { room in
+                        socketManager.enterChatroom(roomCode: room.roomCode ?? "")
+                        self.socketEntered.accept(room)
                     }, onError: { error in
                         if let error = error as? APIError {
-                            error == .roomNotExist ? print("Alert logic needed") : print("Alert logic needed")
+                            error == .roomNotExist ? print("Alert logic needed room not exist") : print("Alert logic needed")
                         }
                     })
                     .disposed(by: rx.disposeBag)
@@ -73,29 +74,33 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
         let roomItem = rooms.asDriver(onErrorJustReturn: [])
         
         let created = input.createTrigger
-            .map { [unowned self] in
+            .asDriver(onErrorJustReturn: ())
+            .map { [unowned self] () -> CreateRoomViewModel in
                 let viewModel = CreateRoomViewModel()
                 viewModel.roomInfo.asObserver()
                     .bind(to: self.roomInfo)
                     .disposed(by: rx.disposeBag)
                 return viewModel
             }
-            .asDriver(onErrorJustReturn: CreateRoomViewModel())
         
         let joined = input.joinTrigger
-            .map { [unowned self] in
+            .asDriver(onErrorJustReturn: ())
+            .map { [unowned self] () -> JoinRoomViewModel in
                 let viewModel = JoinRoomViewModel()
                 viewModel.roomInfo.asObserver()
                     .bind(to: self.roomInfo)
                     .disposed(by: rx.disposeBag)
                 return viewModel
             }
-            .asDriver(onErrorJustReturn: JoinRoomViewModel())
         
-        let entered = apiJoinValid
-            .delay(.milliseconds(500), scheduler: MainScheduler.instance)
-            .map { _ in ChattingViewModel() }
-            .asDriver(onErrorJustReturn: ChattingViewModel() )
+        let entered = socketEntered
+            .asDriver(onErrorJustReturn: nil)
+            .delay(.milliseconds(500))
+            .map { room -> ChattingViewModel in
+                let viewModel = ChattingViewModel()
+                viewModel.roomInfo.accept((title: room?.title, code: room?.roomCode))
+                return viewModel
+            }
         
         return Output(viewTexts: viewText,
                       item: roomItem,
