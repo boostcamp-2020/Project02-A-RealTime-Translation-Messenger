@@ -27,7 +27,7 @@ class LanguageViewController: ViewController {
         let engSelection = engButton.rx.tap.map { Localize.english }
         let korSelection = korButton.rx.tap.map { Localize.korean }
         let selection = Observable.of(engSelection, korSelection).merge()
-        let saveTrigger = nextButton.rx.tap.map { _ in }
+        let saveTrigger = nextButton.rx.tap.asObservable()
         
         let input = LanguageViewModel.Input(selection: selection,
                                             saveTrigger: saveTrigger)

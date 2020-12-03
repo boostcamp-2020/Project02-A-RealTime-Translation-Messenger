@@ -92,6 +92,8 @@ final class Navigator {
         switch transition {
         case .navigation:
             guard let navigationController = sender.navigationController else { return }
+            navigationController.navigationBar.topItem?.title = ""
+            navigationController.navigationBar.tintColor = .white
             navigationController.pushViewController(target, animated: true)
         case .present:
             target.modalTransitionStyle = .crossDissolve
@@ -99,6 +101,11 @@ final class Navigator {
             sender.present(target, animated: true, completion: nil)
         default: break
         }
+    }
+    
+    func pop(sender: UIViewController) {
+        guard let navigationController = sender.navigationController else { return }
+        navigationController.popViewController(animated: true)
     }
     
     private func instantiateFromStoryBoard<T>(type: T.Type, viewModel: ViewModel) -> UIViewController? {

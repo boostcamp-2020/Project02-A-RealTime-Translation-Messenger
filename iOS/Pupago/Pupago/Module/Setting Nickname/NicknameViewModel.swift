@@ -8,6 +8,7 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import SocketIO
 
 final class NicknameViewModel: ViewModel, ViewModelType {
     
@@ -25,8 +26,19 @@ final class NicknameViewModel: ViewModel, ViewModelType {
     
     let isEmpty = BehaviorRelay<Bool>(value: true)
     let isValid = BehaviorRelay<Bool>(value: false)
+    let connected = PublishRelay<SocketIOStatus>()
     
     func transform(_ input: Input) -> Output {
+        
+        let socket = SocketIOManager.shared.socket
+        
+        socket?.rx.event(.connect)
+            .subscribe(onNext: { [unowned self] _ in
+                print("\n\nConnected Event Received!")
+                self.connected.accept(SocketIOStatus.connected)
+            })
+            .disposed(by: rx.disposeBag)
+        
         input.nicknameText
             .map { $0?.isEmpty ?? true }
             .bind(to: isEmpty)
@@ -52,13 +64,15 @@ final class NicknameViewModel: ViewModel, ViewModelType {
             .withLatestFrom(input.nicknameText)
             .subscribe(onNext: { text in
                 Application.shared.userName = text ?? ""
+                SocketIOManager.shared.establishConnect()
             })
             .disposed(by: rx.disposeBag)
         
-        let saved = input.saveTrigger
-            .map { ChattingListViewModel() }
-            .asDriver(onErrorJustReturn: ChattingListViewModel())
-        
+        let saved = connected
+            .filter { $0 == .connected }
+            .asDriver(onErrorJustReturn: .notConnected)
+            .map { _ in ChattingListViewModel() }
+            
         return Output(viewTexts: viewText,
                       hasValidNickname: validate,
                       activate: activate,

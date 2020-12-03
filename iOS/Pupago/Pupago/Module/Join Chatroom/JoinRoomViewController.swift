@@ -15,12 +15,17 @@ final class JoinRoomViewController: ViewController {
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var joinButton: Button!
     @IBOutlet var codeTextFields: [UITextField]!
+    @IBOutlet weak var centerConstraint: NSLayoutConstraint!
     
+    private var keyboardShown: Bool = false
+    
+    // MARK: - Object Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTextFieldControls()
     }
     
+    // MARK: - Bind ViewModel
     override func bindViewModel() {
         super.bindViewModel()
         
@@ -31,9 +36,11 @@ final class JoinRoomViewController: ViewController {
                 .map { $0.rx.text.orEmpty.asObservable() }
             return Observable.combineLatest(observers)
         }()
+        let joinTrigger = joinButton.rx.tap.map { _ in }
         let cancelTrigger = closeButton.rx.tap.map { _ in }
         
         let input = JoinRoomViewModel.Input(roomCode: roomCode,
+                                            joinTrigger: joinTrigger,
                                             cancelTrigger: cancelTrigger)
         
         let output = viewModel.transform(input)
@@ -53,14 +60,27 @@ final class JoinRoomViewController: ViewController {
             .disposed(by: rx.disposeBag)
         
         output.dismiss
-            .drive(onNext: { [unowned self] () in
+            .drive(onNext: { [unowned self] in
                 self.navigator.dismiss(sender: self)
             })
             .disposed(by: rx.disposeBag)
     }
     
+    override func registerForKeyboardNotifications() {
+        super.registerForKeyboardNotifications()
+        
+        NotificationCenter.default
+            .addObserver(self, selector: #selector(keyboardWillShow),
+                               name: UIResponder.keyboardWillShowNotification,
+                               object: nil)
+        NotificationCenter.default
+            .addObserver(self, selector: #selector(keyboardWillHide),
+                               name: UIResponder.keyboardWillHideNotification,
+                               object: nil)
+    }
 }
 
+// MARK: - TextFild Setup
 private extension JoinRoomViewController {
     
     func setupTextFieldControls() {
@@ -76,4 +96,30 @@ private extension JoinRoomViewController {
         }
     }
     
+}
+
+// MARK: - KeyBoard Notification
+extension JoinRoomViewController {
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            if keyboardSize.height == 0.0 || keyboardShown { return }
+            
+            UIView.animate(withDuration: 0) {
+                let bottomPadding = self.view.safeAreaInsets.bottom
+                self.centerConstraint.constant -= (keyboardSize.height - bottomPadding) / 2
+                self.keyboardShown = true
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if !keyboardShown { return }
+            
+        UIView.animate(withDuration: 0) {
+            self.centerConstraint.constant = 0
+            self.keyboardShown = false
+            self.view.layoutIfNeeded()
+        }
+    }
 }

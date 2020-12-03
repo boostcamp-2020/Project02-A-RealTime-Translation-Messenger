@@ -8,27 +8,65 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import SocketIO
 
 final class ChattingListViewModel: ViewModel, ViewModelType {
     
     struct Input {
         let createTrigger: Observable<Void>
         let joinTrigger: Observable<Void>
-        let selection: Observable<Void>
+        let selection: Observable<IndexPath>
     }
     
     struct Output {
         let viewTexts: Driver<(localizeTexts: Localize.ChatListViewText, nickname: String)>
-        let item: Driver<[Int]> // Mock for UI
+        let item: Driver<[Room]>
         let created: Driver<CreateRoomViewModel>
         let joined: Driver<JoinRoomViewModel>
-        let selected: Driver<ChattingViewModel>
+        let entered: Driver<ChattingViewModel>
     }
     
-    // Mock for UI
-    let rooms = BehaviorRelay<[Int]>(value: Array(1...5))
+    let rooms = BehaviorRelay<[Room]>(value: [])
+    let roomInfo = PublishRelay<(code: String, isPrivate: Bool)>()
+    let socketEntered = PublishRelay<Room?>()
     
     func transform(_ input: Input) -> Output {
+        
+        let pupagoAPI = PupagoAPI()
+        let socketManager = SocketIOManager.shared
+        
+        pupagoAPI.rooms()
+            .subscribe(onNext: { [unowned self] result in
+                self.rooms.accept(result.roomList)
+            }, onError: { error in
+                print(error)
+            })
+            .disposed(by: rx.disposeBag)
+        
+        input.selection
+            .map { [unowned self] indexPath -> (String, Bool) in
+                let idx = indexPath.row
+                return (self.rooms.value[idx].roomCode ?? "", false)
+            }
+            .bind(to: roomInfo)
+            .disposed(by: rx.disposeBag)
+        
+        roomInfo.asObservable()
+            .subscribe(onNext: { [unowned self] info in
+                pupagoAPI.join(code: info.code, isPrivate: info.isPrivate)
+                    .subscribe(onNext: { room in
+                        socketManager.enterChatroom(roomCode: room.roomCode ?? "")
+                        self.socketEntered.accept(room)
+                    }, onError: { error in
+                        if let error = error as? APIError {
+                            error == .roomNotExist ? print("Alert logic needed room not exist") : print("Alert logic needed")
+                        }
+                    })
+                    .disposed(by: rx.disposeBag)
+            }, onError: { error in
+                print(error)
+            })
+            .disposed(by: rx.disposeBag)
         
         let viewText = localize.asDriver()
             .map { (localizeTexts: $0.chattingListViewText, nickname: Application.shared.userName) }
@@ -36,22 +74,40 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
         let roomItem = rooms.asDriver(onErrorJustReturn: [])
         
         let created = input.createTrigger
-            .map { CreateRoomViewModel() }
-            .asDriver(onErrorJustReturn: CreateRoomViewModel())
+            .asDriver(onErrorJustReturn: ())
+            .map { [unowned self] () -> CreateRoomViewModel in
+                let viewModel = CreateRoomViewModel()
+                viewModel.roomInfo.asObserver()
+                    .bind(to: self.roomInfo)
+                    .disposed(by: rx.disposeBag)
+                return viewModel
+            }
         
         let joined = input.joinTrigger
-            .map { JoinRoomViewModel() }
-            .asDriver(onErrorJustReturn: JoinRoomViewModel())
+            .asDriver(onErrorJustReturn: ())
+            .map { [unowned self] () -> JoinRoomViewModel in
+                let viewModel = JoinRoomViewModel()
+                viewModel.roomInfo.asObserver()
+                    .bind(to: self.roomInfo)
+                    .disposed(by: rx.disposeBag)
+                return viewModel
+            }
         
-        let selected = input.selection
-            .map { ChattingViewModel() }
-            .asDriver(onErrorJustReturn: ChattingViewModel())
+        let entered = socketEntered
+            .asDriver(onErrorJustReturn: nil)
+            .delay(.milliseconds(500))
+            .map { room -> ChattingViewModel in
+                let viewModel = ChattingViewModel()
+                viewModel.roomInfo.accept((title: room?.title, code: room?.roomCode))
+                return viewModel
+            }
         
         return Output(viewTexts: viewText,
                       item: roomItem,
                       created: created,
                       joined: joined,
-                      selected: selected)
+                      entered: entered)
+      
     }
     
 }

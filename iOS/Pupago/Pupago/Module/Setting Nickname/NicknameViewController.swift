@@ -15,6 +15,11 @@ final class NicknameViewController: ViewController {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var nameTextField: ValidatingTextField!
     @IBOutlet weak var startButton: Button!
+    @IBOutlet weak var inputConstraint: NSLayoutConstraint!
+    @IBOutlet weak var topConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    
+    private var keyboardShown: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +30,7 @@ final class NicknameViewController: ViewController {
         
         guard let viewModel = viewModel as? NicknameViewModel else { return }
         let nameText = nameTextField.rx.text.asObservable()
-        let saveTrigger = startButton.rx.tap.map { _ in }
+        let saveTrigger = startButton.rx.tap.asObservable()
         
         let input = NicknameViewModel.Input(nicknameText: nameText,
                                             saveTrigger: saveTrigger)
