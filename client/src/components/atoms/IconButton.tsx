@@ -6,7 +6,7 @@ import MicIcon from '@material-ui/icons/Mic';
 import LeaveIcon from '@material-ui/icons/ExitToApp';
 
 export type IconButtonPropsType = {
-  iconType: string;
+  iconType: 'Edit' | 'ArrowBack' | 'Send' | 'Mic' | 'Leave';
   color: string;
 };
 
