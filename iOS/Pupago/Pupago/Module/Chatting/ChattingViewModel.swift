@@ -24,6 +24,7 @@ class ChattingViewModel: ViewModel, ViewModelType {
         let viewText: Driver<Localize.ChatroomViewText>
         let roomInfo: Driver<RoomInfo>
         let items: Driver<[MessageSection]>
+        let reset: Driver<Void>
     }
     
     let chats = BehaviorRelay<[MessageSection]>(value: [MessageSection(header: "Chat", items: [])])
@@ -67,9 +68,12 @@ class ChattingViewModel: ViewModel, ViewModelType {
         
         let chatItem = chats.asDriver(onErrorJustReturn: [])
         
+        let reset = input.registTrigger.asDriver(onErrorJustReturn: ())
+        
         return Output(viewText: viewText,
                       roomInfo: info,
-                      items: chatItem)
+                      items: chatItem,
+                      reset: reset)
     }
     
     private func updateMessage(message: Message) {

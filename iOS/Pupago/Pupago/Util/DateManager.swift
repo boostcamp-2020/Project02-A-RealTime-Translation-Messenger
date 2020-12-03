@@ -15,7 +15,7 @@ final class DateManager {
         let outputFormatter = DateFormatter()
         var outputDate: String = ""
         
-        inputFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        inputFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
             
         if let date = inputFormatter.date(from: dueDate) {
             outputFormatter.dateFormat = "h:mm a"
@@ -24,13 +24,6 @@ final class DateManager {
         
         return outputDate
         
-    }
-    
-    public static func dateFormat(of dueDate: Date) -> String {
-        let outputFormatter = DateFormatter()
-        outputFormatter.dateFormat = "h:mm a"
-        
-        return outputFormatter.string(from: dueDate)
     }
     
 }

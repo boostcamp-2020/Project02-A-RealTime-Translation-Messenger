@@ -17,12 +17,24 @@ class ChattingViewController: ViewController {
     @IBOutlet weak var inputText: UITextView!
     @IBOutlet weak var registButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var inputBar: UIView!
-    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var inputBarBottomConstraint: NSLayoutConstraint!
+    
+    private var didSetupViewConstraints = false
+    private var keyboardShown: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        registerForKeyboardNotifications()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        let lastItemIndex = self.collectionView.numberOfItems(inSection: 0) - 1
+        let indexPath: NSIndexPath = NSIndexPath.init(item: lastItemIndex, section: 0)
+        self.collectionView.scrollToItem(at: indexPath as IndexPath, at: .bottom, animated: true)
     }
     
     override func bindViewModel() {
@@ -58,13 +70,15 @@ class ChattingViewController: ViewController {
                                                                     for: indexPath) as? MyChattingCell
                 else { return UICollectionViewCell() }
                 cell.chatTextField.text = item.korean
-                cell.createAtLabel.text = DateManager.dateFormat(of: Date())
+                cell.createAtLabel.text = DateManager.stringFormat(of: item.createdAt)
                 return cell
             } else {
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OthersChattingCell.identifier,
                                                                     for: indexPath) as? OthersChattingCell
                 else { return UICollectionViewCell() }
-                cell.originChatLabel.text = item.korean
+                cell.userNameLabel.text = item.nickname
+                cell.originChatTextView.text = item.korean
+                cell.createAtLabel.text = DateManager.stringFormat(of: item.createdAt)
                 return cell
             }
         })
@@ -73,6 +87,11 @@ class ChattingViewController: ViewController {
             .bind(to: self.collectionView.rx.items(dataSource: dataSource))
             .disposed(by: rx.disposeBag)
         
+        output.reset
+            .drive(onNext: { _ in
+                self.inputText.text = ""
+            })
+            .disposed(by: rx.disposeBag)
     }
 }
 
@@ -92,6 +111,52 @@ extension ChattingViewController {
         self.collectionView.alwaysBounceVertical = true
         self.collectionView.keyboardDismissMode = .interactive
         
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        self.collectionView.addGestureRecognizer(tap)
+        
+    }
+    
+    func registerForKeyboardNotifications() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillShow),
+                                               name: UIResponder.keyboardWillShowNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillHide),
+                                               name: UIResponder.keyboardWillHideNotification,
+                                               object: nil)
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            if keyboardSize.height == 0.0 || keyboardShown { return }
+            
+            let bottomPadding = self.view.safeAreaInsets.bottom
+            inputBarBottomConstraint.constant = keyboardSize.height - bottomPadding
+            print(inputBarBottomConstraint.constant)
+            UIView.animate(withDuration: 0) {
+                self.collectionView.contentInset.bottom = keyboardSize.height - bottomPadding
+                self.collectionView.scrollIndicatorInsets.bottom = self.collectionView.contentInset.bottom - bottomPadding
+                self.keyboardShown = true
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if !keyboardShown { return }
+        self.inputBarBottomConstraint.constant = 0
+            
+        UIView.animate(withDuration: 0) {
+            self.collectionView.contentInset.bottom = 0
+            self.collectionView.scrollIndicatorInsets.bottom = self.collectionView.contentInset.bottom
+            self.keyboardShown = false
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    @objc func dismissKeyboard(_ : NSNotification) {
+        self.view.endEditing(true)
     }
     
 }
