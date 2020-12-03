@@ -6,3 +6,19 @@
 //
 
 import Foundation
+
+struct Language: Codable {
+    let langCode: String
+}
+
+extension Language {
+    
+    var code: String {
+        return langCode != "ko" ? "en" : "ko"
+    }
+    
+    var opposite: String {
+        return langCode == "ko" ? "en" : "ko"
+    }
+    
+}
