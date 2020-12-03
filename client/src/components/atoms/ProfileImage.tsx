@@ -4,23 +4,59 @@ import styled from 'styled-components';
 import Palette from '../../@types/Palette';
 
 export type ProfileImagePropsType = {
-  width: number;
-  height: number;
-  border: number;
+  size: 'size-88' | 'size-72' | 'size-40' | 'size-24';
+  isMe: boolean;
+  image: string;
 };
 
-const StyledProfileImage = styled.div<ProfileImagePropsType>`
-  width: ${(props) => `${props.width.toString()}px`};
-  height: ${(props) => `${props.height.toString()}px`};
-  padding: 7.8px 0px 0 7.8px;
-  box-shadow: 1px 1px 5px 0 #00000040;
-  border: solid ${(props) => `${props.border.toString()}px`} ${Palette.PUPAGO_BLUE};
-  border-radius: 100px;
-  background-color: WHITE;
+export type ProfileImageSrcProsType = {
+  imageSize: string;
+};
+
+const setSize = (size: string): [string, string] => {
+  switch (size) {
+    case 'size-88':
+      return ['88px', '80px'];
+    case 'size-72':
+      return ['72px', '64px'];
+    case 'size-40':
+      return ['40px', '36px'];
+    case 'size-24':
+      return ['24px', '22px'];
+    default:
+      return ['88px', '80px'];
+  }
+};
+
+const StyledProfileImageSrc = styled.img<ProfileImageSrcProsType>`
+  display: block;
+  width: ${(props) => setSize(props.imageSize)[1]};
+  height: ${(props) => setSize(props.imageSize)[1]};
+  border-radius: 50%;
 `;
 
-export function ProfileImage({ width, height, border }: ProfileImagePropsType) {
-  return <StyledProfileImage width={width} height={height} border={border} />;
+const StyledProfileImage = styled.div<ProfileImagePropsType>`
+  width: ${(props) => setSize(props.size)[0]};
+  height: ${(props) => setSize(props.size)[0]};
+  ${(props) =>
+    props.size === 'size-88' || props.size === 'size-72'
+      ? `box-shadow: 1px 1px 5px 0 #00000040;
+  border: solid 3px ${props.isMe ? Palette.PUPAGO_BLUE : Palette.LIGHT_GREY};`
+      : `box-shadow: none;
+  border: solid 2px ${props.isMe ? Palette.PUPAGO_BLUE : Palette.LIGHT_GREY};`}
+  border-radius: 50%;
+  background-color: WHITE;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export function ProfileImage({ size, isMe, image }: ProfileImagePropsType) {
+  return (
+    <StyledProfileImage size={size} isMe={isMe} image={image}>
+      <StyledProfileImageSrc alt="profile image" src={image} imageSize={size}></StyledProfileImageSrc>
+    </StyledProfileImage>
+  );
 }
 
 export default ProfileImage;

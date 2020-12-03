@@ -12,7 +12,14 @@ const Template: Story<ProfileImagePropsType> = (args) => <ProfileImage {...args}
 
 export const Active = Template.bind({});
 Active.args = {
-  width: 88,
-  height: 88,
-  border: 3,
+  size: 'size-88',
+  isMe: true,
+  image: `https://i.imgur.com/O3G3HwR.jpg`,
+};
+
+export const Disabled = Template.bind({});
+Disabled.args = {
+  size: 'size-88',
+  isMe: false,
+  image: `https://i.imgur.com/O3G3HwR.jpg`,
 };
