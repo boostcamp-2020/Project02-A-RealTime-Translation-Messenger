@@ -17,6 +17,7 @@ class ChattingViewController: ViewController {
     @IBOutlet weak var inputText: UITextView!
     @IBOutlet weak var registButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var translationTextfield: UITextView!
     @IBOutlet weak var inputBarBottomConstraint: NSLayoutConstraint!
     
     private var didSetupViewConstraints = false
@@ -25,16 +26,6 @@ class ChattingViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        registerForKeyboardNotifications()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        let lastItemIndex = self.collectionView.numberOfItems(inSection: 0) - 1
-        let indexPath: NSIndexPath = NSIndexPath.init(item: lastItemIndex, section: 0)
-        self.collectionView.scrollToItem(at: indexPath as IndexPath, at: .bottom, animated: true)
     }
     
     override func bindViewModel() {
@@ -88,17 +79,44 @@ class ChattingViewController: ViewController {
             .disposed(by: rx.disposeBag)
         
         output.reset
-            .drive(onNext: { _ in
+            .drive(onNext: { [unowned self] _ in
                 self.inputText.text = ""
             })
             .disposed(by: rx.disposeBag)
+        
+        output.scroll
+            .drive(onNext: { [unowned self] _ in
+                scrollDownChat()
+            })
+            .disposed(by: rx.disposeBag)
+        
+        output.activate
+            .drive(onNext: { [unowned self] activate in
+                self.registButton.isUserInteractionEnabled = activate
+                self.registButton.tintColor = activate ? UIColor(named: "BlueColor") : .lightGray
+                self.translationTextfield.isHidden = !activate
+            })
+            .disposed(by: rx.disposeBag)
+    }
+    
+    override func registerForKeyboardNotifications() {
+        super.registerForKeyboardNotifications()
+        
+        NotificationCenter.default
+            .addObserver(self, selector: #selector(keyboardWillShow),
+                               name: UIResponder.keyboardWillShowNotification,
+                               object: nil)
+        NotificationCenter.default
+            .addObserver(self, selector: #selector(keyboardWillHide),
+                               name: UIResponder.keyboardWillHideNotification,
+                               object: nil)
     }
 }
 
 extension ChattingViewController {
     func configureCollectionView() {
         let size = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                        heightDimension: .estimated(33))
+                                          heightDimension: .estimated(74))
         let item = NSCollectionLayoutItem(layoutSize: size)
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: size, subitem: item, count: 1)
         let section = NSCollectionLayoutSection(group: group)
@@ -116,15 +134,14 @@ extension ChattingViewController {
         
     }
     
-    func registerForKeyboardNotifications() {
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(keyboardWillShow),
-                                               name: UIResponder.keyboardWillShowNotification,
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(keyboardWillHide),
-                                               name: UIResponder.keyboardWillHideNotification,
-                                               object: nil)
+    private func scrollDownChat() {
+        self.view.layoutIfNeeded()
+        
+        let lastItemIndex = self.collectionView.numberOfItems(inSection: 0) - 1
+        if lastItemIndex < 0 { return }
+        
+        let indexPath = IndexPath(row: lastItemIndex, section: 0)
+        self.collectionView.scrollToItem(at: indexPath, at: .bottom, animated: true)
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
@@ -133,14 +150,15 @@ extension ChattingViewController {
             
             let bottomPadding = self.view.safeAreaInsets.bottom
             inputBarBottomConstraint.constant = keyboardSize.height - bottomPadding
-            print(inputBarBottomConstraint.constant)
+            
             UIView.animate(withDuration: 0) {
                 self.collectionView.contentInset.bottom = keyboardSize.height - bottomPadding
-                self.collectionView.scrollIndicatorInsets.bottom = self.collectionView.contentInset.bottom - bottomPadding
+                self.collectionView.verticalScrollIndicatorInsets.bottom = self.collectionView.contentInset.bottom - bottomPadding
                 self.keyboardShown = true
-                self.view.layoutIfNeeded()
+                self.scrollDownChat()
             }
         }
+        
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
@@ -149,10 +167,12 @@ extension ChattingViewController {
             
         UIView.animate(withDuration: 0) {
             self.collectionView.contentInset.bottom = 0
-            self.collectionView.scrollIndicatorInsets.bottom = self.collectionView.contentInset.bottom
+            self.collectionView.verticalScrollIndicatorInsets.bottom = self.collectionView.contentInset.bottom
             self.keyboardShown = false
+            self.scrollDownChat()
             self.view.layoutIfNeeded()
         }
+        
     }
     
     @objc func dismissKeyboard(_ : NSNotification) {
