@@ -23,7 +23,7 @@ const Button = styled.button<ButtonPropsType>`
 
 export function MainButton({ disabled = true, children = 'button' }: ButtonPropsType) {
   return (
-    <Button type="button" disabled={disabled}>
+    <Button type="button" disabled={disabled} {...props}>
       {children}
     </Button>
   );
