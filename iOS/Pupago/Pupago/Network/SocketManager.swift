@@ -11,7 +11,7 @@ import SocketIO
 class SocketIOManager {
     
     static let shared = SocketIOManager()
-    let manager = SocketManager(socketURL: SocketEndpoint.baseUrl, config: [.log(true), .compress])
+    let manager = SocketManager(socketURL: SocketEndpoint.baseUrl, config: [.log(false), .compress])
     var socket: SocketIOClient!
     
     private init() {

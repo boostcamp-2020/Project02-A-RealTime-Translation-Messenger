@@ -25,6 +25,10 @@ extension RoomEndpoint: EndpointType {
         }
     }
     
+    var header: HTTPHeaders? {
+        return nil
+    }
+    
     var method: HTTPMethod {
         switch self {
         case .create, .join:

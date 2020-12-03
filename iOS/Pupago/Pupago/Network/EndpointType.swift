@@ -11,6 +11,7 @@ import Alamofire
 
 protocol EndpointType {
     var baseUrl: String { get }
+    var header: HTTPHeaders? { get }
     var path: String { get }
     var method: HTTPMethod { get }
     var parameter: [String: Any]? { get }
