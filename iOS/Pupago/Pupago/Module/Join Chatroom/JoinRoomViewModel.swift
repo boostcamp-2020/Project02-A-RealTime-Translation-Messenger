@@ -49,7 +49,7 @@ final class JoinRoomViewModel: ViewModel, ViewModelType {
         let activate = Observable.combineLatest(isFull, isValid)
             .map { $0 && $1 }
             .asDriver(onErrorJustReturn: false)
-        
+
         let dismiss = Observable.of(input.cancelTrigger, input.joinTrigger).merge()
             .map { _ in }
             .asDriver(onErrorJustReturn: ())

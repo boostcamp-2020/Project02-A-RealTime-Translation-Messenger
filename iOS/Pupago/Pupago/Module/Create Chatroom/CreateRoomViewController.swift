@@ -27,10 +27,12 @@ final class CreateRoomViewController: ViewController {
     }
     
     // MARK: - Bind ViewModel
+  
     override func bindViewModel() {
         super.bindViewModel()
         
         guard let viewModel = viewModel as? CreateRoomViewModel else { return }
+      
         let roomName = roomTextField.rx.text.orEmpty.asObservable()
         let segmentSelection = privateSegment.rx.selectedSegmentIndex.map { $0 == 1 }
         let createTrigger = createButton.rx.tap.asObservable()
@@ -112,4 +114,5 @@ extension CreateRoomViewController {
             self.view.layoutIfNeeded()
         }
     }
+  
 }

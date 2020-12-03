@@ -28,7 +28,7 @@ final class ChattingListViewController: ViewController {
         super.bindViewModel()
         
         guard let viewModel = viewModel as? ChattingListViewModel else { return }
-        
+
         let createTrigger = createButton.rx.tap.asObservable()
         let joinTrigger = joinButton.rx.tap.asObservable()
         let selection = collectionView.rx.itemSelected.map { $0 }
@@ -72,7 +72,7 @@ final class ChattingListViewController: ViewController {
                                      transition: .present)
             })
             .disposed(by: rx.disposeBag)
-        
+
         output.entered
             .drive(onNext: { [unowned self] viewModel in
                 self.navigator.show(segue: .chatting(viewModel: viewModel),

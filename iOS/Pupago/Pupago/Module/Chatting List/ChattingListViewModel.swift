@@ -107,6 +107,7 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
                       created: created,
                       joined: joined,
                       entered: entered)
+      
     }
     
 }
