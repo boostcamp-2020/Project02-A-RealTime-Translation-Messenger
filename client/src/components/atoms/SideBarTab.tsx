@@ -22,17 +22,16 @@ const StyledSideBarTabWrapper = styled.div<SideBarTabStyleProps>`
   background-color: ${(props) => (props.isSelected ? 'transparent' : 'rgba(92, 167, 228, 0.8)')};
   color: ${(props) => (props.isSelected ? palette.PUPAGO_BLUE : 'white')};
 
-  box-sizing: border-box;
-
   font-size: 14px;
+
+  cursor: pointer;
+  user-select: none;
 `;
 
 const StyledSideBarTab = styled.span<SideBarTabStyleProps>`
   display: block;
 
   padding-bottom: 2px;
-  box-sizing: border-box;
-
   border-bottom: 2px solid ${(props) => (props.isSelected ? Palette.PUPAGO_BLUE : 'transparent')};
 `;
 

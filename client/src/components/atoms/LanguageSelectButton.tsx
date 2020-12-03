@@ -12,6 +12,7 @@ export type LanguageSelectButtonPropsType = {
 const StyledButton = styled.button<LanguageSelectButtonPropsType>`
   width: 56px;
   height: 56px;
+  outline: none;
   border-radius: 10px;
   border: solid 3px #ffffff;
   background-color: ${(props) => (props.selected ? 'white' : 'transparent')};

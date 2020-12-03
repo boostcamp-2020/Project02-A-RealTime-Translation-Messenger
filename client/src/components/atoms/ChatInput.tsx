@@ -14,8 +14,6 @@ const StyledChatInput = styled.textarea`
   border: none;
   border-radius: 30px 0 0 0;
 
-  box-sizing: border-box;
-
   background-color: ${Palette.ALMOST_WHITE};
 
   resize: none;

@@ -8,6 +8,7 @@ const StyledUnderLinedInput = styled.input`
 
   outline: none;
   border: none;
+  background-color: transparent;
   border-bottom: 1px solid ${palette.PUPAGO_BLUE};
 
   width: 344px;
