@@ -5,7 +5,7 @@ import RefreshIcon from '@material-ui/icons/Refresh';
 import Palette from '../../@types/Palette';
 
 export type RefreshButtonTypes = {
-  onClick?: () => void;
+  onClick?: () => (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 };
 
 const IconWrapper = styled.div`
