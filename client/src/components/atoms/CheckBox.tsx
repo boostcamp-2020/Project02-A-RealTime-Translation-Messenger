@@ -6,7 +6,7 @@ import Palette from '../../@types/Palette';
 export type CheckBoxTypes = {
   isChecked: boolean;
   children?: string;
-  onClick?: () => void;
+  onClick?: () => (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 };
 
 const StyledCheckBox = styled.div<CheckBoxTypes>`
