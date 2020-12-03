@@ -5,6 +5,7 @@ enum Palette {
   PUPAGO_BLUE = '#5ca7e4',
   LIGHT_GREY = '#e5e5e5',
   DARK_PUPAGO_BLUE = '#5C8DB6',
+  PUPAGO_GREEN = '#60C0A4',
 }
 
 export default Palette;
