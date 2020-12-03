@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Palette from '../@types/Palette';
+import Palette from '../../@types/Palette';
 
 export type ButtonPropsType = {
   disabled?: boolean;
   onClick?: () => void;
+  children?: string;
 };
 
 const Button = styled.button<ButtonPropsType>`
@@ -20,7 +21,7 @@ const Button = styled.button<ButtonPropsType>`
   font-size: 18px;
 `;
 
-export function MainButton({ disabled = true, children = 'button', ...props }) {
+export function MainButton({ disabled = true, children = 'button' }: ButtonPropsType) {
   return (
     <Button type="button" disabled={disabled} {...props}>
       {children}
