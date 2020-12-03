@@ -3,15 +3,11 @@ import styled from 'styled-components';
 
 import Palette from '../../@types/Palette';
 
-export type RoomCodePropsType = {
-  children: React.ReactNode;
-};
-
 export type RoomCodeTextPropsType = {
   children: React.ReactNode;
 };
 
-const StyledRoomCode = styled.div<RoomCodePropsType>`
+const StyledRoomCode = styled.div`
   width: 72px;
   height: 24px;
   padding: 4px 0px 0px 8px;
