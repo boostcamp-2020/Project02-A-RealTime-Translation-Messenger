@@ -35,9 +35,15 @@ class ChattingViewModel: ViewModel, ViewModelType {
         
         socketManager.socket.rx.event(.receiveMessage)
             .subscribe(onNext: { [unowned self] data in
-                if let msg = self.parse(data.items) {
+                if let msg = self.parse(data) {
                     updateMessage(message: msg)
                 }
+            })
+            .disposed(by: rx.disposeBag)
+        
+        socketManager.socket.rx.event(.list)
+            .subscribe(onNext: { data in
+                print("Participant changed!")
             })
             .disposed(by: rx.disposeBag)
 

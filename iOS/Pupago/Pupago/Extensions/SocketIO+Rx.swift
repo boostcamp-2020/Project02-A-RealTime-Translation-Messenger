@@ -12,12 +12,10 @@ import SocketIO
 
 extension Reactive where Base: SocketIOClient {
     
-    func event(_ endpoint: SocketEndpoint) -> Observable<SocketAnyEvent> {
+    func event(_ endpoint: SocketEndpoint) -> Observable<[Any]> {
         return Observable.create { observer in
-            self.base.onAny { event in
-                if event.event == endpoint.eventName {
-                    observer.onNext(event)
-                }
+            self.base.on(endpoint.eventName) { data, _ in
+                observer.onNext(data)
             }
             return Disposables.create()
         }

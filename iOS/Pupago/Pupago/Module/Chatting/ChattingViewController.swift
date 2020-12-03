@@ -8,7 +8,6 @@
 import UIKit
 import RxSwift
 import RxCocoa
-import RxKeyboard
 import RxDataSources
 
 class ChattingViewController: ViewController {
@@ -18,6 +17,7 @@ class ChattingViewController: ViewController {
     @IBOutlet weak var inputText: UITextView!
     @IBOutlet weak var registButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var inputBar: UIView!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
@@ -51,20 +51,6 @@ class ChattingViewController: ViewController {
                 self.codeButton.setTitle(info.code, for: .normal)
             })
             .disposed(by: rx.disposeBag)
-        
-        RxKeyboard.instance.visibleHeight.drive(onNext: { [unowned self] visibleHeight in
-      
-            if visibleHeight == 0 {
-                self.bottomConstraint.constant = 0
-            } else {
-                let height = visibleHeight - self.view.safeAreaInsets.bottom
-                self.bottomConstraint.constant = height
-                self.collectionView.frame.size.height -= height
-            }
-            
-            self.view.setNeedsLayout()
-            self.view.layoutIfNeeded()
-        }).disposed(by: rx.disposeBag)
         
         let dataSource = RxCollectionViewSectionedReloadDataSource<MessageSection>(configureCell: { _, collectionView, indexPath, item in
             if item.senderId == SocketIOManager.shared.socket.sid {

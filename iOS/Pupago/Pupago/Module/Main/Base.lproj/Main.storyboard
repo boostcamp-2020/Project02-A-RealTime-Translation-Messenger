@@ -868,13 +868,14 @@
                             <constraint firstItem="g0E-zh-DY2" firstAttribute="leading" secondItem="dHP-NA-TA6" secondAttribute="leading" id="ZYY-3L-cu6"/>
                             <constraint firstItem="6eY-3D-wBG" firstAttribute="top" secondItem="wTn-wJ-TF7" secondAttribute="top" id="e1O-ln-qBs"/>
                             <constraint firstItem="Zsf-eg-09v" firstAttribute="top" secondItem="6eY-3D-wBG" secondAttribute="bottom" id="kIb-3L-tqM"/>
-                            <constraint firstItem="g0E-zh-DY2" firstAttribute="top" secondItem="Zsf-eg-09v" secondAttribute="bottom" id="tkL-FY-412"/>
+                            <constraint firstItem="dHP-NA-TA6" firstAttribute="top" secondItem="Zsf-eg-09v" secondAttribute="bottom" constant="-797" id="tkL-FY-412"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="bottomConstraint" destination="CzC-7F-Zfo" id="nUr-CA-oE1"/>
+                        <outlet property="bottomConstraint" destination="CzC-7F-Zfo" id="gvg-OI-qur"/>
                         <outlet property="codeButton" destination="vI2-2T-qaj" id="OVU-CK-3G0"/>
                         <outlet property="collectionView" destination="Zsf-eg-09v" id="Hua-Y6-ZTe"/>
+                        <outlet property="inputBar" destination="g0E-zh-DY2" id="k7p-DW-osR"/>
                         <outlet property="inputText" destination="qBh-LD-tVb" id="0gP-u8-bkQ"/>
                         <outlet property="languageLabel" destination="Q3s-bi-oq7" id="tz7-3f-ki9"/>
                         <outlet property="registButton" destination="L6S-gd-vQm" id="uZP-Pn-fq5"/>
