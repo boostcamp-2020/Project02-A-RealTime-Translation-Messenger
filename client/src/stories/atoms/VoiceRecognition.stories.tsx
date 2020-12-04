@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
-import VoiceRecognition from '../components/atoms/resources/VoiceRecognition';
+import VoiceRecognition from '../../components/atoms/resources/VoiceRecognition';
 
 export default {
   title: 'pupago/VoiceRecognition',
