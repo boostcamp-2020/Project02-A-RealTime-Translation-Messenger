@@ -6,6 +6,7 @@ import StatusCode from '../@types/statusCode';
 import roomService from '../services/roomService';
 import validationUtil from '../utils/validation';
 import { CreatedRoomType } from '../@types/dataType';
+import socketService from '../sockets/socketService';
 
 const getPublicRoomList = async (req: Request, res: Response) => {
   try {
@@ -34,9 +35,16 @@ const createRoom = async (req: Request, res: Response) => {
   }
 };
 
+const getParticipantsList = async (req: Request, res: Response) => {
+  const roomCode = req.params.roomCode;
+  const participantsList = await socketService.getParticipantsListFromRoomCode(roomCode);
+  return res.status(StatusCode.OK).json({ participantsList });
+};
+
 const roomController = {
   getPublicRoomList,
   createRoom,
+  getParticipantsList,
 };
 
 export default roomController;
