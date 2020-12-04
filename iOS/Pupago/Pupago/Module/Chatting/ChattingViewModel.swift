@@ -8,7 +8,6 @@
 import Foundation
 import RxSwift
 import RxCocoa
-import RxDataSources
 
 class ChattingViewModel: ViewModel, ViewModelType {
     
