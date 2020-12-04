@@ -17,7 +17,7 @@ class ChattingViewController: ViewController {
     @IBOutlet weak var inputText: UITextView!
     @IBOutlet weak var registButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var translationTextfield: UITextView!
+    @IBOutlet weak var translationTextView: UITextView!
     @IBOutlet weak var inputBarBottomConstraint: NSLayoutConstraint!
     
     private var didSetupViewConstraints = false
@@ -32,10 +32,12 @@ class ChattingViewController: ViewController {
         super.bindViewModel()
         
         guard let viewModel = viewModel as? ChattingViewModel else { return }
+        let dataSource = MessageDataSource()
         
         let chatText = inputText.rx.text.orEmpty.asObservable()
-        let registTrigger = registButton.rx.tap.map { _ in }
+        let registTrigger = registButton.rx.tap.asObservable()
         let willLeave = rx.viewWillDisappear.map { _ in }
+        
         let input = ChattingViewModel.Input(chatText: chatText,
                                             registTrigger: registTrigger,
                                             willLeave: willLeave)
@@ -55,33 +57,16 @@ class ChattingViewController: ViewController {
             })
             .disposed(by: rx.disposeBag)
         
-        let dataSource = RxCollectionViewSectionedReloadDataSource<MessageSection>(configureCell: { _, collectionView, indexPath, item in
-            if item.senderId == SocketIOManager.shared.socket.sid {
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyChattingCell.identifier,
-                                                                    for: indexPath) as? MyChattingCell
-                else { return UICollectionViewCell() }
-                cell.chatTextField.text = item.korean
-                cell.createAtLabel.text = DateManager.stringFormat(of: item.createdAt)
-                return cell
-            } else {
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OthersChattingCell.identifier,
-                                                                    for: indexPath) as? OthersChattingCell
-                else { return UICollectionViewCell() }
-                cell.userNameLabel.text = item.nickname
-                cell.originChatTextView.text = item.korean
-                cell.createAtLabel.text = DateManager.stringFormat(of: item.createdAt)
-                return cell
-            }
-        })
+        output.translationViewState
+            .bind(to: translationTextView.rx.state)
+            .disposed(by: rx.disposeBag)
         
         output.items.asObservable()
             .bind(to: self.collectionView.rx.items(dataSource: dataSource))
             .disposed(by: rx.disposeBag)
         
         output.reset
-            .drive(onNext: { [unowned self] _ in
-                self.inputText.text = ""
-            })
+            .drive(inputText.rx.text)
             .disposed(by: rx.disposeBag)
         
         output.scroll
@@ -94,7 +79,6 @@ class ChattingViewController: ViewController {
             .drive(onNext: { [unowned self] activate in
                 self.registButton.isUserInteractionEnabled = activate
                 self.registButton.tintColor = activate ? UIColor(named: "BlueColor") : .lightGray
-                self.translationTextfield.isHidden = !activate
             })
             .disposed(by: rx.disposeBag)
     }
@@ -110,6 +94,11 @@ class ChattingViewController: ViewController {
             .addObserver(self, selector: #selector(keyboardWillHide),
                                name: UIResponder.keyboardWillHideNotification,
                                object: nil)
+    }
+    
+    func resetTranslationView() {
+        self.translationTextView.text = ""
+        self.translationTextView.isHidden = true
     }
 }
 
