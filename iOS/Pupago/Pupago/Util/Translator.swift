@@ -20,7 +20,10 @@ class Translator: NSObject {
     }
     
     func translate(with text: String) -> Observable<Text> {
-        guard let pupagoApi = provider as? PupagoAPI else { return Observable.empty() }
+        guard
+            let pupagoApi = provider as? PupagoAPI,
+            !text.isEmpty
+        else { return Observable.empty() }
         return Observable.create { [unowned self] observer in
             pupagoApi.langDetect(text)
                 .flatMap { pupagoApi.translate(source: $0.code, target: $0.opposite, text: text)}

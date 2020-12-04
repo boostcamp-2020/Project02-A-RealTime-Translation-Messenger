@@ -36,11 +36,8 @@ class ChattingViewController: ViewController {
         let chatText = inputText.rx.text.orEmpty.asObservable()
         let registTrigger = registButton.rx.tap.asObservable()
         let willLeave = rx.viewWillDisappear.map { _ in }
-        let inputChanged = inputText.rx.didChange.asObservable()
-        let deactivateTrigger = inputText.rx.didBeginEditing.asObservable()
+        
         let input = ChattingViewModel.Input(chatText: chatText,
-                                            inputChanged: inputChanged,
-                                            deactivateTrigger: deactivateTrigger,
                                             registTrigger: registTrigger,
                                             willLeave: willLeave)
         
@@ -59,15 +56,8 @@ class ChattingViewController: ViewController {
             })
             .disposed(by: rx.disposeBag)
         
-        output.textChanged
-            .drive(onNext: { text in
-                self.translationTextView.isHidden = false
-                self.translationTextView.text = text
-            })
-            .disposed(by: rx.disposeBag)
-        
-        output.translated
-            .drive(translationTextView.rx.text)
+        output.translationViewState
+            .bind(to: translationTextView.rx.state)
             .disposed(by: rx.disposeBag)
         
         let dataSource = RxCollectionViewSectionedReloadDataSource<MessageSection>(configureCell: { _, collectionView, indexPath, item in

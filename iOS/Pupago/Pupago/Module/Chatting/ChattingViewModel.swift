@@ -13,11 +13,10 @@ import RxDataSources
 class ChattingViewModel: ViewModel, ViewModelType {
     
     typealias RoomInfo = (title: String?, code: String?)
+    typealias TranslationViewState = (text: String, isHidden: Bool)
     
     struct Input {
         let chatText: Observable<String>
-        let inputChanged: Observable<Void>
-        let deactivateTrigger: Observable<Void>
         let registTrigger: Observable<Void>
         let willLeave: Observable<Void>
     }
@@ -26,8 +25,7 @@ class ChattingViewModel: ViewModel, ViewModelType {
         let viewText: Driver<Localize.ChatroomViewText>
         let roomInfo: Driver<RoomInfo>
         let items: Driver<[MessageSection]>
-        let translated: Driver<String>
-        let textChanged: Driver<String>
+        let translationViewState: Observable<TranslationViewState>
         let reset: Driver<Void>
         let scroll: Driver<Void>
         let activate: Driver<Bool>
@@ -38,6 +36,7 @@ class ChattingViewModel: ViewModel, ViewModelType {
     let chatInfo = PublishRelay<Translator.Text>()
     let activate = BehaviorRelay<Bool>(value: false)
     let downScroll = PublishRelay<Void>()
+    let translationViewState = PublishRelay<(text: String, isHidden: Bool)>()
 
     func transform(_ input: Input) -> Output {
         
@@ -45,7 +44,7 @@ class ChattingViewModel: ViewModel, ViewModelType {
         let provider = PupagoAPI()
         let translator = Translator(provider: provider)
         
-        // MARK: - Observing Socket Events
+        // MARK: - Socket Event Control
         
         socketManager.socket.rx.event(.receiveMessage)
             .subscribe(onNext: { [unowned self] data in
@@ -62,28 +61,37 @@ class ChattingViewModel: ViewModel, ViewModelType {
             })
             .disposed(by: rx.disposeBag)
         
-        input.chatText
-            .distinctUntilChanged()
-            .filter { !$0.isEmpty }
-            .debounce(.milliseconds(500), scheduler: MainScheduler.instance)
-            .flatMap { translator.translate(with: $0) }
-            .bind(to: chatInfo)
+        input.willLeave
+            .subscribe(onNext: {
+                socketManager.leavChatroom()
+                socketManager.socket.removeAllHandlers()
+            })
             .disposed(by: rx.disposeBag)
         
-        let textChanged = input.inputChanged
-            .withLatestFrom(input.chatText)
-            .map { text in
-                return text.isEmpty ? "" : "번역중.."
-            }
-            .asDriver(onErrorJustReturn: "")
+        // MARK: - Translation
         
-        let translated = chatInfo
-            .map { [unowned self] info in
-                self.activate.accept(true)
-                return info.lang == "Korean" ? info.english : info.korean
-            }
-            .asDriver(onErrorJustReturn: "")
-
+        input.chatText
+            .distinctUntilChanged()
+            .debounce(.milliseconds(800), scheduler: MainScheduler.instance)
+            .flatMap { translator.translate(with: $0) }
+            .subscribe(onNext: { [unowned self] info in
+                let translatedText = info.lang == "Korean" ? info.english : info.korean
+                translationViewState.accept((translatedText, false))
+                chatInfo.accept(info)
+                activate.accept(true)
+            })
+            .disposed(by: rx.disposeBag)
+        
+        input.chatText
+            .subscribe(onNext: { [unowned self] text in
+                let status = text.isEmpty ? ("", true) : ("번역중..", false)
+                translationViewState.accept(status)
+                activate.accept(false)
+            })
+            .disposed(by: rx.disposeBag)
+        
+        // MARK: - InputBar
+        
         input.registTrigger
             .withLatestFrom(chatInfo)
             .subscribe(onNext: { info in
@@ -93,31 +101,17 @@ class ChattingViewModel: ViewModel, ViewModelType {
             })
             .disposed(by: rx.disposeBag)
         
-        input.willLeave
-            .subscribe(onNext: {
-                socketManager.leavChatroom()
-                socketManager.socket.removeAllHandlers()
-            })
-            .disposed(by: rx.disposeBag)
+        // MARK: - Drivers
         
-        input.deactivateTrigger
-            .map { false }
-            .bind(to: activate)
-            .disposed(by: rx.disposeBag)
-        
-        let viewText = localize.asDriver()
-            .map { $0.chatroomViewText }
-        
+        let viewText = localize.asDriver().map { $0.chatroomViewText }
         let info = roomInfo.asDriver(onErrorJustReturn: (nil, nil))
         let reset = input.registTrigger.asDriver(onErrorJustReturn: ())
-        
         let chatItem = chats.asDriver(onErrorJustReturn: [])
         
         return Output(viewText: viewText,
                       roomInfo: info,
                       items: chatItem,
-                      translated: translated,
-                      textChanged: textChanged,
+                      translationViewState: translationViewState.asObservable(),
                       reset: reset,
                       scroll: downScroll.asDriver(onErrorJustReturn: ()),
                       activate: activate.asDriver())
