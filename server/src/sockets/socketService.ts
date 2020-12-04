@@ -4,17 +4,14 @@ import dateUtil from '../utils/date';
 import { ReceiveChatType, ParticipantsType } from '../@types/dataType';
 import { Socket } from 'socket.io';
 
-const getParticipantsListFromRoomCode = async (roomCode: string, type: string) => {
+const getParticipantsListFromRoomCode = async (roomCode: string) => {
   const rawParticipantsData = await roomSocketsInfoModel.getSocketsByRoom(roomCode);
   const participantsList: ParticipantsType[] = Object.entries(rawParticipantsData).map(([key, value]) => {
     const { nickname, language }: { nickname: string; language: string } = JSON.parse(value);
     return { socketId: key, nickname, language };
   });
 
-  return {
-    participantsList: participantsList,
-    type,
-  };
+  return participantsList;
 };
 
 const insertSocketInfoIntoDB = async (socketId: string, roomCode: string, nickname: string, language: string) => {

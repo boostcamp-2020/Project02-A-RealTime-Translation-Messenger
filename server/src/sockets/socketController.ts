@@ -22,7 +22,8 @@ const enterChatroom = async (socket: Socket, io: SocketIO.Server, userData: User
 
   try {
     await socketService.insertSocketInfoIntoDB(socket.id, roomCode, nickname, language);
-    const participantsList = await socketService.getParticipantsListFromRoomCode(roomCode, 'enter');
+    const rawParticipantsList = await socketService.getParticipantsListFromRoomCode(roomCode);
+    const participantsList = { participantsList: rawParticipantsList, type: 'enter' };
     io.to(roomCode).emit('receive participants list', JSON.stringify(participantsList));
   } catch (err) {
     return socketService.emitSocketError(socket, SocketErrorMessage.SERVER);
@@ -53,7 +54,8 @@ const disconnect = async (socket: Socket, io: SocketIO.Server) => {
         return;
       }
 
-      const participantsList = await socketService.getParticipantsListFromRoomCode(roomCode, 'leave');
+      const rawParticipantsList = await socketService.getParticipantsListFromRoomCode(roomCode);
+      const participantsList = { participantsList: rawParticipantsList, type: 'leave' };
       io.to(roomCode).emit('receive participants list', JSON.stringify(participantsList));
     }
   } catch (err) {
