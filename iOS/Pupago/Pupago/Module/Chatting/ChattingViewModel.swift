@@ -16,6 +16,8 @@ class ChattingViewModel: ViewModel, ViewModelType {
     
     struct Input {
         let chatText: Observable<String>
+        let inputChanged: Observable<Void>
+        let deactivateTrigger: Observable<Void>
         let registTrigger: Observable<Void>
         let willLeave: Observable<Void>
     }
@@ -24,6 +26,8 @@ class ChattingViewModel: ViewModel, ViewModelType {
         let viewText: Driver<Localize.ChatroomViewText>
         let roomInfo: Driver<RoomInfo>
         let items: Driver<[MessageSection]>
+        let translated: Driver<String>
+        let textChanged: Driver<String>
         let reset: Driver<Void>
         let scroll: Driver<Void>
         let activate: Driver<Bool>
@@ -31,11 +35,9 @@ class ChattingViewModel: ViewModel, ViewModelType {
     
     let chats = BehaviorRelay<[MessageSection]>(value: [MessageSection(header: "Chat", items: [])])
     let roomInfo = BehaviorRelay<RoomInfo>(value: (nil, nil))
-
-    let langCode = PublishRelay<(lang: Language, text: String)>()
+    let chatInfo = PublishRelay<Translator.Text>()
     let activate = BehaviorRelay<Bool>(value: false)
     let downScroll = PublishRelay<Void>()
-    let isValid = BehaviorRelay<Bool>(value: false)
 
     func transform(_ input: Input) -> Output {
         
@@ -65,15 +67,29 @@ class ChattingViewModel: ViewModel, ViewModelType {
             .filter { !$0.isEmpty }
             .debounce(.milliseconds(500), scheduler: MainScheduler.instance)
             .flatMap { translator.translate(with: $0) }
-            .subscribe(onNext: { (korean, english) in
-                print("korean: \(korean), english: \(english)")
-            })
+            .bind(to: chatInfo)
             .disposed(by: rx.disposeBag)
+        
+        let textChanged = input.inputChanged
+            .withLatestFrom(input.chatText)
+            .map { text in
+                return text.isEmpty ? "" : "번역중.."
+            }
+            .asDriver(onErrorJustReturn: "")
+        
+        let translated = chatInfo
+            .map { [unowned self] info in
+                self.activate.accept(true)
+                return info.lang == "Korean" ? info.english : info.korean
+            }
+            .asDriver(onErrorJustReturn: "")
 
         input.registTrigger
-            .withLatestFrom(input.chatText)
-            .subscribe(onNext: { msg in
-                socketManager.sendMessage(korean: msg, english: msg, origin: "Korean")
+            .withLatestFrom(chatInfo)
+            .subscribe(onNext: { info in
+                socketManager.sendMessage(korean: info.korean,
+                                          english: info.english,
+                                          origin: info.lang)
             })
             .disposed(by: rx.disposeBag)
         
@@ -84,9 +100,9 @@ class ChattingViewModel: ViewModel, ViewModelType {
             })
             .disposed(by: rx.disposeBag)
         
-        input.chatText
-            .map { self.validate(chat: $0) }
-            .bind(to: isValid)
+        input.deactivateTrigger
+            .map { false }
+            .bind(to: activate)
             .disposed(by: rx.disposeBag)
         
         let viewText = localize.asDriver()
@@ -94,15 +110,17 @@ class ChattingViewModel: ViewModel, ViewModelType {
         
         let info = roomInfo.asDriver(onErrorJustReturn: (nil, nil))
         let reset = input.registTrigger.asDriver(onErrorJustReturn: ())
-        let activate = isValid.asDriver(onErrorJustReturn: false)
+        
         let chatItem = chats.asDriver(onErrorJustReturn: [])
         
         return Output(viewText: viewText,
                       roomInfo: info,
                       items: chatItem,
+                      translated: translated,
+                      textChanged: textChanged,
                       reset: reset,
                       scroll: downScroll.asDriver(onErrorJustReturn: ()),
-                      activate: activate)
+                      activate: activate.asDriver())
     }
     
 }
@@ -123,12 +141,6 @@ private extension ChattingViewModel {
         else { return nil }
 
         return message
-    }
-    
-    private func validate(chat: String) -> Bool {
-        guard chat.count <= 80 && !chat.isEmpty else { return false }
-        
-        return true
     }
     
 }

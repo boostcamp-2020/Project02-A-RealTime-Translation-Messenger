@@ -17,7 +17,7 @@ class ChattingViewController: ViewController {
     @IBOutlet weak var inputText: UITextView!
     @IBOutlet weak var registButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var translationTextfield: UITextView!
+    @IBOutlet weak var translationTextView: UITextView!
     @IBOutlet weak var inputBarBottomConstraint: NSLayoutConstraint!
     
     private var didSetupViewConstraints = false
@@ -34,9 +34,13 @@ class ChattingViewController: ViewController {
         guard let viewModel = viewModel as? ChattingViewModel else { return }
         
         let chatText = inputText.rx.text.orEmpty.asObservable()
-        let registTrigger = registButton.rx.tap.map { _ in }
+        let registTrigger = registButton.rx.tap.asObservable()
         let willLeave = rx.viewWillDisappear.map { _ in }
+        let inputChanged = inputText.rx.didChange.asObservable()
+        let deactivateTrigger = inputText.rx.didBeginEditing.asObservable()
         let input = ChattingViewModel.Input(chatText: chatText,
+                                            inputChanged: inputChanged,
+                                            deactivateTrigger: deactivateTrigger,
                                             registTrigger: registTrigger,
                                             willLeave: willLeave)
         
@@ -53,6 +57,17 @@ class ChattingViewController: ViewController {
                 self.navigationItem.title = info.title
                 self.codeButton.setTitle(info.code, for: .normal)
             })
+            .disposed(by: rx.disposeBag)
+        
+        output.textChanged
+            .drive(onNext: { text in
+                self.translationTextView.isHidden = false
+                self.translationTextView.text = text
+            })
+            .disposed(by: rx.disposeBag)
+        
+        output.translated
+            .drive(translationTextView.rx.text)
             .disposed(by: rx.disposeBag)
         
         let dataSource = RxCollectionViewSectionedReloadDataSource<MessageSection>(configureCell: { _, collectionView, indexPath, item in
@@ -81,6 +96,7 @@ class ChattingViewController: ViewController {
         output.reset
             .drive(onNext: { [unowned self] _ in
                 self.inputText.text = ""
+                self.resetTranslationView()
             })
             .disposed(by: rx.disposeBag)
         
@@ -94,7 +110,6 @@ class ChattingViewController: ViewController {
             .drive(onNext: { [unowned self] activate in
                 self.registButton.isUserInteractionEnabled = activate
                 self.registButton.tintColor = activate ? UIColor(named: "BlueColor") : .lightGray
-                self.translationTextfield.isHidden = !activate
             })
             .disposed(by: rx.disposeBag)
     }
@@ -110,6 +125,11 @@ class ChattingViewController: ViewController {
             .addObserver(self, selector: #selector(keyboardWillHide),
                                name: UIResponder.keyboardWillHideNotification,
                                object: nil)
+    }
+    
+    func resetTranslationView() {
+        self.translationTextView.text = ""
+        self.translationTextView.isHidden = true
     }
 }
 

@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 class Translator: NSObject {
-    typealias Text = (korean: String, english: String)
+    typealias Text = (korean: String, english: String, lang: String)
     
     private let provider: NetworkProviding
     private let detected = PublishRelay<Language>()
@@ -27,7 +27,7 @@ class Translator: NSObject {
                 .subscribe(onNext: { data in
                     let translated = data.message.result.translatedText
                     let code = data.message.result.srcLangType
-                    code == "ko" ? observer.onNext((text, translated)) : observer.onNext((translated, text))
+                    code == "ko" ? observer.onNext((text, translated, "Korean")) : observer.onNext((translated, text, "English"))
                 })
                 .disposed(by: rx.disposeBag)
             return Disposables.create()
