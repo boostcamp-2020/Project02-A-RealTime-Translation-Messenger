@@ -1,9 +1,10 @@
 import express from 'express';
+import http from 'http';
+
 import envLoader from './env';
 import expressLoader from './express';
-import socketLoader from '../socket/socket';
+import socketLoader from '../sockets/socket';
 import databaseLoader from './database';
-import http from 'http';
 
 export default async (expressApp: express.Application, server: http.Server): Promise<void> => {
   envLoader();
