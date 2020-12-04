@@ -65,16 +65,13 @@ class ChattingViewController: ViewController {
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyChattingCell.identifier,
                                                                     for: indexPath) as? MyChattingCell
                 else { return UICollectionViewCell() }
-                cell.chatTextField.text = item.korean
-                cell.createAtLabel.text = DateManager.stringFormat(of: item.createdAt)
+                cell.configure(with: item)
                 return cell
             } else {
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OthersChattingCell.identifier,
                                                                     for: indexPath) as? OthersChattingCell
                 else { return UICollectionViewCell() }
-                cell.userNameLabel.text = item.nickname
-                cell.originChatTextView.text = item.korean
-                cell.createAtLabel.text = DateManager.stringFormat(of: item.createdAt)
+                cell.configure(with: item)
                 return cell
             }
         })
