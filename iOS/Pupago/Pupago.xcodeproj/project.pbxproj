@@ -31,6 +31,7 @@
 		976C373625762EDA00BD8094 /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976C373525762EDA00BD8094 /* SocketManager.swift */; };
 		976C373B2576352B00BD8094 /* SocketIO+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976C373A2576352B00BD8094 /* SocketIO+Rx.swift */; };
 		977AA53925793896005BF456 /* Translator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977AA53825793896005BF456 /* Translator.swift */; };
+		978F5804257A44B90034846A /* UITextView+Binder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978F5803257A44B90034846A /* UITextView+Binder.swift */; };
 		97B4BE74256BE935009A3825 /* NSObject+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B4BE73256BE935009A3825 /* NSObject+Rx.swift */; };
 		97B4BE92256BEE7F009A3825 /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B4BE91256BEE7F009A3825 /* Navigator.swift */; };
 		97B4BE98256BEFBC009A3825 /* NicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B4BE97256BEFBC009A3825 /* NicknameViewController.swift */; };
@@ -117,6 +118,7 @@
 		976C373525762EDA00BD8094 /* SocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketManager.swift; sourceTree = "<group>"; };
 		976C373A2576352B00BD8094 /* SocketIO+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SocketIO+Rx.swift"; sourceTree = "<group>"; };
 		977AA53825793896005BF456 /* Translator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translator.swift; sourceTree = "<group>"; };
+		978F5803257A44B90034846A /* UITextView+Binder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Binder.swift"; sourceTree = "<group>"; };
 		97B4BE73256BE935009A3825 /* NSObject+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Rx.swift"; sourceTree = "<group>"; };
 		97B4BE91256BEE7F009A3825 /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
 		97B4BE97256BEFBC009A3825 /* NicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameViewController.swift; sourceTree = "<group>"; };
@@ -329,6 +331,7 @@
 				97B4BE73256BE935009A3825 /* NSObject+Rx.swift */,
 				976C373A2576352B00BD8094 /* SocketIO+Rx.swift */,
 				975A264B2577D9030096C918 /* UIViewController+Rx.swift */,
+				978F5803257A44B90034846A /* UITextView+Binder.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -717,6 +720,7 @@
 				975C53FF256B844C00739DCA /* SelectableButton.swift in Sources */,
 				97B4BE92256BEE7F009A3825 /* Navigator.swift in Sources */,
 				97CB75BA256E3E5B00FE052A /* CreateRoomViewModel.swift in Sources */,
+				978F5804257A44B90034846A /* UITextView+Binder.swift in Sources */,
 				BD5F616D256D23E300D63CCD /* NavigationController.swift in Sources */,
 				976C373625762EDA00BD8094 /* SocketManager.swift in Sources */,
 				97CB75AB256E2CB900FE052A /* CollectionViewBaseCell.swift in Sources */,
