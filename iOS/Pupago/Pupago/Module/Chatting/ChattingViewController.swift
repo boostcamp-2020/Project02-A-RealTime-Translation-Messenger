@@ -32,6 +32,7 @@ class ChattingViewController: ViewController {
         super.bindViewModel()
         
         guard let viewModel = viewModel as? ChattingViewModel else { return }
+        let dataSource = MessageDataSource()
         
         let chatText = inputText.rx.text.orEmpty.asObservable()
         let registTrigger = registButton.rx.tap.asObservable()
@@ -59,22 +60,6 @@ class ChattingViewController: ViewController {
         output.translationViewState
             .bind(to: translationTextView.rx.state)
             .disposed(by: rx.disposeBag)
-        
-        let dataSource = RxCollectionViewSectionedReloadDataSource<MessageSection>(configureCell: { _, collectionView, indexPath, item in
-            if item.senderId == SocketIOManager.shared.socket.sid {
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyChattingCell.identifier,
-                                                                    for: indexPath) as? MyChattingCell
-                else { return UICollectionViewCell() }
-                cell.configure(with: item)
-                return cell
-            } else {
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OthersChattingCell.identifier,
-                                                                    for: indexPath) as? OthersChattingCell
-                else { return UICollectionViewCell() }
-                cell.configure(with: item)
-                return cell
-            }
-        })
         
         output.items.asObservable()
             .bind(to: self.collectionView.rx.items(dataSource: dataSource))
