@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
-import SideBarTab, { SideBarTabPropsType } from '../components/atoms/buttons/SideBarTab';
+import SideBarTab, { SideBarTabPropsType } from '../../components/atoms/buttons/SideBarTab';
 
 export default {
   title: 'pupago/SideBarTab',

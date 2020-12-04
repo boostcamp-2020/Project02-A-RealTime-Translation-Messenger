@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
-import { CodeBox, CodeBoxPropsType } from '../components/atoms/boxes/CodeBox';
+import { CodeBox, CodeBoxPropsType } from '../../components/atoms/boxes/CodeBox';
 
 export default {
   title: 'pupago/CodeBox',

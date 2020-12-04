@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
-import { ProfileChangeButton } from '../components/atoms/buttons/ProfileChangeButton';
+import { ProfileChangeButton } from '../../components/atoms/buttons/ProfileChangeButton';
 
 export default {
   title: 'pupago/ProfileChangeButton',

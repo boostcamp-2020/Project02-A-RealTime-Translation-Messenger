@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
-import { MainPageBox, MainPageBoxPropsType } from '../components/atoms/boxes/MainPageBox';
+import { MainPageBox, MainPageBoxPropsType } from '../../components/atoms/boxes/MainPageBox';
 
 export default {
   title: 'pupago/MainPageBox',

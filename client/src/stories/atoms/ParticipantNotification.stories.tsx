@@ -3,7 +3,7 @@ import { Story, Meta } from '@storybook/react/types-6-0';
 
 import ParticipantNotification, {
   ParticipantNotificationPropsType,
-} from '../components/atoms/texts/ParticipantNotification';
+} from '../../components/atoms/texts/ParticipantNotification';
 
 export default {
   title: 'pupago/ParticiapantNotification',
