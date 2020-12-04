@@ -17,6 +17,7 @@ class ChattingViewModel: ViewModel, ViewModelType {
     struct Input {
         let chatText: Observable<String>
         let registTrigger: Observable<Void>
+        let showParticipantTrigger: Observable<Void>
         let willLeave: Observable<Void>
     }
     
@@ -25,10 +26,10 @@ class ChattingViewModel: ViewModel, ViewModelType {
         let roomInfo: Driver<RoomInfo>
         let items: Driver<[MessageSection]>
         let translationViewState: Observable<TranslationViewState>
-        let reset: Driver<
-            String>
+        let reset: Driver<String>
         let scroll: Driver<Void>
         let activate: Driver<Bool>
+        let showParticipant: Driver<ParticipantViewModel>
     }
     
     let chats = BehaviorRelay<[MessageSection]>(value: [MessageSection(header: "Chat", items: [])])
@@ -109,14 +110,16 @@ class ChattingViewModel: ViewModel, ViewModelType {
         let viewText = localize.asDriver().map { $0.chatroomViewText }
         let info = roomInfo.asDriver(onErrorJustReturn: (nil, nil))
         let chatItem = chats.asDriver(onErrorJustReturn: [])
-        
+        let showParticipant = input.showParticipantTrigger.asDriver(onErrorJustReturn: ())
+            .map { ParticipantViewModel() }
         return Output(viewText: viewText,
                       roomInfo: info,
                       items: chatItem,
                       translationViewState: translationViewState.asObservable(),
                       reset: reset.map { "" }.asDriver(onErrorJustReturn: ""),
                       scroll: downScroll.asDriver(onErrorJustReturn: ()),
-                      activate: activate.asDriver())
+                      activate: activate.asDriver(),
+                      showParticipant: showParticipant)
     }
     
 }
