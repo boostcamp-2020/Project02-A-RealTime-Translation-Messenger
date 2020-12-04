@@ -5,8 +5,8 @@ import roomCodeUtil from '../utils/roomCode';
 import StatusCode from '../@types/statusCode';
 import roomService from '../services/roomService';
 import validationUtil from '../utils/validation';
-import { CreatedRoomType } from '../@types/dataType';
 import socketService from '../sockets/socketService';
+import { CreatedRoomType } from '../@types/dataType';
 
 const getPublicRoomList = async (req: Request, res: Response) => {
   try {
@@ -37,8 +37,13 @@ const createRoom = async (req: Request, res: Response) => {
 
 const getParticipantsList = async (req: Request, res: Response) => {
   const roomCode = req.params.roomCode;
-  const participantsList = await socketService.getParticipantsListFromRoomCode(roomCode);
-  return res.status(StatusCode.OK).json({ participantsList });
+  if (!validationUtil.isRoomCodeValid(roomCode)) return res.status(StatusCode.CLIENT_ERROR).json();
+  try {
+    const participantsList = await socketService.getParticipantsListFromRoomCode(roomCode);
+    return res.status(StatusCode.OK).json({ participantsList });
+  } catch (err) {
+    return res.status(StatusCode.SERVER_ERROR).json();
+  }
 };
 
 const roomController = {
