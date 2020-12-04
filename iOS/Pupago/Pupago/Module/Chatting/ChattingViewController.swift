@@ -66,10 +66,7 @@ class ChattingViewController: ViewController {
             .disposed(by: rx.disposeBag)
         
         output.reset
-            .drive(onNext: { [unowned self] _ in
-                self.inputText.text = ""
-                self.resetTranslationView()
-            })
+            .drive(inputText.rx.text)
             .disposed(by: rx.disposeBag)
         
         output.scroll

@@ -25,7 +25,8 @@ class ChattingViewModel: ViewModel, ViewModelType {
         let roomInfo: Driver<RoomInfo>
         let items: Driver<[MessageSection]>
         let translationViewState: Observable<TranslationViewState>
-        let reset: Driver<Void>
+        let reset: Driver<
+            String>
         let scroll: Driver<Void>
         let activate: Driver<Bool>
     }
@@ -36,6 +37,7 @@ class ChattingViewModel: ViewModel, ViewModelType {
     let activate = BehaviorRelay<Bool>(value: false)
     let downScroll = PublishRelay<Void>()
     let translationViewState = PublishRelay<(text: String, isHidden: Bool)>()
+    let reset = PublishRelay<Void>()
 
     func transform(_ input: Input) -> Output {
         
@@ -93,10 +95,12 @@ class ChattingViewModel: ViewModel, ViewModelType {
         
         input.registTrigger
             .withLatestFrom(chatInfo)
-            .subscribe(onNext: { info in
+            .subscribe(onNext: { [unowned self] info in
                 socketManager.sendMessage(korean: info.korean,
                                           english: info.english,
                                           origin: info.lang)
+                translationViewState.accept(("", true))
+                reset.accept(())
             })
             .disposed(by: rx.disposeBag)
         
@@ -104,14 +108,13 @@ class ChattingViewModel: ViewModel, ViewModelType {
         
         let viewText = localize.asDriver().map { $0.chatroomViewText }
         let info = roomInfo.asDriver(onErrorJustReturn: (nil, nil))
-        let reset = input.registTrigger.asDriver(onErrorJustReturn: ())
         let chatItem = chats.asDriver(onErrorJustReturn: [])
         
         return Output(viewText: viewText,
                       roomInfo: info,
                       items: chatItem,
                       translationViewState: translationViewState.asObservable(),
-                      reset: reset,
+                      reset: reset.map { "" }.asDriver(onErrorJustReturn: ""),
                       scroll: downScroll.asDriver(onErrorJustReturn: ()),
                       activate: activate.asDriver())
     }
