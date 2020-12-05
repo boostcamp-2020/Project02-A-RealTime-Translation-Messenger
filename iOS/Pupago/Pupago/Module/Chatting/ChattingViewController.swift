@@ -19,12 +19,20 @@ class ChattingViewController: ViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var translationTextView: UITextView!
     @IBOutlet weak var inputBarBottomConstraint: NSLayoutConstraint!
-    
+    private lazy var rightNavigationItem: UIBarButtonItem = {
+        let item = UIBarButtonItem(image: UIImage(systemName: "list.bullet"),
+                                   style: .plain,
+                                   target: self,
+                                   action: nil)
+        return item
+    }()
+
     private var didSetupViewConstraints = false
     private var keyboardShown: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.rightBarButtonItem = rightNavigationItem
         configureCollectionView()
     }
     
@@ -36,10 +44,12 @@ class ChattingViewController: ViewController {
         
         let chatText = inputText.rx.text.orEmpty.asObservable()
         let registTrigger = registButton.rx.tap.asObservable()
+        let showParticipantTrigger = rightNavigationItem.rx.tap.asObservable()
         let willLeave = rx.viewWillDisappear.map { _ in }
         
         let input = ChattingViewModel.Input(chatText: chatText,
                                             registTrigger: registTrigger,
+                                            showParticipantTrigger: showParticipantTrigger,
                                             willLeave: willLeave)
         
         let output = viewModel.transform(input)
@@ -79,6 +89,14 @@ class ChattingViewController: ViewController {
             .drive(onNext: { [unowned self] activate in
                 self.registButton.isUserInteractionEnabled = activate
                 self.registButton.tintColor = activate ? UIColor(named: "BlueColor") : .lightGray
+            })
+            .disposed(by: rx.disposeBag)
+        
+        output.showParticipant
+            .drive(onNext: { [unowned self] viewModel in
+                self.navigator.show(segue: .participant(viewModel: viewModel),
+                                    sender: self,
+                                    transition: .slideIn)
             })
             .disposed(by: rx.disposeBag)
     }
