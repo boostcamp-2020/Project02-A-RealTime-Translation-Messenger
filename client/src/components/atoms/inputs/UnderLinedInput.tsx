@@ -10,7 +10,7 @@ const StyledUnderLinedInput = styled.input`
   border: none;
   border-bottom: 1px solid ${palette.PUPAGO_BLUE};
   background-color: transparent;
-  font-size: 12px;
+  font-size: 18px;
 `;
 
 export type StyledUnderLinedInputPropsType = {
