@@ -2,6 +2,7 @@ type UserDataType = {
   roomCode: string;
   nickname: string;
   language: string;
+  imageLink: string;
 };
 
 type ParticipantsType = {

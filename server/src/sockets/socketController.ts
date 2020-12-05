@@ -9,7 +9,7 @@ import SocketErrorMessage from '../@types/socketErrorMessage';
 import { UserDataType, SendChatType } from '../@types/dataType';
 
 const enterChatroom = async (socket: Socket, io: SocketIO.Server, userData: UserDataType) => {
-  const { roomCode, nickname, language } = userData;
+  const { roomCode, nickname, language, imageLink } = userData;
 
   if (!validationUtil.isRoomCodeValid(roomCode))
     return socketService.emitSocketError(socket, SocketErrorMessage.ROOM_CODE);
@@ -17,11 +17,13 @@ const enterChatroom = async (socket: Socket, io: SocketIO.Server, userData: User
     return socketService.emitSocketError(socket, SocketErrorMessage.NICKNAME);
   if (!validationUtil.isLanguageValid(language))
     return socketService.emitSocketError(socket, SocketErrorMessage.LANGUAGE);
+  if (!validationUtil.isImageLinkValid(imageLink))
+    return socketService.emitSocketError(socket, SocketErrorMessage.IMAGELINK);
 
   socket.join(roomCode);
 
   try {
-    await socketService.insertSocketInfoIntoDB(socket.id, roomCode, nickname, language);
+    await socketService.insertSocketInfoIntoDB(socket.id, roomCode, nickname, language, imageLink);
     const participantsList = await socketService.getParticipantsListFromRoomCode(roomCode, 'enter');
     io.to(roomCode).emit('receive participants list', JSON.stringify(participantsList));
   } catch (err) {
