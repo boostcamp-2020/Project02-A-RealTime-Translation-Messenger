@@ -18,7 +18,7 @@
     "axios": "^0.21.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "socket.io-client": "^3.0.3",
+    "socket.io-client": "^1.4.8",
     "styled-components": "^5.2.1",
     "styled-icons": "^10.22.0",
     "styled-reset": "^4.3.1"
