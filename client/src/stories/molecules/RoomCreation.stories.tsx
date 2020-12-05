@@ -1,13 +1,17 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
-import { RoomCreation } from '../../components/molecules/RoomCreationPage/RoomCreation';
+import { RoomCreation, RoomCreationPropsType } from '../../components/molecules/RoomCreationPage/RoomCreation';
 
 export default {
   title: 'pupagoMolecule/RoomCreation',
   component: RoomCreation,
 } as Meta;
 
-const Template: Story = (args) => <RoomCreation {...args} />;
+const Template: Story<RoomCreationPropsType> = (args) => <RoomCreation {...args} />;
 
 export const Default = Template.bind({});
+Default.args = {
+  TypedWordCount: 0,
+  MaxWordCount: 30,
+};
