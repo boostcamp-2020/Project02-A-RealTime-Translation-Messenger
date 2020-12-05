@@ -5,7 +5,7 @@ import Palette from '../../../@types/Palette';
 
 export type RoomCodeTextPropsType = {
   code: string;
-  onClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 };
 
 const StyledRoomCode = styled.div`
