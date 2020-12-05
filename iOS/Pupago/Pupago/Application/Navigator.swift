@@ -14,6 +14,7 @@ protocol Navigatable {
 final class Navigator {
     
     static let `default` = Navigator()
+    let transitionHelper = SlidInTransitionHelper()
     
     enum Scene {
         case language(viewModel: LanguageViewModel)
@@ -104,9 +105,8 @@ final class Navigator {
             target.modalPresentationStyle = .overCurrentContext
             sender.present(target, animated: true, completion: nil)
         case .slideIn:
-            let helper = SlidInTransitionHelper()
             target.modalPresentationStyle = .overCurrentContext
-            target.transitioningDelegate = helper
+            target.transitioningDelegate = transitionHelper
             sender.present(target, animated: true, completion: nil)
             
         default: break

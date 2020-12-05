@@ -16,12 +16,14 @@
 		970547872566649E00500D79 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 970547852566649E00500D79 /* LaunchScreen.storyboard */; };
 		970547922566649F00500D79 /* PupagoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970547912566649F00500D79 /* PupagoTests.swift */; };
 		9705479D2566649F00500D79 /* PupagoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9705479C2566649F00500D79 /* PupagoUITests.swift */; };
+		970A963E257B26A9000CF814 /* ParticipantCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970A963D257B26A9000CF814 /* ParticipantCell.swift */; };
 		970EB5F82578F371000C577C /* PapagoEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970EB5F72578F371000C577C /* PapagoEndpoint.swift */; };
 		970EB6052578F53B000C577C /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970EB6042578F53B000C577C /* Language.swift */; };
 		970EB60A2578F80D000C577C /* Translation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970EB6092578F80D000C577C /* Translation.swift */; };
 		975A2644257768570096C918 /* SocketEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975A2643257768570096C918 /* SocketEndpoint.swift */; };
 		975A264C2577D9030096C918 /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975A264B2577D9030096C918 /* UIViewController+Rx.swift */; };
 		975A9754257A9C16000C3AE5 /* TransitionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975A9753257A9C16000C3AE5 /* TransitionHelper.swift */; };
+		975A9759257AA20D000C3AE5 /* Participant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975A9758257AA20D000C3AE5 /* Participant.swift */; };
 		975C53F5256B6DFF00739DCA /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975C53F4256B6DFF00739DCA /* Button.swift */; };
 		975C53FA256B7CD100739DCA /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975C53F9256B7CD100739DCA /* GradientView.swift */; };
 		975C53FF256B844C00739DCA /* SelectableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975C53FE256B844C00739DCA /* SelectableButton.swift */; };
@@ -108,12 +110,14 @@
 		970547982566649F00500D79 /* PupagoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PupagoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9705479C2566649F00500D79 /* PupagoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PupagoUITests.swift; sourceTree = "<group>"; };
 		9705479E2566649F00500D79 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		970A963D257B26A9000CF814 /* ParticipantCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantCell.swift; sourceTree = "<group>"; };
 		970EB5F72578F371000C577C /* PapagoEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PapagoEndpoint.swift; sourceTree = "<group>"; };
 		970EB6042578F53B000C577C /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		970EB6092578F80D000C577C /* Translation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translation.swift; sourceTree = "<group>"; };
 		975A2643257768570096C918 /* SocketEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketEndpoint.swift; sourceTree = "<group>"; };
 		975A264B2577D9030096C918 /* UIViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
 		975A9753257A9C16000C3AE5 /* TransitionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionHelper.swift; sourceTree = "<group>"; };
+		975A9758257AA20D000C3AE5 /* Participant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Participant.swift; sourceTree = "<group>"; };
 		975C53F4256B6DFF00739DCA /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		975C53F9256B7CD100739DCA /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		975C53FE256B844C00739DCA /* SelectableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableButton.swift; sourceTree = "<group>"; };
@@ -342,6 +346,7 @@
 			children = (
 				978F5819257A95E30034846A /* ParticipantViewController.swift */,
 				978F581E257A962A0034846A /* ParticipantViewModel.swift */,
+				970A963D257B26A9000CF814 /* ParticipantCell.swift */,
 			);
 			path = Participant;
 			sourceTree = "<group>";
@@ -473,6 +478,7 @@
 				97DAC7D62574DF8F009B76B5 /* Room.swift */,
 				970EB6042578F53B000C577C /* Language.swift */,
 				970EB6092578F80D000C577C /* Translation.swift */,
+				975A9758257AA20D000C3AE5 /* Participant.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -748,6 +754,7 @@
 				97B4BE92256BEE7F009A3825 /* Navigator.swift in Sources */,
 				97CB75BA256E3E5B00FE052A /* CreateRoomViewModel.swift in Sources */,
 				978F5804257A44B90034846A /* UITextView+Binder.swift in Sources */,
+				970A963E257B26A9000CF814 /* ParticipantCell.swift in Sources */,
 				BD5F616D256D23E300D63CCD /* NavigationController.swift in Sources */,
 				976C373625762EDA00BD8094 /* SocketManager.swift in Sources */,
 				97CB75AB256E2CB900FE052A /* CollectionViewBaseCell.swift in Sources */,
@@ -769,6 +776,7 @@
 				97CB75C4256E3EA700FE052A /* JoinRoomViewModel.swift in Sources */,
 				BD626FF82570997B00569277 /* StackView.swift in Sources */,
 				BD65A8062572A06500EE43BC /* Label.swift in Sources */,
+				975A9759257AA20D000C3AE5 /* Participant.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
