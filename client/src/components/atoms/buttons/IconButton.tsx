@@ -18,13 +18,28 @@ const IconWrapper = styled.div`
 
 export function IconButton({ iconType = 'Edit', color = 'black' }: IconButtonPropsType) {
   let icon;
-  if (iconType === 'Edit') icon = <EditIcon style={{ fontSize: 24, color: color }} />;
-  else if (iconType === 'ArrowBack') icon = <ArrowBackIcon style={{ fontSize: 24, color: color }} />;
-  else if (iconType === 'Send') icon = <SendIcon style={{ fontSize: 24, color: color }} />;
-  else if (iconType === 'Mic') icon = <MicIcon style={{ fontSize: 24, color: color }} />;
-  else if (iconType === 'Leave')
-    icon = <LeaveIcon style={{ fontSize: 24, color: color, transform: 'rotate(180deg)' }} />;
-  else if (iconType === 'Close') icon = <CloseIcon style={{ fontSize: 24, color: color }} />;
+  const defaultIconProps = { fontSize: 24, color: color };
+
+  switch (iconType) {
+    case 'Edit':
+      icon = <EditIcon style={defaultIconProps} />;
+      break;
+    case 'Send':
+      icon = <ArrowBackIcon style={defaultIconProps} />;
+      break;
+    case 'Mic':
+      icon = <MicIcon style={defaultIconProps} />;
+      break;
+    case 'Leave':
+      icon = <LeaveIcon style={{ ...defaultIconProps, transform: 'rotate(180deg)' }} />;
+      break;
+    case 'Close':
+      icon = <CloseIcon style={defaultIconProps} />;
+      break;
+    default:
+      icon = <EditIcon style={defaultIconProps} />;
+      break;
+  }
 
   return <IconWrapper>{icon}</IconWrapper>;
 }
