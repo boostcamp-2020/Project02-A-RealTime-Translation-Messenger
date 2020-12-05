@@ -36,6 +36,9 @@ const StyledProfileImageSrc = styled.img<ProfileImageSrcProsType>`
 `;
 
 const StyledProfileImage = styled.div<ProfileImagePropsType>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: ${(props) => setSize(props.size)[0]};
   height: ${(props) => setSize(props.size)[0]};
   ${(props) =>
@@ -46,9 +49,6 @@ const StyledProfileImage = styled.div<ProfileImagePropsType>`
   border: solid 2px ${props.isMe ? Palette.PUPAGO_BLUE : Palette.LIGHT_GREY};`}
   border-radius: 50%;
   background-color: WHITE;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;
 
 export function ProfileImage({ size, isMe, image }: ProfileImagePropsType) {

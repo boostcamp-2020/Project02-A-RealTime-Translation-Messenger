@@ -12,17 +12,15 @@ export type CheckBoxTypes = {
 const StyledCheckBox = styled.div<CheckBoxTypes>`
   width: 16px;
   height: 16px;
-
   border: solid 1px ${Palette.DARK_GREY};
-  background-color: ${(props) => (props.isChecked ? Palette.PUPAGO_BLUE : 'transparent')};
   border-radius: 2px;
-
+  background-color: ${(props) => (props.isChecked ? Palette.PUPAGO_BLUE : 'transparent')};
   cursor: pointer;
 `;
 
 const StyledChoiceText = styled.p`
   margin: 0;
-  padding-left: 6px;
+  padding: 0 0 0 6px;
   color: ${Palette.DARK_GREY};
   font-size: 14px;
 `;

@@ -10,15 +10,15 @@ export type LanguageTagPropsType = {
 
 const StyledLanguageTag = styled.div<LanguageTagPropsType>`
   display: flex;
+  justify-content: center;
+  align-items: center;
   width: 24px;
   height: 24px;
-  border-radius: 10px;
   border: solid 3px white;
+  border-radius: 10px;
   background-color: ${(props) => (props.isMe ? Palette.PUPAGO_BLUE : 'none')};
   font-size: 14px;
   color: white;
-  justify-content: center;
-  align-items: center;
 `;
 
 export function LanguageTag({ language, isMe }: LanguageTagPropsType) {

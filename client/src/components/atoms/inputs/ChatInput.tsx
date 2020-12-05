@@ -4,24 +4,18 @@ import Palette from '../../../@types/Palette';
 
 const StyledChatInput = styled.textarea`
   display: block;
-
-  padding: 25px;
-
   width: 476px;
   height: 96px;
-
+  padding: 25px;
   outline: none;
   border: none;
   border-radius: 30px 0 0 0;
-
   background-color: ${Palette.ALMOST_WHITE};
-
-  resize: none;
-  overflow: hidden;
-
   font-family: 'Noto Sans KR', sans-serif;
   font-size: 14px;
   line-height: 20px;
+  resize: none;
+  overflow: hidden;
 `;
 
 export type ChatInputPropsType = {
