@@ -1,6 +1,5 @@
-import AWS = require('aws-sdk');
+import AWS from 'aws-sdk';
 import dotenv from 'dotenv';
-import profileImageController from '../controllers/profileImageController';
 
 dotenv.config();
 
