@@ -20,12 +20,13 @@ export type TextPropsType = {
   size?: number;
   weight?: string;
   color?: string;
+  className?: string;
   children: React.ReactNode;
 };
 
-function Text({ size = 12, weight = 'normal', color = palette.DARK_GREY, children }: TextPropsType) {
+function Text({ size = 12, weight = 'normal', color = palette.DARK_GREY, children, className }: TextPropsType) {
   return (
-    <StyledText size={size} weight={weight} color={color}>
+    <StyledText size={size} weight={weight} color={color} className={className}>
       {children}
     </StyledText>
   );
