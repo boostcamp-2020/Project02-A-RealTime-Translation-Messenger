@@ -4,7 +4,7 @@ import { Story, Meta } from '@storybook/react/types-6-0';
 import { CodeBox, CodeBoxPropsType } from '../../components/atoms/boxes/CodeBox';
 
 export default {
-  title: 'pupago/CodeBox',
+  title: 'pupagoAtom/CodeBox',
   component: CodeBox,
 } as Meta;
 

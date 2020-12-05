@@ -4,7 +4,7 @@ import { Story, Meta } from '@storybook/react/types-6-0';
 import { MainButton, ButtonPropsType } from '../../components/atoms/buttons/MainButton';
 
 export default {
-  title: 'pupago/MainButton',
+  title: 'pupagoAtom/MainButton',
   component: MainButton,
 } as Meta;
 

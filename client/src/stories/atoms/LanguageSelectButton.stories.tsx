@@ -8,7 +8,7 @@ import {
 } from '../../components/atoms/buttons/LanguageSelectButton';
 
 export default {
-  title: 'pupago/LanguageSelectButton',
+  title: 'pupagoAtom/LanguageSelectButton',
   component: LanguageSelectButton,
 } as Meta;
 

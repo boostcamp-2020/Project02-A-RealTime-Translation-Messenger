@@ -4,7 +4,7 @@ import { Story, Meta } from '@storybook/react/types-6-0';
 import { LogoWithText } from '../../components/atoms/logos/LogoWithText';
 
 export default {
-  title: 'pupago/LogoWithText',
+  title: 'pupagoAtom/LogoWithText',
   component: LogoWithText,
 } as Meta;
 

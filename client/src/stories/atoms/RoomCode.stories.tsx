@@ -4,7 +4,7 @@ import { Story, Meta } from '@storybook/react/types-6-0';
 import { RoomCode, RoomCodeTextPropsType } from '../../components/atoms/texts/RoomCode';
 
 export default {
-  title: 'pupago/RoomCode',
+  title: 'pupagoAtom/RoomCode',
   component: RoomCode,
 } as Meta;
 
