@@ -6,3 +6,14 @@
 //
 
 import Foundation
+
+struct Participant: Codable {
+    let socketId: String
+    let nickname: String
+    let language: String
+    let imageLink: String?
+}
+
+struct Participants: Codable {
+    let participantsList: [Participant]
+}
