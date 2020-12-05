@@ -9,6 +9,17 @@ export type ButtonPropsType = {
   children?: string;
 };
 
+const setButtonColor = (disabled: boolean | undefined) => {
+  switch (disabled) {
+    case true:
+      return Palette.DISABLED_YELLOW;
+    case false:
+      return Palette.ACTIVE_YELLOW;
+    default:
+      return 'white';
+  }
+};
+
 const Button = styled.button<ButtonPropsType>`
   display: block;
   width: 336px;
@@ -17,13 +28,14 @@ const Button = styled.button<ButtonPropsType>`
   outline: none;
   border-radius: 10px;
   border: none;
-  background-color: ${(props) => (props.disabled ? Palette.DISABLED_YELLOW : Palette.ACTIVE_YELLOW)};
+  /* background-color: ${(props) => (props.disabled ? Palette.DISABLED_YELLOW : Palette.ACTIVE_YELLOW)}; */
+  background-color: ${(props) => setButtonColor(props.disabled)};
   color: ${Palette.DARK_GREY};
   font-size: 18px;
   cursor: pointer;
 `;
 
-export function MainButton({ disabled = true, children = 'button', ...props }: ButtonPropsType) {
+export function MainButton({ disabled, children = 'button', ...props }: ButtonPropsType) {
   return (
     <Button type="button" disabled={disabled} {...props}>
       {children}
