@@ -7,17 +7,12 @@ const StyledParticipantNotification = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
-  padding: 4px 20px;
-
   min-width: 240px;
   max-width: 400px;
-
-  background-color: ${Palette.MIDDLE_GREY};
-
-  color: white;
+  padding: 4px 20px;
   border-radius: 10px;
-
+  background-color: ${Palette.MIDDLE_GREY};
+  color: white;
   user-select: none;
 `;
 
