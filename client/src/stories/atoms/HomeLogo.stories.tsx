@@ -4,7 +4,7 @@ import { Story, Meta } from '@storybook/react/types-6-0';
 import { HomeLogo, HomeLogoType } from '../../components/atoms/logos/HomeLogo';
 
 export default {
-  title: 'pupago/HomeLogo',
+  title: 'pupagoAtom/HomeLogo',
   component: HomeLogo,
 } as Meta;
 

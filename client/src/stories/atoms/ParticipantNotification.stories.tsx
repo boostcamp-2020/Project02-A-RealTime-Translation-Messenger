@@ -6,7 +6,7 @@ import ParticipantNotification, {
 } from '../../components/atoms/texts/ParticipantNotification';
 
 export default {
-  title: 'pupago/ParticiapantNotification',
+  title: 'pupagoAtom/ParticiapantNotification',
   component: ParticipantNotification,
 } as Meta;
 

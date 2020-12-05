@@ -4,7 +4,7 @@ import { Story, Meta } from '@storybook/react/types-6-0';
 import SideBar, { SideBarpropsType } from '../../components/atoms/boxes/SideBar';
 
 export default {
-  title: 'pupago/SideBar',
+  title: 'pupagoAtom/SideBar',
   component: SideBar,
 } as Meta;
 

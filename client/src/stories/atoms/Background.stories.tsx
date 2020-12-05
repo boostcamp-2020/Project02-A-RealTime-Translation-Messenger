@@ -4,7 +4,7 @@ import { Story, Meta } from '@storybook/react/types-6-0';
 import { Background } from '../../components/atoms/resources/Background';
 
 export default {
-  title: 'pupago/Background',
+  title: 'pupagoAtom/Background',
   component: Background,
 } as Meta;
 

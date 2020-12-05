@@ -5,7 +5,7 @@ import { IconButton, IconButtonPropsType } from '../../components/atoms/buttons/
 import Palette from '../../@types/Palette';
 
 export default {
-  title: 'pupago/IconButton',
+  title: 'pupagoAtom/IconButton',
   component: IconButton,
 } as Meta;
 
