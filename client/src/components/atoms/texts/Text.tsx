@@ -5,7 +5,6 @@ import palette from '../../../@types/Palette';
 
 const StyledText = styled.span<StyledTextPropsType>`
   display: block;
-
   font-size: ${(props) => `${props.size.toString()}px`};
   font-weight: ${(props) => props.weight};
   color: ${(props) => props.color};
