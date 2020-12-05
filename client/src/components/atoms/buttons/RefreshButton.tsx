@@ -9,10 +9,10 @@ export type RefreshButtonTypes = {
 };
 
 const IconWrapper = styled.div`
-  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: absolute;
   width: 344px;
   height: 32px;
   cursor: pointer;
@@ -21,9 +21,8 @@ const IconWrapper = styled.div`
 const RefrshButtonWrapper = styled.div<RefreshButtonTypes>`
   width: 344px;
   height: 32px;
-
-  background-color: ${Palette.PUPAGO_BLUE};
   border-radius: 5px;
+  background-color: ${Palette.PUPAGO_BLUE};
 
   &:hover {
     background-color: ${Palette.DARK_PUPAGO_BLUE};
