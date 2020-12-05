@@ -15,6 +15,7 @@ Big.args = {
   size: 'big',
   createdAt: '몇 분 전 생성',
   participantCount: 4,
+  roomCapacity: 8,
   title: '안녕',
 };
 
@@ -23,5 +24,6 @@ Small.args = {
   size: 'small',
   createdAt: '몇 분 전 생성',
   participantCount: 3,
-  title: '에반데',
+  roomCapacity: 8,
+  title: '영어로 대화할 사람을 구해요!',
 };

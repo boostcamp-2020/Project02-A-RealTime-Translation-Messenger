@@ -28,10 +28,11 @@ export type RoomItemPropsType = {
   size: 'big' | 'small';
   createdAt: string;
   participantCount: number;
+  roomCapacity: number;
   title: string;
 };
 
-function RoomItem({ size, createdAt, participantCount, title }: RoomItemPropsType) {
+function RoomItem({ size, createdAt, participantCount, roomCapacity, title }: RoomItemPropsType) {
   return (
     <div>
       <RoomItemBox size={size}>
@@ -42,7 +43,7 @@ function RoomItem({ size, createdAt, participantCount, title }: RoomItemPropsTyp
               {createdAt}
             </MarginedText>
           </RoomItemHeaderLeft>
-          <Text size={14} color={Palette.DARK_GREY}>{`(${participantCount} / 8)`}</Text>
+          <Text size={14} color={Palette.DARK_GREY}>{`(${participantCount} / ${roomCapacity})`}</Text>
         </RoomItemHeaderWrapper>
 
         <Text size={16} color={Palette.DARK_GREY}>
