@@ -6,11 +6,11 @@ import Text from '../../atoms/texts/Text';
 import Palette from '../../../@types/Palette';
 
 const MainTitleWrapper = styled.div`
-  width: 400px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 400px;
 
   img {
     margin-bottom: 16px;
