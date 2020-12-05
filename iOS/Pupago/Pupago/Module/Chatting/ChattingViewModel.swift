@@ -110,8 +110,14 @@ class ChattingViewModel: ViewModel, ViewModelType {
         let viewText = localize.asDriver().map { $0.chatroomViewText }
         let info = roomInfo.asDriver(onErrorJustReturn: (nil, nil))
         let chatItem = chats.asDriver(onErrorJustReturn: [])
-        let showParticipant = input.showParticipantTrigger.asDriver(onErrorJustReturn: ())
-            .map { ParticipantViewModel() }
+        let showParticipant = input.showParticipantTrigger
+            .withLatestFrom(roomInfo)
+            .map { _, code -> ParticipantViewModel in
+                let code = code ?? ""
+                return ParticipantViewModel(roomCode: code)
+            }
+            .asDriver(onErrorJustReturn: ParticipantViewModel(roomCode: ""))
+            
         return Output(viewText: viewText,
                       roomInfo: info,
                       items: chatItem,
