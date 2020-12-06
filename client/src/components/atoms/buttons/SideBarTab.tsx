@@ -33,11 +33,12 @@ export type SideBarTabPropsType = {
   children: React.ReactNode;
   isSelected: boolean;
   isTabNameParticipant: boolean;
+  onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 };
 
-function SideBarTab({ children, isSelected, isTabNameParticipant }: SideBarTabPropsType) {
+function SideBarTab({ children, isSelected, isTabNameParticipant, onClick }: SideBarTabPropsType) {
   return (
-    <StyledSideBarTabWrapper isSelected={isSelected} isTabNameParticipant={isTabNameParticipant}>
+    <StyledSideBarTabWrapper isSelected={isSelected} isTabNameParticipant={isTabNameParticipant} onClick={onClick}>
       <StyledSideBarTab isSelected={isSelected}>{children}</StyledSideBarTab>
     </StyledSideBarTabWrapper>
   );
