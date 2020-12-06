@@ -8,7 +8,7 @@ const Logo = styled.img`
 `;
 
 export function CryingPapago() {
-  return <Logo src="https://i.imgur.com/SH66ghB.png" alt="crying papago" />;
+  return <Logo src="https://kr.object.ncloudstorage.com/pupago/assets/CryingPapago.png" alt="crying papago" />;
 }
 
 export default CryingPapago;
