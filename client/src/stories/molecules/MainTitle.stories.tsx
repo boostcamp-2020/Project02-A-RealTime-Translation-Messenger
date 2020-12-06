@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
-import { MainTitle } from '../../components/molecules/MainPage/MainTitle';
+import { MainTitle } from '../../components/molecules/mainPage/MainTitle';
 
 export default {
   title: 'pupagoMolecule/MainTitle',
