@@ -28,7 +28,6 @@ const Button = styled.button<ButtonPropsType>`
   outline: none;
   border-radius: 10px;
   border: none;
-  /* background-color: ${(props) => (props.disabled ? Palette.DISABLED_YELLOW : Palette.ACTIVE_YELLOW)}; */
   background-color: ${(props) => setButtonColor(props.disabled)};
   color: ${Palette.DARK_GREY};
   font-size: 18px;
