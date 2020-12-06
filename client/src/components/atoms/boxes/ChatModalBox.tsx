@@ -3,6 +3,10 @@ import styled from 'styled-components';
 
 import Palette from '../../../@types/Palette';
 
+type ChatModalPropsType = {
+  children?: React.ReactNode;
+};
+
 const StyledChatModalBox = styled.div`
   width: 400px;
   height: 240px;
@@ -11,8 +15,8 @@ const StyledChatModalBox = styled.div`
   background-color: ${Palette.LIGHT_GREY};
 `;
 
-export const ChatModalBox = () => {
-  return <StyledChatModalBox />;
+export const ChatModalBox = ({ children }: ChatModalPropsType) => {
+  return <StyledChatModalBox>{children}</StyledChatModalBox>;
 };
 
 export default ChatModalBox;
