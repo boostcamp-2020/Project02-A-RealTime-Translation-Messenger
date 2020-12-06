@@ -9,6 +9,7 @@ import Palette from '../../../@types/Palette';
 export type RoomCreationPropsType = {
   TypedWordCount: number;
   MaxWordCount: number;
+  privateSelected?: boolean;
   InputOnChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
@@ -39,12 +40,17 @@ const RightAlignedText = styled(Text)`
   margin-top: 4px;
 `;
 
-export const RoomCreation = ({ TypedWordCount, MaxWordCount, InputOnChange }: RoomCreationPropsType) => {
+export const RoomCreation = ({
+  TypedWordCount,
+  MaxWordCount,
+  privateSelected,
+  InputOnChange,
+}: RoomCreationPropsType) => {
   return (
     <>
       <CheckBoxWrapper>
-        <CheckBox isChecked={false}>공개</CheckBox>
-        <CheckBox isChecked={false}>비공개</CheckBox>
+        <CheckBox isChecked={privateSelected ? false : true}>공개</CheckBox>
+        <CheckBox isChecked={privateSelected ? true : false}>비공개</CheckBox>
       </CheckBoxWrapper>
       <RoomCreationWrapper>
         <UnderLinedInput placeholder={'방 제목을 입력해주세요.'} maxLength={30} onChange={InputOnChange} />

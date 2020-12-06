@@ -14,4 +14,5 @@ export const Default = Template.bind({});
 Default.args = {
   TypedWordCount: 0,
   MaxWordCount: 30,
+  privateSelected: true,
 };
