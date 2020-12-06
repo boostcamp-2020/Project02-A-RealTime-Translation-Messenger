@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
-import { ParticipantItem, ParticipantItemPropsType } from '../../components/molecules/ChatRoomPage/ParticipantItem';
+import { ParticipantItem, ParticipantItemPropsType } from '../../components/molecules/chatRoomPage/ParticipantItem';
 
 export default {
   title: 'pupagoMolecule/ParticipantItem',

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
-import ChatRoomHeader, { ChatRoomHeaderPropsType } from '../../components/molecules/chatRoomPages/ChatRoomHeader';
+import ChatRoomHeader, { ChatRoomHeaderPropsType } from '../../components/molecules/chatRoomPage/ChatRoomHeader';
 
 export default {
   title: 'pupagoMolecule/ChatRoomHeader',

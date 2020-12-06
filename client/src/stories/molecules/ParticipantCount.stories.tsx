@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
-import ParticipantCount, { ParticipantCountPropsType } from '../../components/molecules/ChatRoomPage/ParticipantCount';
+import ParticipantCount, { ParticipantCountPropsType } from '../../components/molecules/chatRoomPage/ParticipantCount';
 
 export default {
   title: 'pupagoMolecule/ParticipantCount',
