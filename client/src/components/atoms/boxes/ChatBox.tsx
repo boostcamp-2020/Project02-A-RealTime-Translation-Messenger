@@ -12,8 +12,7 @@ const StyledChatBoxWrapper = styled.div`
 `;
 
 const StyledChatBox = styled.div<StyledChatBoxPropsType>`
-  min-width: 199px;
-  max-width: 399px;
+  width: 399px;
   height: 88px;
   padding: 16px;
   background-color: ${(props) => (props.isMe ? Palette.PUPAGO_BLUE : Palette.LIGHT_GREY)};
