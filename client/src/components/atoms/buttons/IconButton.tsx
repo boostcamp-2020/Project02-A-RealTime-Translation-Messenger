@@ -10,15 +10,15 @@ import CloseIcon from '@material-ui/icons/Close';
 export type IconButtonPropsType = {
   iconType: 'Edit' | 'ArrowBack' | 'Send' | 'Mic' | 'Leave' | 'Close';
   color: string;
-  className?: string;
   onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  className?: string;
 };
 
 const IconWrapper = styled.div`
   cursor: pointer;
 `;
 
-export function IconButton({ iconType = 'Edit', color = 'black', className, onClick }: IconButtonPropsType) {
+export function IconButton({ iconType = 'Edit', color = 'black', onClick, className }: IconButtonPropsType) {
   let icon;
   const defaultIconProps = { fontSize: 24, color: color };
 
@@ -27,7 +27,7 @@ export function IconButton({ iconType = 'Edit', color = 'black', className, onCl
       icon = <EditIcon style={defaultIconProps} />;
       break;
     case 'Send':
-      icon = <ArrowBackIcon style={defaultIconProps} />;
+      icon = <SendIcon style={defaultIconProps} />;
       break;
     case 'Mic':
       icon = <MicIcon style={defaultIconProps} />;
@@ -38,13 +38,16 @@ export function IconButton({ iconType = 'Edit', color = 'black', className, onCl
     case 'Close':
       icon = <CloseIcon style={defaultIconProps} />;
       break;
+    case 'ArrowBack':
+      icon = <ArrowBackIcon style={defaultIconProps} />;
+      break;
     default:
       icon = <EditIcon style={defaultIconProps} />;
       break;
   }
 
   return (
-    <IconWrapper className={className} onClick={onClick}>
+    <IconWrapper onClick={onClick} className={className}>
       {icon}
     </IconWrapper>
   );
