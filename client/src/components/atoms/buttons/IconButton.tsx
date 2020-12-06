@@ -10,13 +10,15 @@ import CloseIcon from '@material-ui/icons/Close';
 export type IconButtonPropsType = {
   iconType: 'Edit' | 'ArrowBack' | 'Send' | 'Mic' | 'Leave' | 'Close';
   color: string;
+  className?: string;
+  onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 };
 
 const IconWrapper = styled.div`
   cursor: pointer;
 `;
 
-export function IconButton({ iconType = 'Edit', color = 'black' }: IconButtonPropsType) {
+export function IconButton({ iconType = 'Edit', color = 'black', className, onClick }: IconButtonPropsType) {
   let icon;
   const defaultIconProps = { fontSize: 24, color: color };
 
@@ -41,7 +43,11 @@ export function IconButton({ iconType = 'Edit', color = 'black' }: IconButtonPro
       break;
   }
 
-  return <IconWrapper>{icon}</IconWrapper>;
+  return (
+    <IconWrapper className={className} onClick={onClick}>
+      {icon}
+    </IconWrapper>
+  );
 }
 
 export default IconButton;
