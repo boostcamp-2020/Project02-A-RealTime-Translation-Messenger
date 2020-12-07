@@ -24,7 +24,7 @@ extension RoomEndpoint: EndpointType {
         case .join:
             return "join"
         case .getParticipant(let roomCode):
-            return "room/list/\(roomCode)"
+            return "room/participantsList/\(roomCode)"
         }
     }
     
