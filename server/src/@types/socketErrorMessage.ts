@@ -4,7 +4,6 @@ enum SocketErrorMessage {
   LANGUAGE = 'Language is not valid',
   CHAT = 'Chat message is not valid',
   SERVER = 'Internal server error',
-  IMAGELINK = 'Image link is not valid',
 }
 
 export default SocketErrorMessage;
