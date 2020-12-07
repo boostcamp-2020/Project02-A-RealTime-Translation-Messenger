@@ -46,7 +46,6 @@ enum Localize {
     struct ChatroomViewText {
         var language: String
     }
-    
 }
 
 extension Localize {

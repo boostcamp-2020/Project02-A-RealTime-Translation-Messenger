@@ -65,6 +65,9 @@
 		97F534FF256CE947005998EE /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F534FE256CE947005998EE /* Application.swift */; };
 		97FB232D256FE93000F7E21E /* RegexManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97FB232C256FE93000F7E21E /* RegexManager.swift */; };
 		9D3C1EAB4F277EE81902BD99 /* Pods_PupagoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D63A44A3FA54CB79CE0D4AEC /* Pods_PupagoTests.framework */; };
+		BD55224D257DE87A008E3A1A /* SpeechViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD55224C257DE87A008E3A1A /* SpeechViewController.swift */; };
+		BD552255257DE89F008E3A1A /* SpeechViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD552254257DE89F008E3A1A /* SpeechViewModel.swift */; };
+		BD55225A257DE96B008E3A1A /* SpeechManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD552259257DE96B008E3A1A /* SpeechManager.swift */; };
 		BD5928612577E4A800F091F1 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5928602577E4A800F091F1 /* DateManager.swift */; };
 		BD5F6160256D204400D63CCD /* ChattingListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5F615F256D204400D63CCD /* ChattingListViewModel.swift */; };
 		BD5F6165256D207600D63CCD /* ChattingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5F6164256D207600D63CCD /* ChattingListViewController.swift */; };
@@ -159,6 +162,9 @@
 		97F534FE256CE947005998EE /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		97FB232C256FE93000F7E21E /* RegexManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegexManager.swift; sourceTree = "<group>"; };
 		AE1676964940092EB6BDCC83 /* Pods-PupagoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PupagoTests.release.xcconfig"; path = "Target Support Files/Pods-PupagoTests/Pods-PupagoTests.release.xcconfig"; sourceTree = "<group>"; };
+		BD55224C257DE87A008E3A1A /* SpeechViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechViewController.swift; sourceTree = "<group>"; };
+		BD552254257DE89F008E3A1A /* SpeechViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechViewModel.swift; sourceTree = "<group>"; };
+		BD552259257DE96B008E3A1A /* SpeechManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechManager.swift; sourceTree = "<group>"; };
 		BD5928602577E4A800F091F1 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 		BD5F615F256D204400D63CCD /* ChattingListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingListViewModel.swift; sourceTree = "<group>"; };
 		BD5F6164256D207600D63CCD /* ChattingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingListViewController.swift; sourceTree = "<group>"; };
@@ -289,6 +295,7 @@
 				97CB75B3256E3E1000FE052A /* Join Chatroom */,
 				97CB75CB256E410000FE052A /* Chatting */,
 				978F5818257A95CC0034846A /* Participant */,
+				BD55224B257DE858008E3A1A /* SpeechToText */,
 				975C53EB256B5AF600739DCA /* Main */,
 			);
 			path = Module;
@@ -448,6 +455,7 @@
 				BD5928602577E4A800F091F1 /* DateManager.swift */,
 				977AA53825793896005BF456 /* Translator.swift */,
 				975A9753257A9C16000C3AE5 /* TransitionHelper.swift */,
+				BD552259257DE96B008E3A1A /* SpeechManager.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -459,6 +467,15 @@
 				D63A44A3FA54CB79CE0D4AEC /* Pods_PupagoTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BD55224B257DE858008E3A1A /* SpeechToText */ = {
+			isa = PBXGroup;
+			children = (
+				BD55224C257DE87A008E3A1A /* SpeechViewController.swift */,
+				BD552254257DE89F008E3A1A /* SpeechViewModel.swift */,
+			);
+			path = SpeechToText;
 			sourceTree = "<group>";
 		};
 		BD5F615E256D202E00D63CCD /* Chatting List */ = {
@@ -755,6 +772,7 @@
 				97CB75BA256E3E5B00FE052A /* CreateRoomViewModel.swift in Sources */,
 				978F5804257A44B90034846A /* UITextView+Binder.swift in Sources */,
 				970A963E257B26A9000CF814 /* ParticipantCell.swift in Sources */,
+				BD552255257DE89F008E3A1A /* SpeechViewModel.swift in Sources */,
 				BD5F616D256D23E300D63CCD /* NavigationController.swift in Sources */,
 				976C373625762EDA00BD8094 /* SocketManager.swift in Sources */,
 				97CB75AB256E2CB900FE052A /* CollectionViewBaseCell.swift in Sources */,
@@ -764,11 +782,13 @@
 				975C53F5256B6DFF00739DCA /* Button.swift in Sources */,
 				977AA53925793896005BF456 /* Translator.swift in Sources */,
 				975C5404256B8D3F00739DCA /* Localize.swift in Sources */,
+				BD55225A257DE96B008E3A1A /* SpeechManager.swift in Sources */,
 				97E8B57D2574EDE90009C938 /* MockAPI.swift in Sources */,
 				975C540E256B907D00739DCA /* ViewModel.swift in Sources */,
 				97B4BE74256BE935009A3825 /* NSObject+Rx.swift in Sources */,
 				97B4BEA0256BEFD9009A3825 /* NicknameViewModel.swift in Sources */,
 				97FB232D256FE93000F7E21E /* RegexManager.swift in Sources */,
+				BD55224D257DE87A008E3A1A /* SpeechViewController.swift in Sources */,
 				BD62700825709AC500569277 /* OthersChattingCell.swift in Sources */,
 				97CB75BF256E3E9D00FE052A /* JoinRoomViewController.swift in Sources */,
 				BD5F6160256D204400D63CCD /* ChattingListViewModel.swift in Sources */,
@@ -954,7 +974,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = EKU567YQE4;
+				DEVELOPMENT_TEAM = B3PWYBKFUK;
 				INFOPLIST_FILE = Pupago/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -975,7 +995,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = EKU567YQE4;
+				DEVELOPMENT_TEAM = B3PWYBKFUK;
 				INFOPLIST_FILE = Pupago/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (

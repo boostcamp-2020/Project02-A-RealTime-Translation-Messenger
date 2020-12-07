@@ -41,7 +41,7 @@ class ChattingViewModel: ViewModel, ViewModelType {
     let downScroll = PublishRelay<Void>()
     let translationViewState = PublishRelay<(text: String, isHidden: Bool)>()
     let reset = PublishRelay<Void>()
-
+    
     func transform(_ input: Input) -> Output {
         
         let socketManager = SocketIOManager.shared
@@ -107,16 +107,6 @@ class ChattingViewModel: ViewModel, ViewModelType {
             })
             .disposed(by: rx.disposeBag)
         
-        /*
-        input.micTrigger
-            .subscribe(onNext: { [unowned self] _ in
-                self.speechManager.speechToText()
-                speechManager.recognizedSpeech
-                    .subscribe(onNext: { print($0) })
-                    .disposed(by: rx.disposeBag)
-            })
-            .disposed(by: rx.disposeBag)
-        */
         // MARK: - Drivers
         
         let viewText = localize.asDriver().map { $0.chatroomViewText }

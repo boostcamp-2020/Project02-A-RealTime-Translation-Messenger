@@ -24,6 +24,7 @@ final class Navigator {
         case joinRoom(viewModel: JoinRoomViewModel)
         case chatting(viewModel: ChattingViewModel)
         case participant(viewModel: ParticipantViewModel)
+        case speech(viewModel: SpeechViewModel)
     }
     
     enum Transition {
@@ -59,6 +60,8 @@ final class Navigator {
             return instantiateFromStoryBoard(type: ChattingViewController.self, viewModel: viewModel)
         case .participant(let viewModel):
             return instantiateFromStoryBoard(type: ParticipantViewController.self, viewModel: viewModel)
+        case .speech(let viewModel):
+            return instantiateFromStoryBoard(type: SpeechViewController.self, viewModel: viewModel)
         }
     }
     
