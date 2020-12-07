@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 
 import ChatModalBackground from '../../atoms/boxes/ChatModalBackground';
@@ -15,11 +15,14 @@ type RoomSwitchModalPropsType = {
 };
 
 const ChatModalBoxWrapper = styled.div`
+  position: absolute;
+  left: 440px;
+  top: 240px;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 1280px;
-  height: 720px;
+  width: 400px;
+  height: 240px;
   button,
   span {
     margin-bottom: 24px;
@@ -44,21 +47,20 @@ export const RoomSwitchModal = ({
 }: RoomSwitchModalPropsType) => {
   return (
     <div>
-      <ChatModalBackground onClick={onClickBackground}>
-        <ChatModalBoxWrapper>
-          <ChatModalBox onClickClose={onClickClose}>
-            <ModalContentWrapper>
-              <Text size={14} color={Palette.DARK_GREY}>
-                다른 채팅방으로 이동하시겠습니까?
-              </Text>
-              <MainButton disabled={false} onClick={onClickConfirm}>
-                확인
-              </MainButton>
-              <MainButton onClick={onClickCancel}>취소</MainButton>
-            </ModalContentWrapper>
-          </ChatModalBox>
-        </ChatModalBoxWrapper>
-      </ChatModalBackground>
+      <ChatModalBackground onClick={onClickBackground} />
+      <ChatModalBoxWrapper>
+        <ChatModalBox onClickClose={onClickClose}>
+          <ModalContentWrapper>
+            <Text size={14} color={Palette.DARK_GREY}>
+              다른 채팅방으로 이동하시겠습니까?
+            </Text>
+            <MainButton disabled={false} onClick={onClickConfirm}>
+              확인
+            </MainButton>
+            <MainButton onClick={onClickCancel}>취소</MainButton>
+          </ModalContentWrapper>
+        </ChatModalBox>
+      </ChatModalBoxWrapper>
     </div>
   );
 };

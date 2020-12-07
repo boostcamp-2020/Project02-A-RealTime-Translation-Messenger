@@ -4,6 +4,7 @@ import styled from 'styled-components';
 type ChatModalBackgroundPropsType = {
   children?: React.ReactNode;
   onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  ref?: React.RefObject<HTMLDivElement>;
 };
 
 const StyledChatModalBackground = styled.div`
@@ -13,8 +14,8 @@ const StyledChatModalBackground = styled.div`
   background-color: rgba(0, 0, 0, 0.4);
 `;
 
-export const ChatModalBackground = ({ children, onClick }: ChatModalBackgroundPropsType) => {
-  return <StyledChatModalBackground>{children}</StyledChatModalBackground>;
+export const ChatModalBackground = ({ children, ...props }: ChatModalBackgroundPropsType) => {
+  return <StyledChatModalBackground {...props}>{children}</StyledChatModalBackground>;
 };
 
 export default ChatModalBackground;
