@@ -13,7 +13,7 @@ const StyledSideBar = styled.section`
   background: rgba(255, 255, 255, 0.6);
 `;
 
-function SideBarBox({ children }: SideBarpropsType) {
+function SideBarBox({ children }: SideBarBoxpropsType) {
   return (
     <>
       <StyledSideBar>{children}</StyledSideBar>
