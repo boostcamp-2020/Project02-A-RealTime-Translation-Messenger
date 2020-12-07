@@ -6,8 +6,8 @@ import ProfileChangeButton from '../../atoms/buttons/ProfileChangeButton';
 
 const ProfileChangeButtonWrapper = styled.div`
   position: relative;
-  left: 62px;
-  bottom: 33px;
+  left: 56px;
+  bottom: 32px;
   z-index: 3;
 `;
 

@@ -21,7 +21,7 @@ const ParticipantItemWrapper = styled.div`
 `;
 
 const TextWrapper = styled.div`
-  width: 144px;
+  width: 152px;
 `;
 
 export const ParticipantItem = ({ imageLink, language, isMe, nickname }: ParticipantItemPropsType) => {
@@ -29,7 +29,7 @@ export const ParticipantItem = ({ imageLink, language, isMe, nickname }: Partici
     <ParticipantItemWrapper>
       <ProfileImage size="size-40" image={imageLink} isMe={isMe} />
       <TextWrapper>
-        <Text size={12} color="black">
+        <Text size={14} color="black">
           {nickname}
         </Text>
       </TextWrapper>

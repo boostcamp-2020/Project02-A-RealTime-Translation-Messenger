@@ -16,7 +16,7 @@ export type RoomCreationPropsType = {
 const RoomCreationWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 348px;
+  width: 344px;
 `;
 
 const CheckBoxWrapper = styled.div`

@@ -8,15 +8,16 @@ import Palette from '../../../@types/Palette';
 const LanguageSelectionBox = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 169px;
   height: 96px;
-  box-sizing: border-box;
 `;
 
 const LanguageButtonBox = styled.div`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   margin-top: 8px;
+  width: 130px;
 `;
 
 export type LanguageSelectionPropsType = {

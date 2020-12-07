@@ -6,11 +6,15 @@ import MiniLogo from '../../atoms/logos/MiniLogo';
 import Text from '../../atoms/texts/Text';
 import Palette from '../../../@types/Palette';
 
-const RoomItemHeaderWrapper = styled.div`
+type RoomItemHeaderWrapperPropsType = {
+  size: 'big' | 'small';
+};
+
+const RoomItemHeaderWrapper = styled.div<RoomItemHeaderWrapperPropsType>`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0 0 15px 0;
+  /* margin-bottom: ${(props) => (props.size === 'big' ? '16px' : '12px')}; */
   padding: 0 0 2px 0;
   border-bottom: 4px solid ${Palette.LIGHT_GREY};
 `;
@@ -32,23 +36,34 @@ export type RoomItemPropsType = {
   title: string;
 };
 
+const TextWrapper = styled.div<RoomItemHeaderWrapperPropsType>`
+  display: flex;
+  align-items: center;
+  width: ${(props) => (props.size === 'big' ? '320px' : '216px')};
+  height: ${(props) => (props.size === 'big' ? '46px' : '34px')};
+`;
+
 function RoomItem({ size, createdAt, participantCount, roomCapacity, title }: RoomItemPropsType) {
   return (
     <div>
       <RoomItemBox size={size}>
-        <RoomItemHeaderWrapper>
+        <RoomItemHeaderWrapper size={size}>
           <RoomItemHeaderLeft>
             <MiniLogo />
-            <MarginedText size={14} color={Palette.PUPAGO_BLUE}>
+            <MarginedText size={size === 'big' ? 14 : 12} color={Palette.PUPAGO_BLUE}>
               {createdAt}
             </MarginedText>
           </RoomItemHeaderLeft>
-          <Text size={14} color={Palette.DARK_GREY}>{`(${participantCount} / ${roomCapacity})`}</Text>
+          <Text
+            size={size === 'big' ? 14 : 12}
+            color={Palette.DARK_GREY}
+          >{`(${participantCount} / ${roomCapacity})`}</Text>
         </RoomItemHeaderWrapper>
-
-        <Text size={16} color={Palette.DARK_GREY}>
-          {title}
-        </Text>
+        <TextWrapper size={size}>
+          <Text size={size === 'big' ? 16 : 12} color={Palette.DARK_GREY}>
+            {title}
+          </Text>
+        </TextWrapper>
       </RoomItemBox>
     </div>
   );

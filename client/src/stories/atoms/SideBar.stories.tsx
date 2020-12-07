@@ -1,14 +1,14 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
-import SideBar, { SideBarpropsType } from '../../components/atoms/boxes/SideBar';
+import SideBarBox, { SideBarBoxpropsType } from '../../components/atoms/boxes/SideBarBox';
 
 export default {
-  title: 'pupagoAtom/SideBar',
-  component: SideBar,
+  title: 'pupagoAtom/SideBarBox',
+  component: SideBarBox,
 } as Meta;
 
-const Template: Story<SideBarpropsType> = (args) => <SideBar {...args} />;
+const Template: Story<SideBarBoxpropsType> = (args) => <SideBarBox {...args} />;
 
 export const Appearance = Template.bind({});
 Appearance.args = {};
