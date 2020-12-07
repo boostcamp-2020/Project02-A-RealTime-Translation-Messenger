@@ -11,12 +11,9 @@ export default {
 const Template: Story<LanguageSelectionPropsType> = (args) => <LanguageSelection {...args} />;
 
 export const unSelected = Template.bind({});
-unSelected.args = {
-  children: '언어를 선택해주세요',
-};
+unSelected.args = {};
 
 export const selectedKorean = Template.bind({});
 selectedKorean.args = {
-  children: '언어를 선택해주세요',
   selected: false,
 };
