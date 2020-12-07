@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export type SideBarpropsType = {
+export type SideBarBoxpropsType = {
   children: React.ReactNode;
 };
 
@@ -13,7 +13,7 @@ const StyledSideBar = styled.section`
   background: rgba(255, 255, 255, 0.6);
 `;
 
-function SideBar({ children }: SideBarpropsType) {
+function SideBarBox({ children }: SideBarpropsType) {
   return (
     <>
       <StyledSideBar>{children}</StyledSideBar>
@@ -21,4 +21,4 @@ function SideBar({ children }: SideBarpropsType) {
   );
 }
 
-export default SideBar;
+export default SideBarBox;

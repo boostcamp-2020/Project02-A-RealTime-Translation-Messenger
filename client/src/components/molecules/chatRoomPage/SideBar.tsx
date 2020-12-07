@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import SideBarBox from '../../atoms/boxes/SideBar';
+import SideBarBox from '../../atoms/boxes/SideBarBox';
 import SideBarTab from '../../atoms/buttons/SideBarTab';
 
 const SideBarTabWrapper = styled.div`

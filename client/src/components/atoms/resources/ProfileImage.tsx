@@ -16,15 +16,15 @@ export type ProfileImageSrcProsType = {
 const setSize = (size: string): [string, string] => {
   switch (size) {
     case 'size-88':
-      return ['88px', '80px'];
+      return ['88px', '76px'];
     case 'size-72':
-      return ['72px', '64px'];
+      return ['72px', '60px'];
     case 'size-40':
-      return ['40px', '36px'];
+      return ['40px', '32px'];
     case 'size-24':
-      return ['24px', '22px'];
+      return ['24px', '18px'];
     default:
-      return ['88px', '80px'];
+      return ['88px', '76px'];
   }
 };
 

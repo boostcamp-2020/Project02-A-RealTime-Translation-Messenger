@@ -17,13 +17,17 @@ const MainTitleWrapper = styled.div`
   }
 `;
 
+const MarginedText = styled(Text)`
+  margin-bottom: 8px;
+`;
+
 export const MainTitle = () => {
   return (
     <MainTitleWrapper>
       <LogoWithText />
-      <Text size={24} weight={'bold'} color={Palette.PUPAGO_BLUE}>
+      <MarginedText size={24} weight={'bold'} color={Palette.PUPAGO_BLUE}>
         실시간 번역 채팅 푸파고!
-      </Text>
+      </MarginedText>
       <Text size={18} color={Palette.DARK_GREY}>
         글로벌 채팅을 즐겨보세요!
       </Text>

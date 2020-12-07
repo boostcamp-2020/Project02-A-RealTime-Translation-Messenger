@@ -13,17 +13,22 @@ export type ParticipantCountPropsType = {
 const ParticipantCountWrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 48px;
   height: 16px;
+`;
+
+const MarginedText = styled(Text)`
+  margin-top: 2px;
 `;
 
 export const ParticipantCount = ({ maxCapacity, participatingCount }: ParticipantCountPropsType) => {
   return (
     <ParticipantCountWrapper>
       <MiniLogo />
-      <Text size={14} color={Palette.PUPAGO_BLUE}>
+      <MarginedText size={14} color={Palette.PUPAGO_BLUE}>
         {participatingCount} / {maxCapacity}
-      </Text>
+      </MarginedText>
     </ParticipantCountWrapper>
   );
 };

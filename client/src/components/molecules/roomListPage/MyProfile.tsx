@@ -23,13 +23,13 @@ const MyProfileBox = styled.div`
 const LanguageTagWrapper = styled.div`
   position: relative;
   left: 24px;
-  bottom: 31px;
+  bottom: 24px;
   z-index: 3;
 `;
 
 const NicknameText = styled(Text)`
   position: relative;
-  bottom: 20px;
+  bottom: 14px;
 `;
 
 function MyProfile({ image, language, nickname }: MyProfilePropsType) {
