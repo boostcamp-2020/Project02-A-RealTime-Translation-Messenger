@@ -20,20 +20,18 @@ const LanguageButtonBox = styled.div`
 `;
 
 export type LanguageSelectionPropsType = {
-  children: React.ReactNode;
   selectedKorean: boolean;
-  selectedEnglish: boolean;
 };
 
-function LanguageSelection({ children, selectedKorean, selectedEnglish }: LanguageSelectionPropsType) {
+function LanguageSelection({ selectedKorean = true }: LanguageSelectionPropsType) {
   return (
     <LanguageSelectionBox>
       <Text size={18} color={Palette.DARK_GREY}>
-        {children}
+        언어를 선택해주세요
       </Text>
       <LanguageButtonBox>
         <LanguageSelectButton selected={selectedKorean} language={'Korean'}></LanguageSelectButton>
-        <LanguageSelectButton selected={selectedEnglish} language={'English'}></LanguageSelectButton>
+        <LanguageSelectButton selected={!selectedKorean} language={'English'}></LanguageSelectButton>
       </LanguageButtonBox>
     </LanguageSelectionBox>
   );
