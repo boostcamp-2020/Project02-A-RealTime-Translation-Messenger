@@ -4,11 +4,6 @@ import styled from 'styled-components';
 import Text from '../../atoms/texts/Text';
 import CryingPapago from '../../atoms/resources/CryingPapago';
 
-export type NoChatRoomPropsType = {
-  noChatRoomText: string;
-  createRoomText: string;
-};
-
 const NoChatRoomBox = styled.div`
   display: flex;
   flex-direction: column;
@@ -26,12 +21,12 @@ const CreateRoomText = styled(Text)`
   margin-top: 98px;
 `;
 
-function NoChatRoom({ noChatRoomText, createRoomText }: NoChatRoomPropsType) {
+function NoChatRoom() {
   return (
     <NoChatRoomBox>
-      <NoChatRoomText size={14}>{noChatRoomText}</NoChatRoomText>
+      <NoChatRoomText size={14}>채팅방이 없어요!</NoChatRoomText>
       <CryingPapago />
-      <CreateRoomText size={14}>{createRoomText}</CreateRoomText>
+      <CreateRoomText size={14}>방을 만들고 대화를 시작해보세요!</CreateRoomText>
     </NoChatRoomBox>
   );
 }
