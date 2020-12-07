@@ -15,5 +15,5 @@ unSelected.args = {};
 
 export const selectedKorean = Template.bind({});
 selectedKorean.args = {
-  selected: false,
+  selectedKorean: false,
 };
