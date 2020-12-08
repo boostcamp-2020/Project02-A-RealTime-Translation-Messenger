@@ -27,4 +27,10 @@ type ReceiveChatType = {
   createdAt: string;
 };
 
-export { RoomListType, ParticipantsType, ParticipantsListType, ReceiveChatType };
+type CreatedRoomType = {
+  roomCode: string | null;
+  title: string | null;
+  isPrivate: string | null;
+};
+
+export { RoomListType, ParticipantsType, ParticipantsListType, ReceiveChatType, CreatedRoomType };
