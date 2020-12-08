@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import request from 'request';
-
 import dotenv from 'dotenv';
+
 import StatusCode from '../@types/statusCode';
 
 dotenv.config();
@@ -20,7 +20,7 @@ const detection = async (req: Request, res: Response) => {
   };
 
   request.post(options, function (error, response, body) {
-    if (!error && response.statusCode == 200) {
+    if (!error && response.statusCode === StatusCode.OK) {
       res.status(StatusCode.OK).json(JSON.parse(body));
     } else {
       res.status(response.statusCode).json(error);
@@ -39,7 +39,7 @@ const translation = async (req: Request, res: Response) => {
   };
 
   request.post(options, function (error, response, body) {
-    if (!error && response.statusCode == 200) {
+    if (!error && response.statusCode === StatusCode.OK) {
       res.status(StatusCode.OK).json(JSON.parse(body).message.result);
     } else {
       res.status(response.statusCode).json(error);
