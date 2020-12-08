@@ -14,6 +14,7 @@ type ParticipantsType = {
 type ParticipantsListType = {
   participantsList: ParticipantsType[];
   type: string;
+  diffNickname: string;
 };
 
 type SendChatType = {
@@ -27,6 +28,7 @@ type ReceiveChatType = {
   English: string;
   senderId: string;
   nickname: string;
+  imageLink: string;
   createdAt: string;
 };
 
