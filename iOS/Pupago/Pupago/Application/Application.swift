@@ -16,11 +16,13 @@ final class Application: NSObject {
     let navigator: Navigator
     var userName: String
     var localize: Localize
+    var profile: String
     
     private override init() {
         navigator = Navigator.default
         userName = ""
         localize = .korean
+        profile = ""
     }
     
     func presentInitialScreen(in window: UIWindow?) {

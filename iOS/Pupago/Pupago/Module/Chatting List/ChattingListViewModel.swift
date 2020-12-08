@@ -15,6 +15,7 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
     struct Input {
         let createTrigger: Observable<Void>
         let joinTrigger: Observable<Void>
+        let tapTrigger: Observable<UITapGestureRecognizer>
         let selection: Observable<IndexPath>
     }
     
@@ -24,11 +25,13 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
         let created: Driver<CreateRoomViewModel>
         let joined: Driver<JoinRoomViewModel>
         let entered: Driver<ChattingViewModel>
+        let reload: Driver<Void>
     }
     
     let rooms = BehaviorRelay<[Room]>(value: [])
     let roomInfo = PublishRelay<(code: String, isPrivate: Bool)>()
     let socketEntered = PublishRelay<Room?>()
+    let tapTrigger = PublishRelay<Void>()
     
     func transform(_ input: Input) -> Output {
         
@@ -102,11 +105,23 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
                 return viewModel
             }
         
+        input.tapTrigger
+            .subscribe(onNext: { [unowned self] _ in
+                pupagoAPI.profile()
+                    .subscribe(onNext: { result in
+                        Application.shared.profile = result.imageLink
+                        tapTrigger.accept(())
+                })
+                .disposed(by: rx.disposeBag)
+            })
+            .disposed(by: rx.disposeBag)
+        
         return Output(viewTexts: viewText,
                       item: roomItem,
                       created: created,
                       joined: joined,
-                      entered: entered)
+                      entered: entered,
+                      reload: tapTrigger.asDriver(onErrorJustReturn: ()))
       
     }
     

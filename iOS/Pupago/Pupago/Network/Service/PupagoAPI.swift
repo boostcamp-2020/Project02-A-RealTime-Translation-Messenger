@@ -34,4 +34,7 @@ class PupagoAPI: NetworkProviding {
         return request(endpoint: PapagoEndpoint.translate(source: source, target: target, text: text))
     }
     
+    func profile() -> Observable<Profile> {
+        return request(endpoint: RoomEndpoint.profile)
+    }
 }

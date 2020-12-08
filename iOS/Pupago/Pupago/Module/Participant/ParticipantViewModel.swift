@@ -16,6 +16,7 @@ class ParticipantViewModel: ViewModel, ViewModelType {
         let dismissTrigger: Observable<Void>
     }
     struct Output {
+        let viewTexts: Driver<Localize.ParticipantViewText>
         let item: Observable<[Participant]>
         let dismiss: Driver<Void>
     }
@@ -37,10 +38,14 @@ class ParticipantViewModel: ViewModel, ViewModelType {
             })
             .disposed(by: rx.disposeBag)
         
+        let viewText = localize.asDriver()
+            .map { $0.participantViewText }
+        
         let item = participants.asObservable()
         let dismiss = input.dismissTrigger.asDriver(onErrorJustReturn: ())
         
-        return Output(item: item,
+        return Output(viewTexts: viewText,
+                      item: item,
                       dismiss: dismiss)
     }
     

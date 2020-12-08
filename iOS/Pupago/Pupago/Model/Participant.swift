@@ -16,4 +16,6 @@ struct Participant: Codable {
 
 struct Participants: Codable {
     let participantsList: [Participant]
+    let type: String?
+    let diffNickname: String?
 }

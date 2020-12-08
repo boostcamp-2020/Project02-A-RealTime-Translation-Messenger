@@ -45,6 +45,12 @@ enum Localize {
     
     struct ChatroomViewText {
         var language: String
+        var enter: String
+        var leave: String
+    }
+    
+    struct ParticipantViewText {
+        var title: String
     }
 }
 
@@ -141,9 +147,18 @@ extension Localize {
     var chatroomViewText: ChatroomViewText {
         switch self {
         case .korean:
-            return .init(language: "한국어")
+            return .init(language: "한국어", enter: "님이 들어왔습니다.", leave: "님이 나갔습니다.")
         case .english:
-            return .init(language: "English")
+            return .init(language: "English", enter: " Came In", leave: " Went Out")
+        }
+    }
+    
+    var participantViewText: ParticipantViewText {
+        switch self {
+        case .korean:
+            return .init(title: "대화 상대")
+        case .english:
+            return .init(title: "Contact")
         }
     }
 }

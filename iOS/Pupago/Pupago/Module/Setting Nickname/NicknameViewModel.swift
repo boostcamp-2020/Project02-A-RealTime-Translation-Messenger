@@ -30,6 +30,7 @@ final class NicknameViewModel: ViewModel, ViewModelType {
     
     func transform(_ input: Input) -> Output {
         
+        let pupagoAPI = PupagoAPI()
         let socket = SocketIOManager.shared.socket
         
         socket?.rx.event(.connect)
@@ -62,9 +63,14 @@ final class NicknameViewModel: ViewModel, ViewModelType {
         
         input.saveTrigger
             .withLatestFrom(input.nicknameText)
-            .subscribe(onNext: { text in
-                Application.shared.userName = text ?? ""
-                SocketIOManager.shared.establishConnect()
+            .subscribe(onNext: { [unowned self] text in
+                pupagoAPI.profile()
+                    .subscribe(onNext: { result in
+                        Application.shared.profile = result.imageLink
+                        Application.shared.userName = text ?? ""
+                        SocketIOManager.shared.establishConnect()
+                })
+                .disposed(by: rx.disposeBag)
             })
             .disposed(by: rx.disposeBag)
         
