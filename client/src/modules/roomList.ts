@@ -30,11 +30,7 @@ const initialState: RoomListInitialStateType = {
 const roomList = createSlice({
   name,
   initialState,
-  reducers: {
-    clearRoom: (state) => {
-      state.data = null;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(getRoomList.pending.type, (state) => {
@@ -52,4 +48,3 @@ const roomList = createSlice({
 });
 
 export default roomList.reducer;
-export const clearRoom = roomList.actions.clearRoom;
