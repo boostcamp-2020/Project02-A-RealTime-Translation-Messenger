@@ -5,26 +5,28 @@ import api from '../assets/api';
 
 const name = 'roomList';
 
-export const getRoomList = createAsyncThunk(`${name}/getRoomList`, async (_, { rejectWithValue }) => {
+const getRoomList = createAsyncThunk(`${name}/getRoomList`, async (_, { rejectWithValue }) => {
   try {
-    return (await api.getRoomList()).data;
+    return (await api.getRoomList()).data.roomList;
   } catch (e) {
     return rejectWithValue(e);
   }
 });
 
 type RoomListInitialStateType = {
-  data: {
-    roomList: RoomListType[];
-  } | null;
-  loading: boolean;
-  error: Error | null;
+  roomList: {
+    data: RoomListType[] | null;
+    loading: boolean;
+    error: Error | null;
+  };
 };
 
 const initialState: RoomListInitialStateType = {
-  data: null,
-  loading: false,
-  error: null,
+  roomList: {
+    data: null,
+    loading: false,
+    error: null,
+  },
 };
 
 const roomList = createSlice({
@@ -34,17 +36,18 @@ const roomList = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getRoomList.pending.type, (state) => {
-        state.loading = true;
+        state.roomList.loading = true;
       })
-      .addCase(getRoomList.fulfilled.type, (state, action: PayloadAction<{ roomList: RoomListType[] }>) => {
-        state.loading = false;
-        state.data = action.payload;
+      .addCase(getRoomList.fulfilled.type, (state, action: PayloadAction<RoomListType[]>) => {
+        state.roomList.loading = false;
+        state.roomList.data = action.payload;
       })
       .addCase(getRoomList.rejected.type, (state, action: PayloadAction<Error>) => {
-        state.loading = false;
-        state.error = action.payload;
+        state.roomList.loading = false;
+        state.roomList.error = action.payload;
       });
   },
 });
 
 export default roomList.reducer;
+export { getRoomList };
