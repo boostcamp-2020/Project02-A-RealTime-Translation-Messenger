@@ -1,12 +1,8 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-const name = 'user';
+import { UserStateType } from '../@types/types';
 
-type UserStateType = {
-  nickname: string | null;
-  language: string | null;
-  imageLink: string | null;
-};
+const name = 'user';
 
 type InitialStateType = {
   user: {
