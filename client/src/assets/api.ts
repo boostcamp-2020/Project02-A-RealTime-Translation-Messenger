@@ -7,7 +7,6 @@ const getRoomList = async () => {
 };
 
 const createRoom = async (title: string, isPrivate: 'true' | 'false') => {
-  console.log({ title, isPrivate });
   return axios.post<CreatedRoomType>(`${process.env.BASE_URL}/api/room`, { title, isPrivate });
 };
 
