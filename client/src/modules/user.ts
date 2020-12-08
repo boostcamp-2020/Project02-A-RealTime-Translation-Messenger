@@ -8,13 +8,13 @@ type UserStateType = {
   imageLink: string | null;
 };
 
-type UserInitialStateType = {
+type InitialStateType = {
   user: {
     data: UserStateType;
   };
 };
 
-const initialState: UserInitialStateType = {
+const initialState: InitialStateType = {
   user: {
     data: {
       nickname: null,
