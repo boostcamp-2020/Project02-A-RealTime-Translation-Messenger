@@ -27,4 +27,15 @@ type ReceiveChatType = {
   createdAt: string;
 };
 
-export { RoomListType, ParticipantsType, ParticipantsListType, ReceiveChatType };
+type ChatLogsType = {
+  Korean: string | undefined;
+  English: string | undefined;
+  senderId: string | undefined;
+  nickname: string | undefined;
+  imageLink: string | undefined;
+  createdAt: string | undefined;
+  type: string | undefined;
+  diffNickname: string | undefined;
+};
+
+export { RoomListType, ParticipantsType, ParticipantsListType, ReceiveChatType, ChatLogsType };
