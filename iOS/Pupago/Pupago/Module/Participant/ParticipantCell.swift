@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ParticipantCell: CollectionViewBaseCell {
     
@@ -21,6 +22,9 @@ class ParticipantCell: CollectionViewBaseCell {
     }
     
     func configure(with item: Participant) {
+        let url = URL(string: item.imageLink ?? "")
+        
+        thumbnailImageView.kf.setImage(with: url)
         nameLabel.text = item.nickname
         langLabel.text = item.language
     }

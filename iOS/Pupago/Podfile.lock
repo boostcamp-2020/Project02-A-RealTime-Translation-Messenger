@@ -1,6 +1,9 @@
 PODS:
   - Alamofire (5.4.0)
   - Differentiator (4.0.1)
+  - Kingfisher (5.15.8):
+    - Kingfisher/Core (= 5.15.8)
+  - Kingfisher/Core (5.15.8)
   - RxBlocking (5.1.1):
     - RxSwift (~> 5)
   - RxCocoa (5.1.1):
@@ -19,9 +22,11 @@ PODS:
     - Starscream (~> 3.1)
   - Starscream (3.1.1)
   - SwiftLint (0.41.0)
+  - Toaster (2.3.0)
 
 DEPENDENCIES:
   - Alamofire (~> 5.2)
+  - Kingfisher
   - RxBlocking (~> 5.0)
   - RxCocoa (~> 5.0)
   - RxDataSources (~> 4.0)
@@ -29,11 +34,13 @@ DEPENDENCIES:
   - RxTest (~> 5.0)
   - Socket.IO-Client-Swift (~> 15.2.0)
   - SwiftLint
+  - Toaster (from `https://github.com/devxoul/Toaster.git`, branch `master`)
 
 SPEC REPOS:
   trunk:
     - Alamofire
     - Differentiator
+    - Kingfisher
     - RxBlocking
     - RxCocoa
     - RxDataSources
@@ -44,9 +51,20 @@ SPEC REPOS:
     - Starscream
     - SwiftLint
 
+EXTERNAL SOURCES:
+  Toaster:
+    :branch: master
+    :git: https://github.com/devxoul/Toaster.git
+
+CHECKOUT OPTIONS:
+  Toaster:
+    :commit: 0fca711c4083cb921cc0893a7a47836358ebf96b
+    :git: https://github.com/devxoul/Toaster.git
+
 SPEC CHECKSUMS:
   Alamofire: 3b6a534a3df22db367e4dedeeca73d1ddfcf0e2f
   Differentiator: 886080237d9f87f322641dedbc5be257061b0602
+  Kingfisher: a3c03d702433fa6cfedabb2bddbe076fb8f2e902
   RxBlocking: 5f700a78cad61ce253ebd37c9a39b5ccc76477b4
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxDataSources: efee07fa4de48477eca0a4611e6d11e2da9c1114
@@ -56,7 +74,8 @@ SPEC CHECKSUMS:
   Socket.IO-Client-Swift: 1e3e3a1f09f3312a167f0d781eb2f383d477357c
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
   SwiftLint: c585ebd615d9520d7fbdbe151f527977b0534f1e
+  Toaster: c3473963c78e8cabbf6ea6f11ad0fdaae6f54987
 
-PODFILE CHECKSUM: 4ec803caf47fc9a318f0e3cad4f7a31321a6d112
+PODFILE CHECKSUM: f2c36e8b42858d1e4b873686fbb9bf239da39bc3
 
 COCOAPODS: 1.9.3

@@ -8,6 +8,7 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import Kingfisher
 
 final class ChattingListViewController: ViewController {
     
@@ -19,9 +20,12 @@ final class ChattingListViewController: ViewController {
     @IBOutlet weak var createButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     
+    private let tapGesture = UITapGestureRecognizer()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
+        configureThumbnailImageView()
     }
     
     override func bindViewModel() {
@@ -32,9 +36,11 @@ final class ChattingListViewController: ViewController {
         let createTrigger = createButton.rx.tap.asObservable()
         let joinTrigger = joinButton.rx.tap.asObservable()
         let selection = collectionView.rx.itemSelected.map { $0 }
+        let tapTrigger = tapGesture.rx.event.asObservable()
         
         let input = ChattingListViewModel.Input(createTrigger: createTrigger,
                                                 joinTrigger: joinTrigger,
+                                                tapTrigger: tapTrigger,
                                                 selection: selection)
         
         let output = viewModel.transform(input)
@@ -75,9 +81,16 @@ final class ChattingListViewController: ViewController {
 
         output.entered
             .drive(onNext: { [unowned self] viewModel in
-                self.navigator.show(segue: .chatting(viewModel:   viewModel),
+                self.navigator.show(segue: .chatting(viewModel: viewModel),
                                      sender: self,
                                      transition: .navigation)
+            })
+            .disposed(by: rx.disposeBag)
+        
+        output.reload
+            .drive(onNext: { [unowned self] _ in
+                let url = URL(string: Application.shared.profile)
+                self.thumbnailImageView.kf.setImage(with: url)
             })
             .disposed(by: rx.disposeBag)
     }
@@ -100,4 +113,12 @@ private extension ChattingListViewController {
         self.collectionView.collectionViewLayout = layout
     }
     
+    func configureThumbnailImageView() {
+        thumbnailImageView.isUserInteractionEnabled = true
+        thumbnailImageView.addGestureRecognizer(tapGesture)
+        
+        let url = URL(string: Application.shared.profile)
+        print(Application.shared.profile)
+        self.thumbnailImageView.kf.setImage(with: url)
+    }
 }

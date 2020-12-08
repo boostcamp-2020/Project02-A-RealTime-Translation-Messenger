@@ -13,6 +13,7 @@ class ChattingViewModel: ViewModel, ViewModelType {
     
     typealias RoomInfo = (title: String?, code: String?)
     typealias TranslationViewState = (text: String, isHidden: Bool)
+    typealias ParticipantState = (nickname: String, type: Bool)
     
     struct Input {
         let chatText: Observable<String>
@@ -32,6 +33,7 @@ class ChattingViewModel: ViewModel, ViewModelType {
         let activate: Driver<Bool>
         let showParticipant: Driver<ParticipantViewModel>
         let speeched: Driver<SpeechViewModel>
+        let status: Driver<ParticipantState>
     }
     
     let chats = BehaviorRelay<[MessageSection]>(value: [MessageSection(header: "Chat", items: [])])
@@ -41,6 +43,7 @@ class ChattingViewModel: ViewModel, ViewModelType {
     let downScroll = PublishRelay<Void>()
     let translationViewState = PublishRelay<(text: String, isHidden: Bool)>()
     let reset = PublishRelay<Void>()
+    let status = BehaviorRelay<(ParticipantState)>(value: ("", false))
     
     func transform(_ input: Input) -> Output {
         
@@ -60,8 +63,12 @@ class ChattingViewModel: ViewModel, ViewModelType {
             .disposed(by: rx.disposeBag)
         
         socketManager.socket.rx.event(.list)
-            .subscribe(onNext: { data in
-                print("Participant changed!")
+            .subscribe(onNext: { [unowned self] data in
+                if let list = self.participantParse(data) {
+                    let nickname: String = list.diffNickname ?? ""
+                    let type = list.type == "enter" ? true : false
+                    self.status.accept((nickname, type))
+                }
             })
             .disposed(by: rx.disposeBag)
         
@@ -132,7 +139,8 @@ class ChattingViewModel: ViewModel, ViewModelType {
                       scroll: downScroll.asDriver(onErrorJustReturn: ()),
                       activate: activate.asDriver(),
                       showParticipant: showParticipant,
-                      speeched: speeched)
+                      speeched: speeched,
+                      status: status.asDriver())
     }
     
 }
@@ -155,4 +163,13 @@ private extension ChattingViewModel {
         return message
     }
     
+    private func participantParse(_ data: [Any]?) -> Participants? {
+        guard
+            let dataString = data?[0] as? String,
+            let data = dataString.data(using: .utf8),
+            let participants = try? JSONDecoder().decode(Participants.self, from: data)
+        else { return nil }
+
+        return participants
+    }
 }

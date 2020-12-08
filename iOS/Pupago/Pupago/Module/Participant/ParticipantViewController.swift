@@ -11,6 +11,7 @@ class ParticipantViewController: ViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var dismissButton: UIButton!
+    @IBOutlet weak var titleLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +28,12 @@ class ParticipantViewController: ViewController {
         let input = ParticipantViewModel.Input(viewWillAppear: viewWillAppear,
                                                dismissTrigger: dismissTrigger)
         let output = viewModel.transform(input)
+        
+        output.viewTexts
+            .drive(onNext: { [unowned self] texts in
+                self.titleLabel.text = texts.title
+            })
+            .disposed(by: rx.disposeBag)
         
         output.item
             .bind(to: collectionView.rx.items(

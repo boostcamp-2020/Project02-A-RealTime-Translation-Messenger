@@ -9,6 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import RxDataSources
+import Toaster
 
 class ChattingViewController: ViewController {
 
@@ -30,6 +31,8 @@ class ChattingViewController: ViewController {
 
     private var didSetupViewConstraints = false
     private var keyboardShown: Bool = false
+    private var enterStatus: String = ""
+    private var leaveStatus: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +63,8 @@ class ChattingViewController: ViewController {
         output.viewText
             .drive(onNext: { [unowned self] text in
                 self.languageLabel.text = text.language
+                self.enterStatus = text.enter
+                self.leaveStatus = text.leave
             })
             .disposed(by: rx.disposeBag)
         
@@ -109,6 +114,14 @@ class ChattingViewController: ViewController {
                                     sender: self,
                                     transition: .present)
                         
+            })
+            .disposed(by: rx.disposeBag)
+        
+        output.status
+            .drive(onNext: { [unowned self] status in
+                var toasterText = status.nickname
+                toasterText += status.type == true ? enterStatus : leaveStatus
+                status.nickname == "" ? nil : Toast(text: toasterText).show()
             })
             .disposed(by: rx.disposeBag)
     }
