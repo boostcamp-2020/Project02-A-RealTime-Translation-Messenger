@@ -17,6 +17,7 @@ class ChattingViewModel: ViewModel, ViewModelType {
     struct Input {
         let chatText: Observable<String>
         let registTrigger: Observable<Void>
+        let micTrigger: Observable<Void>
         let showParticipantTrigger: Observable<Void>
         let willLeave: Observable<Void>
     }
@@ -30,6 +31,7 @@ class ChattingViewModel: ViewModel, ViewModelType {
         let scroll: Driver<Void>
         let activate: Driver<Bool>
         let showParticipant: Driver<ParticipantViewModel>
+        let speeched: Driver<SpeechViewModel>
     }
     
     let chats = BehaviorRelay<[MessageSection]>(value: [MessageSection(header: "Chat", items: [])])
@@ -39,7 +41,7 @@ class ChattingViewModel: ViewModel, ViewModelType {
     let downScroll = PublishRelay<Void>()
     let translationViewState = PublishRelay<(text: String, isHidden: Bool)>()
     let reset = PublishRelay<Void>()
-
+    
     func transform(_ input: Input) -> Output {
         
         let socketManager = SocketIOManager.shared
@@ -117,7 +119,11 @@ class ChattingViewModel: ViewModel, ViewModelType {
                 return ParticipantViewModel(roomCode: code)
             }
             .asDriver(onErrorJustReturn: ParticipantViewModel(roomCode: ""))
-            
+        
+        let speeched = input.micTrigger
+            .asDriver(onErrorJustReturn: ())
+            .map { _ in SpeechViewModel() }
+        
         return Output(viewText: viewText,
                       roomInfo: info,
                       items: chatItem,
@@ -125,7 +131,8 @@ class ChattingViewModel: ViewModel, ViewModelType {
                       reset: reset.map { "" }.asDriver(onErrorJustReturn: ""),
                       scroll: downScroll.asDriver(onErrorJustReturn: ()),
                       activate: activate.asDriver(),
-                      showParticipant: showParticipant)
+                      showParticipant: showParticipant,
+                      speeched: speeched)
     }
     
 }

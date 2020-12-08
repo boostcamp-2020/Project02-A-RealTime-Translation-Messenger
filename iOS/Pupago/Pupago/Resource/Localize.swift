@@ -59,6 +59,15 @@ extension Localize {
         }
     }
     
+    var toLocale: Locale {
+        switch self {
+        case .korean:
+            return Locale(identifier: "ko-KR")
+        case .english:
+            return Locale(identifier: "en-US")
+        }
+    }
+    
     var languageViewText: SettingLanguageViewText {
         switch self {
         case .korean:

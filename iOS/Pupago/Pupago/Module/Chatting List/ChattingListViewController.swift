@@ -75,7 +75,7 @@ final class ChattingListViewController: ViewController {
 
         output.entered
             .drive(onNext: { [unowned self] viewModel in
-                self.navigator.show(segue: .chatting(viewModel: viewModel),
+                self.navigator.show(segue: .chatting(viewModel:   viewModel),
                                      sender: self,
                                      transition: .navigation)
             })

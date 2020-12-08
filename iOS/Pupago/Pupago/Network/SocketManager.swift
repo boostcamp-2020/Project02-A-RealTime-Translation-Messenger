@@ -40,6 +40,7 @@ class SocketIOManager {
     
     func sendMessage(korean: String, english: String, origin: String) {
         let item = ["Korean": korean, "English": english, "origin": origin]
+        
         socket.emit(SocketEndpoint.sendMessage.eventName, item)
     }
     

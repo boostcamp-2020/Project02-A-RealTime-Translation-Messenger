@@ -48,12 +48,12 @@ extension ParticipantViewController {
     
     private func configureCollectionViewLayout() {
         let size = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                          heightDimension: .absolute(50))
+                                          heightDimension: .absolute(70))
         let item = NSCollectionLayoutItem(layoutSize: size)
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: size, subitem: item, count: 1)
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = 20.0
-        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 24, bottom: 10, trailing: 0)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 12, leading: 0, bottom: 0, trailing: 0)
         
         let layout = UICollectionViewCompositionalLayout(section: section)
         

@@ -16,6 +16,7 @@ class ChattingViewController: ViewController {
     @IBOutlet weak var codeButton: Button!
     @IBOutlet weak var inputText: UITextView!
     @IBOutlet weak var registButton: UIButton!
+    @IBOutlet weak var micButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var translationTextView: UITextView!
     @IBOutlet weak var inputBarBottomConstraint: NSLayoutConstraint!
@@ -44,11 +45,13 @@ class ChattingViewController: ViewController {
         
         let chatText = inputText.rx.text.orEmpty.asObservable()
         let registTrigger = registButton.rx.tap.asObservable()
+        let micTrigger = micButton.rx.tap.asObservable()
         let showParticipantTrigger = rightNavigationItem.rx.tap.asObservable()
         let willLeave = rx.viewWillDisappear.map { _ in }
         
         let input = ChattingViewModel.Input(chatText: chatText,
                                             registTrigger: registTrigger,
+                                            micTrigger: micTrigger,
                                             showParticipantTrigger: showParticipantTrigger,
                                             willLeave: willLeave)
         
@@ -97,6 +100,15 @@ class ChattingViewController: ViewController {
                 self.navigator.show(segue: .participant(viewModel: viewModel),
                                     sender: self,
                                     transition: .slideIn)
+            })
+            .disposed(by: rx.disposeBag)
+        
+        output.speeched
+            .drive(onNext: { [unowned self] viewModel in
+                self.navigator.show(segue: .speech(viewModel: viewModel),
+                                    sender: self,
+                                    transition: .present)
+                        
             })
             .disposed(by: rx.disposeBag)
     }
