@@ -27,4 +27,23 @@ type ReceiveChatType = {
   createdAt: string;
 };
 
-export { RoomListType, ParticipantsType, ParticipantsListType, ReceiveChatType };
+type TranslateTextPropsType = {
+  source: 'ko' | 'en';
+  target: 'ko' | 'en';
+  text: string;
+};
+
+type TranslateTextReturnType = {
+  srcLangType: string;
+  tarLangType: string;
+  translatedText: string;
+};
+
+export {
+  RoomListType,
+  ParticipantsType,
+  ParticipantsListType,
+  ReceiveChatType,
+  TranslateTextPropsType,
+  TranslateTextReturnType,
+};
