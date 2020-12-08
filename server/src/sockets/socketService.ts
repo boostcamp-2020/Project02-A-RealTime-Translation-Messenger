@@ -32,13 +32,14 @@ const createReceiveChatType = async (socketId: string, Korean: string, English: 
   const roomCode = await socketRoomModel.getRoomBySocket(socketId);
 
   const socketInfo = await roomSocketsInfoModel.getSocketInfo(roomCode, socketId);
-  const { nickname }: { nickname: string } = JSON.parse(socketInfo);
+  const { nickname, imageLink }: { nickname: string; imageLink: string } = JSON.parse(socketInfo);
 
   const receiveChat: ReceiveChatType = {
     Korean,
     English,
     senderId: socketId,
     nickname,
+    imageLink,
     createdAt: dateUtil.getNow(),
   };
 
