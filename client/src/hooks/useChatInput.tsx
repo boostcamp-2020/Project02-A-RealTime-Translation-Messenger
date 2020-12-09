@@ -1,5 +1,6 @@
 import { useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+
 import { RootState } from '../modules';
 import { getTranslatedText, setChatInput } from '../modules/chatInput';
 
@@ -21,8 +22,9 @@ function useTranslate() {
     (text: string) => dispatch(getTranslatedText({ text, currentLanguage: translation.data.language })),
     [dispatch],
   );
+
   const onSetChatInput = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => dispatch(setChatInput(e.target.value)),
+    (e: React.ChangeEvent<HTMLTextAreaElement>) => dispatch(setChatInput(e.target.value)),
     [dispatch],
   );
 
