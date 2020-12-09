@@ -1,8 +1,8 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../modules';
-import { setUser } from '../modules/user';
 import { useCallback } from 'react';
 
+import { RootState } from '../modules';
+import { setUser } from '../modules/user';
 import { UserStateType } from '../@types/types';
 
 export default function useUser() {
