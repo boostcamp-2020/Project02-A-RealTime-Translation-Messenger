@@ -27,6 +27,7 @@ type ReceiveChatType = {
   createdAt: string;
 };
 
+
 type TranslateTextPropsType = {
   source: 'ko' | 'en';
   target: 'ko' | 'en';
@@ -39,6 +40,12 @@ type TranslateTextReturnType = {
   translatedText: string;
 };
 
+type UserStateType = {
+  nickname: string | null;
+  language: string | null;
+  imageLink: string | null;
+};
+
 export {
   RoomListType,
   ParticipantsType,
@@ -46,4 +53,5 @@ export {
   ReceiveChatType,
   TranslateTextPropsType,
   TranslateTextReturnType,
+  UserStateType
 };
