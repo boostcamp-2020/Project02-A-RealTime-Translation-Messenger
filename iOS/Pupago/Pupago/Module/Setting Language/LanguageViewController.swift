@@ -47,6 +47,12 @@ class LanguageViewController: ViewController {
             .bind(animated: descriptionLabel.rx.animated.fade(duration: 0.33).text)
             .disposed(by: rx.disposeBag)
         
+        output.viewTexts
+            .drive(onNext: { [unowned self] texts in
+                self.nextButton.setTitle(texts.nextButton, for: .normal)
+            })
+            .disposed(by: rx.disposeBag)
+        
         output.selected
             .drive(onNext: { [unowned self] localize in
                 let korSelected = localize == .korean

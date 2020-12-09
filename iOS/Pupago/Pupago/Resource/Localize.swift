@@ -92,12 +92,12 @@ extension Localize {
         case .korean:
             return .init(intro: "다음으로\n닉네임을 입력해주세요.",
                          inputPlaceholder: "닉네임을 입력해주세요.",
-                         inputConstraint: "닉네임은 2-12자여야 합니다.",
+                         inputConstraint: "닉네임은 2-12자여야 하며, 공백이 없어야 합니다.",
                          nextButton: "시작하기")
         case .english:
             return .init(intro: "Next,\nEnter your nickname.",
                          inputPlaceholder: "Enter your nickname",
-                         inputConstraint: "Nickname must be 2-12 characters.",
+                         inputConstraint: "Nickname must be 2-12 characters with No white spaces.",
                          nextButton: "Start")
         }
     }
