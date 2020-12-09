@@ -5,7 +5,7 @@ import RefreshIcon from '@material-ui/icons/Refresh';
 import Palette from '../../../@types/Palette';
 
 export type RefreshButtonTypes = {
-  onClick?: () => (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  onClickRefresh: () => void;
 };
 
 const IconWrapper = styled.div`
@@ -18,9 +18,10 @@ const IconWrapper = styled.div`
   cursor: pointer;
 `;
 
-const RefrshButtonWrapper = styled.div<RefreshButtonTypes>`
+const RefrshButtonWrapper = styled.div`
   width: 344px;
   height: 32px;
+  margin: 32px 0 16px 0;
   border-radius: 5px;
   background-color: ${Palette.PUPAGO_BLUE};
 
@@ -29,9 +30,9 @@ const RefrshButtonWrapper = styled.div<RefreshButtonTypes>`
   }
 `;
 
-export function RefreshButton({ ...props }: RefreshButtonTypes) {
+export function RefreshButton({ onClickRefresh }: RefreshButtonTypes) {
   return (
-    <RefrshButtonWrapper {...props}>
+    <RefrshButtonWrapper onClick={onClickRefresh}>
       <IconWrapper>
         <RefreshIcon style={{ fontSize: 24, color: 'white' }} />
       </IconWrapper>
