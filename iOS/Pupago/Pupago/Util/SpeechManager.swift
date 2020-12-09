@@ -31,6 +31,7 @@ final class SpeechManager: NSObject {
         
         audioEngine.stop()
         recognitionRequest?.endAudio()
+        playBackSound(status: false)
     }
     
     private func recoding() {
@@ -45,6 +46,9 @@ final class SpeechManager: NSObject {
     
     private func configureAVAudioSession() {
         let audioSession = AVAudioSession.sharedInstance()
+        
+        playBackSound(status: true)
+        usleep(400000)
         
         do {
             try audioSession.setCategory(AVAudioSession.Category.record)
@@ -103,5 +107,20 @@ final class SpeechManager: NSObject {
 }
 
 extension SpeechManager: SFSpeechRecognizerDelegate {
+    
+    private func playBackSound(status: Bool) {
+        let audioSession = AVAudioSession.sharedInstance()
+        
+        do {
+            try audioSession.setCategory(AVAudioSession.Category.playback)
+            try audioSession.setMode(AVAudioSession.Mode.default)
+            try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
+        } catch let error as NSError {
+            print(error)
+        }
+         
+        let sound: SystemSoundID = status ? 1110 : 1112
+        AudioServicesPlaySystemSound(sound)
+    }
     
 }
