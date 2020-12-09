@@ -1,12 +1,12 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import { ChatLogsType } from '../@types/types';
+import { ChatLogsType, ParticipantsUpdateType } from '../@types/types';
 
 const name = 'chat';
 
 type InitialStateType = {
   chatLogs: {
-    data: ChatLogsType[];
+    data: (ChatLogsType | ParticipantsUpdateType)[];
   };
 };
 
@@ -20,7 +20,7 @@ const chat = createSlice({
   name,
   initialState,
   reducers: {
-    stackChats: (state, action: PayloadAction<ChatLogsType>) => {
+    stackChats: (state, action: PayloadAction<ChatLogsType | ParticipantsUpdateType>) => {
       state.chatLogs.data.push(action.payload);
     },
   },

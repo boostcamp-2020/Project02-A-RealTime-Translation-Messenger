@@ -3,7 +3,7 @@ type RoomListType = {
   title: string;
   createdAt: string;
   participantCount: number;
-  isPrivate: string;
+  isPrivate: 'true' | 'false';
 };
 
 type ParticipantsType = {
@@ -14,7 +14,7 @@ type ParticipantsType = {
 
 type ParticipantsListType = {
   participantsList: ParticipantsType[];
-  type: string;
+  type: 'enter' | 'leave';
   diffNickname: string;
 };
 
@@ -28,14 +28,17 @@ type ReceiveChatType = {
 };
 
 type ChatLogsType = {
-  Korean: string | null;
-  English: string | null;
-  senderId: string | null;
-  nickname: string | null;
-  imageLink: string | null;
-  createdAt: string | null;
-  type: string | null;
-  diffNickname: string | null;
+  Korean: string;
+  English: string;
+  senderId: string;
+  nickname: string;
+  imageLink: string;
+  createdAt: string;
 };
 
-export { RoomListType, ParticipantsType, ParticipantsListType, ReceiveChatType, ChatLogsType };
+type ParticipantsUpdateType = {
+  type: 'enter' | 'leave';
+  diffNickname: string;
+};
+
+export { RoomListType, ParticipantsType, ParticipantsListType, ReceiveChatType, ChatLogsType, ParticipantsUpdateType };
