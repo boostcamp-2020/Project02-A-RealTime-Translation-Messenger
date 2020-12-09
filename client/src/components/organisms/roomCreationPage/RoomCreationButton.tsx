@@ -1,10 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+
 import useRoom from '../../../hooks/useRoom';
-
 import MainButton from '../../atoms/buttons/MainButton';
-
-const Wrapper = styled.div``;
 
 const validate = (title: string) => {
   if (title.length < 2 || title.length > 30) return false;
@@ -12,7 +10,6 @@ const validate = (title: string) => {
 };
 
 function RoomCreationButton() {
-  //   const { nicknameData, imageLinkData } = useUser();
   const { data: roomData, onCreateRoom } = useRoom();
 
   return (
