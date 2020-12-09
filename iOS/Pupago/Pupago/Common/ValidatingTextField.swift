@@ -7,8 +7,23 @@
 
 import UIKit
 
+@IBDesignable
 class ValidatingTextField: UITextField {
     
+    @IBInspectable var maxLength: Int = 12
+        
+    var stringValue: String { return text ?? "" }
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        keyboardType = .asciiCapable
+        addTarget(self, action: #selector(editingChanged), for: .editingChanged)
+        editingChanged(sender: self)
+    }
+    
+    @objc func editingChanged(sender: UITextField) {
+        sender.text = String(stringValue.prefix(maxLength))
+    }
+
     var isValid: Bool = true {
         didSet {
             configureForValid()

@@ -59,6 +59,12 @@ final class NicknameViewController: ViewController {
             })
             .disposed(by: rx.disposeBag)
         
+        output.animate
+            .asObservable()
+            .filter { $0 == true }
+            .bind(animated: nameTextField.rx.animated.tick(duration: 0.33).isSelected)
+            .disposed(by: rx.disposeBag)
+        
         output.saved
             .drive(onNext: { [unowned self] viewModel in
                 guard let window = self.view.window else { return }
@@ -66,4 +72,5 @@ final class NicknameViewController: ViewController {
             })
             .disposed(by: rx.disposeBag)
     }
+    
 }
