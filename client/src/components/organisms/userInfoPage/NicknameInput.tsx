@@ -1,9 +1,16 @@
 import React from 'react';
-import Palette from '../../../@types/Palette';
+import styled from 'styled-components';
 
+import Palette from '../../../@types/Palette';
 import useUser from '../../../hooks/useUser';
 import UnderLinedInput from '../../atoms/inputs/UnderLinedInput';
 import Text from '../../atoms/texts/Text';
+
+const NickNameLength = styled(Text)`
+  width: 40px;
+  margin-top: 10px;
+  margin-left: auto;
+`;
 
 function NicknameInput() {
   const { nicknameData, onSetNickname } = useUser();
@@ -19,7 +26,7 @@ function NicknameInput() {
         }}
         maxLength={12}
       />
-      <Text color={Palette.PUPAGO_BLUE} size={14}>{`${nicknameData.length} / ${12}`}</Text>
+      <NickNameLength color={Palette.PUPAGO_BLUE} size={14}>{`${nicknameData.length} / ${12}`}</NickNameLength>
     </>
   );
 }

@@ -4,7 +4,9 @@ import useUser from '../../../hooks/useUser';
 
 import MainButton from '../../atoms/buttons/MainButton';
 
-const Wrapper = styled.div``;
+const RoomCreateButtonWrapper = styled.div`
+  margin-bottom: 32px;
+`;
 
 const validate = (nickname: string, imageLink: string | null) => {
   if (nickname.length === 0) return false;
@@ -17,14 +19,16 @@ function StartButtons() {
 
   return (
     <>
-      <MainButton
-        disabled={!validate(nicknameData, imageLinkData)}
-        onClickButton={() => {
-          console.log('hihi');
-        }}
-      >
-        + 방 만들기
-      </MainButton>
+      <RoomCreateButtonWrapper>
+        <MainButton
+          disabled={!validate(nicknameData, imageLinkData)}
+          onClickButton={() => {
+            console.log('hihi');
+          }}
+        >
+          + 방 만들기
+        </MainButton>
+      </RoomCreateButtonWrapper>
       <MainButton
         disabled={!validate(nicknameData, imageLinkData)}
         onClickButton={() => {
