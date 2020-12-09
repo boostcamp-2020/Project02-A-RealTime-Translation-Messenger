@@ -4,6 +4,7 @@ import reset from 'styled-reset';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import ChatPage from './pages/ChatPage';
 import MainPage from './pages/MainPage';
+import Background from './components/atoms/resources/Background';
 
 export const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -25,11 +26,13 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <Switch>
-        <Route path="/" component={MainPage} exact />
-        <Route path="/chat" component={ChatPage} exact />
-        <Redirect from="*" to="/" />
-      </Switch>
+      <Background>
+        <Switch>
+          <Route path="/" component={MainPage} exact />
+          <Route path="/chat" component={ChatPage} exact />
+          <Redirect from="*" to="/" />
+        </Switch>
+      </Background>
     </>
   );
 }
