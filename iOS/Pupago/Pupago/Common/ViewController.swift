@@ -24,4 +24,5 @@ class ViewController: UIViewController, Navigatable {
     
     func bindViewModel() {}
     func registerForKeyboardNotifications() {}
+    
 }

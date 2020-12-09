@@ -13,6 +13,7 @@ class ValidatingTextField: UITextField {
     @IBInspectable var maxLength: Int = 12
         
     var stringValue: String { return text ?? "" }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         addTarget(self, action: #selector(editingChanged), for: .editingChanged)

@@ -1430,7 +1430,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="JGb-2g-qqD">
                                                 <rect key="frame" x="35.666666666666686" y="226.33333333333331" width="220" height="52"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GAF-io-Shw">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GAF-io-Shw" customClass="ValidatingTextField" customModule="Pupago" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="40" height="52"/>
                                                         <color key="backgroundColor" systemColor="systemGray6Color"/>
                                                         <constraints>
@@ -1443,9 +1443,12 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                                 <integer key="value" value="5"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="maxLength">
+                                                                <integer key="value" value="1"/>
+                                                            </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="coH-G4-8K1">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="coH-G4-8K1" customClass="ValidatingTextField" customModule="Pupago" customModuleProvider="target">
                                                         <rect key="frame" x="60" y="0.0" width="40" height="52"/>
                                                         <color key="backgroundColor" systemColor="systemGray6Color"/>
                                                         <constraints>
@@ -1458,9 +1461,12 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                                 <integer key="value" value="5"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="maxLength">
+                                                                <integer key="value" value="1"/>
+                                                            </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mik-QG-06j">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mik-QG-06j" customClass="ValidatingTextField" customModule="Pupago" customModuleProvider="target">
                                                         <rect key="frame" x="120" y="0.0" width="40" height="52"/>
                                                         <color key="backgroundColor" systemColor="systemGray6Color"/>
                                                         <constraints>
@@ -1473,9 +1479,12 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                                 <integer key="value" value="5"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="maxLength">
+                                                                <integer key="value" value="1"/>
+                                                            </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EzQ-3P-eRi">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EzQ-3P-eRi" customClass="ValidatingTextField" customModule="Pupago" customModuleProvider="target">
                                                         <rect key="frame" x="180" y="0.0" width="40" height="52"/>
                                                         <color key="backgroundColor" systemColor="systemGray6Color"/>
                                                         <constraints>
@@ -1487,6 +1496,9 @@
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                                 <integer key="value" value="5"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="maxLength">
+                                                                <integer key="value" value="1"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
@@ -1622,7 +1634,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZXa-kk-Sej">
-                                <rect key="frame" x="328.66666666666669" y="780.66666666666663" width="77.666666666666686" height="77.666666666666629"/>
+                                <rect key="frame" x="328.66666666666669" y="782.33333333333337" width="77.666666666666686" height="77.666666666666629"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ZXa-kk-Sej" secondAttribute="height" multiplier="1:1" id="Frd-Ww-5ml"/>
                                 </constraints>
@@ -1635,7 +1647,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="428" height="44"/>
                                 <color key="backgroundColor" name="GreenColor"/>
                             </view>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="yFN-cZ-xvr">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="yFN-cZ-xvr">
                                 <rect key="frame" x="28" y="608.33333333333337" width="372" height="52"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" id="Qtv-q2-Txw"/>
@@ -1663,16 +1675,19 @@
                             <constraint firstItem="zox-go-5a4" firstAttribute="trailing" secondItem="LlS-CZ-5me" secondAttribute="trailing" id="pAk-cF-dvI"/>
                             <constraint firstItem="p2O-KS-zHR" firstAttribute="height" secondItem="ZXa-kk-Sej" secondAttribute="height" constant="1" id="pHa-2U-JLU"/>
                             <constraint firstItem="ZXa-kk-Sej" firstAttribute="width" secondItem="bxc-4K-BHJ" secondAttribute="width" multiplier="0.2" constant="-8" id="u0l-nQ-XMZ"/>
-                            <constraint firstItem="LlS-CZ-5me" firstAttribute="bottom" secondItem="ZXa-kk-Sej" secondAttribute="bottom" constant="33.666666666666742" id="wG1-bN-qQM"/>
+                            <constraint firstItem="LlS-CZ-5me" firstAttribute="bottom" secondItem="ZXa-kk-Sej" secondAttribute="bottom" constant="32" id="wG1-bN-qQM"/>
                             <constraint firstItem="ah5-Px-gxQ" firstAttribute="leading" secondItem="bxc-4K-BHJ" secondAttribute="leading" id="yRq-wz-NXc"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="assistLabel" destination="dWY-YV-Ex1" id="dK6-Pp-IgS"/>
                         <outlet property="backButton" destination="CjJ-5E-YxF" id="zAk-cq-3ta"/>
+                        <outlet property="buttonConstraint" destination="wG1-bN-qQM" id="tJt-No-MyV"/>
                         <outlet property="micButton" destination="p2O-KS-zHR" id="rfr-lC-2uy"/>
+                        <outlet property="originConstraint" destination="ZK3-ZM-lF4" id="lpp-hW-zEi"/>
                         <outlet property="originTextView" destination="lYd-Uz-Oyf" id="hHW-PW-uga"/>
                         <outlet property="sendButton" destination="ZXa-kk-Sej" id="QmR-Wm-SqZ"/>
+                        <outlet property="translationConstraint" destination="Rhz-rv-3VX" id="efh-TP-c1F"/>
                         <outlet property="translationTextView" destination="yFN-cZ-xvr" id="MBZ-jb-7sj"/>
                     </connections>
                 </viewController>
@@ -1687,6 +1702,12 @@
         </designable>
         <designable name="Bqk-sa-4T0">
             <size key="intrinsicContentSize" width="5" height="21"/>
+        </designable>
+        <designable name="EzQ-3P-eRi">
+            <size key="intrinsicContentSize" width="5" height="25.666666666666668"/>
+        </designable>
+        <designable name="GAF-io-Shw">
+            <size key="intrinsicContentSize" width="5" height="25.666666666666668"/>
         </designable>
         <designable name="KKZ-u6-060">
             <size key="intrinsicContentSize" width="142.66666666666666" height="21"/>
@@ -1706,8 +1727,14 @@
         <designable name="c14-eN-GRe">
             <size key="intrinsicContentSize" width="52" height="30"/>
         </designable>
+        <designable name="coH-G4-8K1">
+            <size key="intrinsicContentSize" width="5" height="25.666666666666668"/>
+        </designable>
         <designable name="gpw-rI-zEV">
             <size key="intrinsicContentSize" width="157" height="31"/>
+        </designable>
+        <designable name="mik-QG-06j">
+            <size key="intrinsicContentSize" width="5" height="25.666666666666668"/>
         </designable>
         <designable name="vI2-2T-qaj">
             <size key="intrinsicContentSize" width="38" height="30"/>
