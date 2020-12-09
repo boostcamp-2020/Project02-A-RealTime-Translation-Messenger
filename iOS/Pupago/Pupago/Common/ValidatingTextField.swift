@@ -15,13 +15,14 @@ class ValidatingTextField: UITextField {
     var stringValue: String { return text ?? "" }
     override func awakeFromNib() {
         super.awakeFromNib()
-        keyboardType = .asciiCapable
         addTarget(self, action: #selector(editingChanged), for: .editingChanged)
         editingChanged(sender: self)
     }
     
     @objc func editingChanged(sender: UITextField) {
-        sender.text = String(stringValue.prefix(maxLength))
+        if text?.count ?? 0 > maxLength {
+            text = String(stringValue.prefix(maxLength))
+        }
     }
 
     var isValid: Bool = true {

@@ -20,6 +20,7 @@
 		970EB5F82578F371000C577C /* PapagoEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970EB5F72578F371000C577C /* PapagoEndpoint.swift */; };
 		970EB6052578F53B000C577C /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970EB6042578F53B000C577C /* Language.swift */; };
 		970EB60A2578F80D000C577C /* Translation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970EB6092578F80D000C577C /* Translation.swift */; };
+		971746F32580BA0700F8E9DE /* KingFisher+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971746F22580BA0700F8E9DE /* KingFisher+Rx.swift */; };
 		975A2644257768570096C918 /* SocketEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975A2643257768570096C918 /* SocketEndpoint.swift */; };
 		975A264C2577D9030096C918 /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975A264B2577D9030096C918 /* UIViewController+Rx.swift */; };
 		975A9754257A9C16000C3AE5 /* TransitionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975A9753257A9C16000C3AE5 /* TransitionHelper.swift */; };
@@ -118,6 +119,7 @@
 		970EB5F72578F371000C577C /* PapagoEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PapagoEndpoint.swift; sourceTree = "<group>"; };
 		970EB6042578F53B000C577C /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		970EB6092578F80D000C577C /* Translation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translation.swift; sourceTree = "<group>"; };
+		971746F22580BA0700F8E9DE /* KingFisher+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KingFisher+Rx.swift"; sourceTree = "<group>"; };
 		975A2643257768570096C918 /* SocketEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketEndpoint.swift; sourceTree = "<group>"; };
 		975A264B2577D9030096C918 /* UIViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
 		975A9753257A9C16000C3AE5 /* TransitionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionHelper.swift; sourceTree = "<group>"; };
@@ -367,6 +369,7 @@
 				976C373A2576352B00BD8094 /* SocketIO+Rx.swift */,
 				975A264B2577D9030096C918 /* UIViewController+Rx.swift */,
 				978F5803257A44B90034846A /* UITextView+Binder.swift */,
+				971746F22580BA0700F8E9DE /* KingFisher+Rx.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -751,6 +754,7 @@
 				970EB60A2578F80D000C577C /* Translation.swift in Sources */,
 				97DAC7F72574E5D0009B76B5 /* NetworkProviding.swift in Sources */,
 				BD5F6165256D207600D63CCD /* ChattingListViewController.swift in Sources */,
+				971746F32580BA0700F8E9DE /* KingFisher+Rx.swift in Sources */,
 				97CB75D2256E412700FE052A /* ChattingViewModel.swift in Sources */,
 				97F534FF256CE947005998EE /* Application.swift in Sources */,
 				976C371225762D6000BD8094 /* SegementedControl.swift in Sources */,
@@ -978,7 +982,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = B3PWYBKFUK;
+				DEVELOPMENT_TEAM = EKU567YQE4;
 				INFOPLIST_FILE = Pupago/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -999,7 +1003,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = B3PWYBKFUK;
+				DEVELOPMENT_TEAM = EKU567YQE4;
 				INFOPLIST_FILE = Pupago/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
