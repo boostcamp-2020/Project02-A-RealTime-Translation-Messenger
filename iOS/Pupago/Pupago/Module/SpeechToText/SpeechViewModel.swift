@@ -20,8 +20,10 @@ class SpeechViewModel: ViewModel, ViewModelType {
         let originText: Observable<String>
     }
     struct Output {
+        let viewTexts: Observable<String>
         let activate: Driver<Bool>
         let available: Driver<Bool>
+        let assitable: Observable<Bool>
         let originText: Observable<String>
         let translationViewState: Observable<TranslationViewState>
         let dismiss: Driver<Void>
@@ -31,6 +33,7 @@ class SpeechViewModel: ViewModel, ViewModelType {
     let originText = PublishRelay<String>()
     let chatInfo = PublishRelay<Translator.Text>()
     let available = BehaviorRelay<Bool>(value: false)
+    let assistable = BehaviorRelay<Bool>(value: false)
     let translationViewState = PublishRelay<(text: String, isHidden: Bool)>()
     let dismiss = PublishRelay<Void>()
     
@@ -41,11 +44,15 @@ class SpeechViewModel: ViewModel, ViewModelType {
         let provider = PupagoAPI()
         let translator = Translator(provider: provider)
         
+        let viewtext = localize.asDriver()
+            .map { $0.speechViewText.assist }
+        
         input.micTrigger
             .subscribe(onNext: { [unowned self] _ in
                 speechManager.speechToText()
                 let state = activate.value == false ? true : false
                 activate.accept(state)
+                assistable.accept(true)
             })
             .disposed(by: rx.disposeBag)
         
@@ -64,6 +71,7 @@ class SpeechViewModel: ViewModel, ViewModelType {
         input.originText
             .subscribe(onNext: { [unowned self] text in
                 let status = text.isEmpty ? ("", true) : ("번역중..", false)
+                assistable.accept(!status.1)
                 translationViewState.accept(status)
                 available.accept(false)
             })
@@ -91,8 +99,10 @@ class SpeechViewModel: ViewModel, ViewModelType {
             })
             .disposed(by: rx.disposeBag)
         
-        return Output(activate: activate.asDriver(),
+        return Output(viewTexts: viewtext.asObservable(),
+                      activate: activate.asDriver(),
                       available: available.asDriver(),
+                      assitable: assistable.asObservable(),
                       originText: originText.asObservable(),
                       translationViewState: translationViewState.asObservable(),
                       dismiss: dismiss.asDriver(onErrorJustReturn: ()))

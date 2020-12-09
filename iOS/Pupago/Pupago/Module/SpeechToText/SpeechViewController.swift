@@ -6,18 +6,21 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
+import RxAnimated
 
 class SpeechViewController: ViewController {
     
     @IBOutlet weak var originTextView: UITextView!
     @IBOutlet weak var translationTextView: UITextView!
+    @IBOutlet weak var assistLabel: UILabel!
     @IBOutlet weak var micButton: UIButton!
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureButton()
     }
     
     override func bindViewModel() {
@@ -37,6 +40,10 @@ class SpeechViewController: ViewController {
         
         let output = viewModel.transform(input)
         
+        output.viewTexts
+            .bind(to: assistLabel.rx.text)
+            .disposed(by: rx.disposeBag)
+        
         output.activate
             .drive(onNext: {[unowned self] activate in
                 let image = activate ? "micing" : "miced"
@@ -55,8 +62,13 @@ class SpeechViewController: ViewController {
         output.available
             .drive(onNext: { [unowned self] available in
                 self.sendButton.isUserInteractionEnabled = available
-                self.sendButton.tintColor = available ? UIColor(named: "BlueColor") : .lightGray
+                let image = available ? "arrow" : "arrowed"
+                self.sendButton.setImage(UIImage(named: image), for: .normal)
             })
+            .disposed(by: rx.disposeBag)
+        
+        output.assitable
+            .bind(animated: assistLabel.rx.animated.fade(duration: 0.33).isHidden)
             .disposed(by: rx.disposeBag)
         
         output.dismiss
@@ -66,14 +78,4 @@ class SpeechViewController: ViewController {
             .disposed(by: rx.disposeBag)
     }
 
-}
-
-extension SpeechViewController {
-    private func configureButton() {
-        let largeConfig = UIImage.SymbolConfiguration(pointSize: 40, weight: .regular, scale: .medium)
-        
-        let largeBoldDoc = UIImage(systemName: "arrow.up.message.fill", withConfiguration: largeConfig)
-
-        sendButton.setImage(largeBoldDoc, for: .normal)
-    }
 }

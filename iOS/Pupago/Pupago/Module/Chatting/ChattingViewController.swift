@@ -10,6 +10,7 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 import Toaster
+import RxAnimated
 
 class ChattingViewController: ViewController {
 
@@ -112,7 +113,7 @@ class ChattingViewController: ViewController {
             .drive(onNext: { [unowned self] viewModel in
                 self.navigator.show(segue: .speech(viewModel: viewModel),
                                     sender: self,
-                                    transition: .present)
+                                    transition: .modal)
                         
             })
             .disposed(by: rx.disposeBag)

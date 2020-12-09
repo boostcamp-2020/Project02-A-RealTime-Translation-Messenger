@@ -33,6 +33,7 @@ final class Navigator {
         case navigation
         case present
         case slideIn
+        case modal
     }
     
     lazy var transition: CATransition = {
@@ -111,7 +112,8 @@ final class Navigator {
             target.modalPresentationStyle = .overCurrentContext
             target.transitioningDelegate = transitionHelper
             sender.present(target, animated: true, completion: nil)
-            
+        case .modal:
+            sender.present(target, animated: true, completion: nil)
         default: break
         }
     }

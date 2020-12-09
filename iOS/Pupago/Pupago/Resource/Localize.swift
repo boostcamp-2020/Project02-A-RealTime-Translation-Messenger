@@ -52,6 +52,10 @@ enum Localize {
     struct ParticipantViewText {
         var title: String
     }
+    
+    struct SpeechViewText {
+        var assist: String
+    }
 }
 
 extension Localize {
@@ -97,7 +101,7 @@ extension Localize {
         case .english:
             return .init(intro: "Next,\nEnter your nickname.",
                          inputPlaceholder: "Enter your nickname",
-                         inputConstraint: "Nickname must be 2-12 characters with No white spaces.",
+                         inputConstraint: "2-12 characters with No white spaces.",
                          nextButton: "Start")
         }
     }
@@ -159,6 +163,15 @@ extension Localize {
             return .init(title: "대화 상대")
         case .english:
             return .init(title: "Contact")
+        }
+    }
+    
+    var speechViewText: SpeechViewText {
+        switch self {
+        case .korean:
+            return .init(assist: "버튼을 눌러\n음성인식을 시작하세요.")
+        case .english:
+            return .init(assist: "Press the button\nto start voice recognition.")
         }
     }
 }
