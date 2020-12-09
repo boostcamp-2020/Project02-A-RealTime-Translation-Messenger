@@ -2,17 +2,38 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useCallback } from 'react';
 
 import { RootState } from '../modules';
-import { setUser } from '../modules/user';
-import { UserStateType } from '../@types/types';
+import { setNickname, setLanguage, getRandomProfileImage } from '../modules/user';
 
 export default function useUser() {
-  const { data } = useSelector((state: RootState) => state.user.user);
+  const { nickname, language, imageLink } = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
 
-  const onSetUser = useCallback((user: UserStateType) => dispatch(setUser(user)), [dispatch]);
+  const onSetNickname = useCallback(
+    (nickname: string) => {
+      dispatch(setNickname(nickname));
+    },
+    [dispatch],
+  );
+
+  const onSetLanguage = useCallback(
+    (language: 'Korean' | 'English') => {
+      dispatch(setLanguage(language));
+    },
+    [dispatch],
+  );
+
+  const onGetRandomProfileImage = useCallback(() => {
+    dispatch(getRandomProfileImage());
+  }, [dispatch]);
 
   return {
-    data,
-    onSetUser,
+    nicknameData: nickname.data,
+    languageData: language.data,
+    imageLinkData: imageLink.data,
+    imageLinkLoading: imageLink.loading,
+    imageLinkError: imageLink.error,
+    onSetNickname,
+    onSetLanguage,
+    onGetRandomProfileImage,
   };
 }
