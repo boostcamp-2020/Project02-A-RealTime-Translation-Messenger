@@ -27,7 +27,6 @@ type ReceiveChatType = {
   createdAt: string;
 };
 
-
 type CreatedRoomType = {
   roomCode: string | null;
   title: string | null;
@@ -60,12 +59,6 @@ type TranslateTextReturnType = {
   translatedText: string;
 };
 
-type UserStateType = {
-  nickname: string | null;
-  language: string | null;
-  imageLink: string | null;
-};
-
 export {
   RoomListType,
   ParticipantsType,
@@ -73,8 +66,7 @@ export {
   ReceiveChatType,
   TranslateTextPropsType,
   TranslateTextReturnType,
-  UserStateType,
   ChatLogsType,
   ParticipantsUpdateType,
-  CreatedRoomType
+  CreatedRoomType,
 };

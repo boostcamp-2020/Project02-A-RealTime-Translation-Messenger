@@ -32,12 +32,15 @@ const translateText = async ({ source, target, text }: TranslateTextPropsType) =
   });
 };
 
+const getRandomProfileImage = async () => backend.get<{ imageLink: string }>('/api/profileImage');
+
 const api = {
   getRoomList,
   createRoom,
   joinRoom,
   detectLanguage,
   translateText,
+  getRandomProfileImage,
 };
 
 export default api;

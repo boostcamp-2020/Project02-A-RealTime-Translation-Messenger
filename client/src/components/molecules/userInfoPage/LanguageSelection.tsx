@@ -22,17 +22,30 @@ const LanguageButtonBox = styled.div`
 
 export type LanguageSelectionPropsType = {
   selectedKorean: boolean;
+  onClickLanguage: (selectLanguage: 'Korean' | 'English') => void;
 };
 
-function LanguageSelection({ selectedKorean = true }: LanguageSelectionPropsType) {
+function LanguageSelection({ selectedKorean = true, onClickLanguage }: LanguageSelectionPropsType) {
   return (
     <LanguageSelectionBox>
       <Text size={18} color={Palette.DARK_GREY}>
         언어를 선택해주세요
       </Text>
       <LanguageButtonBox>
-        <LanguageSelectButton selected={selectedKorean} language={'Korean'}></LanguageSelectButton>
-        <LanguageSelectButton selected={!selectedKorean} language={'English'}></LanguageSelectButton>
+        <LanguageSelectButton
+          selected={selectedKorean}
+          language={'Korean'}
+          onClick={() => {
+            onClickLanguage('Korean');
+          }}
+        ></LanguageSelectButton>
+        <LanguageSelectButton
+          selected={!selectedKorean}
+          language={'English'}
+          onClick={() => {
+            onClickLanguage('English');
+          }}
+        ></LanguageSelectButton>
       </LanguageButtonBox>
     </LanguageSelectionBox>
   );

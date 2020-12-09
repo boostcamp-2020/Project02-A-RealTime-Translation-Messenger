@@ -6,7 +6,7 @@ import Palette from '../../../@types/Palette';
 export type ProfileImagePropsType = {
   size: 'size-88' | 'size-72' | 'size-40' | 'size-24';
   isMe: boolean;
-  image: string;
+  image: string | null;
 };
 
 export type ProfileImageSrcProsType = {
@@ -54,7 +54,7 @@ const StyledProfileImage = styled.div<ProfileImagePropsType>`
 export function ProfileImage({ size, isMe, image }: ProfileImagePropsType) {
   return (
     <StyledProfileImage size={size} isMe={isMe} image={image}>
-      <StyledProfileImageSrc alt="profile image" src={image} imageSize={size}></StyledProfileImageSrc>
+      {image && <StyledProfileImageSrc alt="profile image" src={image} imageSize={size}></StyledProfileImageSrc>}
     </StyledProfileImage>
   );
 }

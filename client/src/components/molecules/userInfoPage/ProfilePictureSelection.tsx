@@ -12,14 +12,15 @@ const ProfileChangeButtonWrapper = styled.div`
 `;
 
 export type ProfilePictureSelectionPropsType = {
-  image: string;
+  image: string | null;
+  onClickRefresh: () => void;
 };
 
-function ProfilePictureSelection({ image }: ProfilePictureSelectionPropsType) {
+function ProfilePictureSelection({ image, onClickRefresh }: ProfilePictureSelectionPropsType) {
   return (
     <div>
       <ProfileImage size="size-88" isMe={true} image={image}></ProfileImage>
-      <ProfileChangeButtonWrapper>
+      <ProfileChangeButtonWrapper onClick={onClickRefresh}>
         <ProfileChangeButton />
       </ProfileChangeButtonWrapper>
     </div>

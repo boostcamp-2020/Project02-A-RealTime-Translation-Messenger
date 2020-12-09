@@ -8,6 +8,7 @@ export type MainPageBoxPropsType = {
 const StyledMainpageBox = styled.div<MainPageBoxPropsType>`
   width: 400px;
   height: 720px;
+  padding: 32px;
   box-shadow: 5px 5px 100px 0 rgba(0, 0, 0, 0.25);
   border-radius: 30px;
   background-color: rgba(255, 255, 255, 0.6);
