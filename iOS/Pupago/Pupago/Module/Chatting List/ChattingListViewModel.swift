@@ -15,7 +15,8 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
     struct Input {
         let createTrigger: Observable<Void>
         let joinTrigger: Observable<Void>
-        let tapTrigger: Observable<UITapGestureRecognizer>
+        let imageReload: Observable<UITapGestureRecognizer>
+        let reloadRoom: Observable<Void>
         let selection: Observable<IndexPath>
     }
     
@@ -25,12 +26,14 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
         let created: Driver<CreateRoomViewModel>
         let joined: Driver<JoinRoomViewModel>
         let entered: Driver<ChattingViewModel>
+        let isReloading: Driver<Bool>
         let reload: Driver<Void>
     }
     
     let rooms = BehaviorRelay<[Room]>(value: [])
     let roomInfo = PublishRelay<(code: String, isPrivate: Bool)>()
     let socketEntered = PublishRelay<Room?>()
+    let isRefreshing = BehaviorRelay<Bool>(value: false)
     let tapTrigger = PublishRelay<Void>()
     
     func transform(_ input: Input) -> Output {
@@ -41,6 +44,17 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
         pupagoAPI.rooms()
             .subscribe(onNext: { [unowned self] result in
                 self.rooms.accept(result.roomList)
+            }, onError: { error in
+                print(error)
+            })
+            .disposed(by: rx.disposeBag)
+        
+        input.reloadRoom
+            .debounce(.milliseconds(500), scheduler: MainScheduler.instance)
+            .flatMapLatest { pupagoAPI.rooms()}
+            .subscribe(onNext: {[unowned self] result in
+                rooms.accept(result.roomList)
+                isRefreshing.accept(false)
             }, onError: { error in
                 print(error)
             })
@@ -105,7 +119,7 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
                 return viewModel
             }
         
-        input.tapTrigger
+        input.imageReload
             .subscribe(onNext: { [unowned self] _ in
                 pupagoAPI.profile()
                     .subscribe(onNext: { result in
@@ -120,7 +134,7 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
                       item: roomItem,
                       created: created,
                       joined: joined,
-                      entered: entered,
+                      entered: entered, isReloading: isRefreshing.asDriver(),
                       reload: tapTrigger.asDriver(onErrorJustReturn: ()))
       
     }

@@ -21,6 +21,7 @@ final class ChattingListViewController: ViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     
     private let tapGesture = UITapGestureRecognizer()
+    private let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,11 +37,13 @@ final class ChattingListViewController: ViewController {
         let createTrigger = createButton.rx.tap.asObservable()
         let joinTrigger = joinButton.rx.tap.asObservable()
         let selection = collectionView.rx.itemSelected.map { $0 }
+        let reloadRoom = refreshControl.rx.controlEvent(.valueChanged).map { _ in }
         let tapTrigger = tapGesture.rx.event.asObservable()
         
         let input = ChattingListViewModel.Input(createTrigger: createTrigger,
                                                 joinTrigger: joinTrigger,
-                                                tapTrigger: tapTrigger,
+                                                imageReload: tapTrigger,
+                                                reloadRoom: reloadRoom,
                                                 selection: selection)
         
         let output = viewModel.transform(input)
@@ -87,6 +90,10 @@ final class ChattingListViewController: ViewController {
             })
             .disposed(by: rx.disposeBag)
         
+        output.isReloading
+            .bind(animated: refreshControl.rx.isRefreshing)
+            .disposed(by: rx.disposeBag)
+        
         output.reload
             .drive(onNext: { [unowned self] _ in
                 let url = URL(string: Application.shared.profile)
@@ -111,6 +118,8 @@ private extension ChattingListViewController {
         let layout = UICollectionViewCompositionalLayout(section: section)
         
         self.collectionView.collectionViewLayout = layout
+        
+        collectionView.refreshControl = refreshControl
     }
     
     func configureThumbnailImageView() {
