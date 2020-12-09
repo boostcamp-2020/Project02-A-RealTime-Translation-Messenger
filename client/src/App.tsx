@@ -22,9 +22,7 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <div>
-        <h1>React Typescript~</h1>
-      </div>
+      <div>Hello</div>
     </>
   );
 }

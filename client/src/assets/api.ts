@@ -6,14 +6,13 @@ const backend = axios.create({
   baseURL: process.env.BASE_URL,
 });
 
-
 const createRoom = async (title: string, isPrivate: 'true' | 'false') => {
   return backend.post<CreatedRoomType>('/api/room', { title, isPrivate });
 };
 
 const joinRoom = async (roomCode: string, isPrivate: 'true' | 'false') => {
   return backend.post<CreatedRoomType>('/api/room', { roomCode, isPrivate });
-
+};
 
 const getRoomList = async () => {
   return backend.get<{ roomList: RoomListType[] }>('/api/room');
