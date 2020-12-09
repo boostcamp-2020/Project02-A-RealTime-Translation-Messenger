@@ -6,13 +6,13 @@ const name = 'chat';
 
 type InitialStateType = {
   chatLogs: {
-    data: ChatLogsType[] | null;
+    data: ChatLogsType[];
   };
 };
 
 const initialState: InitialStateType = {
   chatLogs: {
-    data: null,
+    data: [],
   },
 };
 
@@ -20,11 +20,10 @@ const chat = createSlice({
   name,
   initialState,
   reducers: {
-    stackChats: (state, action: PayloadAction<ChatLogsType[]>) => {
-      state.chatLogs.data = action.payload;
+    stackChats: (state, action: PayloadAction<ChatLogsType>) => {
+      state.chatLogs.data.push(action.payload);
     },
   },
-  extraReducers: {},
 });
 
 export default chat.reducer;

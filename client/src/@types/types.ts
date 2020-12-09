@@ -28,14 +28,14 @@ type ReceiveChatType = {
 };
 
 type ChatLogsType = {
-  Korean: string | undefined;
-  English: string | undefined;
-  senderId: string | undefined;
-  nickname: string | undefined;
-  imageLink: string | undefined;
-  createdAt: string | undefined;
-  type: string | undefined;
-  diffNickname: string | undefined;
+  Korean: string | null;
+  English: string | null;
+  senderId: string | null;
+  nickname: string | null;
+  imageLink: string | null;
+  createdAt: string | null;
+  type: string | null;
+  diffNickname: string | null;
 };
 
 export { RoomListType, ParticipantsType, ParticipantsListType, ReceiveChatType, ChatLogsType };

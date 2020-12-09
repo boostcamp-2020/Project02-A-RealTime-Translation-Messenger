@@ -9,7 +9,7 @@ export default function useChat() {
   const { data } = useSelector((state: RootState) => state.chat.chatLogs);
   const dispatch = useDispatch();
 
-  const onStackChats = useCallback((chatLogs: ChatLogsType[]) => dispatch(stackChats(chatLogs)), [dispatch]);
+  const onStackChats = useCallback((chatLogs: ChatLogsType) => dispatch(stackChats(chatLogs)), [dispatch]);
 
   return {
     data,
