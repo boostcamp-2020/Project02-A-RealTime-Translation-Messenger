@@ -10,7 +10,6 @@ const MainTitleWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 400px;
 
   img {
     margin-bottom: 16px;

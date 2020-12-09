@@ -3,7 +3,7 @@ import { Story, Meta } from '@storybook/react/types-6-0';
 
 import ProfilePictureSelection, {
   ProfilePictureSelectionPropsType,
-} from '../../components/molecules/mainPage/ProfilePictureSelection';
+} from '../../components/molecules/userInfoPage/ProfilePictureSelection';
 
 export default {
   title: 'pupagoMolecule/ProfilePictureSelection',

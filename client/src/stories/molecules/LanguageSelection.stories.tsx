@@ -1,7 +1,9 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
-import LanguageSelection, { LanguageSelectionPropsType } from '../../components/molecules/mainPage/LanguageSelection';
+import LanguageSelection, {
+  LanguageSelectionPropsType,
+} from '../../components/molecules/userInfoPage/LanguageSelection';
 
 export default {
   title: 'pupagoMolecule/LanguageSelection',
