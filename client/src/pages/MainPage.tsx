@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import UserInfoPage from './UserInfoPage';
 import MainPageBox from '../components/atoms/boxes/MainPageBox';
+import RoomCreationPage from './RoomCreationPage';
 
 const Wrapper = styled.div`
   display: flex;
@@ -15,7 +16,8 @@ function MainPage() {
   return (
     <Wrapper>
       <MainPageBox>
-        <UserInfoPage />
+        {/* <UserInfoPage /> */}
+        <RoomCreationPage />
       </MainPageBox>
     </Wrapper>
   );
