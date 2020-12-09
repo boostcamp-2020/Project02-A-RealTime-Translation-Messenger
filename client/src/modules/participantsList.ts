@@ -24,7 +24,6 @@ const participantsList = createSlice({
       state.participantsList.data = action.payload;
     },
   },
-  extraReducers: {},
 });
 
 export default participantsList.reducer;

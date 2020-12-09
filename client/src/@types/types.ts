@@ -33,4 +33,10 @@ type CreatedRoomType = {
   isPrivate: string | null;
 };
 
-export { RoomListType, ParticipantsType, ParticipantsListType, ReceiveChatType, CreatedRoomType };
+type UserStateType = {
+  nickname: string | null;
+  language: string | null;
+  imageLink: string | null;
+};
+
+export { RoomListType, ParticipantsType, ParticipantsListType, ReceiveChatType, CreatedRoomType, UserStateType };
