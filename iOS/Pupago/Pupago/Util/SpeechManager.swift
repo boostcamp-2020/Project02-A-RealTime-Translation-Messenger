@@ -120,7 +120,7 @@ extension SpeechManager: SFSpeechRecognizerDelegate {
         }
          
         let sound: SystemSoundID = status ? 1110 : 1112
-        AudioServicesPlaySystemSoundWithCompletion(sound) { }
+        AudioServicesPlaySystemSound(sound)
     }
     
 }
