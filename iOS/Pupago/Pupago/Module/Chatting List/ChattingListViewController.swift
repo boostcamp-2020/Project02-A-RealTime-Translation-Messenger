@@ -118,7 +118,6 @@ private extension ChattingListViewController {
         thumbnailImageView.addGestureRecognizer(tapGesture)
         
         let url = URL(string: Application.shared.profile)
-        print(Application.shared.profile)
         self.thumbnailImageView.kf.setImage(with: url)
     }
 }

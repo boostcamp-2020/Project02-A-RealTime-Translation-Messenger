@@ -12,11 +12,13 @@ import RxCocoa
 class ChattingViewModel: ViewModel, ViewModelType {
     
     typealias RoomInfo = (title: String?, code: String?)
+    typealias CopyInfo = (code: String?, localize: String?)
     typealias TranslationViewState = (text: String, isHidden: Bool)
     typealias ParticipantState = (nickname: String, type: Bool)
     
     struct Input {
         let chatText: Observable<String>
+        let codeTrigger: Observable<Void>
         let registTrigger: Observable<Void>
         let micTrigger: Observable<Void>
         let showParticipantTrigger: Observable<Void>
@@ -34,6 +36,7 @@ class ChattingViewModel: ViewModel, ViewModelType {
         let showParticipant: Driver<ParticipantViewModel>
         let speeched: Driver<SpeechViewModel>
         let status: Driver<ParticipantState>
+        let clipboard: Driver<CopyInfo>
     }
     
     let chats = BehaviorRelay<[MessageSection]>(value: [MessageSection(header: "Chat", items: [])])
@@ -44,6 +47,7 @@ class ChattingViewModel: ViewModel, ViewModelType {
     let translationViewState = PublishRelay<(text: String, isHidden: Bool)>()
     let reset = PublishRelay<Void>()
     let status = BehaviorRelay<(ParticipantState)>(value: ("", false))
+    let clipboard = PublishRelay<CopyInfo>()
     
     func transform(_ input: Input) -> Output {
         
@@ -131,6 +135,14 @@ class ChattingViewModel: ViewModel, ViewModelType {
             .asDriver(onErrorJustReturn: ())
             .map { _ in SpeechViewModel() }
         
+        input.codeTrigger
+            .withLatestFrom(roomInfo)
+            .subscribe(onNext: { [unowned self] info in
+                let localText = localize.value.chatroomViewText.copy
+                clipboard.accept((info.code, localText))
+            })
+            .disposed(by: rx.disposeBag)
+        
         return Output(viewText: viewText,
                       roomInfo: info,
                       items: chatItem,
@@ -140,7 +152,8 @@ class ChattingViewModel: ViewModel, ViewModelType {
                       activate: activate.asDriver(),
                       showParticipant: showParticipant,
                       speeched: speeched,
-                      status: status.asDriver())
+                      status: status.asDriver(),
+                      clipboard: clipboard.asDriver(onErrorJustReturn: ("", "")))
     }
     
 }
