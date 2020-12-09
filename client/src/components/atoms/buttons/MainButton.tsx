@@ -5,8 +5,14 @@ import Palette from '../../../@types/Palette';
 
 export type ButtonPropsType = {
   disabled?: boolean;
-  onClick?: ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) & (() => void);
-  children?: string;
+  onClickButton: ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) & (() => void);
+  children: string;
+};
+
+type StyledButtonPropsType = {
+  disabled?: boolean;
+  onClick: ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) & (() => void);
+  children: string;
 };
 
 const setButtonColor = (disabled: boolean | undefined) => {
@@ -20,7 +26,7 @@ const setButtonColor = (disabled: boolean | undefined) => {
   }
 };
 
-const Button = styled.button<ButtonPropsType>`
+const Button = styled.button<StyledButtonPropsType>`
   display: block;
   width: 336px;
   height: 40px;
@@ -31,12 +37,21 @@ const Button = styled.button<ButtonPropsType>`
   background-color: ${(props) => setButtonColor(props.disabled)};
   color: ${Palette.DARK_GREY};
   font-size: 18px;
-  cursor: pointer;
+  ${(props) => (props.disabled ? '' : 'cursor: pointer;')}
 `;
 
-export function MainButton({ disabled, children = 'button', ...props }: ButtonPropsType) {
+export function MainButton({ disabled, children, onClickButton }: ButtonPropsType) {
   return (
-    <Button type="button" disabled={disabled} {...props}>
+    <Button
+      type="button"
+      disabled={disabled}
+      onClick={() => {
+        if (!disabled) {
+          console.log('gg');
+          onClickButton();
+        }
+      }}
+    >
       {children}
     </Button>
   );

@@ -20,7 +20,7 @@ export type StyledUnderLinedInputPropsType = {
 };
 
 export type UnderLinedInputType = {
-  value?: string;
+  value: string;
   placeholder?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   maxLength: number;
