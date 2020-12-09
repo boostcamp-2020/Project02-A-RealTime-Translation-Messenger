@@ -26,7 +26,7 @@ final class ChattingListViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
-        configureThumbnailImageView()
+        registerGesture()
     }
     
     override func bindViewModel() {
@@ -38,7 +38,7 @@ final class ChattingListViewController: ViewController {
         let joinTrigger = joinButton.rx.tap.asObservable()
         let selection = collectionView.rx.itemSelected.map { $0 }
         let reloadRoom = refreshControl.rx.controlEvent(.valueChanged).map { _ in }
-        let tapTrigger = tapGesture.rx.event.asObservable()
+        let tapTrigger = tapGesture.rx.event.map { _ in }
         
         let input = ChattingListViewModel.Input(createTrigger: createTrigger,
                                                 joinTrigger: joinTrigger,
@@ -94,11 +94,8 @@ final class ChattingListViewController: ViewController {
             .bind(animated: refreshControl.rx.isRefreshing)
             .disposed(by: rx.disposeBag)
         
-        output.reload
-            .drive(onNext: { [unowned self] _ in
-                let url = URL(string: Application.shared.profile)
-                self.thumbnailImageView.kf.setImage(with: url)
-            })
+        output.profileImage
+            .bind(animated: thumbnailImageView.rx.animated.fade(duration: 0.2).image)
             .disposed(by: rx.disposeBag)
     }
     
@@ -122,12 +119,9 @@ private extension ChattingListViewController {
         collectionView.refreshControl = refreshControl
     }
     
-    func configureThumbnailImageView() {
+    func registerGesture() {
         thumbnailImageView.isUserInteractionEnabled = true
         thumbnailImageView.addGestureRecognizer(tapGesture)
-        
-        let url = URL(string: Application.shared.profile)
-        print(Application.shared.profile)
-        self.thumbnailImageView.kf.setImage(with: url)
     }
+    
 }
