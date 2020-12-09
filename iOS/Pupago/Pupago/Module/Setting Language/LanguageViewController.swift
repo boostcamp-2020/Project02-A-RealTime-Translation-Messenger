@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import RxAnimated
 
 class LanguageViewController: ViewController {
     @IBOutlet weak var introLabel: UILabel!
@@ -35,9 +36,19 @@ class LanguageViewController: ViewController {
         let output = viewModel.transform(input)
         
         output.viewTexts
+            .asObservable()
+            .map { $0.intro }
+            .bind(animated: introLabel.rx.animated.fade(duration: 0.33).text)
+            .disposed(by: rx.disposeBag)
+        
+        output.viewTexts
+            .asObservable()
+            .map { $0.description }
+            .bind(animated: descriptionLabel.rx.animated.fade(duration: 0.33).text)
+            .disposed(by: rx.disposeBag)
+        
+        output.viewTexts
             .drive(onNext: { [unowned self] texts in
-                self.introLabel.text = texts.intro
-                self.descriptionLabel.text = texts.description
                 self.nextButton.setTitle(texts.nextButton, for: .normal)
             })
             .disposed(by: rx.disposeBag)

@@ -13,6 +13,7 @@ target 'Pupago' do
     pod 'Socket.IO-Client-Swift', '~> 15.2.0'
     pod 'Kingfisher'
     pod 'Toaster', :git => 'https://github.com/devxoul/Toaster.git', :branch => 'master'
+    pod 'RxAnimated'
 end
 
 # RxTest
