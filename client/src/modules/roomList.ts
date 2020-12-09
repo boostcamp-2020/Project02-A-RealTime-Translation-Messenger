@@ -15,7 +15,7 @@ const getRoomList = createAsyncThunk(`${name}/getRoomList`, async (_, { rejectWi
 
 type InitialStateType = {
   roomList: {
-    data: RoomListType[];
+    data: RoomListType[] | null;
     loading: boolean;
     error: Error | null;
   };
@@ -23,7 +23,7 @@ type InitialStateType = {
 
 const initialState: InitialStateType = {
   roomList: {
-    data: [],
+    data: null,
     loading: false,
     error: null,
   },
