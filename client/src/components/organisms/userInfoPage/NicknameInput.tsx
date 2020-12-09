@@ -20,13 +20,11 @@ function NicknameInput() {
         placeholder="닉네임을 입력해주세요"
         value={nicknameData}
         onChange={(e) => {
-          if (nicknameData.length < 12) {
-            onSetNickname(e.target.value);
-          }
+          onSetNickname(e.target.value.substr(0, 12));
         }}
         maxLength={12}
       />
-      <NickNameLength color={Palette.PUPAGO_BLUE} size={14}>{`${nicknameData.length} / ${12}`}</NickNameLength>
+      <NickNameLength size={14} color={Palette.PUPAGO_BLUE}>{`${nicknameData.length} / ${12}`}</NickNameLength>
     </>
   );
 }
