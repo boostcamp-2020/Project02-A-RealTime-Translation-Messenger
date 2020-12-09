@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import dotenv from 'dotenv';
+import io from 'socket.io-client';
 
 import { ParticipantsListType, ReceiveChatType } from '../@types/types';
+
 dotenv.config();
 
 const { BASE_URL } = process.env;
@@ -22,7 +24,7 @@ function ChatPage() {
     });
   }, []);
 
-  return <div></div>;
+  return <h1>쳇!</h1>;
 }
 
 export default ChatPage;
