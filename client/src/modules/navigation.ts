@@ -16,7 +16,7 @@ const initialState: InitialStateType = {
   },
 };
 
-const user = createSlice({
+const navigation = createSlice({
   name,
   initialState,
   reducers: {
@@ -26,5 +26,5 @@ const user = createSlice({
   },
 });
 
-export default user.reducer;
-export const setNavigation = user.actions.setNavigation;
+export default navigation.reducer;
+export const setNavigation = navigation.actions.setNavigation;
