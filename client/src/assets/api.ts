@@ -1,9 +1,19 @@
 import axios from 'axios';
-import { RoomListType, TranslateTextPropsType, TranslateTextReturnType } from '../@types/types';
+
+import { RoomListType, TranslateTextPropsType, TranslateTextReturnType, CreatedRoomType } from '../@types/types';
 
 const backend = axios.create({
   baseURL: process.env.BASE_URL,
 });
+
+
+const createRoom = async (title: string, isPrivate: 'true' | 'false') => {
+  return backend.post<CreatedRoomType>('/api/room', { title, isPrivate });
+};
+
+const joinRoom = async (roomCode: string, isPrivate: 'true' | 'false') => {
+  return backend.post<CreatedRoomType>('/api/room', { roomCode, isPrivate });
+
 
 const getRoomList = async () => {
   return backend.get<{ roomList: RoomListType[] }>('/api/room');
@@ -25,6 +35,8 @@ const translateText = async ({ source, target, text }: TranslateTextPropsType) =
 
 const api = {
   getRoomList,
+  createRoom,
+  joinRoom,
   detectLanguage,
   translateText,
 };

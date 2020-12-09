@@ -28,6 +28,12 @@ type ReceiveChatType = {
 };
 
 
+type CreatedRoomType = {
+  roomCode: string | null;
+  title: string | null;
+  isPrivate: string | null;
+};
+
 type ChatLogsType = {
   Korean: string;
   English: string;
@@ -69,5 +75,6 @@ export {
   TranslateTextReturnType,
   UserStateType,
   ChatLogsType,
-  ParticipantsUpdateType
+  ParticipantsUpdateType,
+  CreatedRoomType
 };
