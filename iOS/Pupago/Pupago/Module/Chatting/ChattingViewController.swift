@@ -39,6 +39,7 @@ class ChattingViewController: ViewController {
         super.viewDidLoad()
         self.navigationItem.rightBarButtonItem = rightNavigationItem
         configureCollectionView()
+        configureToasterView()
     }
     
     override func bindViewModel() {
@@ -48,12 +49,14 @@ class ChattingViewController: ViewController {
         let dataSource = MessageDataSource()
         
         let chatText = inputText.rx.text.orEmpty.asObservable()
+        let codeTrigger = codeButton.rx.tap.asObservable()
         let registTrigger = registButton.rx.tap.asObservable()
         let micTrigger = micButton.rx.tap.asObservable()
         let showParticipantTrigger = rightNavigationItem.rx.tap.asObservable()
         let willLeave = rx.viewWillDisappear.map { _ in }
         
         let input = ChattingViewModel.Input(chatText: chatText,
+                                            codeTrigger: codeTrigger,
                                             registTrigger: registTrigger,
                                             micTrigger: micTrigger,
                                             showParticipantTrigger: showParticipantTrigger,
@@ -125,6 +128,16 @@ class ChattingViewController: ViewController {
                 status.nickname == "" ? nil : Toast(text: toasterText).show()
             })
             .disposed(by: rx.disposeBag)
+        
+        output.clipboard
+            .drive(onNext: { info in
+                let pasteboard = UIPasteboard.general
+                let toasterText = "[\(info.code ?? "")]\(info.localize ?? "")"
+                pasteboard.string = info.code
+                
+                Toast(text: toasterText).show()
+            })
+            .disposed(by: rx.disposeBag)
     }
     
     override func registerForKeyboardNotifications() {
@@ -165,6 +178,14 @@ extension ChattingViewController {
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         self.collectionView.addGestureRecognizer(tap)
         
+    }
+    
+    func configureToasterView() {
+        let marginTop: CGFloat = 200
+        let frame = self.view.safeAreaLayoutGuide.layoutFrame
+        
+        ToastView.appearance().bottomOffsetPortrait = max(frame.width, frame.height) - marginTop
+        ToastView.appearance().bottomOffsetLandscape = min(frame.width, frame.height) - marginTop
     }
     
     private func scrollDownChat() {
