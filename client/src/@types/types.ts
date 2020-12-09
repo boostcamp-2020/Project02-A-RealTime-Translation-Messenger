@@ -3,7 +3,7 @@ type RoomListType = {
   title: string;
   createdAt: string;
   participantCount: number;
-  isPrivate: string;
+  isPrivate: 'true' | 'false';
 };
 
 type ParticipantsType = {
@@ -14,7 +14,7 @@ type ParticipantsType = {
 
 type ParticipantsListType = {
   participantsList: ParticipantsType[];
-  type: string;
+  type: 'enter' | 'leave';
   diffNickname: string;
 };
 
@@ -27,10 +27,37 @@ type ReceiveChatType = {
   createdAt: string;
 };
 
+
 type CreatedRoomType = {
   roomCode: string | null;
   title: string | null;
   isPrivate: string | null;
+};
+
+type ChatLogsType = {
+  Korean: string;
+  English: string;
+  senderId: string;
+  nickname: string;
+  imageLink: string;
+  createdAt: string;
+};
+
+type ParticipantsUpdateType = {
+  type: 'enter' | 'leave';
+  diffNickname: string;
+};
+
+type TranslateTextPropsType = {
+  source: 'ko' | 'en';
+  target: 'ko' | 'en';
+  text: string;
+};
+
+type TranslateTextReturnType = {
+  srcLangType: string;
+  tarLangType: string;
+  translatedText: string;
 };
 
 type UserStateType = {
@@ -39,4 +66,15 @@ type UserStateType = {
   imageLink: string | null;
 };
 
-export { RoomListType, ParticipantsType, ParticipantsListType, ReceiveChatType, CreatedRoomType, UserStateType };
+export {
+  RoomListType,
+  ParticipantsType,
+  ParticipantsListType,
+  ReceiveChatType,
+  TranslateTextPropsType,
+  TranslateTextReturnType,
+  UserStateType,
+  ChatLogsType,
+  ParticipantsUpdateType,
+  CreatedRoomType
+};
