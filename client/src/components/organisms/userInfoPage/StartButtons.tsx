@@ -9,7 +9,7 @@ const RoomCreateButtonWrapper = styled.div`
 `;
 
 const validate = (nickname: string, imageLink: string | null) => {
-  if (nickname.length === 0) return false;
+  if (nickname.length < 2) return false;
   if (!imageLink) return false;
   return true;
 };
@@ -23,7 +23,7 @@ function StartButtons() {
         <MainButton
           disabled={!validate(nicknameData, imageLinkData)}
           onClickButton={() => {
-            console.log('hihi');
+            //  라우팅 코드
           }}
         >
           + 방 만들기
@@ -32,7 +32,7 @@ function StartButtons() {
       <MainButton
         disabled={!validate(nicknameData, imageLinkData)}
         onClickButton={() => {
-          console.log('hihi');
+          //  라우팅 코드
         }}
       >
         참가하기
