@@ -21,11 +21,12 @@ final class ChattingListViewController: ViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     
     private let tapGesture = UITapGestureRecognizer()
+    private let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
-        configureThumbnailImageView()
+        registerGesture()
     }
     
     override func bindViewModel() {
@@ -36,11 +37,13 @@ final class ChattingListViewController: ViewController {
         let createTrigger = createButton.rx.tap.asObservable()
         let joinTrigger = joinButton.rx.tap.asObservable()
         let selection = collectionView.rx.itemSelected.map { $0 }
-        let tapTrigger = tapGesture.rx.event.asObservable()
+        let reloadRoom = refreshControl.rx.controlEvent(.valueChanged).map { _ in }
+        let tapTrigger = tapGesture.rx.event.map { _ in }
         
         let input = ChattingListViewModel.Input(createTrigger: createTrigger,
                                                 joinTrigger: joinTrigger,
-                                                tapTrigger: tapTrigger,
+                                                imageReload: tapTrigger,
+                                                reloadRoom: reloadRoom,
                                                 selection: selection)
         
         let output = viewModel.transform(input)
@@ -87,11 +90,12 @@ final class ChattingListViewController: ViewController {
             })
             .disposed(by: rx.disposeBag)
         
-        output.reload
-            .drive(onNext: { [unowned self] _ in
-                let url = URL(string: Application.shared.profile)
-                self.thumbnailImageView.kf.setImage(with: url)
-            })
+        output.isReloading
+            .bind(animated: refreshControl.rx.isRefreshing)
+            .disposed(by: rx.disposeBag)
+        
+        output.profileImage
+            .bind(animated: thumbnailImageView.rx.animated.fade(duration: 0.2).image)
             .disposed(by: rx.disposeBag)
     }
     
@@ -111,13 +115,13 @@ private extension ChattingListViewController {
         let layout = UICollectionViewCompositionalLayout(section: section)
         
         self.collectionView.collectionViewLayout = layout
+        
+        collectionView.refreshControl = refreshControl
     }
     
-    func configureThumbnailImageView() {
+    func registerGesture() {
         thumbnailImageView.isUserInteractionEnabled = true
         thumbnailImageView.addGestureRecognizer(tapGesture)
-        
-        let url = URL(string: Application.shared.profile)
-        self.thumbnailImageView.kf.setImage(with: url)
     }
+    
 }

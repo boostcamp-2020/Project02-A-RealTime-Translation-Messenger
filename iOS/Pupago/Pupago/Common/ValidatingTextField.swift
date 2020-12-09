@@ -21,8 +21,8 @@ class ValidatingTextField: UITextField {
     }
     
     @objc func editingChanged(sender: UITextField) {
-        if sender.text?.count ?? maxLength > maxLength {
-            sender.text = String(stringValue.prefix(maxLength))
+        if text?.count ?? 0 > maxLength {
+            text = String(stringValue.prefix(maxLength))
         }
     }
 
