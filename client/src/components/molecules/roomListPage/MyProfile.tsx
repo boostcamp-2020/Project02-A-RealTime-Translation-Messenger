@@ -6,7 +6,7 @@ import LanguageTag from '../../atoms/resources/LanguageTag';
 import Text from '../../atoms/texts/Text';
 
 export type MyProfilePropsType = {
-  image: string;
+  image: string | null;
   language: 'Korean' | 'English';
   nickname: string;
 };
