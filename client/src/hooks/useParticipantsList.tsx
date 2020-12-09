@@ -1,8 +1,8 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../modules';
-import { setParticipantsList } from '../modules/participantsList';
 import { useCallback } from 'react';
 
+import { RootState } from '../modules';
+import { setParticipantsList } from '../modules/participantsList';
 import { ParticipantsType } from '../@types/types';
 
 export default function useParticipantsList() {
