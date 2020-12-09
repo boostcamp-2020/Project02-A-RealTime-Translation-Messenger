@@ -14,6 +14,7 @@ target 'Pupago' do
     pod 'Kingfisher'
     pod 'Toaster', :git => 'https://github.com/devxoul/Toaster.git', :branch => 'master'
     pod 'RxAnimated'
+    pod 'lottie-ios'
 end
 
 # RxTest
