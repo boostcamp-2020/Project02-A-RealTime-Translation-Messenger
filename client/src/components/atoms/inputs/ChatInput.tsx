@@ -20,11 +20,11 @@ const StyledChatInput = styled.textarea`
 
 export type ChatInputPropsType = {
   value: string;
-  onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  onChangeInput?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
 };
 
-function ChatInput({ value, onChange }: ChatInputPropsType) {
-  return <StyledChatInput onChange={onChange} value={value} />;
+function ChatInput({ value, onChangeInput }: ChatInputPropsType) {
+  return <StyledChatInput onChange={onChangeInput} value={value} />;
 }
 
 export default ChatInput;
