@@ -107,11 +107,6 @@ final class ChattingListViewController: ViewController {
         
         output.isBlanking
             .map { !$0 }
-            .bind(animated: blankView.rx.animated.fade(duration: 0.2).isHidden)
-            .disposed(by: rx.disposeBag)
-        
-        output.isShaking
-            .filter { $0 == false }
             .bind(animated: blankView.rx.animated.tick(duration: 0.6).isHidden)
             .disposed(by: rx.disposeBag)
     }

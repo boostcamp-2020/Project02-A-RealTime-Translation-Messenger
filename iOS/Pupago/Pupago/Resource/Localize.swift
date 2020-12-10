@@ -80,6 +80,15 @@ extension Localize {
         }
     }
     
+    var translating: String {
+        switch self {
+        case .korean:
+            return "번역중..."
+        case .english:
+            return "translating..."
+        }
+    }
+    
     var languageViewText: SettingLanguageViewText {
         switch self {
         case .korean:
@@ -119,7 +128,7 @@ extension Localize {
             return .init(title: "Pupago",
                          language: "English",
                          chatroom: "Chats",
-                         blanking: "Does not exist chatroom")
+                         blanking: "Chatroom does not exist")
         }
     }
     

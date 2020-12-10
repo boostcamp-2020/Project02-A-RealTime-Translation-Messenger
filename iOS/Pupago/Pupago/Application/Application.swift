@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxCocoa
 
 final class Application: NSObject {
     
@@ -17,12 +18,32 @@ final class Application: NSObject {
     var userName: String
     var localize: Localize
     var profile: String
+    var currentRoomCode = ""
+    
+    let isSocketValid = PublishRelay<Bool>()
+    let socketManager = SocketIOManager.shared
     
     private override init() {
         navigator = Navigator.default
         userName = ""
         localize = .korean
         profile = ""
+    }
+    
+    func setUpSocket() {
+        socketManager.socket.rx.event(.connect)
+            .subscribe(onNext: { [unowned self] _ in
+                isSocketValid.accept(true)
+            })
+            .disposed(by: rx.disposeBag)
+        
+        isSocketValid
+            .asObservable()
+            .filter { $0 == true }
+            .subscribe(onNext: { [unowned self] _ in
+                !currentRoomCode.isEmpty ? socketManager.enterChatroom(roomCode: currentRoomCode) : nil
+            })
+            .disposed(by: rx.disposeBag)
     }
     
     func presentInitialScreen(in window: UIWindow?) {

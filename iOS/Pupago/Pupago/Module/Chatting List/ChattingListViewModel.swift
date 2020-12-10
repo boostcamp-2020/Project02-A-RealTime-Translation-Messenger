@@ -31,7 +31,6 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
         let entered: Driver<ChattingViewModel>
         let isReloading: Driver<Bool>
         let isBlanking: Driver<Bool>
-        let isShaking: Driver<Bool>
     }
     
     private let rooms = BehaviorRelay<[Room]>(value: [])
@@ -40,7 +39,6 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
     private let isRefreshing = BehaviorRelay<Bool>(value: false)
     private let profileImage = PublishRelay<UIImage?>()
     private let blank = PublishRelay<Bool>()
-    private let shake = PublishRelay<Bool>()
     
     func transform(_ input: Input) -> Output {
         
@@ -69,7 +67,7 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
                 profileImage.accept(image)
             })
             .disposed(by: rx.disposeBag)
-            
+        
         // MARK: - Rooms
         
         pupagoAPI.rooms()
@@ -77,7 +75,6 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
                 self.rooms.accept(result.roomList)
                 let state = result.roomList.isEmpty ? true: false
                 blank.accept(state)
-                shake.accept(!state)
             }, onError: { error in
                 print(error)
             })
@@ -90,7 +87,6 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
                 rooms.accept(result.roomList)
                 let state = result.roomList.isEmpty ? true: false
                 blank.accept(state)
-                shake.accept(!state)
                 isRefreshing.accept(false)
             }, onError: { error in
                 print(error)
@@ -103,7 +99,6 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
                 rooms.accept(result.roomList)
                 let state = result.roomList.isEmpty ? true: false
                 blank.accept(state)
-                shake.accept(!state)
                 isRefreshing.accept(false)
             }, onError: { error in
                 print(error)
@@ -119,19 +114,15 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
             .disposed(by: rx.disposeBag)
         
         roomInfo.asObservable()
-            .subscribe(onNext: { [unowned self] info in
-                pupagoAPI.join(code: info.code, isPrivate: info.isPrivate)
-                    .subscribe(onNext: { room in
-                        socketManager.enterChatroom(roomCode: room.roomCode ?? "")
-                        self.socketEntered.accept(room)
-                    }, onError: { error in
-                        if let error = error as? APIError {
-                            error == .roomNotExist ? print("Alert logic needed room not exist") : print("Alert logic needed")
-                        }
-                    })
-                    .disposed(by: rx.disposeBag)
+            .flatMap { pupagoAPI.join(code: $0.code, isPrivate: $0.isPrivate) }
+            .subscribe(onNext: { room in
+                Application.shared.currentRoomCode = room.roomCode ?? ""
+                socketManager.enterChatroom(roomCode: room.roomCode ?? "")
+                self.socketEntered.accept(room)
             }, onError: { error in
-                print(error)
+                if let error = error as? APIError {
+                    error == .roomNotExist ? print("Alert logic needed room not exist") : print("Alert logic needed")
+                }
             })
             .disposed(by: rx.disposeBag)
         
@@ -175,9 +166,7 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
                       created: created,
                       joined: joined,
                       entered: entered, isReloading: isRefreshing.asDriver(),
-                      isBlanking: blank.asDriver(onErrorJustReturn: false),
-                      isShaking: shake.asDriver(onErrorJustReturn: false))
-      
+                      isBlanking: blank.asDriver(onErrorJustReturn: false))
     }
     
 }
