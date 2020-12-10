@@ -3,6 +3,8 @@ import dotenv from 'dotenv';
 import io from 'socket.io-client';
 
 import { ParticipantsListType, ReceiveChatType } from '../@types/types';
+import SideBar from '../components/organisms/chatRoomPage/SideBar';
+import useParticipantsList from '../hooks/useParticipantsList';
 
 dotenv.config();
 
@@ -10,9 +12,11 @@ const { BASE_URL } = process.env;
 const socket = io(BASE_URL as string);
 
 function ChatPage() {
+  const { onSetParticipantsList } = useParticipantsList();
+
   useEffect(() => {
     socket.on('receive participants list', (participantsList: ParticipantsListType) => {
-      // participants 상태 업데이트
+      onSetParticipantsList(participantsList.participantsList);
       // 채팅에 입장/퇴장 로그 추가
     });
     socket.on('receive chat', (receiveChat: ReceiveChatType) => {
@@ -24,7 +28,7 @@ function ChatPage() {
     });
   }, []);
 
-  return <h1>쳇!</h1>;
+  return <SideBar />;
 }
 
 export default ChatPage;
