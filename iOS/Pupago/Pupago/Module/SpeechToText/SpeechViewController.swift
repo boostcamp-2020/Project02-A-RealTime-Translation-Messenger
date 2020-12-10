@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 import RxAnimated
 
-class SpeechViewController: ViewController {
+final class SpeechViewController: ViewController {
     
     @IBOutlet weak var originTextView: UITextView!
     @IBOutlet weak var translationTextView: UITextView!

@@ -51,6 +51,9 @@ extension ChattingListViewController: MemoryLeakCheckable, StoryboardInstantiati
 extension CreateRoomViewController: MemoryLeakCheckable, StoryboardInstantiatible, Resolvable {}
 extension JoinRoomViewController: MemoryLeakCheckable, StoryboardInstantiatible, Resolvable {}
 extension ChattingViewController: MemoryLeakCheckable, StoryboardInstantiatible, Resolvable {}
+extension ParticipantViewController: MemoryLeakCheckable, StoryboardInstantiatible, Resolvable {}
+extension SpeechViewController: MemoryLeakCheckable, StoryboardInstantiatible, Resolvable {}
+
 
 extension Resolver {
     
@@ -62,6 +65,8 @@ extension Resolver {
             .regist { _ in CreateRoomViewModel() }
             .regist { _ in JoinRoomViewModel() }
             .regist { _ in ChattingViewModel() }
+            .regist { _ in ParticipantViewModel(roomCode: "0000") }
+            .regist { _ in SpeechViewModel() }
             .regist { resolver in
                 LanguageViewController.instantiate()
                     .setup { $0.viewModel = resolver.resolve(LanguageViewModel.self) }
@@ -85,6 +90,14 @@ extension Resolver {
             .regist { resolver in
                 ChattingViewController.instantiate()
                     .setup { $0.viewModel = resolver.resolve(ChattingViewModel.self) }
+            }
+            .regist { resolver in
+                ParticipantViewController.instantiate()
+                    .setup { $0.viewModel = resolver.resolve(ParticipantViewModel.self) }
+            }
+            .regist { resolver in
+                SpeechViewController.instantiate()
+                    .setup { $0.viewModel = resolver.resolve(SpeechViewModel.self) }
             }
     }
     

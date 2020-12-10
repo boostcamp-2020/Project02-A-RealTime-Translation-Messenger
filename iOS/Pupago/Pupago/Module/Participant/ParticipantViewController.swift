@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ParticipantViewController: ViewController {
+final class ParticipantViewController: ViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var dismissButton: UIButton!

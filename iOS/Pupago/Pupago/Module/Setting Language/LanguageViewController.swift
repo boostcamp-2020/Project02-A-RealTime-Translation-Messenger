@@ -11,7 +11,7 @@ import RxCocoa
 import RxAnimated
 import AVFoundation
 
-class LanguageViewController: ViewController {
+final class LanguageViewController: ViewController {
     @IBOutlet weak var introLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var engButton: SelectableButton!

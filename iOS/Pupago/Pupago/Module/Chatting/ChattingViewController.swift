@@ -12,7 +12,7 @@ import RxDataSources
 import Toaster
 import RxAnimated
 
-class ChattingViewController: ViewController {
+final class ChattingViewController: ViewController {
 
     @IBOutlet weak var languageLabel: UILabel!
     @IBOutlet weak var codeButton: Button!
