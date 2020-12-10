@@ -11,7 +11,7 @@ const RoomCreateButtonWrapper = styled.div`
 `;
 
 const validate = (nickname: string, imageLink: string | null) => {
-  if (nickname.length < 2) return false;
+  if (!/^[A-Z|a-z|가-힣]{2,12}$/.test(nickname)) return false;
   if (!imageLink) return false;
   return true;
 };

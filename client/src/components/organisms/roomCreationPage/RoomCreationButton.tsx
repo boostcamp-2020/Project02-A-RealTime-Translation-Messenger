@@ -5,6 +5,7 @@ import MainButton from '../../atoms/buttons/MainButton';
 
 const validate = (title: string) => {
   if (title.length < 2 || title.length > 30) return false;
+  if (title.trim().length === 0) return false;
   return true;
 };
 
