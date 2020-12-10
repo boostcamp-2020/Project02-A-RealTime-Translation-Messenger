@@ -13,6 +13,10 @@ type ChatInputPropsType = {
 const Wrapper = styled.div`
   position: relative;
   display: flex;
+  border-bottom-left-radius: 30px;
+  width: 1000px;
+  height: 128px;
+  background-color: white;
 `;
 
 const VoiceWrapper = styled.div`
