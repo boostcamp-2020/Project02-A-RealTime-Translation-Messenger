@@ -10,6 +10,7 @@ type ParticipantsType = {
   socketId: string;
   nickname: string;
   language: string;
+  imageLink: string;
 };
 
 type ParticipantsListType = {
@@ -59,6 +60,11 @@ type TranslateTextReturnType = {
   translatedText: string;
 };
 
+enum SideBarStatus {
+  PARTICIPANTS,
+  CHAT_ROOMS,
+}
+
 export {
   RoomListType,
   ParticipantsType,
@@ -69,4 +75,5 @@ export {
   ChatLogsType,
   ParticipantsUpdateType,
   CreatedRoomType,
+  SideBarStatus,
 };

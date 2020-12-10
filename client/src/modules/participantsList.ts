@@ -6,13 +6,13 @@ const name = 'participantsList';
 
 type InitialStateType = {
   participantsList: {
-    data: ParticipantsType[] | null;
+    data: ParticipantsType[];
   };
 };
 
 const initialState: InitialStateType = {
   participantsList: {
-    data: null,
+    data: [],
   },
 };
 
