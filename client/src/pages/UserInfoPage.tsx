@@ -10,13 +10,7 @@ import StartButtons from '../components/organisms/userInfoPage/StartButtons';
 const ProfilePictureSelectionWrapper = styled.div`
   display: flex;
   justify-content: center;
-  margin: 32px 0 0 0;
-`;
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  margin-top: 32px;
 `;
 
 const LanguageSelectionwrapper = styled.div`
