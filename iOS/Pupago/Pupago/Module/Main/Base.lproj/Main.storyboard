@@ -560,13 +560,42 @@
                                             </collectionViewCell>
                                         </cells>
                                     </collectionView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p8K-ce-Mqz">
+                                        <rect key="frame" x="149.66666666666669" y="199" width="128.66666666666669" height="214.66666666666663"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sadpapago" translatesAutoresizingMaskIntoConstraints="NO" id="sCt-sf-kbR">
+                                                <rect key="frame" x="0.0" y="0.0" width="128.66666666666666" height="166.33333333333334"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="sCt-sf-kbR" secondAttribute="height" multiplier="111:144" id="VOb-8q-BX4"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="채팅방이 존재하지 않습니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xGq-X5-2qF">
+                                                <rect key="frame" x="-30.666666666666657" y="194.33333333333331" width="190" height="20.333333333333343"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="sCt-sf-kbR" secondAttribute="trailing" id="1m6-s7-251"/>
+                                            <constraint firstItem="sCt-sf-kbR" firstAttribute="leading" secondItem="p8K-ce-Mqz" secondAttribute="leading" id="40P-oR-BhR"/>
+                                            <constraint firstItem="sCt-sf-kbR" firstAttribute="top" secondItem="p8K-ce-Mqz" secondAttribute="top" id="DX4-gn-rTb"/>
+                                            <constraint firstItem="xGq-X5-2qF" firstAttribute="top" secondItem="sCt-sf-kbR" secondAttribute="bottom" constant="28" id="JR9-Oy-RjL"/>
+                                            <constraint firstItem="xGq-X5-2qF" firstAttribute="centerX" secondItem="p8K-ce-Mqz" secondAttribute="centerX" id="icI-3m-bHB"/>
+                                            <constraint firstAttribute="bottom" secondItem="xGq-X5-2qF" secondAttribute="bottom" id="wTo-sr-mnC"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="U0P-mo-qaE" secondAttribute="trailing" constant="24" id="0ab-nC-JZJ"/>
                                     <constraint firstItem="U0P-mo-qaE" firstAttribute="leading" secondItem="9M2-Ug-YDM" secondAttribute="leading" constant="24" id="58P-Iu-NHv"/>
                                     <constraint firstItem="D4u-3c-SH0" firstAttribute="top" secondItem="U0P-mo-qaE" secondAttribute="bottom" constant="16" id="PBj-L4-TDe"/>
+                                    <constraint firstItem="p8K-ce-Mqz" firstAttribute="centerY" secondItem="9M2-Ug-YDM" secondAttribute="centerY" multiplier="0.9" id="eea-Xo-dwU"/>
                                     <constraint firstItem="D4u-3c-SH0" firstAttribute="leading" secondItem="9M2-Ug-YDM" secondAttribute="leading" id="efP-BH-Mit"/>
+                                    <constraint firstItem="p8K-ce-Mqz" firstAttribute="width" secondItem="9M2-Ug-YDM" secondAttribute="width" multiplier="0.3" id="khT-ud-gje"/>
+                                    <constraint firstItem="p8K-ce-Mqz" firstAttribute="centerX" secondItem="9M2-Ug-YDM" secondAttribute="centerX" id="o5a-Fd-l8z"/>
                                     <constraint firstAttribute="trailing" secondItem="D4u-3c-SH0" secondAttribute="trailing" id="tOl-mL-dm2"/>
                                     <constraint firstAttribute="bottom" secondItem="D4u-3c-SH0" secondAttribute="bottom" id="wfI-mN-Ka7"/>
                                     <constraint firstItem="U0P-mo-qaE" firstAttribute="top" secondItem="9M2-Ug-YDM" secondAttribute="top" constant="20" id="zXx-Dv-KWK"/>
@@ -621,6 +650,9 @@
                     </view>
                     <navigationItem key="navigationItem" title="Pupago" id="Kni-hu-I5m"/>
                     <connections>
+                        <outlet property="blankImageView" destination="sCt-sf-kbR" id="6zu-Uc-246"/>
+                        <outlet property="blankListLabel" destination="xGq-X5-2qF" id="FxA-F7-81l"/>
+                        <outlet property="blankView" destination="p8K-ce-Mqz" id="JNy-dx-9ya"/>
                         <outlet property="chatroomLabel" destination="YOr-co-qxF" id="ay0-AC-DBH"/>
                         <outlet property="collectionView" destination="D4u-3c-SH0" id="at3-Db-JdW"/>
                         <outlet property="createButton" destination="8on-eL-CeY" id="aMN-EF-UCo"/>
@@ -632,7 +664,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XA3-ui-dOS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2672.4637681159425" y="75"/>
+            <point key="canvasLocation" x="2671.9626168224299" y="74.514038876889856"/>
         </scene>
         <!--Chatting View Controller-->
         <scene sceneID="zEt-Qa-bQ7">
@@ -1010,13 +1042,13 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="KRG-n1-Gva">
                                                     <rect key="frame" x="80" y="7" width="334" height="46.333333333333336"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RCe-tO-gBe">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RCe-tO-gBe">
                                                             <rect key="frame" x="0.0" y="0.0" width="334" height="24"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ncp-dI-ImM">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ncp-dI-ImM">
                                                             <rect key="frame" x="0.0" y="31.999999999999996" width="334" height="14.333333333333332"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1758,6 +1790,7 @@
         <image name="plus.message" catalog="system" width="128" height="113"/>
         <image name="return" catalog="system" width="128" height="101"/>
         <image name="rightrain" width="285" height="468"/>
+        <image name="sadpapago" width="361" height="470"/>
         <image name="starSprinkle" width="129" height="112"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
         <namedColor name="BlueColor">

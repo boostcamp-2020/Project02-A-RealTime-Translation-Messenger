@@ -19,14 +19,18 @@ final class ChattingListViewController: ViewController {
     @IBOutlet weak var joinButton: UIButton!
     @IBOutlet weak var createButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var blankView: UIView!
+    @IBOutlet weak var blankImageView: UIImageView!
+    @IBOutlet weak var blankListLabel: UILabel!
     
-    private let tapGesture = UITapGestureRecognizer()
+    private let thumbTapGesture = UITapGestureRecognizer()
+    private let blankTapGesture = UITapGestureRecognizer()
     private let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
-        registerGesture()
+        configureImageView()
     }
     
     override func bindViewModel() {
@@ -38,13 +42,15 @@ final class ChattingListViewController: ViewController {
         let joinTrigger = joinButton.rx.tap.asObservable()
         let selection = collectionView.rx.itemSelected.map { $0 }
         let reloadRoom = refreshControl.rx.controlEvent(.valueChanged).map { _ in }
-        let tapTrigger = tapGesture.rx.event.map { _ in }
+        let tapTrigger = thumbTapGesture.rx.event.map { _ in }
+        let blankTrigger = blankTapGesture.rx.event.map { _ in }
         
         let input = ChattingListViewModel.Input(createTrigger: createTrigger,
                                                 joinTrigger: joinTrigger,
                                                 imageReload: tapTrigger,
                                                 reloadRoom: reloadRoom,
-                                                selection: selection)
+                                                selection: selection,
+                                                blankTrigger: blankTrigger)
         
         let output = viewModel.transform(input)
         
@@ -54,6 +60,7 @@ final class ChattingListViewController: ViewController {
                 self.navigationItem.title = localized.title
                 self.languageLabel.text = localized.language
                 self.chatroomLabel.text = localized.chatroom
+                self.blankListLabel.text = localized.blanking
             })
             .disposed(by: rx.disposeBag)
         
@@ -97,6 +104,16 @@ final class ChattingListViewController: ViewController {
         output.profileImage
             .bind(animated: thumbnailImageView.rx.animated.fade(duration: 0.2).image)
             .disposed(by: rx.disposeBag)
+        
+        output.isBlanking
+            .map { !$0 }
+            .bind(animated: blankView.rx.animated.fade(duration: 0.2).isHidden)
+            .disposed(by: rx.disposeBag)
+        
+        output.isShaking
+            .filter { $0 == false }
+            .bind(animated: blankView.rx.animated.tick(duration: 0.6).isHidden)
+            .disposed(by: rx.disposeBag)
     }
     
 }
@@ -119,9 +136,10 @@ private extension ChattingListViewController {
         collectionView.refreshControl = refreshControl
     }
     
-    func registerGesture() {
+    func configureImageView() {
         thumbnailImageView.isUserInteractionEnabled = true
-        thumbnailImageView.addGestureRecognizer(tapGesture)
+        thumbnailImageView.addGestureRecognizer(thumbTapGesture)
+        blankView.addGestureRecognizer(blankTapGesture)
     }
     
 }
