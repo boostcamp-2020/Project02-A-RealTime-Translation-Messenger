@@ -26,7 +26,8 @@ extension NetworkProviding {
             AF.request(endpoint.baseUrl + endpoint.path,
                        method: endpoint.method,
                        parameters: endpoint.parameter,
-                       encoding: JSONEncoding.default)
+                       encoding: JSONEncoding.default,
+                       headers: endpoint.header)
                 .validate()
                 .responseData { response in
                     switch response.result {
@@ -40,7 +41,7 @@ extension NetworkProviding {
                         }
                     case .failure(let error):
                         error.responseCode == 406 ? observer.onError(APIError.roomNotExist) :
-                            observer.onError(APIError.invalidResponse)
+                            observer.onError(error)
                     }
                        }
             return Disposables.create()

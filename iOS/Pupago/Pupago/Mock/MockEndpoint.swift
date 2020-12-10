@@ -21,6 +21,10 @@ extension MockEndpoint: EndpointType {
         }
     }
     
+    var header: HTTPHeaders? {
+        return nil
+    }
+    
     var method: HTTPMethod {
         return .get
     }

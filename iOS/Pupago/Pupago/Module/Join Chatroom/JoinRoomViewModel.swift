@@ -30,7 +30,7 @@ final class JoinRoomViewModel: ViewModel, ViewModelType {
     func transform(_ input: Input) -> Output {
         
         input.roomCode
-            .map { $0.joined() }
+            .map { $0.joined().uppercased() }
             .subscribe(onNext: { [unowned self] code in
                 self.isFull.accept(code.count == 4)
                 self.isValid.accept(self.validate(code))
@@ -49,7 +49,7 @@ final class JoinRoomViewModel: ViewModel, ViewModelType {
         let activate = Observable.combineLatest(isFull, isValid)
             .map { $0 && $1 }
             .asDriver(onErrorJustReturn: false)
-        
+
         let dismiss = Observable.of(input.cancelTrigger, input.joinTrigger).merge()
             .map { _ in }
             .asDriver(onErrorJustReturn: ())

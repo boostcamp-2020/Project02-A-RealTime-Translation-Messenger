@@ -12,6 +12,8 @@ enum RoomEndpoint {
     case create(title: String, isPrivate: Bool)
     case get
     case join(code: String, isPrivate: Bool)
+    case getParticipant(roomCode: String)
+    case profile
 }
 
 extension RoomEndpoint: EndpointType {
@@ -22,21 +24,29 @@ extension RoomEndpoint: EndpointType {
             return "room"
         case .join:
             return "join"
+        case .getParticipant(let roomCode):
+            return "room/participantsList/\(roomCode)"
+        case .profile:
+            return "profileImage"
         }
+    }
+    
+    var header: HTTPHeaders? {
+        return nil
     }
     
     var method: HTTPMethod {
         switch self {
         case .create, .join:
             return .post
-        case .get:
+        case .get, .getParticipant, .profile:
             return .get
         }
     }
     
     var parameter: [String: Any]? {
         switch self {
-        case .get:
+        case .get, .getParticipant, .profile:
             return nil
         case .join(let code, let isPrivate):
             let isPrivate = isPrivate ? "true" : "false"

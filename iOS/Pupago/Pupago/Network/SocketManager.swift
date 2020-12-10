@@ -11,7 +11,7 @@ import SocketIO
 class SocketIOManager {
     
     static let shared = SocketIOManager()
-    let manager = SocketManager(socketURL: SocketEndpoint.baseUrl, config: [.log(true), .compress])
+    let manager = SocketManager(socketURL: SocketEndpoint.baseUrl, config: [.log(false), .compress])
     var socket: SocketIOClient!
     
     private init() {
@@ -29,7 +29,8 @@ class SocketIOManager {
     func enterChatroom(roomCode: String) {
         let nickname = Application.shared.userName
         let language = Application.shared.localize.toString
-        let item = ["roomCode": roomCode, "nickname": nickname, "language": language]
+        let profile = Application.shared.profile
+        let item = ["roomCode": roomCode, "nickname": nickname, "language": language, "imageLink": profile]
         
         socket.emit(SocketEndpoint.enter.eventName, item)
     }
@@ -40,6 +41,7 @@ class SocketIOManager {
     
     func sendMessage(korean: String, english: String, origin: String) {
         let item = ["Korean": korean, "English": english, "origin": origin]
+        
         socket.emit(SocketEndpoint.sendMessage.eventName, item)
     }
     

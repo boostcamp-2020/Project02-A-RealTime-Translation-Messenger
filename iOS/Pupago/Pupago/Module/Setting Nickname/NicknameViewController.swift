@@ -15,6 +15,11 @@ final class NicknameViewController: ViewController {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var nameTextField: ValidatingTextField!
     @IBOutlet weak var startButton: Button!
+    @IBOutlet weak var inputConstraint: NSLayoutConstraint!
+    @IBOutlet weak var topConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    
+    private var keyboardShown: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,11 +59,21 @@ final class NicknameViewController: ViewController {
             })
             .disposed(by: rx.disposeBag)
         
+        output.animate
+            .asObservable()
+            .filter { $0 == true }
+            .bind(animated: nameTextField.rx.animated.tick(duration: 0.33).isSelected)
+            .disposed(by: rx.disposeBag)
+        
         output.saved
             .drive(onNext: { [unowned self] viewModel in
                 guard let window = self.view.window else { return }
-                self.navigator.show(segue: .chatlist(viewModel: viewModel), sender: self, transition: .rootWithNavigation(in: window))
+                checkAnimationView.play { _ in
+                    playCheckSoundAndPause(for: 700)
+                    self.navigator.show(segue: .chatlist(viewModel: viewModel), sender: self, transition: .rootWithNavigation(in: window))
+                }
             })
             .disposed(by: rx.disposeBag)
     }
+    
 }
