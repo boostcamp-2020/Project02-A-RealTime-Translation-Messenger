@@ -2,7 +2,8 @@ import React from 'react';
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import ChatPage from './pages/ChatPage';
+
+import ChatRoomPage from './pages/ChatRoomPage';
 import MainPage from './pages/MainPage';
 import Background from './components/atoms/resources/Background';
 
@@ -29,7 +30,7 @@ function App() {
       <Background>
         <Switch>
           <Route path="/" component={MainPage} exact />
-          <Route path="/chat" component={ChatPage} exact />
+          <Route path="/chat" component={ChatRoomPage} exact />
           <Redirect from="*" to="/" />
         </Switch>
       </Background>
