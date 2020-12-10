@@ -4,6 +4,7 @@ import { TranslateTextPropsType } from '../@types/types';
 import api from '../assets/api';
 import { getLanguageByLangCode, getLangCodeByLanguage } from '../utils/langCode';
 import LangCode from '../@types/langCode';
+import useUser from '../hooks/useUser';
 
 const name = 'chatInput';
 
@@ -31,6 +32,17 @@ const getTranslatedText = createAsyncThunk(
   },
 );
 
+const getTextOrigin = createAsyncThunk(`${name}/getTextOrigin`, async (text: string, { rejectWithValue }) => {
+  try {
+    if (text.length === 0) return null;
+    const { langCode } = (await api.detectLanguage({ query: text })).data;
+
+    return langCode === 'ko' ? 'Korean' : 'English';
+  } catch (e) {
+    return rejectWithValue(e);
+  }
+});
+
 type InitialStateType = {
   chatInput: {
     data: string;
@@ -44,6 +56,12 @@ type InitialStateType = {
     loading: boolean;
     error: Error | null;
   };
+
+  origin: {
+    data: 'Korean' | 'English' | null;
+    loading: boolean;
+    error: Error | null;
+  };
 };
 
 const initialState: InitialStateType = {
@@ -53,6 +71,12 @@ const initialState: InitialStateType = {
 
   translation: {
     data: { language: 'Korean', translationText: '' },
+    loading: false,
+    error: null,
+  },
+
+  origin: {
+    data: null,
     loading: false,
     error: null,
   },
@@ -81,10 +105,21 @@ const chatInput = createSlice({
       .addCase(getTranslatedText.rejected.type, (state, action: PayloadAction<Error>) => {
         state.translation.loading = false;
         state.translation.error = action.payload;
+      })
+      .addCase(getTextOrigin.pending.type, (state) => {
+        state.origin.loading = true;
+      })
+      .addCase(getTextOrigin.fulfilled.type, (state, action: PayloadAction<'Korean' | 'English'>) => {
+        state.origin.loading = false;
+        state.origin.data = action.payload;
+      })
+      .addCase(getTextOrigin.rejected.type, (state, action: PayloadAction<Error>) => {
+        state.origin.loading = false;
+        state.origin.error = action.payload;
       });
   },
 });
 
 export default chatInput.reducer;
 const setChatInput = chatInput.actions.setChatInput;
-export { getTranslatedText, setChatInput };
+export { getTranslatedText, setChatInput, getTextOrigin };
