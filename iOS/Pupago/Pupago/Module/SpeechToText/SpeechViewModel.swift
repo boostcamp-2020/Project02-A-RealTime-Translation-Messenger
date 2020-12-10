@@ -30,6 +30,7 @@ class SpeechViewModel: ViewModel, ViewModelType {
     }
     
     let activate = BehaviorRelay<Bool>(value: false)
+    let speechState = BehaviorRelay<Bool>(value: false)
     let originText = PublishRelay<String>()
     let chatInfo = PublishRelay<Translator.Text>()
     let available = BehaviorRelay<Bool>(value: false)

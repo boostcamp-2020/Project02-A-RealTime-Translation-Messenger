@@ -935,7 +935,7 @@
                                         </state>
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="qBh-LD-tVb">
-                                        <rect key="frame" x="68.333333333333343" y="8" width="292.66666666666663" height="36"/>
+                                        <rect key="frame" x="114.66666666666667" y="8" width="246.33333333333331" height="36"/>
                                         <color key="backgroundColor" systemColor="systemGray3Color"/>
                                         <color key="tintColor" systemColor="labelColor"/>
                                         <constraints>
@@ -950,6 +950,13 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </textView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sIC-Hb-yOd">
+                                        <rect key="frame" x="64.333333333333329" y="15.000000000000002" width="30.333333333333329" height="22.666666666666671"/>
+                                        <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal">
+                                            <imageReference key="image" image="camera.fill" catalog="system" symbolScale="large"/>
+                                        </state>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                 <constraints>
@@ -958,7 +965,9 @@
                                     <constraint firstItem="GYl-r4-msi" firstAttribute="leading" secondItem="g0E-zh-DY2" secondAttribute="leading" constant="24" id="CZb-bs-9TB"/>
                                     <constraint firstItem="qBh-LD-tVb" firstAttribute="top" secondItem="g0E-zh-DY2" secondAttribute="top" constant="8" id="J9T-wg-FaR"/>
                                     <constraint firstAttribute="trailing" secondItem="L6S-gd-vQm" secondAttribute="trailing" constant="20" id="Ou7-5V-kqR"/>
-                                    <constraint firstItem="qBh-LD-tVb" firstAttribute="leading" secondItem="GYl-r4-msi" secondAttribute="trailing" constant="24" id="XUb-Ke-P2j"/>
+                                    <constraint firstItem="sIC-Hb-yOd" firstAttribute="top" secondItem="g0E-zh-DY2" secondAttribute="top" constant="15" id="S0C-Xe-14b"/>
+                                    <constraint firstItem="qBh-LD-tVb" firstAttribute="leading" secondItem="sIC-Hb-yOd" secondAttribute="trailing" constant="20" id="ZYM-13-1Rd"/>
+                                    <constraint firstItem="sIC-Hb-yOd" firstAttribute="leading" secondItem="GYl-r4-msi" secondAttribute="trailing" constant="20" id="ndj-eo-PpN"/>
                                     <constraint firstItem="L6S-gd-vQm" firstAttribute="top" secondItem="g0E-zh-DY2" secondAttribute="top" constant="14" id="qYB-SS-4v6"/>
                                     <constraint firstAttribute="height" constant="50" id="rlA-xM-xza"/>
                                 </constraints>
@@ -1000,7 +1009,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dvl-PQ-I8k" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3559.420289855073" y="75.669642857142847"/>
+            <point key="canvasLocation" x="3559.3457943925232" y="75.161987041036724"/>
         </scene>
         <!--Participant View Controller-->
         <scene sceneID="ntu-Vc-PTC">
@@ -1777,6 +1786,7 @@
         <image name="arrow.counterclockwise.icloud.fill" catalog="system" width="128" height="88"/>
         <image name="arrow.up.message.fill" catalog="system" width="128" height="113"/>
         <image name="arrowed" width="342" height="342"/>
+        <image name="camera.fill" catalog="system" width="128" height="94"/>
         <image name="cancle" width="587" height="587"/>
         <image name="graphicSprinkle" width="750" height="213"/>
         <image name="iconNotification" width="14" height="13"/>

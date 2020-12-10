@@ -25,13 +25,15 @@ final class SpeechManager: NSObject {
     
     func speechToText() {
         guard audioEngine.isRunning else {
-            self.recoding()
+            AudioServicesPlaySystemSoundWithCompletion(1110) {
+                self.recoding()
+            }
             return
         }
         
         audioEngine.stop()
         recognitionRequest?.endAudio()
-        playBackSound(status: false)
+        playBackSound()
     }
     
     private func recoding() {
@@ -47,12 +49,9 @@ final class SpeechManager: NSObject {
     private func configureAVAudioSession() {
         let audioSession = AVAudioSession.sharedInstance()
         
-        playBackSound(status: true)
-        usleep(400000)
-        
         do {
             try audioSession.setCategory(AVAudioSession.Category.record)
-            try audioSession.setMode(AVAudioSession.Mode.measurement)
+            try audioSession.setMode(AVAudioSession.Mode.default)
             try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
         } catch {
             print(error.localizedDescription)
@@ -108,7 +107,7 @@ final class SpeechManager: NSObject {
 
 extension SpeechManager: SFSpeechRecognizerDelegate {
     
-    private func playBackSound(status: Bool) {
+    func playBackSound() {
         let audioSession = AVAudioSession.sharedInstance()
         
         do {
@@ -118,9 +117,8 @@ extension SpeechManager: SFSpeechRecognizerDelegate {
         } catch let error as NSError {
             print(error)
         }
-         
-        let sound: SystemSoundID = status ? 1110 : 1112
-        AudioServicesPlaySystemSound(sound)
+    
+        AudioServicesPlaySystemSound(1112)
     }
     
 }
