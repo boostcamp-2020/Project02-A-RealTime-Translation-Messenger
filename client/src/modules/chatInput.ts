@@ -10,9 +10,9 @@ const name = 'chatInput';
 
 const getTranslatedText = createAsyncThunk(
   `${name}/getLanguageOfInputText`,
-  async ({ text, currentLanguage }: { text: string; currentLanguage: 'Korean' | 'English' }, { rejectWithValue }) => {
+  async ({ text, origin }: { text: string; origin: 'Korean' | 'English' }, { rejectWithValue }) => {
     try {
-      if (text.length === 0) return { translationText: '', language: currentLanguage };
+      if (text.length === 0) return { translationText: '', origin: origin };
       const { langCode } = (await api.detectLanguage({ query: text })).data;
 
       const source = langCode === LangCode.KOREAN ? LangCode.KOREAN : LangCode.ENGLISH;
@@ -25,23 +25,12 @@ const getTranslatedText = createAsyncThunk(
       };
 
       const { translatedText } = (await api.translateText(translateTextProps)).data;
-      return { translationText: translatedText, language: getLanguageByLangCode(source) };
+      return { translationText: translatedText, origin: getLanguageByLangCode(source) };
     } catch (e) {
       return rejectWithValue(e);
     }
   },
 );
-
-const getTextOrigin = createAsyncThunk(`${name}/getTextOrigin`, async (text: string, { rejectWithValue }) => {
-  try {
-    if (text.length === 0) return null;
-    const { langCode } = (await api.detectLanguage({ query: text })).data;
-
-    return langCode === 'ko' ? 'Korean' : 'English';
-  } catch (e) {
-    return rejectWithValue(e);
-  }
-});
 
 type InitialStateType = {
   chatInput: {
@@ -50,15 +39,9 @@ type InitialStateType = {
 
   translation: {
     data: {
-      language: 'Korean' | 'English';
+      origin: 'Korean' | 'English';
       translationText: string;
     };
-    loading: boolean;
-    error: Error | null;
-  };
-
-  origin: {
-    data: 'Korean' | 'English' | null;
     loading: boolean;
     error: Error | null;
   };
@@ -70,13 +53,7 @@ const initialState: InitialStateType = {
   },
 
   translation: {
-    data: { language: 'Korean', translationText: '' },
-    loading: false,
-    error: null,
-  },
-
-  origin: {
-    data: null,
+    data: { origin: 'Korean', translationText: '' },
     loading: false,
     error: null,
   },
@@ -97,7 +74,7 @@ const chatInput = createSlice({
       })
       .addCase(
         getTranslatedText.fulfilled.type,
-        (state, action: PayloadAction<{ translationText: string; language: 'Korean' | 'English' }>) => {
+        (state, action: PayloadAction<{ translationText: string; origin: 'Korean' | 'English' }>) => {
           state.translation.loading = false;
           state.translation.data = action.payload;
         },
@@ -105,21 +82,10 @@ const chatInput = createSlice({
       .addCase(getTranslatedText.rejected.type, (state, action: PayloadAction<Error>) => {
         state.translation.loading = false;
         state.translation.error = action.payload;
-      })
-      .addCase(getTextOrigin.pending.type, (state) => {
-        state.origin.loading = true;
-      })
-      .addCase(getTextOrigin.fulfilled.type, (state, action: PayloadAction<'Korean' | 'English'>) => {
-        state.origin.loading = false;
-        state.origin.data = action.payload;
-      })
-      .addCase(getTextOrigin.rejected.type, (state, action: PayloadAction<Error>) => {
-        state.origin.loading = false;
-        state.origin.error = action.payload;
       });
   },
 });
 
 export default chatInput.reducer;
 const setChatInput = chatInput.actions.setChatInput;
-export { getTranslatedText, setChatInput, getTextOrigin };
+export { getTranslatedText, setChatInput };
