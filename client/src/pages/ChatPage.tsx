@@ -10,6 +10,7 @@ import ChatLogsBox from '../components/atoms/boxes/ChatLogsBox';
 import ChatInput from '../components/organisms/chatRoomPage/ChatInput';
 import useUser from '../hooks/useUser';
 import useRoom from '../hooks/useRoom';
+import useChat from '../hooks/useChat';
 
 dotenv.config();
 
@@ -32,9 +33,10 @@ const StyledChatRoomBox = styled.div`
 `;
 
 const socket = io(BASE_URL as string);
-  
+
 function ChatPage() {
   const { nicknameData, languageData, imageLinkData } = useUser();
+  const { onStackChats } = useChat();
   const { data: roomData } = useRoom();
 
   useEffect(() => {
@@ -50,7 +52,7 @@ function ChatPage() {
     });
     socket.on('receive chat', (receiveChat: ReceiveChatType) => {
       // 채팅 로그에 추가
-      console.log(receiveChat);
+      onStackChats(receiveChat);
     });
     socket.on('socket error', (errorMessage: { errorMessage: string }) => {
       alert(errorMessage);
@@ -65,8 +67,8 @@ function ChatPage() {
         <ChatLogsBox>
           <ChatLogs />
         </ChatLogsBox>
+        <ChatInput socket={socket} />
       </StyledChatRoomBox>
-      <ChatInput socket={socket} />
     </Wrapper>
   );
 }
