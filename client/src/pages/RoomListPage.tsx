@@ -4,7 +4,8 @@ import styled from 'styled-components';
 import MyProfile from '../components/organisms/roomListPage/MyProfile';
 import EnterCodeButton from '../components/organisms/roomListPage/EnterCodeButton';
 import RefreshButton from '../components/organisms/roomListPage/RefreshButton';
-import RoomList from '../components/organisms/roomListPage/roomList';
+import RoomList from '../components/organisms/roomListPage/RoomList';
+import RoomListBackButton from '../components/organisms/roomListPage/RoomListBackButton';
 
 const RoomListPageWrapper = styled.div`
   display: flex;
@@ -15,12 +16,15 @@ const RoomListPageWrapper = styled.div`
 
 function RoomListPage() {
   return (
-    <RoomListPageWrapper>
-      <MyProfile />
-      <EnterCodeButton />
-      <RefreshButton />
-      <RoomList />
-    </RoomListPageWrapper>
+    <>
+      <RoomListBackButton />
+      <RoomListPageWrapper>
+        <MyProfile />
+        <EnterCodeButton />
+        <RefreshButton />
+        <RoomList />
+      </RoomListPageWrapper>
+    </>
   );
 }
 
