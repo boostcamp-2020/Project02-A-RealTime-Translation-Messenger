@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		153C0A9BABD984E3412BA93A /* Pods_Pupago.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51744D7994175CD6BC8A832E /* Pods_Pupago.framework */; };
+		4A45222E25810A3700DA7902 /* IOCContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A45222D25810A3700DA7902 /* IOCContainer.swift */; };
+		4A4522352581CA0200DA7902 /* InstanceSetupable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4522342581CA0200DA7902 /* InstanceSetupable.swift */; };
+		4A72B2CC257927A0000E6621 /* StoryboardInitiatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A72B2C8257927A0000E6621 /* StoryboardInitiatible.swift */; };
+		4A72B2CD257927A0000E6621 /* MemoryLeakCheakable+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A72B2C9257927A0000E6621 /* MemoryLeakCheakable+UIViewController.swift */; };
+		4A72B2CE257927A0000E6621 /* MemoryLeakCheckable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A72B2CA257927A0000E6621 /* MemoryLeakCheckable.swift */; };
+		4A72B2CF257927A0000E6621 /* MemoryLeakCheakable+XCTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A72B2CB257927A0000E6621 /* MemoryLeakCheakable+XCTest.swift */; };
+		4A72B2D7257927C4000E6621 /* MemoryLeakTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A72B2D6257927C4000E6621 /* MemoryLeakTests.swift */; };
 		9705477B2566649D00500D79 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9705477A2566649D00500D79 /* AppDelegate.swift */; };
 		9705477D2566649D00500D79 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9705477C2566649D00500D79 /* SceneDelegate.swift */; };
 		9705477F2566649D00500D79 /* LanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9705477E2566649D00500D79 /* LanguageViewController.swift */; };
@@ -82,6 +89,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4A45222D25810A3700DA7902 /* IOCContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOCContainer.swift; sourceTree = "<group>"; };
+		4A4522342581CA0200DA7902 /* InstanceSetupable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanceSetupable.swift; sourceTree = "<group>"; };
+		4A72B2C8257927A0000E6621 /* StoryboardInitiatible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardInitiatible.swift; sourceTree = "<group>"; };
+		4A72B2C9257927A0000E6621 /* MemoryLeakCheakable+UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MemoryLeakCheakable+UIViewController.swift"; sourceTree = "<group>"; };
+		4A72B2CA257927A0000E6621 /* MemoryLeakCheckable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryLeakCheckable.swift; sourceTree = "<group>"; };
+		4A72B2CB257927A0000E6621 /* MemoryLeakCheakable+XCTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MemoryLeakCheakable+XCTest.swift"; sourceTree = "<group>"; };
+		4A72B2D6257927C4000E6621 /* MemoryLeakTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryLeakTests.swift; sourceTree = "<group>"; };
 		51744D7994175CD6BC8A832E /* Pods_Pupago.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pupago.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		92C35758055C736769A97F84 /* Pods-Pupago.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pupago.debug.xcconfig"; path = "Target Support Files/Pods-Pupago/Pods-Pupago.debug.xcconfig"; sourceTree = "<group>"; };
 		970547772566649D00500D79 /* Pupago.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pupago.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -187,6 +201,19 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		4A72B2C7257927A0000E6621 /* MemoryLeakChecker */ = {
+			isa = PBXGroup;
+			children = (
+				4A72B2C8257927A0000E6621 /* StoryboardInitiatible.swift */,
+				4A72B2C9257927A0000E6621 /* MemoryLeakCheakable+UIViewController.swift */,
+				4A72B2CA257927A0000E6621 /* MemoryLeakCheckable.swift */,
+				4A72B2CB257927A0000E6621 /* MemoryLeakCheakable+XCTest.swift */,
+				4A45222D25810A3700DA7902 /* IOCContainer.swift */,
+				4A4522342581CA0200DA7902 /* InstanceSetupable.swift */,
+			);
+			path = MemoryLeakChecker;
+			sourceTree = "<group>";
+		};
 		9705476E2566649D00500D79 = {
 			isa = PBXGroup;
 			children = (
@@ -229,7 +256,9 @@
 		970547902566649F00500D79 /* PupagoTests */ = {
 			isa = PBXGroup;
 			children = (
+				4A72B2C7257927A0000E6621 /* MemoryLeakChecker */,
 				970547912566649F00500D79 /* PupagoTests.swift */,
+				4A72B2D6257927C4000E6621 /* MemoryLeakTests.swift */,
 				970547932566649F00500D79 /* Info.plist */,
 			);
 			path = PupagoTests;
@@ -728,7 +757,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A72B2CF257927A0000E6621 /* MemoryLeakCheakable+XCTest.swift in Sources */,
+				4A72B2CE257927A0000E6621 /* MemoryLeakCheckable.swift in Sources */,
 				970547922566649F00500D79 /* PupagoTests.swift in Sources */,
+				4A45222E25810A3700DA7902 /* IOCContainer.swift in Sources */,
+				4A4522352581CA0200DA7902 /* InstanceSetupable.swift in Sources */,
+				4A72B2CD257927A0000E6621 /* MemoryLeakCheakable+UIViewController.swift in Sources */,
+				4A72B2CC257927A0000E6621 /* StoryboardInitiatible.swift in Sources */,
+				4A72B2D7257927C4000E6621 /* MemoryLeakTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
