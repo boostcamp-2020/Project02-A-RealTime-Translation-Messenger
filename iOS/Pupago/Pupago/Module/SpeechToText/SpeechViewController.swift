@@ -53,6 +53,7 @@ class SpeechViewController: ViewController {
         output.activate
             .drive(onNext: {[unowned self] activate in
                 let image = activate ? "micing" : "miced"
+                activate ? startPulse() : stopPulse()
                 self.micButton.setImage(UIImage(named: image), for: .normal)
             })
             .disposed(by: rx.disposeBag)
@@ -96,9 +97,24 @@ class SpeechViewController: ViewController {
                                name: UIResponder.keyboardWillHideNotification,
                                object: nil)
     }
+    
 }
 
 extension SpeechViewController {
+    
+    private func startPulse() {
+        let pulse = Pulsing(radius: 70, position: micButton.center)
+        pulse.animationDuration = 1.0
+        pulse.backgroundColor = UIColor.systemBlue.cgColor
+        
+        self.view.layer.insertSublayer(pulse, below: micButton.layer)
+    }
+    
+    private func stopPulse() {
+        guard let animatingLayer = self.view.layer.sublayers?.last as? Pulsing else { return }
+        animatingLayer.removeFromSuperlayer()
+    }
+    
     @objc func keyboardWillShow(notification: NSNotification) {
         let responder = translationTextView.isFirstResponder
         if responder, let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
@@ -126,4 +142,5 @@ extension SpeechViewController {
             self.view.layoutIfNeeded()
         }
     }
+    
 }
