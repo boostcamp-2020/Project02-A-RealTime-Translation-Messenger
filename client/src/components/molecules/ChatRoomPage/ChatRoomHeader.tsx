@@ -35,12 +35,13 @@ export type ChatRoomHeaderPropsType = {
   title: string;
   roomCode: string;
   roomCodeOnClickFunc?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  leaveOnClick: () => void;
 };
 
-function ChatRoomHeader({ title, roomCode, roomCodeOnClickFunc }: ChatRoomHeaderPropsType) {
+function ChatRoomHeader({ title, roomCode, roomCodeOnClickFunc, leaveOnClick }: ChatRoomHeaderPropsType) {
   return (
     <Wrapper>
-      <ExitButton iconType="Leave" color={Palette.PUPAGO_BLUE} />
+      <ExitButton iconType="Leave" color={Palette.PUPAGO_BLUE} onClick={leaveOnClick} />
       <TitleWrapper>
         <RoomTitle weight="bold" size={18} color={'black'}>
           {title}
