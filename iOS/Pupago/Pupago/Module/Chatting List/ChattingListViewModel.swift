@@ -19,6 +19,7 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
         let imageReload: Observable<Void>
         let reloadRoom: Observable<Void>
         let selection: Observable<IndexPath>
+        let blankTrigger: Observable<Void>
     }
     
     struct Output {
@@ -29,6 +30,8 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
         let joined: Driver<JoinRoomViewModel>
         let entered: Driver<ChattingViewModel>
         let isReloading: Driver<Bool>
+        let isBlanking: Driver<Bool>
+        let isShaking: Driver<Bool>
     }
     
     private let rooms = BehaviorRelay<[Room]>(value: [])
@@ -36,6 +39,8 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
     private let socketEntered = PublishRelay<Room?>()
     private let isRefreshing = BehaviorRelay<Bool>(value: false)
     private let profileImage = PublishRelay<UIImage?>()
+    private let blank = PublishRelay<Bool>()
+    private let shake = PublishRelay<Bool>()
     
     func transform(_ input: Input) -> Output {
         
@@ -70,6 +75,9 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
         pupagoAPI.rooms()
             .subscribe(onNext: { [unowned self] result in
                 self.rooms.accept(result.roomList)
+                let state = result.roomList.isEmpty ? true: false
+                blank.accept(state)
+                shake.accept(!state)
             }, onError: { error in
                 print(error)
             })
@@ -80,6 +88,22 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
             .flatMapLatest { pupagoAPI.rooms()}
             .subscribe(onNext: {[unowned self] result in
                 rooms.accept(result.roomList)
+                let state = result.roomList.isEmpty ? true: false
+                blank.accept(state)
+                shake.accept(!state)
+                isRefreshing.accept(false)
+            }, onError: { error in
+                print(error)
+            })
+            .disposed(by: rx.disposeBag)
+        
+        input.blankTrigger
+            .flatMapLatest { pupagoAPI.rooms()}
+            .subscribe(onNext: {[unowned self] result in
+                rooms.accept(result.roomList)
+                let state = result.roomList.isEmpty ? true: false
+                blank.accept(state)
+                shake.accept(!state)
                 isRefreshing.accept(false)
             }, onError: { error in
                 print(error)
@@ -150,7 +174,9 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
                       profileImage: profileImage.asDriver(onErrorJustReturn: nil),
                       created: created,
                       joined: joined,
-                      entered: entered, isReloading: isRefreshing.asDriver())
+                      entered: entered, isReloading: isRefreshing.asDriver(),
+                      isBlanking: blank.asDriver(onErrorJustReturn: false),
+                      isShaking: shake.asDriver(onErrorJustReturn: false))
       
     }
     

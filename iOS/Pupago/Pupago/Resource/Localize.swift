@@ -28,6 +28,7 @@ enum Localize {
         var title: String
         var language: String
         var chatroom: String
+        var blanking: String
     }
     
     struct CreateRoomViewText {
@@ -112,11 +113,13 @@ extension Localize {
         case .korean:
             return .init(title: "푸파고",
                          language: "한국어",
-                         chatroom: "채팅방")
+                         chatroom: "채팅방",
+                         blanking: "채팅방이 존재하지 않습니다.")
         case .english:
             return .init(title: "Pupago",
                          language: "English",
-                         chatroom: "Chats")
+                         chatroom: "Chats",
+                         blanking: "Does not exist chatroom")
         }
     }
     
