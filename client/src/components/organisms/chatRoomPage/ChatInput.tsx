@@ -5,10 +5,11 @@ import ChatInputMolecule from '../../molecules/chatRoomPage/ChatInput';
 import useChatInput from '../../../hooks/useChatInput';
 import ChatTranslationBox from '../../atoms/boxes/ChatTranslationBox';
 import VoiceRecognitionModal from '../../molecules/chatRoomPage/VoiceRecognitionModal';
+import useUser from '../../../hooks/useUser';
 
-type ChatInputPropsType = {
-  socket: SocketIOClient.Socket;
-};
+// type ChatInputPropsType = {
+//   socket: SocketIOClient.Socket;
+// };
 
 const Wrapper = styled.div`
   position: relative;
@@ -27,8 +28,9 @@ const VoiceWrapper = styled.div`
   align-items: center;
 `;
 
-function ChatInput({ socket }: ChatInputPropsType) {
+function ChatInput() {
   const [voice, setVoice] = useState(false);
+  const { socketData } = useUser();
 
   const { chatInputData, translationData, translationLoading, onSetChatInput, onGetTranslatedText } = useChatInput();
 
@@ -45,7 +47,7 @@ function ChatInput({ socket }: ChatInputPropsType) {
           setVoice(true);
         }}
         clickSendFunc={() => {
-          if (translationLoading) return;
+          if (translationLoading || socketData === null) return;
           const sendingChat = {
             Korean: '',
             English: '',
@@ -58,7 +60,7 @@ function ChatInput({ socket }: ChatInputPropsType) {
             sendingChat.Korean = translationData.translationText;
             sendingChat.English = chatInputData;
           }
-          socket.emit('send chat', sendingChat);
+          socketData.emit('send chat', sendingChat);
           // 필드 리셋 - 인풋 초기화
         }}
       />

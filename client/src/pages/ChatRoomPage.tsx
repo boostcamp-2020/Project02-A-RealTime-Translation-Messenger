@@ -4,7 +4,6 @@ import dotenv from 'dotenv';
 import io from 'socket.io-client';
 
 import ChatLogs from '../components/organisms/chatRoomPage/ChatLogs';
-import { ParticipantsListType, ReceiveChatType } from '../@types/types';
 import SideBar from '../components/organisms/chatRoomPage/SideBar';
 import useParticipantsList from '../hooks/useParticipantsList';
 import ChatHeader from '../components/organisms/chatRoomPage/ChatHeader';
@@ -35,35 +34,37 @@ const StyledChatRoomBox = styled.div`
   background-color: rgba(255, 255, 255, 0.6);
 `;
 
-const socket = io(BASE_URL as string);
-
 function ChatPage() {
   const { onSetParticipantsList } = useParticipantsList();
-  const { nicknameData, languageData, onSetSocketId, imageLinkData } = useUser();
+  const { nicknameData, languageData, socketData, onSetSocketId, onSetSocket, imageLinkData } = useUser();
   const { onStackChats } = useChat();
   const { data: roomData } = useRoom();
 
   useEffect(() => {
-    socket.emit('enter chatroom', {
-      roomCode: roomData.roomCode,
-      nickname: nicknameData,
-      language: languageData,
-      imageLink: imageLinkData,
-    });
-    socket.on('receive participants list', (participantsList: string) => {
-      onSetSocketId(socket.id);
-      onSetParticipantsList(JSON.parse(participantsList).participantsList);
-      // 채팅에 입장/퇴장 로그 추가
-    });
-    socket.on('receive chat', (receiveChat: string) => {
-      // 채팅 로그에 추가
-      onStackChats(JSON.parse(receiveChat));
-    });
-    socket.on('socket error', (errorMessage: { errorMessage: string }) => {
-      alert(errorMessage);
-      // 첫 페이지로 리디렉션
-    });
+    onSetSocket(io(BASE_URL as string));
   }, []);
+
+  useEffect(() => {
+    if (socketData !== null) {
+      socketData.emit('enter chatroom', {
+        roomCode: roomData.roomCode,
+        nickname: nicknameData,
+        language: languageData,
+        imageLink: imageLinkData,
+      });
+      socketData.on('receive participants list', (participantsList: string) => {
+        onSetSocketId(socketData.id);
+        onSetParticipantsList(JSON.parse(participantsList).participantsList);
+      });
+      socketData.on('receive chat', (receiveChat: string) => {
+        onStackChats(JSON.parse(receiveChat));
+      });
+      socketData.on('socket error', (errorMessage: { errorMessage: string }) => {
+        alert(errorMessage);
+        // 첫 페이지로 리디렉션
+      });
+    }
+  }, [socketData]);
 
   return (
     <Wrapper>
@@ -72,7 +73,7 @@ function ChatPage() {
         <ChatLogsBox>
           <ChatLogs />
         </ChatLogsBox>
-        <ChatInput socket={socket} />
+        <ChatInput />
       </StyledChatRoomBox>
       <SideBar />
     </Wrapper>
