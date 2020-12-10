@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import UserInfoPage from './UserInfoPage';
-import MainPageBox from '../components/atoms/boxes/MainPageBox';
 import RoomCreationPage from './RoomCreationPage';
+import RoomListPage from './RoomListPage';
+import MainPageBox from '../components/atoms/boxes/MainPageBox';
+import MainPageNavigation from '../@types/mainPageNavigation';
 
 const Wrapper = styled.div`
   display: flex;

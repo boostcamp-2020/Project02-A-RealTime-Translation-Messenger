@@ -14,7 +14,6 @@ const RoomItemHeaderWrapper = styled.div<RoomItemHeaderWrapperPropsType>`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* margin-bottom: ${(props) => (props.size === 'big' ? '16px' : '12px')}; */
   padding: 0 0 2px 0;
   border-bottom: 4px solid ${Palette.LIGHT_GREY};
 `;
@@ -34,6 +33,7 @@ export type RoomItemPropsType = {
   participantCount: number;
   roomCapacity: number;
   title: string;
+  onClickItem: () => void;
 };
 
 const TextWrapper = styled.div<RoomItemHeaderWrapperPropsType>`
@@ -43,10 +43,10 @@ const TextWrapper = styled.div<RoomItemHeaderWrapperPropsType>`
   height: ${(props) => (props.size === 'big' ? '46px' : '34px')};
 `;
 
-function RoomItem({ size, createdAt, participantCount, roomCapacity, title }: RoomItemPropsType) {
+function RoomItem({ size, createdAt, participantCount, roomCapacity, title, onClickItem }: RoomItemPropsType) {
   return (
     <div>
-      <RoomItemBox size={size}>
+      <RoomItemBox size={size} onClick={onClickItem}>
         <RoomItemHeaderWrapper size={size}>
           <RoomItemHeaderLeft>
             <MiniLogo />

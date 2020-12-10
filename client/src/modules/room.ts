@@ -38,7 +38,7 @@ type InitialStateType = {
 const initialState: InitialStateType = {
   room: {
     data: {
-      roomCode: null,
+      roomCode: '',
       title: '',
       isPrivate: 'false',
     },
@@ -57,6 +57,8 @@ const room = createSlice({
     setIsPrivate: (state, action: PayloadAction<'true' | 'false'>) => {
       console.log(action.payload);
       state.room.data.isPrivate = action.payload;
+    changeRoomCode: (state, action: PayloadAction<string>) => {
+      state.room.data.roomCode = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -89,4 +91,5 @@ const room = createSlice({
 export default room.reducer;
 export const setRoomTitle = room.actions.setRoomTitle;
 export const setIsPrivate = room.actions.setIsPrivate;
+export const changeRoomCode = room.actions.changeRoomCode;
 export { createRoom, joinRoom };

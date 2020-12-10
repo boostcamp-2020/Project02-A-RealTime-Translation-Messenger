@@ -11,7 +11,7 @@ const createRoom = async (title: string, isPrivate: 'true' | 'false') => {
 };
 
 const joinRoom = async (roomCode: string, isPrivate: 'true' | 'false') => {
-  return backend.post<CreatedRoomType>('/api/room', { roomCode, isPrivate });
+  return backend.post<CreatedRoomType>('/api/join', { roomCode, isPrivate });
 };
 
 const getRoomList = async () => {

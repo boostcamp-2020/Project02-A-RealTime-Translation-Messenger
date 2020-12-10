@@ -28,7 +28,7 @@ type ReceiveChatType = {
 };
 
 type CreatedRoomType = {
-  roomCode: string | null;
+  roomCode: string;
   title: string;
   isPrivate: 'true' | 'false';
 };
