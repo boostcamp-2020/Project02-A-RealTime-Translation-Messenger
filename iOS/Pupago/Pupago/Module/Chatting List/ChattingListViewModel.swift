@@ -67,7 +67,7 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
                 profileImage.accept(image)
             })
             .disposed(by: rx.disposeBag)
-            
+        
         // MARK: - Rooms
         
         pupagoAPI.rooms()
@@ -114,19 +114,15 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
             .disposed(by: rx.disposeBag)
         
         roomInfo.asObservable()
-            .subscribe(onNext: { [unowned self] info in
-                pupagoAPI.join(code: info.code, isPrivate: info.isPrivate)
-                    .subscribe(onNext: { room in
-                        socketManager.enterChatroom(roomCode: room.roomCode ?? "")
-                        self.socketEntered.accept(room)
-                    }, onError: { error in
-                        if let error = error as? APIError {
-                            error == .roomNotExist ? print("Alert logic needed room not exist") : print("Alert logic needed")
-                        }
-                    })
-                    .disposed(by: rx.disposeBag)
+            .flatMap { pupagoAPI.join(code: $0.code, isPrivate: $0.isPrivate) }
+            .subscribe(onNext: { room in
+                Application.shared.currentRoomCode = room.roomCode ?? ""
+                socketManager.enterChatroom(roomCode: room.roomCode ?? "")
+                self.socketEntered.accept(room)
             }, onError: { error in
-                print(error)
+                if let error = error as? APIError {
+                    error == .roomNotExist ? print("Alert logic needed room not exist") : print("Alert logic needed")
+                }
             })
             .disposed(by: rx.disposeBag)
         
