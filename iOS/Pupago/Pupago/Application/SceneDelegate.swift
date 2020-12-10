@@ -17,10 +17,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         application.setUpSocket()
         application.presentInitialScreen(in: window)
         
-        var id: UInt32 = 0
-        let fileUrl = NSURL(string: "/System/Library/Audio/UISounds/acknowledgment_received.caf")!
-        AudioServicesCreateSystemSoundID(fileUrl, &id)
-        print(id)
         guard let _ = (scene as? UIWindowScene) else { return }
     }
     
