@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useCallback } from 'react';
 
 import { RootState } from '../modules';
-import { setParticipantsList } from '../modules/participantsList';
+import { setParticipantsList, resetParticipantsList } from '../modules/participantsList';
 import { ParticipantsType } from '../@types/types';
 
 export default function useParticipantsList() {
@@ -14,8 +14,11 @@ export default function useParticipantsList() {
     [dispatch],
   );
 
+  const onResetParticipantsList = useCallback(() => dispatch(resetParticipantsList()), [dispatch]);
+
   return {
     data,
     onSetParticipantsList,
+    onResetParticipantsList,
   };
 }

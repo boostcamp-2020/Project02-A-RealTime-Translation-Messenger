@@ -68,6 +68,12 @@ const user = createSlice({
     setSocketId: (state, action: PayloadAction<string>) => {
       state.socketId.data = action.payload;
     },
+    resetSocketId: (state) => {
+      state.socketId.data = null;
+    },
+    resetSocket: (state) => {
+      state.socket.data = null;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -90,4 +96,6 @@ export const setNickname = user.actions.setNickname;
 export const setLanguage = user.actions.setLanguage;
 export const setSocketId = user.actions.setSocketId;
 export const setSocket = user.actions.setSocket;
+export const resetSocketId = user.actions.resetSocketId;
+export const resetSocket = user.actions.resetSocket;
 export { getRandomProfileImage };
