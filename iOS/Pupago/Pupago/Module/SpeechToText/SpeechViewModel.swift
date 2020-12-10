@@ -58,7 +58,7 @@ class SpeechViewModel: ViewModel, ViewModelType {
         
         input.originText
             .distinctUntilChanged()
-            .debounce(.milliseconds(800), scheduler: MainScheduler.instance)
+            .debounce(.milliseconds(200), scheduler: MainScheduler.instance)
             .flatMap { translator.translate(with: $0) }
             .subscribe(onNext: { [unowned self] info in
                 let translatedText = info.lang == "Korean" ? info.english : info.korean
@@ -70,7 +70,7 @@ class SpeechViewModel: ViewModel, ViewModelType {
         
         input.originText
             .subscribe(onNext: { [unowned self] text in
-                let status = text.isEmpty ? ("", true) : ("번역중..", false)
+                let status = text.isEmpty ? ("", true) : (localize.value.translating, false)
                 assistable.accept(!status.1)
                 translationViewState.accept(status)
                 available.accept(false)
