@@ -8,6 +8,8 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  width: 100%;
 `;
 
 const InputCodeText = styled(Text)`
@@ -26,7 +28,7 @@ const WarningText = styled(Text)<WarningTextProps>`
 const Codes = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 368px;
+  width: 100%;
 `;
 
 const FakeInput = styled.input`
@@ -38,42 +40,14 @@ const FakeInput = styled.input`
 `;
 
 export type CodeInputPropsType = {
-  roomCode: { value: string; valid: boolean };
+  roomCodeStatus: { code: string; valid: boolean };
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onKeyUp?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 };
 
-function CodeInput({ roomCode, onChange, onKeyUp }: CodeInputPropsType) {
-  // // ------ codeInput 코드 예시, 나중에 Organism에서 사용하거나, Redux에서 사용하면 됩니다.
-
-  const isRoomCodeValid = (roomCode: string) => {
-    if (!/^[A-Z|0-9]{4}$/.test(roomCode)) return false;
-    return true;
-  };
-
-  // const [roomCode, setCode] = useState({ value: '', valid: true });
-  const { value, valid } = roomCode;
+function CodeInput({ roomCodeStatus, onChange, onKeyUp }: CodeInputPropsType) {
+  const { code, valid } = roomCodeStatus;
   const inputRef = useRef<HTMLInputElement>(null);
-
-  // const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const { value } = e.target;
-  //   const cuttedValue = value.substr(0, 4).toUpperCase();
-  //   if (/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣|\s]/.test(value)) {
-  //     setCode({ ...roomCode, valid: false });
-  //     return;
-  //   }
-  //   setCode({ value: cuttedValue, valid: true });
-  // };
-
-  // const onKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
-  //   if (roomCode.value.length === 4) {
-  //     if (isRoomCodeValid(value)) {
-  //       alert('4자리가 입력되었습니다.');
-  //       setCode({ value: '', valid: true });
-  //       return;
-  //     }
-  //   }
-  // };
 
   return (
     <Wrapper>
@@ -83,7 +57,7 @@ function CodeInput({ roomCode, onChange, onKeyUp }: CodeInputPropsType) {
       </WarningText>
       <FakeInput
         type="text"
-        value={value}
+        value={code}
         onChange={onChange}
         onKeyUp={onKeyUp}
         autoFocus={true}
@@ -93,10 +67,10 @@ function CodeInput({ roomCode, onChange, onKeyUp }: CodeInputPropsType) {
         ref={inputRef}
       />
       <Codes>
-        <CodeBox isEntered={value[0] ? true : false}>{value[0]}</CodeBox>
-        <CodeBox isEntered={value[1] ? true : false}>{value[1]}</CodeBox>
-        <CodeBox isEntered={value[2] ? true : false}>{value[2]}</CodeBox>
-        <CodeBox isEntered={value[3] ? true : false}>{value[3]}</CodeBox>
+        <CodeBox isEntered={code[0] ? true : false}>{code[0]}</CodeBox>
+        <CodeBox isEntered={code[1] ? true : false}>{code[1]}</CodeBox>
+        <CodeBox isEntered={code[2] ? true : false}>{code[2]}</CodeBox>
+        <CodeBox isEntered={code[3] ? true : false}>{code[3]}</CodeBox>
       </Codes>
     </Wrapper>
   );
