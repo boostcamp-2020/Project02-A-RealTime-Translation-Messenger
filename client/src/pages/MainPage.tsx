@@ -21,7 +21,6 @@ function MainPage() {
   const { navigation } = useNavigation();
 
   const renderMainPage = (navigation: MainPageNavigation) => {
-    console.log(navigation);
     switch (navigation) {
       case MainPageNavigation.USER_INFO:
         return <UserInfoPage />;

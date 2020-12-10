@@ -9,6 +9,7 @@ const StyledParticipantNotification = styled.div`
   align-items: center;
   min-width: 240px;
   max-width: 400px;
+  margin-top: 24px;
   padding: 4px 20px;
   border-radius: 10px;
   background-color: ${Palette.MIDDLE_GREY};

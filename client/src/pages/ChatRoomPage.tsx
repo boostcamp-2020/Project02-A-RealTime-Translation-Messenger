@@ -56,11 +56,6 @@ function ChatPage() {
   const { onSetNavigation } = useNavigation();
   const history = useHistory();
 
-  // const { onSetParticipantsList } = useParticipantsList();
-  // const { nicknameData, languageData, socketData, onSetSocketId, onSetSocket, imageLinkData } = useUser();
-  // const { onStackChats } = useChat();
-  // const { data: roomData } = useRoom();
-
   useEffect(() => {
     onSetSocket(io(BASE_URL as string));
   }, []);
@@ -75,7 +70,9 @@ function ChatPage() {
       });
       socketData.on('receive participants list', (participantsList: string) => {
         onSetSocketId(socketData.id);
-        onSetParticipantsList(JSON.parse(participantsList).participantsList);
+        const participants = JSON.parse(participantsList);
+        onSetParticipantsList(participants.participantsList);
+        onStackChats({ type: participants.type, diffNickname: participants.diffNickname });
       });
       socketData.on('receive chat', (receiveChat: string) => {
         onStackChats(JSON.parse(receiveChat));

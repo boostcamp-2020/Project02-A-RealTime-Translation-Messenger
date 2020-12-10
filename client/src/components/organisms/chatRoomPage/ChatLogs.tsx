@@ -35,7 +35,6 @@ function ChatLogs() {
         const log = data as ParticipantsUpdateType;
         if (log.type === undefined) {
           const chatLog = data as ChatLogsType;
-          console.log(data);
           return (
             <ChatLogWrapper isMe={socketIdData === chatLog.senderId}>
               <ChatItemMolecule
