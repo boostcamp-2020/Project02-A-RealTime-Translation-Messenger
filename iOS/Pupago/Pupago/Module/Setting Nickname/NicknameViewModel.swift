@@ -33,14 +33,6 @@ final class NicknameViewModel: ViewModel, ViewModelType {
     func transform(_ input: Input) -> Output {
         
         let pupagoAPI = PupagoAPI()
-        let socket = SocketIOManager.shared.socket
-        
-        socket?.rx.event(.connect)
-            .subscribe(onNext: { [unowned self] _ in
-                print("\n\nConnected Event Received!")
-                self.connected.accept(SocketIOStatus.connected)
-            })
-            .disposed(by: rx.disposeBag)
         
         input.nicknameText
             .map { $0?.isEmpty ?? true }
@@ -75,9 +67,9 @@ final class NicknameViewModel: ViewModel, ViewModelType {
                     .subscribe(onNext: { result in
                         Application.shared.profile = result.imageLink
                         Application.shared.userName = text ?? ""
-                        SocketIOManager.shared.establishConnect()
-                })
-                .disposed(by: rx.disposeBag)
+                        connected.accept(SocketIOStatus.connected)
+                    })
+                    .disposed(by: rx.disposeBag)
             })
             .disposed(by: rx.disposeBag)
         
@@ -85,7 +77,7 @@ final class NicknameViewModel: ViewModel, ViewModelType {
             .filter { $0 == .connected }
             .asDriver(onErrorJustReturn: .notConnected)
             .map { _ in ChattingListViewModel() }
-            
+        
         return Output(viewTexts: viewText,
                       hasValidNickname: validate,
                       activate: activate,

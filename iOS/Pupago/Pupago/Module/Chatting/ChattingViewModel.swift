@@ -78,8 +78,10 @@ class ChattingViewModel: ViewModel, ViewModelType {
         
         input.willLeave
             .subscribe(onNext: {
+                Application.shared.currentRoomCode = ""
                 socketManager.leavChatroom()
-                socketManager.socket.removeAllHandlers()
+                socketManager.socket.off(SocketEndpoint.receiveMessage.eventName)
+                socketManager.socket.off(SocketEndpoint.list.eventName)
             })
             .disposed(by: rx.disposeBag)
         
@@ -87,7 +89,7 @@ class ChattingViewModel: ViewModel, ViewModelType {
         
         input.chatText
             .distinctUntilChanged()
-            .debounce(.milliseconds(800), scheduler: MainScheduler.instance)
+            .debounce(.milliseconds(200), scheduler: MainScheduler.instance)
             .flatMap { translator.translate(with: $0) }
             .subscribe(onNext: { [unowned self] info in
                 let translatedText = info.lang == "Korean" ? info.english : info.korean
@@ -99,7 +101,7 @@ class ChattingViewModel: ViewModel, ViewModelType {
         
         input.chatText
             .subscribe(onNext: { [unowned self] text in
-                let status = text.isEmpty ? ("", true) : ("번역중..", false)
+                let status = text.isEmpty ? ("", true) : (localize.value.translating, false)
                 translationViewState.accept(status)
                 activate.accept(false)
             })
@@ -172,7 +174,7 @@ private extension ChattingViewModel {
             let data = dataString.data(using: .utf8),
             let message = try? JSONDecoder().decode(Message.self, from: data)
         else { return nil }
-
+        
         return message
     }
     
@@ -182,7 +184,8 @@ private extension ChattingViewModel {
             let data = dataString.data(using: .utf8),
             let participants = try? JSONDecoder().decode(Participants.self, from: data)
         else { return nil }
-
+        
         return participants
     }
+    
 }
