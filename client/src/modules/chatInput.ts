@@ -62,7 +62,7 @@ const chatInput = createSlice({
   name,
   initialState,
   reducers: {
-    setChatInput: (state, action) => {
+    setChatInput: (state, action: PayloadAction<string>) => {
       state.chatInput.data = action.payload;
     },
   },
