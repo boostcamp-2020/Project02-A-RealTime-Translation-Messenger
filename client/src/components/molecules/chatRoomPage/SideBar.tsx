@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { SideBarStatus } from '../../../@types/types';
 import SideBarBox from '../../atoms/boxes/SideBarBox';
 import SideBarTab from '../../atoms/buttons/SideBarTab';
 
@@ -14,8 +15,8 @@ const SideBarContent = styled.div`
 
 export type SideBarPropsType = {
   children: React.ReactNode;
-  onClickSideBarTab?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-  selected: 'participants' | 'chatrooms';
+  onClickSideBarTab: React.Dispatch<React.SetStateAction<SideBarStatus>>;
+  selected: SideBarStatus;
 };
 
 function SideBar({ children, onClickSideBarTab, selected }: SideBarPropsType) {
@@ -23,16 +24,20 @@ function SideBar({ children, onClickSideBarTab, selected }: SideBarPropsType) {
     <SideBarBox>
       <SideBarTabWrapper>
         <SideBarTab
-          isSelected={selected === 'participants' ? true : false}
+          isSelected={selected === SideBarStatus.PARTICIPANTS ? true : false}
           isTabNameParticipant={true}
-          onClick={onClickSideBarTab}
+          onClick={() => {
+            onClickSideBarTab(SideBarStatus.PARTICIPANTS);
+          }}
         >
           참여자
         </SideBarTab>
         <SideBarTab
-          isSelected={selected === 'participants' ? false : true}
+          isSelected={selected === SideBarStatus.CHAT_ROOMS ? true : false}
           isTabNameParticipant={false}
-          onClick={onClickSideBarTab}
+          onClick={() => {
+            onClickSideBarTab(SideBarStatus.CHAT_ROOMS);
+          }}
         >
           채팅방
         </SideBarTab>

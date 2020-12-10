@@ -8,6 +8,7 @@ const RefreshButton = () => {
   return (
     <div>
       <RefreshButtonAtom
+        size="big"
         onClickRefresh={() => {
           onGetRoomList();
         }}

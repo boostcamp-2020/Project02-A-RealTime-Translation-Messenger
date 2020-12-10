@@ -5,6 +5,8 @@ import io from 'socket.io-client';
 
 import ChatLogs from '../components/organisms/chatPage/ChatLogs';
 import { ParticipantsListType, ReceiveChatType } from '../@types/types';
+import SideBar from '../components/organisms/chatRoomPage/SideBar';
+import useParticipantsList from '../hooks/useParticipantsList';
 import ChatHeader from '../components/organisms/chatPage/ChatHeader';
 import ChatLogsBox from '../components/atoms/boxes/ChatLogsBox';
 import ChatInput from '../components/organisms/chatRoomPage/ChatInput';
@@ -34,6 +36,7 @@ const StyledChatRoomBox = styled.div`
 const socket = io(BASE_URL as string);
   
 function ChatPage() {
+  const { onSetParticipantsList } = useParticipantsList();
   const { nicknameData, languageData, imageLinkData } = useUser();
   const { data: roomData } = useRoom();
 
@@ -45,7 +48,7 @@ function ChatPage() {
       imageLink: imageLinkData,
     });
     socket.on('receive participants list', (participantsList: ParticipantsListType) => {
-      // participants 상태 업데이트
+      onSetParticipantsList(participantsList.participantsList);
       // 채팅에 입장/퇴장 로그 추가
     });
     socket.on('receive chat', (receiveChat: ReceiveChatType) => {
@@ -57,6 +60,7 @@ function ChatPage() {
       // 첫 페이지로 리디렉션
     });
   }, []);
+
 
   return (
     <Wrapper>
