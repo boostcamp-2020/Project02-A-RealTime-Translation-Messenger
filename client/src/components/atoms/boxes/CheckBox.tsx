@@ -6,10 +6,15 @@ import Palette from '../../../@types/Palette';
 export type CheckBoxTypes = {
   isChecked: boolean;
   children?: React.ReactNode;
-  onClick?: () => (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  isPrivateOnClick: (isPrivate: 'true' | 'false') => void;
+  isPrivate: 'true' | 'false';
 };
 
-const StyledCheckBox = styled.div<CheckBoxTypes>`
+type StyledCheckBoxTypes = {
+  isChecked: boolean;
+};
+
+const StyledCheckBox = styled.div<StyledCheckBoxTypes>`
   width: 16px;
   height: 16px;
   border: solid 1px ${Palette.DARK_GREY};
@@ -31,10 +36,15 @@ const CheckBoxWrapper = styled.div`
   align-items: center;
 `;
 
-export function CheckBox({ isChecked = false, children, ...props }: CheckBoxTypes) {
+export function CheckBox({ isChecked = false, children, isPrivateOnClick, isPrivate }: CheckBoxTypes) {
   return (
     <CheckBoxWrapper>
-      <StyledCheckBox isChecked={isChecked} {...props} />
+      <StyledCheckBox
+        isChecked={isChecked}
+        onClick={() => {
+          isPrivateOnClick(isPrivate);
+        }}
+      />
       <StyledChoiceText>{children}</StyledChoiceText>
     </CheckBoxWrapper>
   );

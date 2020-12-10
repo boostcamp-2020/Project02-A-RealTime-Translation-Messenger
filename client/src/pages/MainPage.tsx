@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import UserInfoPage from './UserInfoPage';
+import RoomCreationPage from './RoomCreationPage';
+import RoomListPage from './RoomListPage';
 import MainPageBox from '../components/atoms/boxes/MainPageBox';
 import MainPageNavigation from '../@types/mainPageNavigation';
-import RoomListPage from './RoomListPage';
 
 const Wrapper = styled.div`
   display: flex;
@@ -18,7 +19,8 @@ function MainPage() {
   return (
     <Wrapper>
       <MainPageBox>
-        <UserInfoPage />
+        {/* <UserInfoPage /> */}
+        <RoomCreationPage />
       </MainPageBox>
     </Wrapper>
   );

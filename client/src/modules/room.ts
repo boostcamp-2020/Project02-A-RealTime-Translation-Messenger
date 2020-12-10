@@ -39,18 +39,24 @@ const initialState: InitialStateType = {
   room: {
     data: {
       roomCode: '',
-      title: null,
-      isPrivate: null,
+      title: '',
+      isPrivate: 'false',
     },
     loading: false,
     error: null,
   },
 };
 
-const roomList = createSlice({
+const room = createSlice({
   name,
   initialState,
   reducers: {
+    setRoomTitle: (state, action: PayloadAction<string>) => {
+      state.room.data.title = action.payload;
+    },
+    setIsPrivate: (state, action: PayloadAction<'true' | 'false'>) => {
+      console.log(action.payload);
+      state.room.data.isPrivate = action.payload;
     changeRoomCode: (state, action: PayloadAction<string>) => {
       state.room.data.roomCode = action.payload;
     },
@@ -82,6 +88,8 @@ const roomList = createSlice({
   },
 });
 
-const changeRoomCode = roomList.actions.changeRoomCode;
-export default roomList.reducer;
-export { createRoom, joinRoom, changeRoomCode };
+export default room.reducer;
+export const setRoomTitle = room.actions.setRoomTitle;
+export const setIsPrivate = room.actions.setIsPrivate;
+export const changeRoomCode = room.actions.changeRoomCode;
+export { createRoom, joinRoom };
