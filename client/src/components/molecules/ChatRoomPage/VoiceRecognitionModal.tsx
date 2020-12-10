@@ -5,7 +5,7 @@ import ChatModalBackground from '../../atoms/boxes/ChatModalBackground';
 import VoiceRecognition from '../../atoms/resources/VoiceRecognition';
 
 export type VoiceRecognitionModalPropsType = {
-  onClickBackground?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  onClickBackground?: () => void;
 };
 
 const VoiceRecognitionWrapper = styled.div`

@@ -24,13 +24,13 @@ const NotificationText = styled.span`
 export type ParticipantNotificationPropsType = {
   nickname: string;
   isEnter: boolean;
-  language: 'KOREAN' | 'ENGLISH';
+  language: 'Korean' | 'English';
 };
 
 function ParticipantNotification({ nickname, isEnter, language }: ParticipantNotificationPropsType) {
   return (
     <StyledParticipantNotification>
-      {language === 'KOREAN' ? (
+      {language === 'Korean' ? (
         <NotificationText>{`${nickname} 님이 ${isEnter ? '입장' : '퇴장'}하셨습니다.`}</NotificationText>
       ) : (
         <NotificationText>{`${nickname} has ${isEnter ? 'entered.' : 'left.'}`}</NotificationText>

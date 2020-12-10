@@ -5,11 +5,12 @@ import Palette from '../../../@types/Palette';
 const StyledChatInput = styled.textarea`
   display: block;
   width: 476px;
-  height: 96px;
+  height: 128px;
   padding: 25px;
+  margin-left: 4px;
   outline: none;
   border: none;
-  border-radius: 30px 0 0 0;
+  border-radius: 0 30px 30px 0;
   background-color: ${Palette.ALMOST_WHITE};
   font-family: 'Noto Sans KR', sans-serif;
   font-size: 14px;
@@ -20,11 +21,11 @@ const StyledChatInput = styled.textarea`
 
 export type ChatInputPropsType = {
   value: string;
-  onChangeInput?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  onChangeTranslation?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
 };
 
-function ChatInput({ value, onChangeInput }: ChatInputPropsType) {
-  return <StyledChatInput onChange={onChangeInput} value={value} />;
+function ChatInput({ value, onChangeTranslation }: ChatInputPropsType) {
+  return <StyledChatInput readOnly={true} onChange={onChangeTranslation} value={value} />;
 }
 
 export default ChatInput;

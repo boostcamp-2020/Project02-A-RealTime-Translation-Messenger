@@ -39,7 +39,7 @@ const NickName = styled(Text)`
 
 function ChatItem({ leftMessage, rightMessage, isMe, imageLink, nickname, createdAt }: ChatItemPropsType) {
   return (
-    <>
+    <div>
       <ProfileWrapper>
         <Profile isMe={isMe}>
           <ProfileImage size="size-24" isMe={isMe} image={imageLink} />
@@ -50,7 +50,7 @@ function ChatItem({ leftMessage, rightMessage, isMe, imageLink, nickname, create
         </Profile>
       </ProfileWrapper>
       <ChatBox leftMessage={leftMessage} rightMessage={rightMessage} isMe={isMe} />
-    </>
+    </div>
   );
 }
 

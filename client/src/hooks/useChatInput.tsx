@@ -2,10 +2,10 @@ import { useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { RootState } from '../modules';
-import { getTranslatedText, setChatInput } from '../modules/chatInput';
+import { getTranslatedText, setChatInput, getTextOrigin } from '../modules/chatInput';
 
 function useTranslate() {
-  const { chatInput, translation } = useSelector((state: RootState) => state.chatInput);
+  const { chatInput, translation, origin } = useSelector((state: RootState) => state.chatInput);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -24,7 +24,10 @@ function useTranslate() {
   );
 
   const onSetChatInput = useCallback(
-    (e: React.ChangeEvent<HTMLTextAreaElement>) => dispatch(setChatInput(e.target.value)),
+    (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+      dispatch(setChatInput(e.target.value));
+      dispatch(getTextOrigin(e.target.value));
+    },
     [dispatch],
   );
 
@@ -33,6 +36,9 @@ function useTranslate() {
     translationData: translation.data,
     translationLoading: translation.loading,
     translationError: translation.error,
+    originData: origin.data,
+    originLoading: origin.loading,
+    originError: origin.error,
     onGetTranslatedText,
     onSetChatInput,
   };
