@@ -15,13 +15,11 @@ const Wrapper = styled.div`
 
 function RoomCreationPage() {
   return (
-    <>
-      <Wrapper>
-        <BackButton />
-        <RoomCreation />
-        <RoomCreationButton />
-      </Wrapper>
-    </>
+    <Wrapper>
+      <BackButton />
+      <RoomCreation />
+      <RoomCreationButton />
+    </Wrapper>
   );
 }
 

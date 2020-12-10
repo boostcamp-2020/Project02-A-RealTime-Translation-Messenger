@@ -13,16 +13,14 @@ function RoomCreationButton() {
   const { data: roomData, onCreateRoom } = useRoom();
 
   return (
-    <>
-      <MainButton
-        disabled={!validate(roomData.title)}
-        onClickButton={() => {
-          onCreateRoom({ title: roomData.title, isPrivate: roomData.isPrivate });
-        }}
-      >
-        생성하기
-      </MainButton>
-    </>
+    <MainButton
+      disabled={!validate(roomData.title)}
+      onClickButton={() => {
+        onCreateRoom({ title: roomData.title, isPrivate: roomData.isPrivate });
+      }}
+    >
+      생성하기
+    </MainButton>
   );
 }
 
