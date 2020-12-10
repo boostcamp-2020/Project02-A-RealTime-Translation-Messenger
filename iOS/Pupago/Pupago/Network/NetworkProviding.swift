@@ -34,7 +34,6 @@ extension NetworkProviding {
                     case .success(let data):
                         let decoder = JSONDecoder()
                         do {
-                            print(data)
                             let decoded = try decoder.decode(ResultType.self, from: data)
                             observer.onNext(decoded)
                         } catch {

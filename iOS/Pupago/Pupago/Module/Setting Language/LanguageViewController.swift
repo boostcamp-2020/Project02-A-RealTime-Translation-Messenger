@@ -8,6 +8,8 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import RxAnimated
+import AVFoundation
 
 class LanguageViewController: ViewController {
     @IBOutlet weak var introLabel: UILabel!
@@ -35,9 +37,19 @@ class LanguageViewController: ViewController {
         let output = viewModel.transform(input)
         
         output.viewTexts
+            .asObservable()
+            .map { $0.intro }
+            .bind(animated: introLabel.rx.animated.fade(duration: 0.33).text)
+            .disposed(by: rx.disposeBag)
+        
+        output.viewTexts
+            .asObservable()
+            .map { $0.description }
+            .bind(animated: descriptionLabel.rx.animated.fade(duration: 0.33).text)
+            .disposed(by: rx.disposeBag)
+        
+        output.viewTexts
             .drive(onNext: { [unowned self] texts in
-                self.introLabel.text = texts.intro
-                self.descriptionLabel.text = texts.description
                 self.nextButton.setTitle(texts.nextButton, for: .normal)
             })
             .disposed(by: rx.disposeBag)
@@ -53,7 +65,11 @@ class LanguageViewController: ViewController {
         output.saved
             .drive(onNext: { [unowned self] viewModel in
                 guard let window = self.view.window else { return }
-                self.navigator.show(segue: .nickname(viewModel: viewModel), sender: self, transition: .root(in: window))
+                checkAnimationView.play { _ in
+                    playCheckSoundAndPause(for: 700)
+                    self.navigator.show(segue: .nickname(viewModel: viewModel), sender: self, transition: .root(in: window))
+                }
+                
             })
             .disposed(by: rx.disposeBag)
     }

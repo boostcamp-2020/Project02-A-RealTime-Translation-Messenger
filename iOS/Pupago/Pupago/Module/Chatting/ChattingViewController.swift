@@ -9,6 +9,8 @@ import UIKit
 import RxSwift
 import RxCocoa
 import RxDataSources
+import Toaster
+import RxAnimated
 
 class ChattingViewController: ViewController {
 
@@ -16,28 +18,48 @@ class ChattingViewController: ViewController {
     @IBOutlet weak var codeButton: Button!
     @IBOutlet weak var inputText: UITextView!
     @IBOutlet weak var registButton: UIButton!
+    @IBOutlet weak var micButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var translationTextfield: UITextView!
+    @IBOutlet weak var translationTextView: UITextView!
     @IBOutlet weak var inputBarBottomConstraint: NSLayoutConstraint!
-    
+    private lazy var rightNavigationItem: UIBarButtonItem = {
+        let item = UIBarButtonItem(image: UIImage(systemName: "list.bullet"),
+                                   style: .plain,
+                                   target: self,
+                                   action: nil)
+        return item
+    }()
+
     private var didSetupViewConstraints = false
     private var keyboardShown: Bool = false
+    private var enterStatus: String = ""
+    private var leaveStatus: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.rightBarButtonItem = rightNavigationItem
         configureCollectionView()
+        configureToasterView()
     }
     
     override func bindViewModel() {
         super.bindViewModel()
         
         guard let viewModel = viewModel as? ChattingViewModel else { return }
+        let dataSource = MessageDataSource()
         
         let chatText = inputText.rx.text.orEmpty.asObservable()
-        let registTrigger = registButton.rx.tap.map { _ in }
+        let codeTrigger = codeButton.rx.tap.asObservable()
+        let registTrigger = registButton.rx.tap.asObservable()
+        let micTrigger = micButton.rx.tap.asObservable()
+        let showParticipantTrigger = rightNavigationItem.rx.tap.asObservable()
         let willLeave = rx.viewWillDisappear.map { _ in }
+        
         let input = ChattingViewModel.Input(chatText: chatText,
+                                            codeTrigger: codeTrigger,
                                             registTrigger: registTrigger,
+                                            micTrigger: micTrigger,
+                                            showParticipantTrigger: showParticipantTrigger,
                                             willLeave: willLeave)
         
         let output = viewModel.transform(input)
@@ -45,6 +67,8 @@ class ChattingViewController: ViewController {
         output.viewText
             .drive(onNext: { [unowned self] text in
                 self.languageLabel.text = text.language
+                self.enterStatus = text.enter
+                self.leaveStatus = text.leave
             })
             .disposed(by: rx.disposeBag)
         
@@ -55,33 +79,16 @@ class ChattingViewController: ViewController {
             })
             .disposed(by: rx.disposeBag)
         
-        let dataSource = RxCollectionViewSectionedReloadDataSource<MessageSection>(configureCell: { _, collectionView, indexPath, item in
-            if item.senderId == SocketIOManager.shared.socket.sid {
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyChattingCell.identifier,
-                                                                    for: indexPath) as? MyChattingCell
-                else { return UICollectionViewCell() }
-                cell.chatTextField.text = item.korean
-                cell.createAtLabel.text = DateManager.stringFormat(of: item.createdAt)
-                return cell
-            } else {
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OthersChattingCell.identifier,
-                                                                    for: indexPath) as? OthersChattingCell
-                else { return UICollectionViewCell() }
-                cell.userNameLabel.text = item.nickname
-                cell.originChatTextView.text = item.korean
-                cell.createAtLabel.text = DateManager.stringFormat(of: item.createdAt)
-                return cell
-            }
-        })
+        output.translationViewState
+            .bind(to: translationTextView.rx.state)
+            .disposed(by: rx.disposeBag)
         
         output.items.asObservable()
             .bind(to: self.collectionView.rx.items(dataSource: dataSource))
             .disposed(by: rx.disposeBag)
         
         output.reset
-            .drive(onNext: { [unowned self] _ in
-                self.inputText.text = ""
-            })
+            .drive(inputText.rx.text)
             .disposed(by: rx.disposeBag)
         
         output.scroll
@@ -94,7 +101,41 @@ class ChattingViewController: ViewController {
             .drive(onNext: { [unowned self] activate in
                 self.registButton.isUserInteractionEnabled = activate
                 self.registButton.tintColor = activate ? UIColor(named: "BlueColor") : .lightGray
-                self.translationTextfield.isHidden = !activate
+            })
+            .disposed(by: rx.disposeBag)
+        
+        output.showParticipant
+            .drive(onNext: { [unowned self] viewModel in
+                self.navigator.show(segue: .participant(viewModel: viewModel),
+                                    sender: self,
+                                    transition: .slideIn)
+            })
+            .disposed(by: rx.disposeBag)
+        
+        output.speeched
+            .drive(onNext: { [unowned self] viewModel in
+                self.navigator.show(segue: .speech(viewModel: viewModel),
+                                    sender: self,
+                                    transition: .modal)
+                        
+            })
+            .disposed(by: rx.disposeBag)
+        
+        output.status
+            .drive(onNext: { [unowned self] status in
+                var toasterText = status.nickname
+                toasterText += status.type == true ? enterStatus : leaveStatus
+                status.nickname == "" ? nil : Toast(text: toasterText).show()
+            })
+            .disposed(by: rx.disposeBag)
+        
+        output.clipboard
+            .drive(onNext: { info in
+                let pasteboard = UIPasteboard.general
+                let toasterText = "[\(info.code ?? "")]\(info.localize ?? "")"
+                pasteboard.string = info.code
+                
+                Toast(text: toasterText).show()
             })
             .disposed(by: rx.disposeBag)
     }
@@ -110,6 +151,11 @@ class ChattingViewController: ViewController {
             .addObserver(self, selector: #selector(keyboardWillHide),
                                name: UIResponder.keyboardWillHideNotification,
                                object: nil)
+    }
+    
+    func resetTranslationView() {
+        self.translationTextView.text = ""
+        self.translationTextView.isHidden = true
     }
 }
 
@@ -132,6 +178,14 @@ extension ChattingViewController {
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         self.collectionView.addGestureRecognizer(tap)
         
+    }
+    
+    func configureToasterView() {
+        let marginTop: CGFloat = 200
+        let frame = self.view.safeAreaLayoutGuide.layoutFrame
+        
+        ToastView.appearance().bottomOffsetPortrait = max(frame.width, frame.height) - marginTop
+        ToastView.appearance().bottomOffsetLandscape = min(frame.width, frame.height) - marginTop
     }
     
     private func scrollDownChat() {

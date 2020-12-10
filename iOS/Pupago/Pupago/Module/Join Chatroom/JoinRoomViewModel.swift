@@ -30,7 +30,7 @@ final class JoinRoomViewModel: ViewModel, ViewModelType {
     func transform(_ input: Input) -> Output {
         
         input.roomCode
-            .map { $0.joined() }
+            .map { $0.joined().uppercased() }
             .subscribe(onNext: { [unowned self] code in
                 self.isFull.accept(code.count == 4)
                 self.isValid.accept(self.validate(code))

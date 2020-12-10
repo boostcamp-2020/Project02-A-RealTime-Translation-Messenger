@@ -14,6 +14,7 @@ protocol Navigatable {
 final class Navigator {
     
     static let `default` = Navigator()
+    let transitionHelper = SlidInTransitionHelper()
     
     enum Scene {
         case language(viewModel: LanguageViewModel)
@@ -22,6 +23,8 @@ final class Navigator {
         case createRoom(viewModel: CreateRoomViewModel)
         case joinRoom(viewModel: JoinRoomViewModel)
         case chatting(viewModel: ChattingViewModel)
+        case participant(viewModel: ParticipantViewModel)
+        case speech(viewModel: SpeechViewModel)
     }
     
     enum Transition {
@@ -29,6 +32,8 @@ final class Navigator {
         case rootWithNavigation(in: UIWindow)
         case navigation
         case present
+        case slideIn
+        case modal
     }
     
     lazy var transition: CATransition = {
@@ -54,6 +59,10 @@ final class Navigator {
             return instantiateFromStoryBoard(type: JoinRoomViewController.self, viewModel: viewModel)
         case .chatting(let viewModel):
             return instantiateFromStoryBoard(type: ChattingViewController.self, viewModel: viewModel)
+        case .participant(let viewModel):
+            return instantiateFromStoryBoard(type: ParticipantViewController.self, viewModel: viewModel)
+        case .speech(let viewModel):
+            return instantiateFromStoryBoard(type: SpeechViewController.self, viewModel: viewModel)
         }
     }
     
@@ -98,6 +107,12 @@ final class Navigator {
         case .present:
             target.modalTransitionStyle = .crossDissolve
             target.modalPresentationStyle = .overCurrentContext
+            sender.present(target, animated: true, completion: nil)
+        case .slideIn:
+            target.modalPresentationStyle = .overCurrentContext
+            target.transitioningDelegate = transitionHelper
+            sender.present(target, animated: true, completion: nil)
+        case .modal:
             sender.present(target, animated: true, completion: nil)
         default: break
         }

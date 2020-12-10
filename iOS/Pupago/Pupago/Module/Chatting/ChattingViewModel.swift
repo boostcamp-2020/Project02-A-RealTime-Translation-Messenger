@@ -8,15 +8,20 @@
 import Foundation
 import RxSwift
 import RxCocoa
-import RxDataSources
 
 class ChattingViewModel: ViewModel, ViewModelType {
     
     typealias RoomInfo = (title: String?, code: String?)
+    typealias CopyInfo = (code: String?, localize: String?)
+    typealias TranslationViewState = (text: String, isHidden: Bool)
+    typealias ParticipantState = (nickname: String, type: Bool)
     
     struct Input {
         let chatText: Observable<String>
+        let codeTrigger: Observable<Void>
         let registTrigger: Observable<Void>
+        let micTrigger: Observable<Void>
+        let showParticipantTrigger: Observable<Void>
         let willLeave: Observable<Void>
     }
     
@@ -24,26 +29,33 @@ class ChattingViewModel: ViewModel, ViewModelType {
         let viewText: Driver<Localize.ChatroomViewText>
         let roomInfo: Driver<RoomInfo>
         let items: Driver<[MessageSection]>
-        let reset: Driver<Void>
+        let translationViewState: Observable<TranslationViewState>
+        let reset: Driver<String>
         let scroll: Driver<Void>
         let activate: Driver<Bool>
+        let showParticipant: Driver<ParticipantViewModel>
+        let speeched: Driver<SpeechViewModel>
+        let status: Driver<ParticipantState>
+        let clipboard: Driver<CopyInfo>
     }
     
     let chats = BehaviorRelay<[MessageSection]>(value: [MessageSection(header: "Chat", items: [])])
     let roomInfo = BehaviorRelay<RoomInfo>(value: (nil, nil))
-
-    let langCode = PublishRelay<(lang: Language, text: String)>()
+    let chatInfo = PublishRelay<Translator.Text>()
     let activate = BehaviorRelay<Bool>(value: false)
     let downScroll = PublishRelay<Void>()
-    let isValid = BehaviorRelay<Bool>(value: false)
-
+    let translationViewState = PublishRelay<(text: String, isHidden: Bool)>()
+    let reset = PublishRelay<Void>()
+    let status = BehaviorRelay<(ParticipantState)>(value: ("", false))
+    let clipboard = PublishRelay<CopyInfo>()
+    
     func transform(_ input: Input) -> Output {
         
         let socketManager = SocketIOManager.shared
         let provider = PupagoAPI()
         let translator = Translator(provider: provider)
         
-        // MARK: - Observing Socket Events
+        // MARK: - Socket Event Control
         
         socketManager.socket.rx.event(.receiveMessage)
             .subscribe(onNext: { [unowned self] data in
@@ -55,54 +67,95 @@ class ChattingViewModel: ViewModel, ViewModelType {
             .disposed(by: rx.disposeBag)
         
         socketManager.socket.rx.event(.list)
-            .subscribe(onNext: { data in
-                print("Participant changed!")
-            })
-            .disposed(by: rx.disposeBag)
-        
-        input.chatText
-            .distinctUntilChanged()
-            .filter { !$0.isEmpty }
-            .debounce(.milliseconds(500), scheduler: MainScheduler.instance)
-            .flatMap { translator.translate(with: $0) }
-            .subscribe(onNext: { (korean, english) in
-                print("korean: \(korean), english: \(english)")
-            })
-            .disposed(by: rx.disposeBag)
-
-        input.registTrigger
-            .withLatestFrom(input.chatText)
-            .subscribe(onNext: { msg in
-                socketManager.sendMessage(korean: msg, english: msg, origin: "Korean")
+            .subscribe(onNext: { [unowned self] data in
+                if let list = self.participantParse(data) {
+                    let nickname: String = list.diffNickname ?? ""
+                    let type = list.type == "enter" ? true : false
+                    self.status.accept((nickname, type))
+                }
             })
             .disposed(by: rx.disposeBag)
         
         input.willLeave
             .subscribe(onNext: {
+                Application.shared.currentRoomCode = ""
                 socketManager.leavChatroom()
-                socketManager.socket.removeAllHandlers()
+                socketManager.socket.off(SocketEndpoint.receiveMessage.eventName)
+                socketManager.socket.off(SocketEndpoint.list.eventName)
+            })
+            .disposed(by: rx.disposeBag)
+        
+        // MARK: - Translation
+        
+        input.chatText
+            .distinctUntilChanged()
+            .debounce(.milliseconds(200), scheduler: MainScheduler.instance)
+            .flatMap { translator.translate(with: $0) }
+            .subscribe(onNext: { [unowned self] info in
+                let translatedText = info.lang == "Korean" ? info.english : info.korean
+                translationViewState.accept((translatedText, false))
+                chatInfo.accept(info)
+                activate.accept(true)
             })
             .disposed(by: rx.disposeBag)
         
         input.chatText
-            .map { self.validate(chat: $0) }
-            .bind(to: isValid)
+            .subscribe(onNext: { [unowned self] text in
+                let status = text.isEmpty ? ("", true) : (localize.value.translating, false)
+                translationViewState.accept(status)
+                activate.accept(false)
+            })
             .disposed(by: rx.disposeBag)
         
-        let viewText = localize.asDriver()
-            .map { $0.chatroomViewText }
+        // MARK: - InputBar
         
+        input.registTrigger
+            .withLatestFrom(chatInfo)
+            .subscribe(onNext: { [unowned self] info in
+                socketManager.sendMessage(korean: info.korean,
+                                          english: info.english,
+                                          origin: info.lang)
+                translationViewState.accept(("", true))
+                reset.accept(())
+            })
+            .disposed(by: rx.disposeBag)
+        
+        // MARK: - Drivers
+        
+        let viewText = localize.asDriver().map { $0.chatroomViewText }
         let info = roomInfo.asDriver(onErrorJustReturn: (nil, nil))
-        let reset = input.registTrigger.asDriver(onErrorJustReturn: ())
-        let activate = isValid.asDriver(onErrorJustReturn: false)
         let chatItem = chats.asDriver(onErrorJustReturn: [])
+        let showParticipant = input.showParticipantTrigger
+            .withLatestFrom(roomInfo)
+            .map { _, code -> ParticipantViewModel in
+                let code = code ?? ""
+                return ParticipantViewModel(roomCode: code)
+            }
+            .asDriver(onErrorJustReturn: ParticipantViewModel(roomCode: ""))
+        
+        let speeched = input.micTrigger
+            .asDriver(onErrorJustReturn: ())
+            .map { _ in SpeechViewModel() }
+        
+        input.codeTrigger
+            .withLatestFrom(roomInfo)
+            .subscribe(onNext: { [unowned self] info in
+                let localText = localize.value.chatroomViewText.copy
+                clipboard.accept((info.code, localText))
+            })
+            .disposed(by: rx.disposeBag)
         
         return Output(viewText: viewText,
                       roomInfo: info,
                       items: chatItem,
-                      reset: reset,
+                      translationViewState: translationViewState.asObservable(),
+                      reset: reset.map { "" }.asDriver(onErrorJustReturn: ""),
                       scroll: downScroll.asDriver(onErrorJustReturn: ()),
-                      activate: activate)
+                      activate: activate.asDriver(),
+                      showParticipant: showParticipant,
+                      speeched: speeched,
+                      status: status.asDriver(),
+                      clipboard: clipboard.asDriver(onErrorJustReturn: ("", "")))
     }
     
 }
@@ -121,14 +174,18 @@ private extension ChattingViewModel {
             let data = dataString.data(using: .utf8),
             let message = try? JSONDecoder().decode(Message.self, from: data)
         else { return nil }
-
+        
         return message
     }
     
-    private func validate(chat: String) -> Bool {
-        guard chat.count <= 80 && !chat.isEmpty else { return false }
+    private func participantParse(_ data: [Any]?) -> Participants? {
+        guard
+            let dataString = data?[0] as? String,
+            let data = dataString.data(using: .utf8),
+            let participants = try? JSONDecoder().decode(Participants.self, from: data)
+        else { return nil }
         
-        return true
+        return participants
     }
     
 }
