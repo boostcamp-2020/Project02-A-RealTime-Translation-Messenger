@@ -1,13 +1,16 @@
 import React from 'react';
+import MainPageNavigation from '../../../@types/mainPageNavigation';
+import useNavigation from '../../../hooks/useNavigation';
 import MainButton from '../../atoms/buttons/MainButton';
 
 function EnterCodeButton() {
+  const { onSetNavigation } = useNavigation();
   return (
     <div>
       <MainButton
         disabled={false}
         onClickButton={() => {
-          // 코드 입력 페이지로 이동
+          onSetNavigation(MainPageNavigation.CODE_INPUT);
         }}
       >
         코드로 참가하기

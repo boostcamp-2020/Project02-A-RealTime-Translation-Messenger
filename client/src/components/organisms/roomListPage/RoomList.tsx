@@ -36,7 +36,7 @@ function RoomList() {
   }, []);
 
   useEffect(() => {
-    if (!error && !loading && roomData.roomCode !== null) {
+    if (!error && !loading && roomData.roomCode !== '') {
       // 채팅 페이지로 이동
       history.push('/chat');
     }
