@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import UserInfoPage from './UserInfoPage';
 import MainPageBox from '../components/atoms/boxes/MainPageBox';
 import MainPageNavigation from '../@types/mainPageNavigation';
+import RoomListPage from './RoomListPage';
 
 const Wrapper = styled.div`
   display: flex;

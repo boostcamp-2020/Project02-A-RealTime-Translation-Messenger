@@ -38,7 +38,7 @@ type InitialStateType = {
 const initialState: InitialStateType = {
   room: {
     data: {
-      roomCode: null,
+      roomCode: '',
       title: null,
       isPrivate: null,
     },
@@ -50,7 +50,11 @@ const initialState: InitialStateType = {
 const roomList = createSlice({
   name,
   initialState,
-  reducers: {},
+  reducers: {
+    changeRoomCode: (state, action: PayloadAction<string>) => {
+      state.room.data.roomCode = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(createRoom.pending.type, (state) => {
@@ -78,5 +82,6 @@ const roomList = createSlice({
   },
 });
 
+const changeRoomCode = roomList.actions.changeRoomCode;
 export default roomList.reducer;
-export { createRoom, joinRoom };
+export { createRoom, joinRoom, changeRoomCode };

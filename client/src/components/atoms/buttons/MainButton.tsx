@@ -28,7 +28,7 @@ const setButtonColor = (disabled: boolean | undefined) => {
 
 const Button = styled.button<StyledButtonPropsType>`
   display: block;
-  width: 336px;
+  width: 344px;
   height: 40px;
   filter: drop-shadow(3px 3px 10px rgba(0, 0, 0, 0.25));
   outline: none;

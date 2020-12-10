@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useCallback } from 'react';
 
 import { RootState } from '../modules';
-import { createRoom, joinRoom } from '../modules/room';
+import { createRoom, joinRoom, changeRoomCode } from '../modules/room';
 
 export default function useRoom() {
   const { data, loading, error } = useSelector((state: RootState) => state.room.room);
@@ -20,11 +20,19 @@ export default function useRoom() {
     [dispatch],
   );
 
+  const onChangeRoomCode = useCallback(
+    (roomCode: string) => {
+      dispatch(changeRoomCode(roomCode));
+    },
+    [dispatch],
+  );
+
   return {
     data,
     loading,
     error,
     onCreateRoom,
     onJoinRoom,
+    onChangeRoomCode,
   };
 }
