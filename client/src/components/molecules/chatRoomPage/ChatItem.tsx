@@ -5,6 +5,10 @@ import ChatBox from '../../atoms/boxes/ChatBox';
 import ProfileImage from '../../atoms/resources/ProfileImage';
 import Text from '../../atoms/texts/Text';
 
+const ChatItemWrapper = styled.div`
+  margin: 24px 0 0 0;
+`;
+
 const ProfileWrapper = styled.div`
   display: flex;
   justify-content: space-between;
@@ -39,7 +43,7 @@ const NickName = styled(Text)`
 
 function ChatItem({ leftMessage, rightMessage, isMe, imageLink, nickname, createdAt }: ChatItemPropsType) {
   return (
-    <div>
+    <ChatItemWrapper>
       <ProfileWrapper>
         <Profile isMe={isMe}>
           <ProfileImage size="size-24" isMe={isMe} image={imageLink} />
@@ -50,7 +54,7 @@ function ChatItem({ leftMessage, rightMessage, isMe, imageLink, nickname, create
         </Profile>
       </ProfileWrapper>
       <ChatBox leftMessage={leftMessage} rightMessage={rightMessage} isMe={isMe} />
-    </div>
+    </ChatItemWrapper>
   );
 }
 

@@ -14,8 +14,9 @@ const Wrapper = styled.div`
   position: relative;
   display: flex;
   border-bottom-left-radius: 30px;
+  padding: 24px;
   width: 1000px;
-  height: 128px;
+  height: 176px;
   background-color: white;
 `;
 
