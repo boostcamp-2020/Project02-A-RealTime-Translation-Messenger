@@ -11,7 +11,7 @@ export default function useNavigation() {
 
   const onSetNavigation = useCallback(
     (destination: MainPageNavigation) => {
-      setNavigation(destination);
+      dispatch(setNavigation(destination));
     },
     [dispatch],
   );
