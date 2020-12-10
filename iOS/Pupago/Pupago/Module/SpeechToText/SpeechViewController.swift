@@ -98,6 +98,10 @@ class SpeechViewController: ViewController {
                                object: nil)
     }
     
+}
+
+extension SpeechViewController {
+    
     private func startPulse() {
         let pulse = Pulsing(radius: 70, position: micButton.center)
         pulse.animationDuration = 1.0
@@ -110,9 +114,7 @@ class SpeechViewController: ViewController {
         guard let animatingLayer = self.view.layer.sublayers?.last as? Pulsing else { return }
         animatingLayer.removeFromSuperlayer()
     }
-}
-
-extension SpeechViewController {
+    
     @objc func keyboardWillShow(notification: NSNotification) {
         let responder = translationTextView.isFirstResponder
         if responder, let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
@@ -140,4 +142,5 @@ extension SpeechViewController {
             self.view.layoutIfNeeded()
         }
     }
+    
 }
