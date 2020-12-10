@@ -2,10 +2,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useCallback } from 'react';
 
 import { RootState } from '../modules';
-import { setNickname, setLanguage, getRandomProfileImage } from '../modules/user';
+import { setNickname, setLanguage, setSocketId, getRandomProfileImage } from '../modules/user';
 
 export default function useUser() {
-  const { nickname, language, imageLink } = useSelector((state: RootState) => state.user);
+  const { nickname, language, socketId, imageLink } = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
 
   const onSetNickname = useCallback(
@@ -22,6 +22,13 @@ export default function useUser() {
     [dispatch],
   );
 
+  const onSetSocketId = useCallback(
+    (socketId: string) => {
+      dispatch(setSocketId(socketId));
+    },
+    [dispatch],
+  );
+
   const onGetRandomProfileImage = useCallback(() => {
     dispatch(getRandomProfileImage());
   }, [dispatch]);
@@ -29,11 +36,13 @@ export default function useUser() {
   return {
     nicknameData: nickname.data,
     languageData: language.data,
+    socketIdData: socketId.data,
     imageLinkData: imageLink.data,
     imageLinkLoading: imageLink.loading,
     imageLinkError: imageLink.error,
     onSetNickname,
     onSetLanguage,
+    onSetSocketId,
     onGetRandomProfileImage,
   };
 }

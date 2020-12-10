@@ -24,6 +24,9 @@ type InitialStateType = {
     loading: boolean;
     error: Error | null;
   };
+  socketId: {
+    data: string | null;
+  };
 };
 
 const initialState: InitialStateType = {
@@ -38,6 +41,9 @@ const initialState: InitialStateType = {
     loading: false,
     error: null,
   },
+  socketId: {
+    data: null,
+  },
 };
 
 const user = createSlice({
@@ -49,6 +55,9 @@ const user = createSlice({
     },
     setLanguage: (state, action: PayloadAction<'Korean' | 'English'>) => {
       state.language.data = action.payload;
+    },
+    setSocketId: (state, action: PayloadAction<string>) => {
+      state.socketId.data = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -70,4 +79,5 @@ const user = createSlice({
 export default user.reducer;
 export const setNickname = user.actions.setNickname;
 export const setLanguage = user.actions.setLanguage;
+export const setSocketId = user.actions.setSocketId;
 export { getRandomProfileImage };
