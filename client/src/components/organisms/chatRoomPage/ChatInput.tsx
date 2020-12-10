@@ -25,7 +25,7 @@ const VoiceWrapper = styled.div`
 function ChatInput({ socket }: ChatInputPropsType) {
   const [voice, setVoice] = useState(false);
 
-  const { chatInputData, translationData, originData, onSetChatInput, onGetTranslatedText } = useChatInput();
+  const { chatInputData, translationData, translationLoading, onSetChatInput, onGetTranslatedText } = useChatInput();
 
   useEffect(() => {
     onGetTranslatedText(chatInputData);
@@ -40,19 +40,21 @@ function ChatInput({ socket }: ChatInputPropsType) {
           setVoice(true);
         }}
         clickSendFunc={() => {
+          if (translationLoading) return;
           const sendingChat = {
             Korean: '',
             English: '',
-            origin: originData,
+            origin: translationData.origin,
           };
-          if (originData === 'Korean') {
+          if (translationData.origin === 'Korean') {
             sendingChat.Korean = chatInputData;
             sendingChat.English = translationData.translationText;
-          } else if (originData === 'English') {
+          } else if (translationData.origin === 'English') {
             sendingChat.Korean = translationData.translationText;
             sendingChat.English = chatInputData;
           }
           socket.emit('send chat', sendingChat);
+          // 필드 리셋 - 인풋 초기화
         }}
       />
       <ChatTranslationBox value={translationData.translationText} />
