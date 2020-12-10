@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 
 import useRoom from '../../../hooks/useRoom';
 import MainButton from '../../atoms/buttons/MainButton';
@@ -17,6 +16,7 @@ function RoomCreationButton() {
       disabled={!validate(roomData.title)}
       onClickButton={() => {
         onCreateRoom({ title: roomData.title, isPrivate: roomData.isPrivate });
+        //승인 떨어지면 채팅방 입장
       }}
     >
       생성하기

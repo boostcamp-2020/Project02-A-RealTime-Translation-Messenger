@@ -55,10 +55,17 @@ const room = createSlice({
       state.room.data.title = action.payload;
     },
     setIsPrivate: (state, action: PayloadAction<'true' | 'false'>) => {
-      console.log(action.payload);
       state.room.data.isPrivate = action.payload;
+    },
     changeRoomCode: (state, action: PayloadAction<string>) => {
       state.room.data.roomCode = action.payload;
+    },
+    resetRoomState: (state) => {
+      state.room.data.title = '';
+      state.room.data.isPrivate = 'false';
+      state.room.data.roomCode = '';
+      state.room.loading = false;
+      state.room.error = null;
     },
   },
   extraReducers: (builder) => {
@@ -92,4 +99,5 @@ export default room.reducer;
 export const setRoomTitle = room.actions.setRoomTitle;
 export const setIsPrivate = room.actions.setIsPrivate;
 export const changeRoomCode = room.actions.changeRoomCode;
+export const resetRoomState = room.actions.resetRoomState;
 export { createRoom, joinRoom };

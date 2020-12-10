@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
 
 import UserInfoPage from './UserInfoPage';
@@ -6,6 +6,8 @@ import RoomCreationPage from './RoomCreationPage';
 import RoomListPage from './RoomListPage';
 import MainPageBox from '../components/atoms/boxes/MainPageBox';
 import MainPageNavigation from '../@types/mainPageNavigation';
+import CodeInputPage from './CodeInputPage';
+import useNavigation from '../hooks/useNavigation';
 
 const Wrapper = styled.div`
   display: flex;
@@ -16,12 +18,27 @@ const Wrapper = styled.div`
 `;
 
 function MainPage() {
+  const { navigation } = useNavigation();
+
+  const renderMainPage = (navigation: MainPageNavigation) => {
+    console.log(navigation);
+    switch (navigation) {
+      case MainPageNavigation.USER_INFO:
+        return <UserInfoPage />;
+      case MainPageNavigation.ROOM_CREATION:
+        return <RoomCreationPage />;
+      case MainPageNavigation.ROOM_LIST:
+        return <RoomListPage />;
+      case MainPageNavigation.CODE_INPUT:
+        return <CodeInputPage />;
+      default:
+        return <UserInfoPage />;
+    }
+  };
+
   return (
     <Wrapper>
-      <MainPageBox>
-        {/* <UserInfoPage /> */}
-        <RoomCreationPage />
-      </MainPageBox>
+      <MainPageBox>{renderMainPage(navigation)}</MainPageBox>
     </Wrapper>
   );
 }

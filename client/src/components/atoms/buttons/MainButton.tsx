@@ -47,7 +47,6 @@ export function MainButton({ disabled, children, onClickButton }: ButtonPropsTyp
       disabled={disabled}
       onClick={() => {
         if (!disabled) {
-          console.log('gg');
           onClickButton();
         }
       }}

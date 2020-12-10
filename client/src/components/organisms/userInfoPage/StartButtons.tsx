@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import MainPageNavigation from '../../../@types/mainPageNavigation';
+import useNavigation from '../../../hooks/useNavigation';
 import useUser from '../../../hooks/useUser';
 
 import MainButton from '../../atoms/buttons/MainButton';
@@ -16,6 +18,7 @@ const validate = (nickname: string, imageLink: string | null) => {
 
 function StartButtons() {
   const { nicknameData, imageLinkData } = useUser();
+  const { onSetNavigation } = useNavigation();
 
   return (
     <>
@@ -23,7 +26,7 @@ function StartButtons() {
         <MainButton
           disabled={!validate(nicknameData, imageLinkData)}
           onClickButton={() => {
-            //  라우팅 코드
+            onSetNavigation(MainPageNavigation.ROOM_CREATION);
           }}
         >
           + 방 만들기
@@ -32,7 +35,7 @@ function StartButtons() {
       <MainButton
         disabled={!validate(nicknameData, imageLinkData)}
         onClickButton={() => {
-          //  라우팅 코드
+          onSetNavigation(MainPageNavigation.ROOM_LIST);
         }}
       >
         참가하기

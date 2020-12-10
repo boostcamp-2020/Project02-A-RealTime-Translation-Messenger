@@ -1,13 +1,21 @@
 import React from 'react';
+import MainPageNavigation from '../../../@types/mainPageNavigation';
+import Palette from '../../../@types/Palette';
+import useNavigation from '../../../hooks/useNavigation';
 
 import IconButton from '../../atoms/buttons/IconButton';
 
-type BackButtonPropsType = {
-  onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-};
-
-function BackButton({ onClick }: BackButtonPropsType) {
-  return <IconButton iconType="ArrowBack" color="black" onClick={onClick} />;
+function BackButton() {
+  const { onSetNavigation } = useNavigation();
+  return (
+    <IconButton
+      iconType="ArrowBack"
+      color={Palette.DARK_GREY}
+      onClick={() => {
+        onSetNavigation(MainPageNavigation.ROOM_LIST);
+      }}
+    />
+  );
 }
 
 export default BackButton;
