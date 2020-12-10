@@ -34,7 +34,7 @@ const StyledChatRoomBox = styled.div`
 `;
 
 const socket = io(BASE_URL as string);
-  
+
 function ChatPage() {
   const { onSetParticipantsList } = useParticipantsList();
   const { nicknameData, languageData, imageLinkData } = useUser();
@@ -69,8 +69,8 @@ function ChatPage() {
         <ChatLogsBox>
           <ChatLogs />
         </ChatLogsBox>
+        <ChatInput socket={socket} />
       </StyledChatRoomBox>
-      <ChatInput socket={socket} />
     </Wrapper>
   );
 }
