@@ -33,15 +33,15 @@ const InputLength = styled(Text)`
 
 export type ChatInputPropsType = {
   value: string;
-  onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  onChangeInput?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
   clickMicFunc?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   clickSendFunc?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 };
 
-function ChatInput({ value, onChange, clickMicFunc, clickSendFunc }: ChatInputPropsType) {
+function ChatInput({ value, onChangeInput, clickMicFunc, clickSendFunc }: ChatInputPropsType) {
   return (
-    <>
-      <ChatInputAtom value={value} onChange={onChange}></ChatInputAtom>
+    <div>
+      <ChatInputAtom value={value} onChangeInput={onChangeInput}></ChatInputAtom>
       <IconWrapper>
         <Icons>
           <InputLength>{value.length}</InputLength>
@@ -49,7 +49,7 @@ function ChatInput({ value, onChange, clickMicFunc, clickSendFunc }: ChatInputPr
           <IconButton iconType="Send" color={Palette.PUPAGO_BLUE} onClick={clickSendFunc} />
         </Icons>
       </IconWrapper>
-    </>
+    </div>
   );
 }
 
