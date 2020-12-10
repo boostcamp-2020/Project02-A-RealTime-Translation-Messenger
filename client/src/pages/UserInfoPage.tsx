@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 
 import MainPageNavigation from '../@types/mainPageNavigation';
 import MainTitle from '../components/molecules/userInfoPage/MainTitle';
@@ -8,19 +9,45 @@ import ProfilePictureSelection from '../components/organisms/userInfoPage/Profil
 import StartButtons from '../components/organisms/userInfoPage/StartButtons';
 import useNavigation from '../hooks/useNavigation';
 
+const ProfilePictureSelectionWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 32px 0 0 0;
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const LanguageSelectionwrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+`;
+
+const NickNameInputWrapper = styled.div`
+  margin-bottom: 56px;
+`;
+
 function UserInfoPage() {
   const { navigation } = useNavigation();
 
   if (navigation !== MainPageNavigation.USER_INFO) return null;
   return (
     <>
-      <div>
-        <MainTitle />
+      <MainTitle />
+      <ProfilePictureSelectionWrapper>
         <ProfilePictureSelection />
+      </ProfilePictureSelectionWrapper>
+      <LanguageSelectionwrapper>
         <LanguageSelection />
+      </LanguageSelectionwrapper>
+      <NickNameInputWrapper>
         <NicknameInput />
-        <StartButtons />
-      </div>
+      </NickNameInputWrapper>
+      <StartButtons />
     </>
   );
 }

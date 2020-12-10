@@ -4,10 +4,12 @@ import useUser from '../../../hooks/useUser';
 
 import MainButton from '../../atoms/buttons/MainButton';
 
-const Wrapper = styled.div``;
+const RoomCreateButtonWrapper = styled.div`
+  margin-bottom: 32px;
+`;
 
 const validate = (nickname: string, imageLink: string | null) => {
-  if (nickname.length === 0) return false;
+  if (nickname.length < 2) return false;
   if (!imageLink) return false;
   return true;
 };
@@ -17,18 +19,20 @@ function StartButtons() {
 
   return (
     <>
+      <RoomCreateButtonWrapper>
+        <MainButton
+          disabled={!validate(nicknameData, imageLinkData)}
+          onClickButton={() => {
+            //  라우팅 코드
+          }}
+        >
+          + 방 만들기
+        </MainButton>
+      </RoomCreateButtonWrapper>
       <MainButton
         disabled={!validate(nicknameData, imageLinkData)}
         onClickButton={() => {
-          console.log('hihi');
-        }}
-      >
-        + 방 만들기
-      </MainButton>
-      <MainButton
-        disabled={!validate(nicknameData, imageLinkData)}
-        onClickButton={() => {
-          console.log('hihi');
+          //  라우팅 코드
         }}
       >
         참가하기
