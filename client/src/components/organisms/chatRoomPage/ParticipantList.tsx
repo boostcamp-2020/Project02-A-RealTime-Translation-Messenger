@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import useParticipantsList from '../../../hooks/useParticipantsList';
+import useUser from '../../../hooks/useUser';
 import ParticipantCount from '../../molecules/chatRoomPage/ParticipantCount';
 import ParticipantItem from '../../molecules/chatRoomPage/ParticipantItem';
 
@@ -16,6 +17,7 @@ const ParticipantCountWrapper = styled.div`
 
 function ParticipantList() {
   const { data: participants } = useParticipantsList();
+  const { socketIdData } = useUser();
 
   return (
     <>
@@ -23,12 +25,11 @@ function ParticipantList() {
         <ParticipantCount participatingCount={participants.length} maxCapacity={8} />
       </ParticipantCountWrapper>
       {participants.map((participant) => (
-        <ParticipantItemWrapper>
+        <ParticipantItemWrapper key={participant.socketId}>
           <ParticipantItem
-            key={participant.socketId}
             imageLink={participant.imageLink}
             language={participant.language as 'Korean' | 'English'}
-            isMe={true}
+            isMe={participant.socketId === socketIdData}
             nickname={participant.nickname}
           />
         </ParticipantItemWrapper>
