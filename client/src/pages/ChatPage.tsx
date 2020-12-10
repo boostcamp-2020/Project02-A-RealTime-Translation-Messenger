@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import io from 'socket.io-client';
 
 import { ParticipantsListType, ReceiveChatType } from '../@types/types';
+import ChatInput from '../components/organisms/chatRoomPage/ChatInput';
 
 dotenv.config();
 
@@ -24,7 +25,11 @@ function ChatPage() {
     });
   }, []);
 
-  return <h1>쳇!</h1>;
+  return (
+    <>
+      <ChatInput />
+    </>
+  );
 }
 
 export default ChatPage;
