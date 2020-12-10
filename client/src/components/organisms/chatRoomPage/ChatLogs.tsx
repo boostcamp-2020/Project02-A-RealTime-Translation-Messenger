@@ -14,7 +14,7 @@ type ChatLogWrapperType = {
 const ChatLogWrapper = styled.div<ChatLogWrapperType>`
   display: flex;
   justify-content: ${(props) => (props.isMe ? 'flex-end' : 'flex-start')};
-  width: inherit;
+  width: 952px;
 `;
 
 const ParticipantLogWrapper = styled.div`
@@ -25,22 +25,24 @@ const ParticipantLogWrapper = styled.div`
 
 function ChatLogs() {
   const { data: chatLogs } = useChat();
-  const { nicknameData, languageData } = useUser();
+  const { nicknameData, languageData, socketIdData } = useUser();
 
   const returnLogs = () => {
     if (chatLogs.length === 0) {
       return <></>;
     } else {
-      return chatLogs.map((data) => {
+      return chatLogs.map((data, index) => {
         const log = data as ParticipantsUpdateType;
         if (log.type === undefined) {
           const chatLog = data as ChatLogsType;
+          console.log(data);
           return (
-            <ChatLogWrapper isMe={nicknameData === chatLog.nickname ? true : false}>
+            <ChatLogWrapper isMe={socketIdData === chatLog.senderId}>
               <ChatItemMolecule
+                key={index}
                 leftMessage={languageData === 'Korean' ? chatLog.Korean : chatLog.English}
                 rightMessage={languageData === 'Korean' ? chatLog.English : chatLog.Korean}
-                isMe={nicknameData === chatLog.nickname ? true : false}
+                isMe={socketIdData === chatLog.senderId}
                 imageLink={chatLog.imageLink}
                 nickname={chatLog.nickname}
                 createdAt={chatLog.createdAt}
@@ -51,6 +53,7 @@ function ChatLogs() {
           return (
             <ParticipantLogWrapper>
               <ParticipantNotification
+                key={index}
                 nickname={log.diffNickname}
                 isEnter={log.type === 'enter' ? true : false}
                 language={languageData}

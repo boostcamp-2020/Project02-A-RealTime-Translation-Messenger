@@ -7,7 +7,7 @@ import useRoom from '../../../hooks/useRoom';
 
 function ChatRoomList() {
   const { data: rooms, loading, error, onGetRoomList } = useRoomList();
-  const { onJoinRoom } = useRoom();
+  const { onJoinRoom, data: roomData } = useRoom();
 
   useEffect(() => {
     onGetRoomList();
@@ -16,16 +16,19 @@ function ChatRoomList() {
   return (
     <>
       <RefreshButton onClickRefresh={onGetRoomList} size={'small'} />
-      {rooms?.map((room) => (
-        <RoomItem
-          size="small"
-          createdAt={timeDisplay.timeSinceKorean(room.createdAt)}
-          participantCount={room.participantCount}
-          roomCapacity={8}
-          title={room.title}
-          onClickItem={() => {}}
-        />
-      ))}
+      {rooms
+        ?.filter((room) => room.roomCode !== roomData.roomCode)
+        .map((room) => (
+          <RoomItem
+            key={room.roomCode}
+            size="small"
+            createdAt={timeDisplay.timeSinceKorean(room.createdAt)}
+            participantCount={room.participantCount}
+            roomCapacity={8}
+            title={room.title}
+            onClickItem={() => {}}
+          />
+        ))}
     </>
   );
 }

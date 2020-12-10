@@ -7,9 +7,13 @@ export type ChatLogsBoxPropsType = {
 
 const StyledChatLogsBox = styled.div<ChatLogsBoxPropsType>`
   width: 1000px;
-  height: 520px;
-  padding: 32px;
+  height: 472px;
+  padding: 0 24px;
   background-color: white;
+  overflow: scroll;
+  &::-webkit-scrollbar {
+    width: 0px;
+  }
 `;
 
 export function ChatLogsBox({ children }: ChatLogsBoxPropsType) {
