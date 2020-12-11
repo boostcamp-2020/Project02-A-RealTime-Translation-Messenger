@@ -26,14 +26,14 @@
 <img width="100%" src="https://i.imgur.com/qOulV1k.png">
 <p></p>
 
-<center>
+<div align="center">
 
 > Papago API를 이용한 실시간 번역 채팅 웹, 모바일(iOS) 서비스 입니다.
 
 푸파고는 별도의 로그인 없이 간단하게 실시간으로 즐길 수 있는 번역 채팅 서비스입니다.
 
 지금 바로 글로벌 채팅을 즐겨보세요!
-</center>
+
 </div>
 
 </br>
