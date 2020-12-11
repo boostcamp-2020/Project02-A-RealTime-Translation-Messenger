@@ -25,6 +25,7 @@ const getTranslatedText = createAsyncThunk(
       };
 
       const { translatedText } = (await api.translateText(translateTextProps)).data;
+
       return { translationText: translatedText, origin: getLanguageByLangCode(source) };
     } catch (e) {
       return rejectWithValue(e);
@@ -66,6 +67,9 @@ const chatInput = createSlice({
     setChatInput: (state, action: PayloadAction<string>) => {
       state.chatInput.data = action.payload;
     },
+    setTranslation: (state, action: PayloadAction<string>) => {
+      state.translation.data.translationText = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -88,4 +92,5 @@ const chatInput = createSlice({
 
 export default chatInput.reducer;
 const setChatInput = chatInput.actions.setChatInput;
-export { getTranslatedText, setChatInput };
+const setTranslation = chatInput.actions.setTranslation;
+export { getTranslatedText, setChatInput, setTranslation };

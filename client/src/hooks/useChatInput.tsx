@@ -2,7 +2,7 @@ import { useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { RootState } from '../modules';
-import { getTranslatedText, setChatInput } from '../modules/chatInput';
+import { getTranslatedText, setChatInput, setTranslation } from '../modules/chatInput';
 
 function useTranslate() {
   const { chatInput, translation } = useSelector((state: RootState) => state.chatInput);
@@ -17,6 +17,12 @@ function useTranslate() {
       clearTimeout(handler);
     };
   }, [chatInput.data]);
+
+  useEffect(() => {
+    if (chatInput.data.length === 0) {
+      dispatch(setTranslation(''));
+    }
+  }, [translation.loading]);
 
   const onGetTranslatedText = useCallback(
     (text: string) => dispatch(getTranslatedText({ text, origin: translation.data.origin })),

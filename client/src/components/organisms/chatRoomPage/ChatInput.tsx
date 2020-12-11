@@ -27,14 +27,15 @@ const VoiceWrapper = styled.div`
   align-items: center;
 `;
 
+const getPapagoStyleText = (loading: boolean, data: string) => {
+  if (loading) return `${data}...`;
+  return data;
+};
+
 function ChatInput({ socket }: ChatInputPropsType) {
   const [voice, setVoice] = useState(false);
 
   const { chatInputData, translationData, translationLoading, onSetChatInput, onGetTranslatedText } = useChatInput();
-
-  useEffect(() => {
-    onGetTranslatedText(chatInputData);
-  }, [chatInputData]);
 
   return (
     <Wrapper>
@@ -62,7 +63,7 @@ function ChatInput({ socket }: ChatInputPropsType) {
           // 필드 리셋 - 인풋 초기화
         }}
       />
-      <ChatTranslationBox value={translationData.translationText} />
+      <ChatTranslationBox value={getPapagoStyleText(translationLoading, translationData.translationText)} />
       {voice && (
         <VoiceWrapper>
           <VoiceRecognitionModal
