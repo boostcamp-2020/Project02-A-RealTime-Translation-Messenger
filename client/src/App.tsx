@@ -5,6 +5,7 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 
 import ChatRoomPage from './pages/ChatRoomPage';
 import MainPage from './pages/MainPage';
+import SwitchRoomLoadingPage from './pages/SwitchRoomLoadingPage';
 import Background from './components/atoms/resources/Background';
 
 export const GlobalStyle = createGlobalStyle`
@@ -31,6 +32,7 @@ function App() {
         <Switch>
           <Route path="/" component={MainPage} exact />
           <Route path="/chat" component={ChatRoomPage} exact />
+          <Route path="/loading" component={SwitchRoomLoadingPage} exact />
           <Redirect from="*" to="/" />
         </Switch>
       </Background>
