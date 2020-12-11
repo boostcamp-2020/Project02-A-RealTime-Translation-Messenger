@@ -67,7 +67,6 @@ const chatInput = createSlice({
     setChatInput: (state, action: PayloadAction<string>) => {
       state.chatInput.data = action.payload;
     },
-
     setTranslation: (state, action: PayloadAction<string>) => {
       state.translation.data.translationText = action.payload;
     },
@@ -97,5 +96,6 @@ const chatInput = createSlice({
 
 export default chatInput.reducer;
 export const setChatInput = chatInput.actions.setChatInput;
+export const setTranslation = chatInput.actions.setTranslation;
 export const resetChatInput = chatInput.actions.resetChatInput;
 export { getTranslatedText };
