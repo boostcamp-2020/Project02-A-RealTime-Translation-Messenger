@@ -7,10 +7,6 @@ import ChatTranslationBox from '../../atoms/boxes/ChatTranslationBox';
 import VoiceRecognitionModal from '../../molecules/chatRoomPage/VoiceRecognitionModal';
 import useUser from '../../../hooks/useUser';
 
-// type ChatInputPropsType = {
-//   socket: SocketIOClient.Socket;
-// };
-
 const Wrapper = styled.div`
   position: relative;
   display: flex;
@@ -49,17 +45,10 @@ function ChatInput() {
         clickSendFunc={() => {
           if (translationLoading || socketData === null) return;
           const sendingChat = {
-            Korean: '',
-            English: '',
+            Korean: translationData.origin === 'Korean' ? chatInputData : translationData.translationText,
+            English: translationData.origin === 'English' ? chatInputData : translationData.translationText,
             origin: translationData.origin,
           };
-          if (translationData.origin === 'Korean') {
-            sendingChat.Korean = chatInputData;
-            sendingChat.English = translationData.translationText;
-          } else if (translationData.origin === 'English') {
-            sendingChat.Korean = translationData.translationText;
-            sendingChat.English = chatInputData;
-          }
           socketData.emit('send chat', sendingChat);
           // 필드 리셋 - 인풋 초기화
         }}

@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useCallback } from 'react';
 
 import { RootState } from '../modules';
-import { stackChats } from '../modules/chat';
+import { stackChats, resetChats } from '../modules/chat';
 import { ChatLogsType, ParticipantsUpdateType } from '../@types/types';
 
 export default function useChat() {
@@ -14,8 +14,11 @@ export default function useChat() {
     [dispatch],
   );
 
+  const onResetChats = useCallback(() => dispatch(resetChats()), [dispatch]);
+
   return {
     data,
     onStackChats,
+    onResetChats,
   };
 }
