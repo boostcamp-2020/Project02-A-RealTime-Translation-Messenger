@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import useRoom from '../../../hooks/useRoom';
 import MainButton from '../../atoms/buttons/MainButton';
@@ -10,7 +11,15 @@ const roomTitleValidate = (title: string) => {
 };
 
 function RoomCreationButton() {
-  const { data: roomData, onCreateRoom } = useRoom();
+  const { data: roomData, loading, error, onCreateRoom, onJoinRoom } = useRoom();
+  const history = useHistory();
+
+  useEffect(() => {
+    if (!error && !loading && roomData.roomCode !== '') {
+      // 채팅 페이지로 이동
+      history.push('/chat');
+    }
+  }, [roomData.roomCode]);
 
   return (
     <MainButton
