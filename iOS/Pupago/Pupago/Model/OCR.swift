@@ -30,4 +30,11 @@ struct OCRResponse: Codable {
     let requestId: String?
     let timestamp: Int?
     let images: [Image]
+    
+    var concatedString: String {
+        guard let image = images.first else { return "" }
+        return image.fields
+            .map { $0.inferText ?? "" }
+            .joined(separator: " ")
+    }
 }
