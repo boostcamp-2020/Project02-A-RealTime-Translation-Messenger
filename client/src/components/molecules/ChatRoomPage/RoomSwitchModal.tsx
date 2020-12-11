@@ -8,10 +8,10 @@ import MainButton from '../../atoms/buttons/MainButton';
 import Palette from '../../../@types/Palette';
 
 type RoomSwitchModalPropsType = {
-  onClickConfirm?: ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) & (() => void);
-  onClickCancel?: ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) & (() => void);
-  onClickBackground?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-  onClickClose?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  onClickConfirm: () => void;
+  onClickCancel: () => void;
+  onClickBackground: () => void;
+  onClickClose: () => void;
 };
 
 const ChatModalBoxWrapper = styled.div`
@@ -54,10 +54,10 @@ export const RoomSwitchModal = ({
             <Text size={14} color={Palette.DARK_GREY}>
               다른 채팅방으로 이동하시겠습니까?
             </Text>
-            <MainButton disabled={false} onClick={onClickConfirm}>
+            <MainButton disabled={false} onClickButton={onClickConfirm}>
               확인
             </MainButton>
-            <MainButton onClick={onClickCancel}>취소</MainButton>
+            <MainButton onClickButton={onClickCancel}>취소</MainButton>
           </ModalContentWrapper>
         </ChatModalBox>
       </ChatModalBoxWrapper>

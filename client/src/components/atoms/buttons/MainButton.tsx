@@ -5,7 +5,7 @@ import Palette from '../../../@types/Palette';
 
 export type ButtonPropsType = {
   disabled?: boolean;
-  onClickButton: ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) & (() => void);
+  onClickButton: () => void;
   children: string;
 };
 
