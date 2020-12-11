@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import ChatInputMolecule from '../../molecules/chatRoomPage/ChatInput';
@@ -26,7 +26,6 @@ const VoiceWrapper = styled.div`
   align-items: center;
 `;
 
-
 const getPapagoStyleText = (loading: boolean, data: string) => {
   if (loading) return `${data}...`;
   return data;
@@ -36,14 +35,14 @@ function ChatInput() {
   const [voice, setVoice] = useState(false);
   const { socketData } = useUser();
 
-  const { chatInputData, translationData, translationLoading, onSetChatInput, onGetTranslatedText } = useChatInput();
+  const { chatInputData, translationData, translationLoading, onSetChatInput } = useChatInput();
 
   return (
     <>
       <Wrapper>
-       <ChatInputMolecule
+        <ChatInputMolecule
           value={chatInputData}
-          onChangeInput={onSetChatInput}
+          onChangeInput={(e) => onSetChatInput(e.target.value)}
           clickMicFunc={() => {
             setVoice(true);
           }}
