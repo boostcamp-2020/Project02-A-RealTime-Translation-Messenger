@@ -4,12 +4,8 @@ import styled from 'styled-components';
 import ChatInputMolecule from '../../molecules/chatRoomPage/ChatInput';
 import useChatInput from '../../../hooks/useChatInput';
 import ChatTranslationBox from '../../atoms/boxes/ChatTranslationBox';
-import VoiceRecognitionModal from '../../molecules/chatRoomPage/VoiceRecognitionModal';
+import VoiceRecognitionOrganism from '../../organisms/chatRoomPage/VoiceRecognition';
 import useUser from '../../../hooks/useUser';
-
-// type ChatInputPropsType = {
-//   socket: SocketIOClient.Socket;
-// };
 
 const Wrapper = styled.div`
   position: relative;
@@ -23,6 +19,8 @@ const Wrapper = styled.div`
 
 const VoiceWrapper = styled.div`
   position: absolute;
+  bottom: 0px;
+  left: 0px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -41,42 +39,37 @@ function ChatInput() {
   const { chatInputData, translationData, translationLoading, onSetChatInput, onGetTranslatedText } = useChatInput();
 
   return (
-    <Wrapper>
-      <ChatInputMolecule
-        value={chatInputData}
-        onChangeInput={onSetChatInput}
-        clickMicFunc={() => {
-          setVoice(true);
-        }}
-        clickSendFunc={() => {
-          if (translationLoading || socketData === null) return;
-          const sendingChat = {
-            Korean: '',
-            English: '',
-            origin: translationData.origin,
-          };
-          if (translationData.origin === 'Korean') {
-            sendingChat.Korean = chatInputData;
-            sendingChat.English = translationData.translationText;
-          } else if (translationData.origin === 'English') {
-            sendingChat.Korean = translationData.translationText;
-            sendingChat.English = chatInputData;
-          }
-          socketData.emit('send chat', sendingChat);
-          // 필드 리셋 - 인풋 초기화
-        }}
-      />
-      <ChatTranslationBox value={getPapagoStyleText(translationLoading, translationData.translationText)} />
+    <>
+      <Wrapper>
+       <ChatInputMolecule
+          value={chatInputData}
+          onChangeInput={onSetChatInput}
+          clickMicFunc={() => {
+            setVoice(true);
+          }}
+          clickSendFunc={() => {
+            if (translationLoading || socketData === null) return;
+            const sendingChat = {
+              Korean: translationData.origin === 'Korean' ? chatInputData : translationData.translationText,
+              English: translationData.origin === 'English' ? chatInputData : translationData.translationText,
+              origin: translationData.origin,
+            };
+            socketData.emit('send chat', sendingChat);
+            // 필드 리셋 - 인풋 초기화
+          }}
+        />
+        <ChatTranslationBox value={getPapagoStyleText(translationLoading, translationData.translationText)} />
+      </Wrapper>
       {voice && (
         <VoiceWrapper>
-          <VoiceRecognitionModal
+          <VoiceRecognitionOrganism
             onClickBackground={() => {
               setVoice(false);
             }}
           />
         </VoiceWrapper>
       )}
-    </Wrapper>
+    </>
   );
 }
 

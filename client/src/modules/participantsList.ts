@@ -23,8 +23,12 @@ const participantsList = createSlice({
     setParticipantsList: (state, action: PayloadAction<ParticipantsType[]>) => {
       state.participantsList.data = action.payload;
     },
+    resetParticipantsList: (state) => {
+      state.participantsList.data = [];
+    },
   },
 });
 
 export default participantsList.reducer;
 export const setParticipantsList = participantsList.actions.setParticipantsList;
+export const resetParticipantsList = participantsList.actions.resetParticipantsList;

@@ -23,8 +23,12 @@ const chat = createSlice({
     stackChats: (state, action: PayloadAction<ChatLogsType | ParticipantsUpdateType>) => {
       state.chatLogs.data.push(action.payload);
     },
+    resetChats: (state) => {
+      state.chatLogs.data = [];
+    },
   },
 });
 
 export default chat.reducer;
 export const stackChats = chat.actions.stackChats;
+export const resetChats = chat.actions.resetChats;

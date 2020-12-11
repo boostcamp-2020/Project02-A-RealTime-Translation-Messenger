@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
 import useChat from '../../../hooks/useChat';
@@ -25,7 +25,15 @@ const ParticipantLogWrapper = styled.div`
 
 function ChatLogs() {
   const { data: chatLogs } = useChat();
-  const { nicknameData, languageData, socketIdData } = useUser();
+  const { languageData, socketIdData } = useUser();
+
+  const divRef = useRef(null);
+
+  useEffect(() => {
+    if (divRef.current !== null) {
+      divRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
 
   const returnLogs = () => {
     if (chatLogs.length === 0) {
@@ -35,11 +43,9 @@ function ChatLogs() {
         const log = data as ParticipantsUpdateType;
         if (log.type === undefined) {
           const chatLog = data as ChatLogsType;
-          console.log(data);
           return (
-            <ChatLogWrapper isMe={socketIdData === chatLog.senderId}>
+            <ChatLogWrapper isMe={socketIdData === chatLog.senderId} key={index}>
               <ChatItemMolecule
-                key={index}
                 leftMessage={languageData === 'Korean' ? chatLog.Korean : chatLog.English}
                 rightMessage={languageData === 'Korean' ? chatLog.English : chatLog.Korean}
                 isMe={socketIdData === chatLog.senderId}
@@ -51,9 +57,8 @@ function ChatLogs() {
           );
         } else {
           return (
-            <ParticipantLogWrapper>
+            <ParticipantLogWrapper key={index}>
               <ParticipantNotification
-                key={index}
                 nickname={log.diffNickname}
                 isEnter={log.type === 'enter' ? true : false}
                 language={languageData}
@@ -65,7 +70,12 @@ function ChatLogs() {
     }
   };
 
-  return <>{returnLogs()}</>;
+  return (
+    <>
+      {returnLogs()}
+      <div ref={divRef}></div>
+    </>
+  );
 }
 
 export default ChatLogs;
