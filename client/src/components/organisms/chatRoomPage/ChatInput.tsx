@@ -7,10 +7,6 @@ import ChatTranslationBox from '../../atoms/boxes/ChatTranslationBox';
 import VoiceRecognitionOrganism from '../../organisms/chatRoomPage/VoiceRecognition';
 import useUser from '../../../hooks/useUser';
 
-// type ChatInputPropsType = {
-//   socket: SocketIOClient.Socket;
-// };
-
 const Wrapper = styled.div`
   position: relative;
   display: flex;
@@ -43,32 +39,26 @@ function ChatInput() {
   return (
     <>
       <Wrapper>
-        <ChatInputMolecule
-          value={chatInputData}
-          onChangeInput={(e) => onSetChatInput(e.target.value)}
-          clickMicFunc={() => {
-            setVoice(true);
-          }}
-          clickSendFunc={() => {
-            if (translationLoading || socketData === null) return;
-            const sendingChat = {
-              Korean: '',
-              English: '',
-              origin: translationData.origin,
-            };
-            if (translationData.origin === 'Korean') {
-              sendingChat.Korean = chatInputData;
-              sendingChat.English = translationData.translationText;
-            } else if (translationData.origin === 'English') {
-              sendingChat.Korean = translationData.translationText;
-              sendingChat.English = chatInputData;
-            }
-            socketData.emit('send chat', sendingChat);
-            // 필드 리셋 - 인풋 초기화
-          }}
-        />
+     <ChatInputMolecule
+        value={chatInputData}
+        onChangeInput={onSetChatInput}
+        clickMicFunc={() => {
+          setVoice(true);
+        }}
+        clickSendFunc={() => {
+          if (translationLoading || socketData === null) return;
+          const sendingChat = {
+            Korean: translationData.origin === 'Korean' ? chatInputData : translationData.translationText,
+            English: translationData.origin === 'English' ? chatInputData : translationData.translationText,
+            origin: translationData.origin,
+          };
+          socketData.emit('send chat', sendingChat);
+          // 필드 리셋 - 인풋 초기화
+        }}
+      />
         <ChatTranslationBox value={translationData.translationText} />
       </Wrapper>
+
       {voice && (
         <VoiceWrapper>
           <VoiceRecognitionOrganism
