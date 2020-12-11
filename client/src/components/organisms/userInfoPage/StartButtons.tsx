@@ -10,7 +10,7 @@ const RoomCreateButtonWrapper = styled.div`
   margin-bottom: 32px;
 `;
 
-const validate = (nickname: string, imageLink: string | null) => {
+const userInfoValidate = (nickname: string, imageLink: string | null) => {
   if (!/^[A-Z|a-z|가-힣]{2,12}$/.test(nickname)) return false;
   if (!imageLink) return false;
   return true;
@@ -24,7 +24,7 @@ function StartButtons() {
     <>
       <RoomCreateButtonWrapper>
         <MainButton
-          disabled={!validate(nicknameData, imageLinkData)}
+          disabled={!userInfoValidate(nicknameData, imageLinkData)}
           onClickButton={() => {
             onSetNavigation(MainPageNavigation.ROOM_CREATION);
           }}
@@ -33,7 +33,7 @@ function StartButtons() {
         </MainButton>
       </RoomCreateButtonWrapper>
       <MainButton
-        disabled={!validate(nicknameData, imageLinkData)}
+        disabled={!userInfoValidate(nicknameData, imageLinkData)}
         onClickButton={() => {
           onSetNavigation(MainPageNavigation.ROOM_LIST);
         }}

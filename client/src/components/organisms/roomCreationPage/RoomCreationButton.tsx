@@ -3,7 +3,7 @@ import React from 'react';
 import useRoom from '../../../hooks/useRoom';
 import MainButton from '../../atoms/buttons/MainButton';
 
-const validate = (title: string) => {
+const roomTitleValidate = (title: string) => {
   if (title.length < 2 || title.length > 30) return false;
   if (title.trim().length === 0) return false;
   return true;
@@ -14,7 +14,7 @@ function RoomCreationButton() {
 
   return (
     <MainButton
-      disabled={!validate(roomData.title)}
+      disabled={!roomTitleValidate(roomData.title)}
       onClickButton={() => {
         onCreateRoom({ title: roomData.title, isPrivate: roomData.isPrivate });
         //승인 떨어지면 채팅방 입장
