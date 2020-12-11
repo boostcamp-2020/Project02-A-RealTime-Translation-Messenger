@@ -26,39 +26,40 @@ const VoiceWrapper = styled.div`
   align-items: center;
 `;
 
+
+const getPapagoStyleText = (loading: boolean, data: string) => {
+  if (loading) return `${data}...`;
+  return data;
+};
+
 function ChatInput() {
   const [voice, setVoice] = useState(false);
   const { socketData } = useUser();
 
   const { chatInputData, translationData, translationLoading, onSetChatInput, onGetTranslatedText } = useChatInput();
 
-  useEffect(() => {
-    onGetTranslatedText(chatInputData);
-  }, [chatInputData]);
-
   return (
     <>
       <Wrapper>
-     <ChatInputMolecule
-        value={chatInputData}
-        onChangeInput={onSetChatInput}
-        clickMicFunc={() => {
-          setVoice(true);
-        }}
-        clickSendFunc={() => {
-          if (translationLoading || socketData === null) return;
-          const sendingChat = {
-            Korean: translationData.origin === 'Korean' ? chatInputData : translationData.translationText,
-            English: translationData.origin === 'English' ? chatInputData : translationData.translationText,
-            origin: translationData.origin,
-          };
-          socketData.emit('send chat', sendingChat);
-          // 필드 리셋 - 인풋 초기화
-        }}
-      />
-        <ChatTranslationBox value={translationData.translationText} />
+       <ChatInputMolecule
+          value={chatInputData}
+          onChangeInput={onSetChatInput}
+          clickMicFunc={() => {
+            setVoice(true);
+          }}
+          clickSendFunc={() => {
+            if (translationLoading || socketData === null) return;
+            const sendingChat = {
+              Korean: translationData.origin === 'Korean' ? chatInputData : translationData.translationText,
+              English: translationData.origin === 'English' ? chatInputData : translationData.translationText,
+              origin: translationData.origin,
+            };
+            socketData.emit('send chat', sendingChat);
+            // 필드 리셋 - 인풋 초기화
+          }}
+        />
+        <ChatTranslationBox value={getPapagoStyleText(translationLoading, translationData.translationText)} />
       </Wrapper>
-
       {voice && (
         <VoiceWrapper>
           <VoiceRecognitionOrganism
