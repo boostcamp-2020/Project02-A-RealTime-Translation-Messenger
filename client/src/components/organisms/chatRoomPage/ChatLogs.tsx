@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
 import useChat from '../../../hooks/useChat';
@@ -25,7 +25,15 @@ const ParticipantLogWrapper = styled.div`
 
 function ChatLogs() {
   const { data: chatLogs } = useChat();
-  const { nicknameData, languageData, socketIdData } = useUser();
+  const { languageData, socketIdData } = useUser();
+
+  const divRef = useRef(null);
+
+  useEffect(() => {
+    if (divRef.current !== null) {
+      divRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
 
   const returnLogs = () => {
     if (chatLogs.length === 0) {
@@ -65,7 +73,12 @@ function ChatLogs() {
     }
   };
 
-  return <>{returnLogs()}</>;
+  return (
+    <>
+      {returnLogs()}
+      <div ref={divRef}></div>
+    </>
+  );
 }
 
 export default ChatLogs;

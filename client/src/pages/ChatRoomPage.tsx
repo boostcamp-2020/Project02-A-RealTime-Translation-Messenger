@@ -34,7 +34,7 @@ const StyledChatRoomBox = styled.div`
   background-color: rgba(255, 255, 255, 0.6);
 `;
 
-function ChatPage() {
+function ChatRoomPage() {
   const { onSetParticipantsList } = useParticipantsList();
   const { nicknameData, languageData, socketData, onSetSocketId, onSetSocket, imageLinkData } = useUser();
   const { onStackChats } = useChat();
@@ -80,4 +80,4 @@ function ChatPage() {
   );
 }
 
-export default ChatPage;
+export default ChatRoomPage;
