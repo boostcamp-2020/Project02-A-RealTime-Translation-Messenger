@@ -42,11 +42,19 @@
 		978F5814257A89C80034846A /* SlideInTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978F5813257A89C80034846A /* SlideInTransition.swift */; };
 		978F581A257A95E30034846A /* ParticipantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978F5819257A95E30034846A /* ParticipantViewController.swift */; };
 		978F581F257A962A0034846A /* ParticipantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978F581E257A962A0034846A /* ParticipantViewModel.swift */; };
+		979F2FAD2582649D00619871 /* ScanningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979F2FAC2582649D00619871 /* ScanningViewController.swift */; };
+		979F2FB2258265B400619871 /* ScanningViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979F2FB1258265B400619871 /* ScanningViewModel.swift */; };
+		979F2FBA25826E6400619871 /* VNDocumentCameraViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979F2FB925826E6400619871 /* VNDocumentCameraViewController+Rx.swift */; };
+		979F2FBF25828DC500619871 /* ClovaEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979F2FBE25828DC500619871 /* ClovaEndpoint.swift */; };
+		979F2FC425828E8100619871 /* OCR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979F2FC325828E8100619871 /* OCR.swift */; };
+		979F2FCC25828FDF00619871 /* UIImage+Base64.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979F2FCB25828FDF00619871 /* UIImage+Base64.swift */; };
 		97B4BE74256BE935009A3825 /* NSObject+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B4BE73256BE935009A3825 /* NSObject+Rx.swift */; };
 		97B4BE92256BEE7F009A3825 /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B4BE91256BEE7F009A3825 /* Navigator.swift */; };
 		97B4BE98256BEFBC009A3825 /* NicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B4BE97256BEFBC009A3825 /* NicknameViewController.swift */; };
 		97B4BEA0256BEFD9009A3825 /* NicknameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B4BE9F256BEFD9009A3825 /* NicknameViewModel.swift */; };
 		97B4BEA5256BF5B0009A3825 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B4BEA4256BF5B0009A3825 /* ViewController.swift */; };
+		97C45C3E2582A36B00899711 /* scanning.json in Resources */ = {isa = PBXBuildFile; fileRef = 97C45C3D2582A36B00899711 /* scanning.json */; };
+		97C45C542582A81800899711 /* AnimationView+Binder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C45C532582A81800899711 /* AnimationView+Binder.swift */; };
 		97CB75A6256E204800FE052A /* ChattingListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CB75A5256E204800FE052A /* ChattingListCell.swift */; };
 		97CB75AB256E2CB900FE052A /* CollectionViewBaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CB75AA256E2CB900FE052A /* CollectionViewBaseCell.swift */; };
 		97CB75B5256E3E3C00FE052A /* CreateRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CB75B4256E3E3C00FE052A /* CreateRoomViewController.swift */; };
@@ -143,11 +151,19 @@
 		978F5813257A89C80034846A /* SlideInTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideInTransition.swift; sourceTree = "<group>"; };
 		978F5819257A95E30034846A /* ParticipantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantViewController.swift; sourceTree = "<group>"; };
 		978F581E257A962A0034846A /* ParticipantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantViewModel.swift; sourceTree = "<group>"; };
+		979F2FAC2582649D00619871 /* ScanningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanningViewController.swift; sourceTree = "<group>"; };
+		979F2FB1258265B400619871 /* ScanningViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanningViewModel.swift; sourceTree = "<group>"; };
+		979F2FB925826E6400619871 /* VNDocumentCameraViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VNDocumentCameraViewController+Rx.swift"; sourceTree = "<group>"; };
+		979F2FBE25828DC500619871 /* ClovaEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClovaEndpoint.swift; sourceTree = "<group>"; };
+		979F2FC325828E8100619871 /* OCR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCR.swift; sourceTree = "<group>"; };
+		979F2FCB25828FDF00619871 /* UIImage+Base64.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Base64.swift"; sourceTree = "<group>"; };
 		97B4BE73256BE935009A3825 /* NSObject+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Rx.swift"; sourceTree = "<group>"; };
 		97B4BE91256BEE7F009A3825 /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
 		97B4BE97256BEFBC009A3825 /* NicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameViewController.swift; sourceTree = "<group>"; };
 		97B4BE9F256BEFD9009A3825 /* NicknameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameViewModel.swift; sourceTree = "<group>"; };
 		97B4BEA4256BF5B0009A3825 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		97C45C3D2582A36B00899711 /* scanning.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = scanning.json; sourceTree = "<group>"; };
+		97C45C532582A81800899711 /* AnimationView+Binder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimationView+Binder.swift"; sourceTree = "<group>"; };
 		97CB75A5256E204800FE052A /* ChattingListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingListCell.swift; sourceTree = "<group>"; };
 		97CB75AA256E2CB900FE052A /* CollectionViewBaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewBaseCell.swift; sourceTree = "<group>"; };
 		97CB75B4256E3E3C00FE052A /* CreateRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRoomViewController.swift; sourceTree = "<group>"; };
@@ -304,6 +320,7 @@
 				97CB75CB256E410000FE052A /* Chatting */,
 				978F5818257A95CC0034846A /* Participant */,
 				BD55224B257DE858008E3A1A /* SpeechToText */,
+				979F2FA82582641500619871 /* OCR */,
 				975C53EB256B5AF600739DCA /* Main */,
 			);
 			path = Module;
@@ -312,6 +329,7 @@
 		975C53EA256B5A8B00739DCA /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				97C45C3D2582A36B00899711 /* scanning.json */,
 				9789302B2581027B00A1A40E /* check.json */,
 				970547832566649E00500D79 /* Assets.xcassets */,
 				975C5403256B8D3F00739DCA /* Localize.swift */,
@@ -368,6 +386,15 @@
 			path = Participant;
 			sourceTree = "<group>";
 		};
+		979F2FA82582641500619871 /* OCR */ = {
+			isa = PBXGroup;
+			children = (
+				979F2FAC2582649D00619871 /* ScanningViewController.swift */,
+				979F2FB1258265B400619871 /* ScanningViewModel.swift */,
+			);
+			path = OCR;
+			sourceTree = "<group>";
+		};
 		97B4BE72256BE921009A3825 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -376,6 +403,9 @@
 				975A264B2577D9030096C918 /* UIViewController+Rx.swift */,
 				978F5803257A44B90034846A /* UITextView+Binder.swift */,
 				971746F22580BA0700F8E9DE /* KingFisher+Rx.swift */,
+				979F2FB925826E6400619871 /* VNDocumentCameraViewController+Rx.swift */,
+				979F2FCB25828FDF00619871 /* UIImage+Base64.swift */,
+				97C45C532582A81800899711 /* AnimationView+Binder.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -437,6 +467,7 @@
 				97DAC7FC2574E608009B76B5 /* RoomEndpoint.swift */,
 				975A2643257768570096C918 /* SocketEndpoint.swift */,
 				970EB5F72578F371000C577C /* PapagoEndpoint.swift */,
+				979F2FBE25828DC500619871 /* ClovaEndpoint.swift */,
 			);
 			path = Endpoint;
 			sourceTree = "<group>";
@@ -508,6 +539,7 @@
 				970EB6092578F80D000C577C /* Translation.swift */,
 				975A9758257AA20D000C3AE5 /* Participant.swift */,
 				BD5C2CD0257E4F3200C910AE /* Profile.swift */,
+				979F2FC325828E8100619871 /* OCR.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -624,6 +656,7 @@
 				970547842566649E00500D79 /* Assets.xcassets in Resources */,
 				97E8B58A2574EE930009C938 /* room.json in Resources */,
 				970547822566649D00500D79 /* Main.storyboard in Resources */,
+				97C45C3E2582A36B00899711 /* scanning.json in Resources */,
 				9789302C2581027B00A1A40E /* check.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -754,13 +787,16 @@
 				97E8B5852574EE210009C938 /* MockEndpoint.swift in Sources */,
 				9789304425811ED100A1A40E /* Pulsing.swift in Sources */,
 				975A2644257768570096C918 /* SocketEndpoint.swift in Sources */,
+				979F2FBA25826E6400619871 /* VNDocumentCameraViewController+Rx.swift in Sources */,
 				BD62700025709A1D00569277 /* MyChattingCell.swift in Sources */,
 				975A264C2577D9030096C918 /* UIViewController+Rx.swift in Sources */,
 				9705477F2566649D00500D79 /* LanguageViewController.swift in Sources */,
 				970EB5F82578F371000C577C /* PapagoEndpoint.swift in Sources */,
+				979F2FB2258265B400619871 /* ScanningViewModel.swift in Sources */,
 				978F5814257A89C80034846A /* SlideInTransition.swift in Sources */,
 				970EB60A2578F80D000C577C /* Translation.swift in Sources */,
 				97DAC7F72574E5D0009B76B5 /* NetworkProviding.swift in Sources */,
+				97C45C542582A81800899711 /* AnimationView+Binder.swift in Sources */,
 				BD5F6165256D207600D63CCD /* ChattingListViewController.swift in Sources */,
 				971746F32580BA0700F8E9DE /* KingFisher+Rx.swift in Sources */,
 				97CB75D2256E412700FE052A /* ChattingViewModel.swift in Sources */,
@@ -776,6 +812,7 @@
 				97DAC7D22574D174009B76B5 /* PupagoAPI.swift in Sources */,
 				BD65A7FE25729A6700EE43BC /* Message.swift in Sources */,
 				97B4BEA5256BF5B0009A3825 /* ViewController.swift in Sources */,
+				979F2FC425828E8100619871 /* OCR.swift in Sources */,
 				97DAC7FD2574E608009B76B5 /* RoomEndpoint.swift in Sources */,
 				975A9754257A9C16000C3AE5 /* TransitionHelper.swift in Sources */,
 				978F5809257A75A60034846A /* MessageDataSource.swift in Sources */,
@@ -783,8 +820,10 @@
 				97B4BE98256BEFBC009A3825 /* NicknameViewController.swift in Sources */,
 				976C373B2576352B00BD8094 /* SocketIO+Rx.swift in Sources */,
 				975C53FF256B844C00739DCA /* SelectableButton.swift in Sources */,
+				979F2FCC25828FDF00619871 /* UIImage+Base64.swift in Sources */,
 				97B4BE92256BEE7F009A3825 /* Navigator.swift in Sources */,
 				97CB75BA256E3E5B00FE052A /* CreateRoomViewModel.swift in Sources */,
+				979F2FAD2582649D00619871 /* ScanningViewController.swift in Sources */,
 				978F5804257A44B90034846A /* UITextView+Binder.swift in Sources */,
 				970A963E257B26A9000CF814 /* ParticipantCell.swift in Sources */,
 				BD552255257DE89F008E3A1A /* SpeechViewModel.swift in Sources */,
@@ -807,6 +846,7 @@
 				BD55224D257DE87A008E3A1A /* SpeechViewController.swift in Sources */,
 				BD62700825709AC500569277 /* OthersChattingCell.swift in Sources */,
 				97CB75BF256E3E9D00FE052A /* JoinRoomViewController.swift in Sources */,
+				979F2FBF25828DC500619871 /* ClovaEndpoint.swift in Sources */,
 				BD5F6160256D204400D63CCD /* ChattingListViewModel.swift in Sources */,
 				97F534F5256CC008005998EE /* ValidatingTextField.swift in Sources */,
 				97CB75C4256E3EA700FE052A /* JoinRoomViewModel.swift in Sources */,
@@ -990,7 +1030,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = B3PWYBKFUK;
+				DEVELOPMENT_TEAM = EKU567YQE4;
 				INFOPLIST_FILE = Pupago/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1011,7 +1051,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = B3PWYBKFUK;
+				DEVELOPMENT_TEAM = EKU567YQE4;
 				INFOPLIST_FILE = Pupago/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
