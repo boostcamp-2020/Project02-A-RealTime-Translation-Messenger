@@ -12,6 +12,10 @@ import ChatInput from '../components/organisms/chatRoomPage/ChatInput';
 import useUser from '../hooks/useUser';
 import useRoom from '../hooks/useRoom';
 import useChat from '../hooks/useChat';
+import useChatInput from '../hooks/useChatInput';
+import useNavigation from '../hooks/useNavigation';
+import MainPageNavigation from '../@types/mainPageNavigation';
+import { useHistory } from 'react-router-dom';
 
 dotenv.config();
 
@@ -35,10 +39,22 @@ const StyledChatRoomBox = styled.div`
 `;
 
 function ChatRoomPage() {
-  const { onSetParticipantsList } = useParticipantsList();
-  const { nicknameData, languageData, socketData, onSetSocketId, onSetSocket, imageLinkData } = useUser();
-  const { onStackChats } = useChat();
-  const { data: roomData } = useRoom();
+  const { onSetParticipantsList, onResetParticipantsList } = useParticipantsList();
+  const {
+    nicknameData,
+    languageData,
+    socketData,
+    onSetSocketId,
+    onSetSocket,
+    onResetSocketId,
+    onResetSocket,
+    imageLinkData,
+  } = useUser();
+  const { onStackChats, onResetChats } = useChat();
+  const { data: roomData, onResetRoomState } = useRoom();
+  const { onResetChatInput } = useChatInput();
+  const { onSetNavigation } = useNavigation();
+  const history = useHistory();
 
   useEffect(() => {
     onSetSocket(io(BASE_URL as string));
@@ -54,14 +70,24 @@ function ChatRoomPage() {
       });
       socketData.on('receive participants list', (participantsList: string) => {
         onSetSocketId(socketData.id);
-        onSetParticipantsList(JSON.parse(participantsList).participantsList);
+        const participants = JSON.parse(participantsList);
+        onSetParticipantsList(participants.participantsList);
+        onStackChats({ type: participants.type, diffNickname: participants.diffNickname });
       });
       socketData.on('receive chat', (receiveChat: string) => {
         onStackChats(JSON.parse(receiveChat));
       });
       socketData.on('socket error', (errorMessage: { errorMessage: string }) => {
         alert(errorMessage);
-        // 첫 페이지로 리디렉션
+        onResetSocketId();
+        onResetChats();
+        onResetChatInput();
+        onResetParticipantsList();
+        onResetRoomState();
+        onSetNavigation(MainPageNavigation.USER_INFO);
+        socketData.disconnect();
+        onResetSocket();
+        history.push('/');
       });
     }
   }, [socketData]);

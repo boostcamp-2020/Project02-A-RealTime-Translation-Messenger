@@ -7,7 +7,9 @@ import UnderLinedInput from '../../atoms/inputs/UnderLinedInput';
 import Text from '../../atoms/texts/Text';
 
 const NickNameLength = styled(Text)`
-  width: 40px;
+  display: flex;
+  justify-content: flex-end;
+  width: 48px;
   margin-top: 10px;
   margin-left: auto;
 `;

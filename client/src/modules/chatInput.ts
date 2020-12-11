@@ -66,6 +66,10 @@ const chatInput = createSlice({
     setChatInput: (state, action: PayloadAction<string>) => {
       state.chatInput.data = action.payload;
     },
+    resetChatInput: (state) => {
+      state.chatInput.data = '';
+      state.translation.data = { origin: 'Korean', translationText: '' };
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -87,5 +91,6 @@ const chatInput = createSlice({
 });
 
 export default chatInput.reducer;
-const setChatInput = chatInput.actions.setChatInput;
-export { getTranslatedText, setChatInput };
+export const setChatInput = chatInput.actions.setChatInput;
+export const resetChatInput = chatInput.actions.resetChatInput;
+export { getTranslatedText };

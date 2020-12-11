@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
 
 import useRoom from '../../../hooks/useRoom';
@@ -9,11 +9,9 @@ const Wrapper = styled.div`
   margin-top: 198px;
 `;
 
-const isRoomCodeInputValid = (roomCode: string) => /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣|\s]/.test(roomCode);
-
 const isRoomCodeValid = (roomCode: string) => {
-  if (!/^[A-Z|0-9]{4}$/.test(roomCode)) return false;
-  return true;
+  if (roomCode.length === 0) return true;
+  return /^[A-Za-z0-9]*$/.test(roomCode);
 };
 
 function CodeInput() {
@@ -21,26 +19,26 @@ function CodeInput() {
   const [roomCodeStatus, setRoomCodeStatus] = useState({ code: room.roomCode, valid: true });
   const { code, valid } = roomCodeStatus;
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    const cuttedValue = value.substr(0, 4).toUpperCase();
+  const onChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const { value } = e.target;
+      const cuttedValue = value.substr(0, 4).toUpperCase();
 
-    if (isRoomCodeInputValid(value)) {
-      setRoomCodeStatus({ code, valid: false });
-      return;
-    }
-    setRoomCodeStatus({ code: cuttedValue, valid: true });
-  };
-
-  const onKeyUp = () => {
-    if (code.length === 4) {
-      if (isRoomCodeValid(code)) {
-        onChangeRoomCode(code);
-        onJoinRoom({ roomCode: code, isPrivate: 'true' });
+      if (!isRoomCodeValid(value)) {
+        setRoomCodeStatus({ code, valid: false });
         return;
       }
+      setRoomCodeStatus({ code: cuttedValue, valid: true });
+    },
+    [roomCodeStatus],
+  );
+
+  const onKeyUp = useCallback(() => {
+    if (code.length === 4 && isRoomCodeValid(code)) {
+      onChangeRoomCode(code);
+      onJoinRoom({ roomCode: code, isPrivate: 'true' });
     }
-  };
+  }, [roomCodeStatus]);
 
   return (
     <Wrapper>

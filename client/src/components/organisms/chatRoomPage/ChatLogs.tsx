@@ -43,11 +43,9 @@ function ChatLogs() {
         const log = data as ParticipantsUpdateType;
         if (log.type === undefined) {
           const chatLog = data as ChatLogsType;
-          console.log(data);
           return (
-            <ChatLogWrapper isMe={socketIdData === chatLog.senderId}>
+            <ChatLogWrapper isMe={socketIdData === chatLog.senderId} key={index}>
               <ChatItemMolecule
-                key={index}
                 leftMessage={languageData === 'Korean' ? chatLog.Korean : chatLog.English}
                 rightMessage={languageData === 'Korean' ? chatLog.English : chatLog.Korean}
                 isMe={socketIdData === chatLog.senderId}
@@ -59,9 +57,8 @@ function ChatLogs() {
           );
         } else {
           return (
-            <ParticipantLogWrapper>
+            <ParticipantLogWrapper key={index}>
               <ParticipantNotification
-                key={index}
                 nickname={log.diffNickname}
                 isEnter={log.type === 'enter' ? true : false}
                 language={languageData}
