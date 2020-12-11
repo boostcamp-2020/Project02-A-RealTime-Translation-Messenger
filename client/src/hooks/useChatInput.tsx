@@ -24,8 +24,8 @@ function useTranslate() {
   );
 
   const onSetChatInput = useCallback(
-    (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-      dispatch(setChatInput(e.target.value));
+    (text: string) => {
+      dispatch(setChatInput(text));
     },
     [dispatch],
   );

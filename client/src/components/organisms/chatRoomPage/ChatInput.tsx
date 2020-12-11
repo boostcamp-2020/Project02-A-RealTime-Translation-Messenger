@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import ChatInputMolecule from '../../molecules/chatRoomPage/ChatInput';
 import useChatInput from '../../../hooks/useChatInput';
 import ChatTranslationBox from '../../atoms/boxes/ChatTranslationBox';
-import VoiceRecognitionModal from '../../molecules/chatRoomPage/VoiceRecognitionModal';
+import VoiceRecognitionOrganism from '../../organisms/chatRoomPage/VoiceRecognition';
 import useUser from '../../../hooks/useUser';
 
 const Wrapper = styled.div`
@@ -19,6 +19,8 @@ const Wrapper = styled.div`
 
 const VoiceWrapper = styled.div`
   position: absolute;
+  bottom: 0px;
+  left: 0px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -35,8 +37,9 @@ function ChatInput() {
   }, [chatInputData]);
 
   return (
-    <Wrapper>
-      <ChatInputMolecule
+    <>
+      <Wrapper>
+     <ChatInputMolecule
         value={chatInputData}
         onChangeInput={onSetChatInput}
         clickMicFunc={() => {
@@ -53,17 +56,19 @@ function ChatInput() {
           // 필드 리셋 - 인풋 초기화
         }}
       />
-      <ChatTranslationBox value={translationData.translationText} />
+        <ChatTranslationBox value={translationData.translationText} />
+      </Wrapper>
+
       {voice && (
         <VoiceWrapper>
-          <VoiceRecognitionModal
+          <VoiceRecognitionOrganism
             onClickBackground={() => {
               setVoice(false);
             }}
           />
         </VoiceWrapper>
       )}
-    </Wrapper>
+    </>
   );
 }
 
