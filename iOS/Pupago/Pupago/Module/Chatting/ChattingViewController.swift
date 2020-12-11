@@ -19,6 +19,7 @@ class ChattingViewController: ViewController {
     @IBOutlet weak var inputText: UITextView!
     @IBOutlet weak var registButton: UIButton!
     @IBOutlet weak var micButton: UIButton!
+    @IBOutlet weak var scanButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var translationTextView: UITextView!
     @IBOutlet weak var inputBarBottomConstraint: NSLayoutConstraint!
@@ -59,6 +60,7 @@ class ChattingViewController: ViewController {
                                             codeTrigger: codeTrigger,
                                             registTrigger: registTrigger,
                                             micTrigger: micTrigger,
+                                            scanButtonTap: scanButton.rx.tap.asObservable(),
                                             showParticipantTrigger: showParticipantTrigger,
                                             willLeave: willLeave)
         
@@ -118,6 +120,14 @@ class ChattingViewController: ViewController {
                                     sender: self,
                                     transition: .modal)
                         
+            })
+            .disposed(by: rx.disposeBag)
+        
+        output.needScan
+            .emit(onNext: { [unowned self] viewModel in
+                navigator.show(segue: .scan(viewModel: viewModel),
+                               sender: self,
+                               transition: .modal)
             })
             .disposed(by: rx.disposeBag)
         
