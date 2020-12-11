@@ -1,6 +1,7 @@
 import { SendChatType } from '../@types/dataType';
 import roomInfoModel from '../models/roomInfoModel';
 import dotenv from 'dotenv';
+import MaxParticipants from '../@types/maxParticipantsInRoom';
 
 dotenv.config();
 
@@ -64,6 +65,11 @@ const isImageLinkValid = (imageLink: string) => {
   return true;
 };
 
+const isMaxParticipants = (participantsCount: number) => {
+  if (participantsCount < MaxParticipants.MAX_PARTICIPANTS) return true;
+  return false;
+};
+
 const validationUtil = {
   isRoomCodeValid,
   isRoomValid,
@@ -73,6 +79,7 @@ const validationUtil = {
   isLanguageValid,
   isMessageValid,
   isImageLinkValid,
+  isMaxParticipants,
 };
 
 export default validationUtil;
