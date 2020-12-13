@@ -10,7 +10,13 @@ const SideBarTabWrapper = styled.div`
 `;
 
 const SideBarContent = styled.div`
+  width: inherit;
+  height: 648px;
   padding: 16px 24px;
+  overflow: scroll;
+  &::-webkit-scrollbar {
+    width: 0px;
+  }
 `;
 
 export type SideBarPropsType = {

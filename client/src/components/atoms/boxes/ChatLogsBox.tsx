@@ -10,7 +10,8 @@ const StyledChatLogsBox = styled.div<ChatLogsBoxPropsType>`
   height: 472px;
   padding: 0 24px;
   background-color: white;
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
   &::-webkit-scrollbar {
     width: 0px;
   }

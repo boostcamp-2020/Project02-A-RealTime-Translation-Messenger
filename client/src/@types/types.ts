@@ -60,6 +60,16 @@ type TranslateTextReturnType = {
   translatedText: string;
 };
 
+type JoiningRoomType = {
+  roomCode: string;
+  isPrivate: 'true' | 'false';
+};
+
+type CreatingRoomType = {
+  title: string;
+  isPrivate: 'true' | 'false';
+};
+
 enum SideBarStatus {
   PARTICIPANTS,
   CHAT_ROOMS,
@@ -76,4 +86,6 @@ export {
   ParticipantsUpdateType,
   CreatedRoomType,
   SideBarStatus,
+  JoiningRoomType,
+  CreatingRoomType,
 };
