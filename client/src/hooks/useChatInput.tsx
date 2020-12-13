@@ -1,9 +1,10 @@
 import { useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import CharacterLimit from '../@types/characterLimit';
 
 import { RootState } from '../modules';
 import { getTranslatedText, setChatInput, setTranslation, resetChatInput } from '../modules/chatInput';
-        
+
 function useTranslate() {
   const { chatInput, translation } = useSelector((state: RootState) => state.chatInput);
   const dispatch = useDispatch();
@@ -31,7 +32,7 @@ function useTranslate() {
 
   const onSetChatInput = useCallback(
     (text: string) => {
-      dispatch(setChatInput(text));
+      dispatch(setChatInput(text.substr(0, CharacterLimit.CHAT_INPUT)));
     },
     [dispatch],
   );

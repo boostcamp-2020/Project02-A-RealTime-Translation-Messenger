@@ -5,6 +5,7 @@ import ChatInputAtom from '../../atoms/inputs/ChatInput';
 import Palette from '../../../@types/Palette';
 import IconButton from '../../atoms/buttons/IconButton';
 import Text from '../../atoms/texts/Text';
+import CharacterLimit from '../../../@types/characterLimit';
 
 const IconWrapper = styled.div`
   display: flex;
@@ -44,7 +45,7 @@ function ChatInput({ value, onChangeInput, clickMicFunc, clickSendFunc }: ChatIn
       <ChatInputAtom value={value} onChangeInput={onChangeInput}></ChatInputAtom>
       <IconWrapper>
         <Icons>
-          <InputLength>{value.length}</InputLength>
+          <InputLength>{`${value.length} / ${CharacterLimit.CHAT_INPUT}`}</InputLength>
           <MicButton iconType="Mic" color={Palette.PUPAGO_BLUE} onClick={clickMicFunc} />
           <IconButton iconType="Send" color={Palette.PUPAGO_BLUE} onClick={clickSendFunc} />
         </Icons>
