@@ -58,6 +58,13 @@ enum Localize {
     struct SpeechViewText {
         var assist: String
     }
+    
+    struct ScanningViewText {
+        var title: String
+        var description: String
+        var originText: String
+        var translationText: String
+    }
 }
 
 extension Localize {
@@ -191,6 +198,21 @@ extension Localize {
             return .init(assist: "버튼을 눌러\n음성인식을 시작하세요.")
         case .english:
             return .init(assist: "Press the button\nto start voice recognition.")
+        }
+    }
+    
+    var scanningViewText: ScanningViewText {
+        switch self {
+        case .korean:
+            return .init(title: "이미지 인식",
+                         description: "이미지 인식을 시작하세요.",
+                         originText: "원본 메시지",
+                         translationText: "번역 메시지")
+        case .english:
+            return .init(title: "Image OCR",
+                         description: "Start image recognition.",
+                         originText: "Origin Message",
+                         translationText: "Translation Message")
         }
     }
 }
