@@ -1,13 +1,13 @@
 import { createAsyncThunk, PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 import api from '../assets/api';
-import { CreatedRoomType } from '../@types/types';
+import { CreatedRoomType, CreatingRoomType, JoiningRoomType } from '../@types/types';
 
 const name = 'room';
 
 const createRoom = createAsyncThunk(
   `${name}/createRoom`,
-  async ({ title, isPrivate }: { title: string; isPrivate: 'true' | 'false' }, { rejectWithValue }) => {
+  async ({ title, isPrivate }: CreatingRoomType, { rejectWithValue }) => {
     try {
       return (await api.createRoom(title, isPrivate)).data;
     } catch (e) {
@@ -18,7 +18,7 @@ const createRoom = createAsyncThunk(
 
 const joinRoom = createAsyncThunk(
   `${name}/joinRoom`,
-  async ({ roomCode, isPrivate }: { roomCode: string; isPrivate: 'true' | 'false' }, { rejectWithValue }) => {
+  async ({ roomCode, isPrivate }: JoiningRoomType, { rejectWithValue }) => {
     try {
       return (await api.joinRoom(roomCode, isPrivate)).data;
     } catch (e) {

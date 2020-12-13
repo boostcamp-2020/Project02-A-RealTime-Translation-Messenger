@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useCallback } from 'react';
 
 import { RootState } from '../modules';
+import { JoiningRoomType, CreatingRoomType } from '../@types/types';
 import { setRoomTitle, setIsPrivate, createRoom, joinRoom, changeRoomCode, resetRoomState } from '../modules/room';
 
 export default function useRoom() {
@@ -12,17 +13,9 @@ export default function useRoom() {
 
   const onSetIsPrivate = useCallback((isPrivate: 'true' | 'false') => dispatch(setIsPrivate(isPrivate)), [dispatch]);
 
-  const onCreateRoom = useCallback(
-    ({ title, isPrivate }: { title: string; isPrivate: 'true' | 'false' }) =>
-      dispatch(createRoom({ title, isPrivate })),
-    [dispatch],
-  );
+  const onCreateRoom = useCallback((creatingRoom: CreatingRoomType) => dispatch(createRoom(creatingRoom)), [dispatch]);
 
-  const onJoinRoom = useCallback(
-    ({ roomCode, isPrivate }: { roomCode: string; isPrivate: 'true' | 'false' }) =>
-      dispatch(joinRoom({ roomCode, isPrivate })),
-    [dispatch],
-  );
+  const onJoinRoom = useCallback((joiningRoom: JoiningRoomType) => dispatch(joinRoom(joiningRoom)), [dispatch]);
 
   const onChangeRoomCode = useCallback(
     (roomCode: string) => {
