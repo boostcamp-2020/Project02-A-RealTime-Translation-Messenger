@@ -1,11 +1,11 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
-import { IconButton, IconButtonPropsType } from '../components/atoms/buttons/IconButton';
-import Palette from '../@types/Palette';
+import { IconButton, IconButtonPropsType } from '../../components/atoms/buttons/IconButton';
+import Palette from '../../@types/Palette';
 
 export default {
-  title: 'pupago/IconButton',
+  title: 'pupagoAtom/IconButton',
   component: IconButton,
 } as Meta;
 

@@ -5,15 +5,12 @@ import palette from '../../../@types/Palette';
 
 const StyledUnderLinedInput = styled.input`
   display: block;
-
+  width: 344px;
   outline: none;
   border: none;
-  background-color: transparent;
   border-bottom: 1px solid ${palette.PUPAGO_BLUE};
-
-  width: 344px;
-
-  font-size: 12px;
+  background-color: transparent;
+  font-size: 18px;
 `;
 
 export type StyledUnderLinedInputPropsType = {
@@ -23,9 +20,9 @@ export type StyledUnderLinedInputPropsType = {
 };
 
 export type UnderLinedInputType = {
-  value?: string;
+  value: string;
   placeholder?: string;
-  onChange?: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   maxLength: number;
 };
 

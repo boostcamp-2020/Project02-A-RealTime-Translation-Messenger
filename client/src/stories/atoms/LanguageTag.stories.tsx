@@ -1,10 +1,10 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
-import { LanguageTag, LanguageTagPropsType } from '../components/atoms/resources/LanguageTag';
+import { LanguageTag, LanguageTagPropsType } from '../../components/atoms/resources/LanguageTag';
 
 export default {
-  title: 'pupago/LanguageTag',
+  title: 'pupagoAtom/LanguageTag',
   component: LanguageTag,
 } as Meta;
 

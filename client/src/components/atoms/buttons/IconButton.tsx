@@ -10,23 +10,47 @@ import CloseIcon from '@material-ui/icons/Close';
 export type IconButtonPropsType = {
   iconType: 'Edit' | 'ArrowBack' | 'Send' | 'Mic' | 'Leave' | 'Close';
   color: string;
+  onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  className?: string;
 };
 
 const IconWrapper = styled.div`
   cursor: pointer;
 `;
 
-export function IconButton({ iconType = 'Edit', color = 'black' }: IconButtonPropsType) {
+export function IconButton({ iconType = 'Edit', color = 'black', onClick, className }: IconButtonPropsType) {
   let icon;
-  if (iconType === 'Edit') icon = <EditIcon style={{ fontSize: 24, color: color }} />;
-  else if (iconType === 'ArrowBack') icon = <ArrowBackIcon style={{ fontSize: 24, color: color }} />;
-  else if (iconType === 'Send') icon = <SendIcon style={{ fontSize: 24, color: color }} />;
-  else if (iconType === 'Mic') icon = <MicIcon style={{ fontSize: 24, color: color }} />;
-  else if (iconType === 'Leave')
-    icon = <LeaveIcon style={{ fontSize: 24, color: color, transform: 'rotate(180deg)' }} />;
-  else if (iconType === 'Close') icon = <CloseIcon style={{ fontSize: 24, color: color }} />;
+  const defaultIconProps = { fontSize: 24, color: color };
 
-  return <IconWrapper>{icon}</IconWrapper>;
+  switch (iconType) {
+    case 'Edit':
+      icon = <EditIcon style={defaultIconProps} />;
+      break;
+    case 'Send':
+      icon = <SendIcon style={defaultIconProps} />;
+      break;
+    case 'Mic':
+      icon = <MicIcon style={defaultIconProps} />;
+      break;
+    case 'Leave':
+      icon = <LeaveIcon style={{ ...defaultIconProps, transform: 'rotate(180deg)' }} />;
+      break;
+    case 'Close':
+      icon = <CloseIcon style={defaultIconProps} />;
+      break;
+    case 'ArrowBack':
+      icon = <ArrowBackIcon style={defaultIconProps} />;
+      break;
+    default:
+      icon = <EditIcon style={defaultIconProps} />;
+      break;
+  }
+
+  return (
+    <IconWrapper onClick={onClick} className={className}>
+      {icon}
+    </IconWrapper>
+  );
 }
 
 export default IconButton;

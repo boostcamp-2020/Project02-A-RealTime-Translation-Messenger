@@ -5,27 +5,52 @@ import Palette from '../../../@types/Palette';
 
 export type ButtonPropsType = {
   disabled?: boolean;
-  onClick?: () => void;
-  children?: string;
+  onClickButton: ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) & (() => void);
+  children: string;
 };
 
-const Button = styled.button<ButtonPropsType>`
+type StyledButtonPropsType = {
+  disabled?: boolean;
+  onClick: ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) & (() => void);
+  children: string;
+};
+
+const setButtonColor = (disabled: boolean | undefined) => {
+  switch (disabled) {
+    case true:
+      return Palette.DISABLED_YELLOW;
+    case false:
+      return Palette.ACTIVE_YELLOW;
+    default:
+      return 'white';
+  }
+};
+
+const Button = styled.button<StyledButtonPropsType>`
   display: block;
-  width: 336px;
+  width: 344px;
   height: 40px;
   filter: drop-shadow(3px 3px 10px rgba(0, 0, 0, 0.25));
   outline: none;
   border-radius: 10px;
   border: none;
-  background-color: ${(props) => (props.disabled ? Palette.DISABLED_YELLOW : Palette.ACTIVE_YELLOW)};
+  background-color: ${(props) => setButtonColor(props.disabled)};
   color: ${Palette.DARK_GREY};
   font-size: 18px;
-  cursor: pointer;
+  ${(props) => (props.disabled ? '' : 'cursor: pointer;')}
 `;
 
-export function MainButton({ disabled = true, children = 'button', ...props }: ButtonPropsType) {
+export function MainButton({ disabled, children, onClickButton }: ButtonPropsType) {
   return (
-    <Button type="button" disabled={disabled} {...props}>
+    <Button
+      type="button"
+      disabled={disabled}
+      onClick={() => {
+        if (!disabled) {
+          onClickButton();
+        }
+      }}
+    >
       {children}
     </Button>
   );

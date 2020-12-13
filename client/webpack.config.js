@@ -2,6 +2,10 @@
 
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const dotenv = require('dotenv');
+const webpack = require('webpack');
+
+dotenv.config();
 
 module.exports = {
   entry: './src/index.tsx',
@@ -10,7 +14,7 @@ module.exports = {
     rules: [
       {
         test: /\.(ts|js)x?$/,
-        use: ['ts-loader', 'babel-loader'],
+        use: ['babel-loader'],
         exclude: /node_modules/,
       },
     ],
@@ -34,5 +38,11 @@ module.exports = {
       template: 'src/index.html',
       inject: false,
     }),
+    new webpack.DefinePlugin({
+      'process.env.BASE_URL': JSON.stringify(process.env.BASE_URL),
+    }),
   ],
+  node: {
+    fs: 'empty',
+  },
 };

@@ -7,15 +7,23 @@ import { Socket } from 'socket.io';
 const getParticipantsListFromRoomCode = async (roomCode: string) => {
   const rawParticipantsData = await roomSocketsInfoModel.getSocketsByRoom(roomCode);
   const participantsList: ParticipantsType[] = Object.entries(rawParticipantsData).map(([key, value]) => {
-    const { nickname, language }: { nickname: string; language: string } = JSON.parse(value);
-    return { socketId: key, nickname, language };
+    const { nickname, language, imageLink }: { nickname: string; language: string; imageLink: string } = JSON.parse(
+      value,
+    );
+    return { socketId: key, nickname, language, imageLink };
   });
 
   return participantsList;
 };
 
-const insertSocketInfoIntoDB = async (socketId: string, roomCode: string, nickname: string, language: string) => {
-  await roomSocketsInfoModel.setSocketInfo(roomCode, socketId, JSON.stringify({ nickname, language }));
+const insertSocketInfoIntoDB = async (
+  socketId: string,
+  roomCode: string,
+  nickname: string,
+  language: string,
+  imageLink: string,
+) => {
+  await roomSocketsInfoModel.setSocketInfo(roomCode, socketId, JSON.stringify({ nickname, language, imageLink }));
   await socketRoomModel.setRoomBySocket(socketId, roomCode);
   return true;
 };
@@ -24,13 +32,14 @@ const createReceiveChatType = async (socketId: string, Korean: string, English: 
   const roomCode = await socketRoomModel.getRoomBySocket(socketId);
 
   const socketInfo = await roomSocketsInfoModel.getSocketInfo(roomCode, socketId);
-  const { nickname }: { nickname: string } = JSON.parse(socketInfo);
+  const { nickname, imageLink }: { nickname: string; imageLink: string } = JSON.parse(socketInfo);
 
   const receiveChat: ReceiveChatType = {
     Korean,
     English,
     senderId: socketId,
     nickname,
+    imageLink,
     createdAt: dateUtil.getNow(),
   };
 

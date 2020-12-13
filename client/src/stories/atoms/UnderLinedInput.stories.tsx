@@ -1,10 +1,10 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
-import UnderLinedInput, { UnderLinedInputType } from '../components/atoms/inputs/UnderLinedInput';
+import UnderLinedInput, { UnderLinedInputType } from '../../components/atoms/inputs/UnderLinedInput';
 
 export default {
-  title: 'pupago/UnderLinedInput',
+  title: 'pupagoAtom/UnderLinedInput',
   component: UnderLinedInput,
 } as Meta;
 

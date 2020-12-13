@@ -1,8 +1,13 @@
 import React from 'react';
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
+import { Redirect, Route, Switch } from 'react-router-dom';
 
-const GlobalStyle = createGlobalStyle`
+import ChatRoomPage from './pages/ChatRoomPage';
+import MainPage from './pages/MainPage';
+import Background from './components/atoms/resources/Background';
+
+export const GlobalStyle = createGlobalStyle`
   ${reset}
 
   @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
@@ -22,9 +27,13 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <div>
-        <h1>React Typescript~</h1>
-      </div>
+      <Background>
+        <Switch>
+          <Route path="/" component={MainPage} exact />
+          <Route path="/chat" component={ChatRoomPage} exact />
+          <Redirect from="*" to="/" />
+        </Switch>
+      </Background>
     </>
   );
 }
