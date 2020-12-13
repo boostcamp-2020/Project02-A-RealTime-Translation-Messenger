@@ -23,7 +23,7 @@ const timeSinceKorean = (Stringdate: string) => {
   if (interval > 1) {
     return Math.floor(interval) + ' 분 전';
   }
-  return seconds < 10 ? '방금 전' : Math.floor(seconds) + ' 초 전';
+  return '방금 전';
 };
 
 const timeSinceEnglish = (Stringdate: string) => {
@@ -51,7 +51,7 @@ const timeSinceEnglish = (Stringdate: string) => {
   if (interval > 1) {
     return Math.floor(interval) + ' minutes ago';
   }
-  return seconds < 10 ? 'created now' : Math.floor(seconds) + ' seconds ago';
+  return 'created now';
 };
 
 const timeDisplay = {
