@@ -102,7 +102,7 @@ class ChattingViewController: ViewController {
         output.activate
             .drive(onNext: { [unowned self] activate in
                 self.registButton.isUserInteractionEnabled = activate
-                self.registButton.tintColor = activate ? UIColor(named: "BlueColor") : .lightGray
+                self.registButton.tintColor = activate ? UIColor(named: "OtherBlueColor") : .lightGray
             })
             .disposed(by: rx.disposeBag)
         
