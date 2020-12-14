@@ -15,7 +15,7 @@ const StyledUnderLinedInput = styled.input<StyledUnderLinedInputPropsType>`
 `;
 
 export type StyledUnderLinedInputPropsType = {
-  valid?: boolean;
+  valid: boolean;
 };
 
 export type UnderLinedInputType = {
@@ -23,7 +23,7 @@ export type UnderLinedInputType = {
   placeholder?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   maxLength: number;
-  valid?: boolean;
+  valid: boolean;
 };
 
 function UnderLinedInput({
@@ -31,7 +31,7 @@ function UnderLinedInput({
   placeholder = '',
   onChange = undefined,
   maxLength,
-  valid,
+  valid = true,
 }: UnderLinedInputType) {
   return (
     <StyledUnderLinedInput type="text" value={value} placeholder={placeholder} onChange={onChange} valid={valid} />
