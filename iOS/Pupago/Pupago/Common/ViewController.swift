@@ -25,6 +25,18 @@ class ViewController: UIViewController, Navigatable {
         return view
     }()
     
+    lazy var scanningAnimationView: AnimationView = {
+        let view = AnimationView(name: "scanning")
+        view.animationSpeed = 1.0
+        view.loopMode = .loop
+        view.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
+        view.center = self.view.center
+        view.contentMode = .scaleAspectFill
+        
+        self.view.addSubview(view)
+        return view
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         bindViewModel()

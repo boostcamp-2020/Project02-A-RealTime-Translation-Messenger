@@ -21,6 +21,7 @@ class ChattingViewModel: ViewModel, ViewModelType {
         let codeTrigger: Observable<Void>
         let registTrigger: Observable<Void>
         let micTrigger: Observable<Void>
+        let scanButtonTap: Observable<Void>
         let showParticipantTrigger: Observable<Void>
         let willLeave: Observable<Void>
     }
@@ -35,6 +36,7 @@ class ChattingViewModel: ViewModel, ViewModelType {
         let activate: Driver<Bool>
         let showParticipant: Driver<ParticipantViewModel>
         let speeched: Driver<SpeechViewModel>
+        let needScan: Signal<ScanningViewModel>
         let status: Driver<ParticipantState>
         let clipboard: Driver<CopyInfo>
     }
@@ -137,6 +139,10 @@ class ChattingViewModel: ViewModel, ViewModelType {
             .asDriver(onErrorJustReturn: ())
             .map { _ in SpeechViewModel() }
         
+        let needScan = input.scanButtonTap
+            .asSignal(onErrorJustReturn: ())
+            .map { _ in ScanningViewModel() }
+        
         input.codeTrigger
             .withLatestFrom(roomInfo)
             .subscribe(onNext: { [unowned self] info in
@@ -154,6 +160,7 @@ class ChattingViewModel: ViewModel, ViewModelType {
                       activate: activate.asDriver(),
                       showParticipant: showParticipant,
                       speeched: speeched,
+                      needScan: needScan,
                       status: status.asDriver(),
                       clipboard: clipboard.asDriver(onErrorJustReturn: ("", "")))
     }
