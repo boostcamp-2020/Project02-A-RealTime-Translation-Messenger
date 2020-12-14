@@ -5,35 +5,40 @@ import RefreshIcon from '@material-ui/icons/Refresh';
 import Palette from '../../../@types/Palette';
 
 export type RefreshButtonTypes = {
-  onClick?: () => (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  onClickRefresh: () => void;
+  size: 'big' | 'small';
 };
 
-const IconWrapper = styled.div`
-  position: absolute;
+const IconWrapper = styled.div<RefreshButtonStyleType>`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 344px;
+  position: absolute;
+  width: ${(props) => (props.size === 'big' ? '344px' : '232px')};
   height: 32px;
   cursor: pointer;
 `;
 
-const RefrshButtonWrapper = styled.div<RefreshButtonTypes>`
-  width: 344px;
-  height: 32px;
+type RefreshButtonStyleType = {
+  size: 'big' | 'small';
+};
 
-  background-color: ${Palette.PUPAGO_BLUE};
+const RefrshButtonWrapper = styled.div<RefreshButtonStyleType>`
+  width: ${(props) => (props.size === 'big' ? '344px' : '232px')};
+  height: 32px;
+  margin: ${(props) => (props.size === 'big' ? '32px 0 16px 0;' : '0 0 16px 0')};
   border-radius: 5px;
+  background-color: ${Palette.PUPAGO_BLUE};
 
   &:hover {
     background-color: ${Palette.DARK_PUPAGO_BLUE};
   }
 `;
 
-export function RefreshButton({ ...props }: RefreshButtonTypes) {
+export function RefreshButton({ onClickRefresh, size }: RefreshButtonTypes) {
   return (
-    <RefrshButtonWrapper {...props}>
-      <IconWrapper>
+    <RefrshButtonWrapper onClick={onClickRefresh} size={size}>
+      <IconWrapper size={size}>
         <RefreshIcon style={{ fontSize: 24, color: 'white' }} />
       </IconWrapper>
     </RefrshButtonWrapper>

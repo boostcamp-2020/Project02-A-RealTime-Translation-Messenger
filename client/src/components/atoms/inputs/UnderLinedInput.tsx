@@ -3,34 +3,39 @@ import styled from 'styled-components';
 
 import palette from '../../../@types/Palette';
 
-const StyledUnderLinedInput = styled.input`
+const StyledUnderLinedInput = styled.input<StyledUnderLinedInputPropsType>`
   display: block;
-
+  width: 344px;
   outline: none;
   border: none;
-  background-color: transparent;
   border-bottom: 1px solid ${palette.PUPAGO_BLUE};
-
-  width: 344px;
-
-  font-size: 12px;
+  background-color: transparent;
+  font-size: 18px;
+  color: ${(props) => (props.valid ? 'black' : 'red')};
 `;
 
 export type StyledUnderLinedInputPropsType = {
-  size: number;
-  weight: string;
-  color: string;
+  valid: boolean;
 };
 
 export type UnderLinedInputType = {
-  value?: string;
+  value: string;
   placeholder?: string;
-  onChange?: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   maxLength: number;
+  valid: boolean;
 };
 
-function UnderLinedInput({ value = '', placeholder = '', onChange = undefined, maxLength }: UnderLinedInputType) {
-  return <StyledUnderLinedInput value={value} placeholder={placeholder} onChange={onChange} />;
+function UnderLinedInput({
+  value = '',
+  placeholder = '',
+  onChange = undefined,
+  maxLength,
+  valid = true,
+}: UnderLinedInputType) {
+  return (
+    <StyledUnderLinedInput type="text" value={value} placeholder={placeholder} onChange={onChange} valid={valid} />
+  );
 }
 
 export default UnderLinedInput;

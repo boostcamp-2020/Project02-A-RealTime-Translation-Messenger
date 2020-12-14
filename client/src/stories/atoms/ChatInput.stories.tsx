@@ -1,10 +1,10 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
-import ChatInput, { ChatInputPropsType } from '../components/atoms/inputs/ChatInput';
+import ChatInput, { ChatInputPropsType } from '../../components/atoms/inputs/ChatInput';
 
 export default {
-  title: 'pupago/ChatInput',
+  title: 'pupagoAtom/ChatInput',
   component: ChatInput,
 } as Meta;
 

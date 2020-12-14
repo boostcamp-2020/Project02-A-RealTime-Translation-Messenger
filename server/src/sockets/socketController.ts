@@ -9,7 +9,7 @@ import SocketErrorMessage from '../@types/socketErrorMessage';
 import { UserDataType, SendChatType } from '../@types/dataType';
 
 const enterChatroom = async (socket: Socket, io: SocketIO.Server, userData: UserDataType) => {
-  const { roomCode, nickname, language } = userData;
+  const { roomCode, nickname, language, imageLink } = userData;
 
   if (!validationUtil.isRoomCodeValid(roomCode))
     return socketService.emitSocketError(socket, SocketErrorMessage.ROOM_CODE);
@@ -17,13 +17,15 @@ const enterChatroom = async (socket: Socket, io: SocketIO.Server, userData: User
     return socketService.emitSocketError(socket, SocketErrorMessage.NICKNAME);
   if (!validationUtil.isLanguageValid(language))
     return socketService.emitSocketError(socket, SocketErrorMessage.LANGUAGE);
+  if (!validationUtil.isImageLinkValid(imageLink))
+    return socketService.emitSocketError(socket, SocketErrorMessage.IMAGELINK);
 
   socket.join(roomCode);
 
   try {
-    await socketService.insertSocketInfoIntoDB(socket.id, roomCode, nickname, language);
+    await socketService.insertSocketInfoIntoDB(socket.id, roomCode, nickname, language, imageLink);
     const rawParticipantsList = await socketService.getParticipantsListFromRoomCode(roomCode);
-    const participantsList = { participantsList: rawParticipantsList, type: 'enter' };
+    const participantsList = { participantsList: rawParticipantsList, type: 'enter', diffNickname: nickname };
     io.to(roomCode).emit('receive participants list', JSON.stringify(participantsList));
   } catch (err) {
     return socketService.emitSocketError(socket, SocketErrorMessage.SERVER);
@@ -46,6 +48,9 @@ const sendChat = async (socket: Socket, io: SocketIO.Server, sendChat: SendChatT
 const disconnect = async (socket: Socket, io: SocketIO.Server) => {
   try {
     const roomCode: string = await socketRoomModel.getRoomBySocket(socket.id);
+    const socketInfo = await roomSocketsInfoModel.getSocketInfo(roomCode, socket.id);
+    const { nickname }: { nickname: string } = JSON.parse(socketInfo);
+
     if (roomCode !== null) {
       await socketService.removeSocketInfoFromDB(socket.id, roomCode);
 
@@ -55,7 +60,7 @@ const disconnect = async (socket: Socket, io: SocketIO.Server) => {
       }
 
       const rawParticipantsList = await socketService.getParticipantsListFromRoomCode(roomCode);
-      const participantsList = { participantsList: rawParticipantsList, type: 'leave' };
+      const participantsList = { participantsList: rawParticipantsList, type: 'leave', diffNickname: nickname };
       io.to(roomCode).emit('receive participants list', JSON.stringify(participantsList));
     }
   } catch (err) {

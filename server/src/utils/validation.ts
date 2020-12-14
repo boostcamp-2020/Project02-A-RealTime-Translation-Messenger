@@ -1,5 +1,9 @@
 import { SendChatType } from '../@types/dataType';
 import roomInfoModel from '../models/roomInfoModel';
+import dotenv from 'dotenv';
+import MaxParticipants from '../@types/maxParticipantsInRoom';
+
+dotenv.config();
 
 const isRoomCodeValid = (roomCode: string) => {
   if (!/^[A-Z|0-9]{4}$/.test(roomCode)) return false;
@@ -54,6 +58,18 @@ const isMessageValid = (sendChat: SendChatType) => {
   return true;
 };
 
+const isImageLinkValid = (imageLink: string) => {
+  const { IMAGE_ENDPOINT } = process.env;
+  const regex = new RegExp(`^${IMAGE_ENDPOINT!}/pupago/.*\.jpg$`, 'g');
+  if (!regex.test(imageLink)) return false;
+  return true;
+};
+
+const isMaxParticipants = (participantsCount: number) => {
+  if (participantsCount < MaxParticipants.MAX_PARTICIPANTS) return true;
+  return false;
+};
+
 const validationUtil = {
   isRoomCodeValid,
   isRoomValid,
@@ -62,6 +78,8 @@ const validationUtil = {
   isNicknameValid,
   isLanguageValid,
   isMessageValid,
+  isImageLinkValid,
+  isMaxParticipants,
 };
 
 export default validationUtil;

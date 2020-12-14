@@ -1,10 +1,10 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
-import ChatBox, { ChatBoxPropsType } from '../components/atoms/boxes/ChatBox';
+import ChatBox, { ChatBoxPropsType } from '../../components/atoms/boxes/ChatBox';
 
 export default {
-  title: 'pupago/ChatBox',
+  title: 'pupagoAtom/ChatBox',
   component: ChatBox,
 } as Meta;
 

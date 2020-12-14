@@ -12,22 +12,16 @@ const StyledChatBoxWrapper = styled.div`
 `;
 
 const StyledChatBox = styled.div<StyledChatBoxPropsType>`
-  padding: 16px;
-
-  min-width: 199px;
-  max-width: 399px;
-
+  width: 399px;
   height: 88px;
-
+  padding: 16px;
   background-color: ${(props) => (props.isMe ? Palette.PUPAGO_BLUE : Palette.LIGHT_GREY)};
-
   color: ${(props) => (props.isMe ? 'white' : 'black')};
   font-size: 14px;
 `;
 
 const LeftBox = styled(StyledChatBox)`
   margin-right: 2px;
-
   border-radius: 10px 0 0 10px;
 `;
 

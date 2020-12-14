@@ -11,8 +11,12 @@ const StyledBackground = styled.div`
   background-image: linear-gradient(to right, ${Palette.PUPAGO_BLUE}, ${Palette.PUPAGO_GREEN});
 `;
 
-export function Background({ children = 'button', ...props }) {
-  return <StyledBackground />;
+export type BackgroundPropsType = {
+  children?: React.ReactNode;
+};
+
+function Background({ children }: BackgroundPropsType) {
+  return <StyledBackground>{children}</StyledBackground>;
 }
 
 export default Background;
