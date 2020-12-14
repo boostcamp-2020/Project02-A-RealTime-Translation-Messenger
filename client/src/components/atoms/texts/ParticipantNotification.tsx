@@ -1,4 +1,5 @@
 import React from 'react';
+import { useIntl } from 'react-intl';
 import styled from 'styled-components';
 
 import Palette from '../../../@types/Palette';
@@ -29,13 +30,14 @@ export type ParticipantNotificationPropsType = {
 };
 
 function ParticipantNotification({ nickname, isEnter, language }: ParticipantNotificationPropsType) {
+  const { formatMessage } = useIntl();
   return (
     <StyledParticipantNotification>
-      {language === 'Korean' ? (
-        <NotificationText>{`${nickname} 님이 ${isEnter ? '입장' : '퇴장'}하셨습니다.`}</NotificationText>
-      ) : (
-        <NotificationText>{`${nickname} has ${isEnter ? 'entered.' : 'left.'}`}</NotificationText>
-      )}
+      <NotificationText>
+        {isEnter
+          ? formatMessage({ id: 'enterRoom' }, { name: nickname })
+          : formatMessage({ id: 'leaveRoom' }, { name: nickname })}
+      </NotificationText>
     </StyledParticipantNotification>
   );
 }
