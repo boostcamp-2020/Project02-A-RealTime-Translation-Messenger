@@ -17,7 +17,7 @@ function VoiceRecognition({ onClickBackground }: VoiceRecognitionPropsType) {
   useEffect(() => {
     SpeechRecognition.startListening({
       continuous: true,
-      language: languageData === 'Korean' ? 'ko' : 'en-US',
+      language: languageData === 'Korean' ? 'ko-KR' : 'en-US',
     });
     return () => {
       resetTranscript();
