@@ -7,7 +7,10 @@ const name = 'roomList';
 
 const getRoomList = createAsyncThunk(`${name}/getRoomList`, async (_, { rejectWithValue }) => {
   try {
-    return (await api.getRoomList()).data.roomList;
+    const roomList = (await api.getRoomList()).data.roomList.sort((prev, next) => {
+      return new Date(next.createdAt).getTime() - new Date(prev.createdAt).getTime();
+    });
+    return roomList;
   } catch (e) {
     return rejectWithValue(e);
   }
