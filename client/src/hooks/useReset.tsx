@@ -12,7 +12,7 @@ function useReset() {
   const { onResetParticipantsList } = useParticipantsList();
   const { onResetRoomState } = useRoom();
   const { onResetChatInput } = useChatInput();
-  const { onResetSocketId, onResetSocket, socketData } = useUser();
+  const { onResetSocketId, onResetSocket } = useUser();
   const dispatch = useDispatch();
 
   const onReset = useCallback(() => {
@@ -21,7 +21,6 @@ function useReset() {
     onResetChatInput();
     onResetParticipantsList();
     onResetRoomState();
-    socketData?.disconnect();
     onResetSocket();
   }, [dispatch]);
 
