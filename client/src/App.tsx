@@ -11,6 +11,7 @@ import Background from './components/atoms/resources/Background';
 import ko from './assets/locale/ko';
 import en from './assets/locale/en';
 import useUser from './hooks/useUser';
+import { getLangCodeByLanguage } from './utils/langCode';
 
 export const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -30,7 +31,7 @@ export const GlobalStyle = createGlobalStyle`
 
 function App() {
   const { languageData } = useUser();
-  
+
   useEffect(() => {
     window.addEventListener('beforeunload', (e) => {
       e.preventDefault();
@@ -42,7 +43,7 @@ function App() {
     <>
       <GlobalStyle />
       <Background>
-        <IntlProvider locale={languageData} messages={languageData === 'Korean' ? ko : en}>
+        <IntlProvider locale={getLangCodeByLanguage(languageData)} messages={languageData === 'Korean' ? ko : en}>
           <Switch>
             <Route path="/" component={MainPage} exact />
             <Route path="/chat" component={ChatRoomPage} exact />
