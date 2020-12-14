@@ -54,7 +54,7 @@ function ChatRoomHeader({ title, roomCode, roomCodeOnClickFunc, leaveOnClick, cl
           {title}
         </RoomTitle>
         <RoomCode code={roomCode} onClick={roomCodeOnClickFunc} />
-        <RoomCodeTextArea value={roomCode} ref={clipBoardRef} />
+        <RoomCodeTextArea value={roomCode} ref={clipBoardRef} readOnly />
       </TitleWrapper>
     </Wrapper>
   );
