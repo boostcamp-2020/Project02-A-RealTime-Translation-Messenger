@@ -1,0 +1,73 @@
+excluded:
+  - Carthage
+  - Pods
+  - DerivedData
+  - Pupago/Application
+  - PupagoTests
+  - PupagoUITests
+
+disabled_rules:
+  - discarded_notification_center_observer
+  - notification_center_detachment
+  - orphaned_doc_comment
+  - todo
+  - unused_capture_list
+  - missing_docs
+  - unused_closure_parameter
+  - cyclomatic_complexity
+  - leading_whitespace
+  - trailing_whitespace
+  
+opt_in_rules:
+  - empty_count
+
+force_cast: warning
+force_try:
+  severity: warning
+
+line_length: 300
+
+function_body_length:
+  - 300 # warning
+  - 400 # error
+
+function_parameter_count:
+  - 10 # warning
+  - 15 # error
+
+large_tuple:
+  - 6 # warning
+  - 12 # error
+
+type_body_length:
+  - 300 # warning
+  - 400 # error
+
+file_length:
+  warning: 1000
+  error: 2000
+
+cyclomatic_complexity:
+  - 15 # warning
+  - 30 # error
+
+type_name:
+  min_length: 3 # only warning
+  max_length: # warning and error
+    warning: 40
+    error: 50
+  excluded: # excluded via string
+    - T
+    - E
+
+identifier_name:
+  min_length: # only min_length
+    error: 3 # only error
+  excluded: # excluded via string array
+    - vc
+    - id
+    - in
+    - kf
+    - x
+    - y
+    - rx

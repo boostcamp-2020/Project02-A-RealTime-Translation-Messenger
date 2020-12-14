@@ -3,13 +3,18 @@ import { useSelector, useDispatch } from 'react-redux';
 import CharacterLimit from '../@types/characterLimit';
 
 import { RootState } from '../modules';
-import { getTranslatedText, setChatInput, setTranslation, resetChatInput } from '../modules/chatInput';
+import { getTranslatedText, setChatInput, setTranslation, resetChatInput, setCycle } from '../modules/chatInput';
 
 function useTranslate() {
-  const { chatInput, translation } = useSelector((state: RootState) => state.chatInput);
+  const { chatInput, translation, cycle } = useSelector((state: RootState) => state.chatInput);
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (chatInput.data.trim().length === 0) {
+      dispatch(setTranslation(''));
+      return;
+    }
+    dispatch(setCycle('PROCESS'));
     const handler = setTimeout(() => {
       dispatch(getTranslatedText({ text: chatInput.data, origin: translation.data.origin }));
     }, 200);
@@ -23,7 +28,7 @@ function useTranslate() {
     if (chatInput.data.length === 0) {
       dispatch(setTranslation(''));
     }
-  }, [translation.loading]);
+  }, [translation.data]);
 
   const onGetTranslatedText = useCallback(
     (text: string) => dispatch(getTranslatedText({ text, origin: translation.data.origin })),
@@ -44,6 +49,7 @@ function useTranslate() {
   return {
     chatInputData: chatInput.data,
     translationData: translation.data,
+    cycleData: cycle.data,
     translationLoading: translation.loading,
     translationError: translation.error,
     onGetTranslatedText,
