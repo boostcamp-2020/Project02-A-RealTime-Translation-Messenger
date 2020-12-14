@@ -49,7 +49,7 @@ final class LanguageViewModel: ViewModel, ViewModelType {
         let showNicknameView = input.nextButtonDidTap.asSignal(onErrorJustReturn: ())
             .map { [unowned self] () -> NicknameViewModel in
                 saveLocalize()
-                return NicknameViewModel()
+                return NicknameViewModel(provider: provider)
             }
         
         return Output(viewTexts: viewText,

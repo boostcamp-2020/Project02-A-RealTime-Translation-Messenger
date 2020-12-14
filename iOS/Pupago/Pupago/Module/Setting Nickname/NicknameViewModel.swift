@@ -29,10 +29,10 @@ final class NicknameViewModel: ViewModel, ViewModelType {
     
     // MARK: - State
     
-    let isEmpty = BehaviorRelay<Bool>(value: true)
-    let isValid = BehaviorRelay<Bool>(value: false)
-    let nickname = BehaviorRelay<String>(value: "")
-    let needShake = BehaviorRelay<Bool>(value: false)
+    private let isEmpty = BehaviorRelay<Bool>(value: true)
+    private let isValid = BehaviorRelay<Bool>(value: false)
+    private let nickname = BehaviorRelay<String>(value: "")
+    private let needShake = BehaviorRelay<Bool>(value: false)
     
     func transform(_ input: Input) -> Output {
         
@@ -59,7 +59,7 @@ final class NicknameViewModel: ViewModel, ViewModelType {
             .asSignal(onErrorJustReturn: ())
             .map { [unowned self] () -> ChattingListViewModel in
                 saveNickname(nickname: nickname.value)
-                return ChattingListViewModel()
+                return ChattingListViewModel(provider: provider)
             }
             
         return Output(viewTexts: viewText,
