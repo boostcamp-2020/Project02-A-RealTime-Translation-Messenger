@@ -33,7 +33,7 @@ class ValidatingTextField: UITextField {
     }
     
     private func configureForValid() {
-        textColor = isValid ? .darkGray : .systemRed
+        textColor = isValid ? UIColor(named: "LabelColor") : .systemRed
     }
     
 }
