@@ -7,6 +7,7 @@ import useRoomList from '../../../hooks/useRoomList';
 import RoomItem from '../../molecules/common/RoomItem';
 import timeDisplay from '../../../utils/timeDisplay';
 import CryingPapago from './CryingPapago';
+import ParticipantsLimit from '../../../@types/participantsLimit';
 
 type WrapperType = {
   isEmpty: boolean;
@@ -55,8 +56,9 @@ function RoomList() {
             size="big"
             title={room.title}
             createdAt={timeDisplay.timeSinceKorean(room.createdAt)}
-            roomCapacity={8}
+            roomCapacity={ParticipantsLimit.PARTICIPATNS_MAX_COUNT}
             participantCount={room.participantCount}
+            disabled={room.participantCount < ParticipantsLimit.PARTICIPATNS_MAX_COUNT ? false : true}
             onClickItem={() => {
               onJoinRoom({ roomCode: room.roomCode, isPrivate: 'false' });
             }}

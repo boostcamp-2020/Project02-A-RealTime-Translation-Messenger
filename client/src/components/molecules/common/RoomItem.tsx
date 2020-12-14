@@ -34,6 +34,7 @@ export type RoomItemPropsType = {
   roomCapacity: number;
   title: string;
   onClickItem: () => void;
+  disabled: boolean;
 };
 
 const TextWrapper = styled.div<RoomItemHeaderWrapperPropsType>`
@@ -43,10 +44,18 @@ const TextWrapper = styled.div<RoomItemHeaderWrapperPropsType>`
   height: ${(props) => (props.size === 'big' ? '46px' : '34px')};
 `;
 
-function RoomItem({ size, createdAt, participantCount, roomCapacity, title, onClickItem }: RoomItemPropsType) {
+function RoomItem({
+  size,
+  createdAt,
+  participantCount,
+  roomCapacity,
+  title,
+  onClickItem,
+  disabled,
+}: RoomItemPropsType) {
   return (
     <div>
-      <RoomItemBox size={size} onClick={onClickItem}>
+      <RoomItemBox size={size} onClickButton={onClickItem} disabled={disabled}>
         <RoomItemHeaderWrapper size={size}>
           <RoomItemHeaderLeft>
             <MiniLogo />
