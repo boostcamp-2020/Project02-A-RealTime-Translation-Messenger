@@ -53,9 +53,13 @@ class ViewController: UIViewController, Navigatable {
 }
 
 extension ViewController {
-    func playCheckSoundAndPause(for milliSecond: Int) {
-        let msMultiflier = 1000
-        AudioServicesPlaySystemSound(1407)
-        usleep(useconds_t(milliSecond * msMultiflier))
+    
+    func playCheckSoundWithCompletion(completionHandler: @escaping () -> Void) {
+        AudioServicesPlaySystemSoundWithCompletion(1407) {
+            DispatchQueue.main.async {
+                completionHandler()
+            }
+        }
     }
+    
 }
