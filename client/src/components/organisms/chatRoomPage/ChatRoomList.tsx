@@ -1,66 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
 
 import useRoomList from '../../../hooks/useRoomList';
 import RefreshButton from '../../atoms/buttons/RefreshButton';
 import RoomItem from '../../molecules/common/RoomItem';
 import timeDisplay from '../../../utils/timeDisplay';
 import useRoom from '../../../hooks/useRoom';
-import RoomSwitchModal from '../../molecules/chatRoomPage/RoomSwitchModal';
-import { useHistory } from 'react-router-dom';
-import useReset from '../../../hooks/useReset';
 import { JoiningRoomType } from '../../../@types/types';
 
-const ChatRoomListWrapper = styled.div`
-  position: relative;
-`;
+type ChatRoomListPropsType = {
+  setIsSwitching: React.Dispatch<React.SetStateAction<boolean>>;
+  setSwitchingRoom: React.Dispatch<React.SetStateAction<JoiningRoomType>>;
+};
 
-const RoomSwitchWrapper = styled.div`
-  position: absolute;
-  z-index: 5;
-  right: -24px;
-  top: -88px;
-`;
-
-function ChatRoomList() {
+function ChatRoomList({ setIsSwitching, setSwitchingRoom }: ChatRoomListPropsType) {
   const { data: rooms, onGetRoomList } = useRoomList();
-  const { onJoinRoom, data: roomData } = useRoom();
-  const [isSwitching, setIsSwitching] = useState(false);
-  const [switchingRoom, setSwitchingRoom] = useState<JoiningRoomType>({
-    roomCode: '',
-    isPrivate: 'false',
-  });
-  const history = useHistory();
-  const { onReset } = useReset();
+  const { data: roomData } = useRoom();
 
   useEffect(() => {
     onGetRoomList();
   }, []);
 
   return (
-    <ChatRoomListWrapper>
-      {isSwitching && (
-        <RoomSwitchWrapper>
-          <RoomSwitchModal
-            onClickConfirm={() => {
-              setIsSwitching(false);
-              onReset();
-              onJoinRoom(switchingRoom);
-              onGetRoomList();
-              history.push('/loading');
-            }}
-            onClickBackground={() => {
-              setIsSwitching(false);
-            }}
-            onClickCancel={() => {
-              setIsSwitching(false);
-            }}
-            onClickClose={() => {
-              setIsSwitching(false);
-            }}
-          />
-        </RoomSwitchWrapper>
-      )}
+    <div>
       <RefreshButton onClickRefresh={onGetRoomList} size={'small'} />
       {rooms
         ?.filter((room) => room.roomCode !== roomData.roomCode)
@@ -78,7 +39,7 @@ function ChatRoomList() {
             }}
           />
         ))}
-    </ChatRoomListWrapper>
+    </div>
   );
 }
 
