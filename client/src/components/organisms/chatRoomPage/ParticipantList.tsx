@@ -24,16 +24,31 @@ function ParticipantList() {
       <ParticipantCountWrapper>
         <ParticipantCount participatingCount={participants.length} maxCapacity={8} />
       </ParticipantCountWrapper>
-      {participants.map((participant) => (
-        <ParticipantItemWrapper key={participant.socketId}>
-          <ParticipantItem
-            imageLink={participant.imageLink}
-            language={participant.language as 'Korean' | 'English'}
-            isMe={participant.socketId === socketIdData}
-            nickname={participant.nickname}
-          />
-        </ParticipantItemWrapper>
-      ))}
+      {participants
+        .filter((participant) => participant.socketId === socketIdData)
+        .map((participant) => (
+          <ParticipantItemWrapper key={participant.socketId}>
+            <ParticipantItem
+              imageLink={participant.imageLink}
+              language={participant.language as 'Korean' | 'English'}
+              isMe={participant.socketId === socketIdData}
+              nickname={participant.nickname}
+            />
+          </ParticipantItemWrapper>
+        ))}
+
+      {participants
+        .filter((participant) => participant.socketId !== socketIdData)
+        .map((participant) => (
+          <ParticipantItemWrapper key={participant.socketId}>
+            <ParticipantItem
+              imageLink={participant.imageLink}
+              language={participant.language as 'Korean' | 'English'}
+              isMe={participant.socketId === socketIdData}
+              nickname={participant.nickname}
+            />
+          </ParticipantItemWrapper>
+        ))}
     </>
   );
 }
