@@ -131,17 +131,17 @@ class ChattingViewModel: ViewModel, ViewModelType {
             .withLatestFrom(roomInfo)
             .map { _, code -> ParticipantViewModel in
                 let code = code ?? ""
-                return ParticipantViewModel(roomCode: code)
+                return ParticipantViewModel(provider: provider, roomCode: code)
             }
-            .asDriver(onErrorJustReturn: ParticipantViewModel(roomCode: ""))
+            .asDriver(onErrorJustReturn: ParticipantViewModel(provider: provider, roomCode: ""))
         
         let speeched = input.micTrigger
             .asDriver(onErrorJustReturn: ())
-            .map { _ in SpeechViewModel() }
+            .map { _ in SpeechViewModel(provider: provider) }
         
         let needScan = input.scanButtonTap
             .asSignal(onErrorJustReturn: ())
-            .map { _ in ScanningViewModel() }
+            .map { _ in ScanningViewModel(provider: provider) }
         
         input.codeTrigger
             .withLatestFrom(roomInfo)

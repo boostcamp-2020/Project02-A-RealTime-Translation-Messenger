@@ -16,5 +16,16 @@ protocol ViewModelType {
 }
 
 class ViewModel: NSObject {
-    let localize = BehaviorRelay<Localize>(value: Application.shared.localize)
+    
+    let provider: NetworkProviding
+    let localize: BehaviorRelay<Localize>
+    let socketManager: SocketIOManager
+    
+    init(provider: NetworkProviding) {
+        self.provider = provider
+        localize = BehaviorRelay<Localize>(value: .korean)
+        socketManager = SocketIOManager.shared
+        
+        super.init()
+    }
 }

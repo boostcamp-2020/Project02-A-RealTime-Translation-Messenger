@@ -51,10 +51,9 @@ final class Application: NSObject {
         guard let window = window else { return }
         self.window = window
         
-        let viewModel = LanguageViewModel()
+        let viewModel = LanguageViewModel(provider: PupagoAPI())
         navigator.show(segue: .language(viewModel: viewModel),
                        sender: nil,
                        transition: .root(in: window))
-        
     }
 }

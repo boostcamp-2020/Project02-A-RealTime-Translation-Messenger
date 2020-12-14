@@ -21,13 +21,14 @@ class ParticipantViewModel: ViewModel, ViewModelType {
         let dismiss: Driver<Void>
     }
     
-    init(roomCode: String) {
-        self.roomCode = roomCode
-    }
-    
-    let roomCode: String
+    var roomCode: String
     let participants = BehaviorRelay<[Participant]>(value: [])
     
+    init(provider: NetworkProviding, roomCode: String) {
+        self.roomCode = roomCode
+        super.init(provider: provider)
+    }
+
     func transform(_ input: Input) -> Output {
         let provider = PupagoAPI()
         
