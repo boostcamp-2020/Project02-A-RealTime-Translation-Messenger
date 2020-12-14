@@ -69,6 +69,7 @@ export const RoomCreation = ({
           placeholder={formatMessage({ id: 'enterRoomTitle' })}
           maxLength={30}
           onChange={InputOnChange}
+          valid={true}
         />
         <RightAlignedText
           size={14}
