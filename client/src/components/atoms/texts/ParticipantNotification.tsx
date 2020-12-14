@@ -35,8 +35,8 @@ function ParticipantNotification({ nickname, isEnter, language }: ParticipantNot
     <StyledParticipantNotification>
       <NotificationText>
         {isEnter
-          ? formatMessage({ id: 'enterRoom' }, { name: nickname })
-          : formatMessage({ id: 'leaveRoom' }, { name: nickname })}
+          ? formatMessage({ id: 'enterRoomAlert' }, { name: nickname })
+          : formatMessage({ id: 'leaveRoomAlert' }, { name: nickname })}
       </NotificationText>
     </StyledParticipantNotification>
   );

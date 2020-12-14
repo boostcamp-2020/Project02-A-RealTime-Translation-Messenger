@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useIntl } from 'react-intl';
 
 import Palette from '../../../@types/Palette';
 import UnderLinedInput from '../../atoms/inputs/UnderLinedInput';
@@ -39,15 +40,17 @@ const NicknameLength = styled(Text)`
 
 function NicknameInput({ nicknameData, onChangeNickname }: NicknameInputPropsType) {
   const [isNicknameValid, setIsNicknameValid] = useState(true);
+  const { formatMessage } = useIntl();
+
   return (
     <NicknameInputWrapper>
       {!isNicknameValid && (
         <NickNameErrorMessage size={12} color={Palette.DARK_GREY}>
-          닉네임은 2자 이상 12자 이하, 특수문자를 제외하고 작성해주세요.
+          {formatMessage({ id: 'nicknameFormatAlert' })}
         </NickNameErrorMessage>
       )}
       <UnderLinedInput
-        placeholder="닉네임을 입력해주세요"
+        placeholder={formatMessage({ id: 'enterYourNickname' })}
         value={nicknameData}
         onChange={(e) => {
           if (!/^[A-Z|a-z|가-힣]{2,12}$/.test(e.target.value)) {

@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { useIntl } from 'react-intl';
 import styled from 'styled-components';
 
 import CodeBox from '../../atoms/boxes/CodeBox';
@@ -48,12 +49,13 @@ export type CodeInputPropsType = {
 function CodeInput({ roomCodeStatus, onChange, onKeyUp }: CodeInputPropsType) {
   const { code, valid } = roomCodeStatus;
   const inputRef = useRef<HTMLInputElement>(null);
+  const { formatMessage } = useIntl();
 
   return (
     <Wrapper>
-      <InputCodeText size={14}>코드를 입력해주세요</InputCodeText>
+      <InputCodeText size={14}>{formatMessage({ id: 'enterTheCode' })}</InputCodeText>
       <WarningText size={14} color={'red'} isValidText={valid}>
-        코드는 숫자와 영어만 허용됩니다.
+        {formatMessage({ id: 'codeFormatAlert' })}
       </WarningText>
       <FakeInput
         type="text"

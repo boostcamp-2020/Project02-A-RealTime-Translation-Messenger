@@ -1,10 +1,12 @@
 import React from 'react';
+import { useIntl } from 'react-intl';
 import MainPageNavigation from '../../../@types/mainPageNavigation';
 import useNavigation from '../../../hooks/useNavigation';
 import MainButton from '../../atoms/buttons/MainButton';
 
 function EnterCodeButton() {
   const { onSetNavigation } = useNavigation();
+  const { formatMessage } = useIntl();
   return (
     <div>
       <MainButton
@@ -13,7 +15,7 @@ function EnterCodeButton() {
           onSetNavigation(MainPageNavigation.CODE_INPUT);
         }}
       >
-        코드로 참가하기
+        {formatMessage({ id: 'enterViaCode' })}
       </MainButton>
     </div>
   );

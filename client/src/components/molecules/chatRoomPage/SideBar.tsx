@@ -1,4 +1,5 @@
 import React from 'react';
+import { useIntl } from 'react-intl';
 import styled from 'styled-components';
 
 import { SideBarStatus } from '../../../@types/types';
@@ -26,6 +27,7 @@ export type SideBarPropsType = {
 };
 
 function SideBar({ children, onClickSideBarTab, selected }: SideBarPropsType) {
+  const { formatMessage } = useIntl();
   return (
     <SideBarBox>
       <SideBarTabWrapper>
@@ -36,7 +38,7 @@ function SideBar({ children, onClickSideBarTab, selected }: SideBarPropsType) {
             onClickSideBarTab(SideBarStatus.PARTICIPANTS);
           }}
         >
-          참여자
+          {formatMessage({ id: 'participants' })}
         </SideBarTab>
         <SideBarTab
           isSelected={selected === SideBarStatus.CHAT_ROOMS ? true : false}
@@ -45,7 +47,7 @@ function SideBar({ children, onClickSideBarTab, selected }: SideBarPropsType) {
             onClickSideBarTab(SideBarStatus.CHAT_ROOMS);
           }}
         >
-          채팅방
+          {formatMessage({ id: 'rooms' })}
         </SideBarTab>
       </SideBarTabWrapper>
       <SideBarContent>{children}</SideBarContent>

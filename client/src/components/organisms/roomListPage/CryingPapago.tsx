@@ -1,4 +1,5 @@
 import React from 'react';
+import { useIntl } from 'react-intl';
 import styled from 'styled-components';
 import MainPageNavigation from '../../../@types/mainPageNavigation';
 import useNavigation from '../../../hooks/useNavigation';
@@ -18,6 +19,7 @@ const Wrapper = styled.div`
 
 function CryingPapago() {
   const { onSetNavigation } = useNavigation();
+  const { formatMessage } = useIntl();
   return (
     <Wrapper>
       <NoChatRoomMolecule />
@@ -27,7 +29,7 @@ function CryingPapago() {
           onSetNavigation(MainPageNavigation.ROOM_CREATION);
         }}
       >
-        + 방 만들기
+        {formatMessage({ id: 'createRoom' })}
       </MainButton>
     </Wrapper>
   );
