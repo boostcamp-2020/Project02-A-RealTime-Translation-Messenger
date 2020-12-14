@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 import { Redirect, Route, Switch } from 'react-router-dom';
@@ -25,6 +25,13 @@ export const GlobalStyle = createGlobalStyle`
 `;
 
 function App() {
+  useEffect(() => {
+    window.addEventListener('beforeunload', (e) => {
+      e.preventDefault();
+      e.returnValue = '';
+    });
+  }, []);
+
   return (
     <>
       <GlobalStyle />
