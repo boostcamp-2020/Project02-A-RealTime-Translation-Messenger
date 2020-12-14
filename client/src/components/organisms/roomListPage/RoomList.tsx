@@ -7,6 +7,7 @@ import useRoomList from '../../../hooks/useRoomList';
 import RoomItem from '../../molecules/common/RoomItem';
 import timeDisplay from '../../../utils/timeDisplay';
 import CryingPapago from './CryingPapago';
+import ParticipantsLimit from '../../../@types/participantsLimit';
 
 type WrapperType = {
   isEmpty: boolean;
@@ -49,14 +50,31 @@ function RoomList() {
       return <CryingPapago />;
     } else {
       return roomListData!.map((room) => {
+        if (room.participantCount < ParticipantsLimit.PARTICIPATNS_MAX_COUNT) {
+          return (
+            <RoomItem
+              key={room.roomCode}
+              size="big"
+              title={room.title}
+              createdAt={timeDisplay.timeSinceKorean(room.createdAt)}
+              roomCapacity={ParticipantsLimit.PARTICIPATNS_MAX_COUNT}
+              participantCount={room.participantCount}
+              disabled={false}
+              onClickItem={() => {
+                onJoinRoom({ roomCode: room.roomCode, isPrivate: 'false' });
+              }}
+            />
+          );
+        }
         return (
           <RoomItem
             key={room.roomCode}
             size="big"
             title={room.title}
             createdAt={timeDisplay.timeSinceKorean(room.createdAt)}
-            roomCapacity={8}
+            roomCapacity={ParticipantsLimit.PARTICIPATNS_MAX_COUNT}
             participantCount={room.participantCount}
+            disabled={true}
             onClickItem={() => {
               onJoinRoom({ roomCode: room.roomCode, isPrivate: 'false' });
             }}
