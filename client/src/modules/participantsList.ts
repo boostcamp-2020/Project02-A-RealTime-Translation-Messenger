@@ -21,7 +21,10 @@ const participantsList = createSlice({
   initialState,
   reducers: {
     setParticipantsList: (state, action: PayloadAction<ParticipantsType[]>) => {
-      state.participantsList.data = action.payload;
+      state.participantsList.data = action.payload.sort((prev, next) => {
+        if (prev.nickname < next.nickname) return -1;
+        return 1;
+      });
     },
     resetParticipantsList: (state) => {
       state.participantsList.data = [];

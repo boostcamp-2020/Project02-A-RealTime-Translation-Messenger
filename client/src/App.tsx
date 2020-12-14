@@ -30,6 +30,13 @@ export const GlobalStyle = createGlobalStyle`
 
 function App() {
   const { languageData } = useUser();
+  
+  useEffect(() => {
+    window.addEventListener('beforeunload', (e) => {
+      e.preventDefault();
+      e.returnValue = '';
+    });
+  }, []);
 
   return (
     <>
