@@ -2,6 +2,8 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
+import CharacterLimit from '../../../@types/characterLimit';
+import useReset from '../../../hooks/useReset';
 import useRoom from '../../../hooks/useRoom';
 import CodeInputMolecule from '../../molecules/codeInputPage/CodeInput';
 
@@ -20,11 +22,12 @@ function CodeInput() {
   const history = useHistory();
   const [roomCodeStatus, setRoomCodeStatus] = useState({ code: room.roomCode, valid: true });
   const { code, valid } = roomCodeStatus;
+  const { onReset } = useReset();
 
   const onChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const { value } = e.target;
-      const cuttedValue = value.substr(0, 4).toUpperCase();
+      const cuttedValue = value.substr(0, CharacterLimit.CODE_INPUT).toUpperCase();
 
       if (!isRoomCodeValid(value)) {
         setRoomCodeStatus({ code, valid: false });
@@ -36,7 +39,7 @@ function CodeInput() {
   );
 
   const onKeyUp = useCallback(() => {
-    if (code.length === 4 && isRoomCodeValid(code)) {
+    if (code.length === CharacterLimit.CODE_INPUT && isRoomCodeValid(code)) {
       onChangeRoomCode(code);
       onJoinRoom({ roomCode: code, isPrivate: 'true' });
     }
@@ -46,6 +49,7 @@ function CodeInput() {
     if (roomError !== null) {
       alert('잘못된 방 번호 입니다.');
       setRoomCodeStatus({ code: '', valid: true });
+      onReset();
     }
   }, [roomError]);
 
