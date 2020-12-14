@@ -648,15 +648,14 @@
                     </view>
                     <navigationItem key="navigationItem" title="Pupago" id="Kni-hu-I5m"/>
                     <connections>
-                        <outlet property="blankImageView" destination="sCt-sf-kbR" id="6zu-Uc-246"/>
-                        <outlet property="blankListLabel" destination="xGq-X5-2qF" id="FxA-F7-81l"/>
-                        <outlet property="blankView" destination="p8K-ce-Mqz" id="JNy-dx-9ya"/>
                         <outlet property="chatroomLabel" destination="YOr-co-qxF" id="ay0-AC-DBH"/>
                         <outlet property="collectionView" destination="D4u-3c-SH0" id="at3-Db-JdW"/>
                         <outlet property="createButton" destination="8on-eL-CeY" id="aMN-EF-UCo"/>
                         <outlet property="joinButton" destination="KI0-Kr-eco" id="Bvq-VZ-e2a"/>
                         <outlet property="languageLabel" destination="rFv-pS-SAZ" id="6qr-l9-ALE"/>
                         <outlet property="nicknameLabel" destination="ela-jb-BBV" id="Jdm-wQ-cme"/>
+                        <outlet property="placeHolderLabel" destination="xGq-X5-2qF" id="FxA-F7-81l"/>
+                        <outlet property="placeHolderView" destination="p8K-ce-Mqz" id="JNy-dx-9ya"/>
                         <outlet property="thumbnailImageView" destination="hYt-sT-mta" id="8DY-to-jfl"/>
                     </connections>
                 </viewController>
