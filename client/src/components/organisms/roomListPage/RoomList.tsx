@@ -50,22 +50,6 @@ function RoomList() {
       return <CryingPapago />;
     } else {
       return roomListData!.map((room) => {
-        if (room.participantCount < ParticipantsLimit.PARTICIPATNS_MAX_COUNT) {
-          return (
-            <RoomItem
-              key={room.roomCode}
-              size="big"
-              title={room.title}
-              createdAt={timeDisplay.timeSinceKorean(room.createdAt)}
-              roomCapacity={ParticipantsLimit.PARTICIPATNS_MAX_COUNT}
-              participantCount={room.participantCount}
-              disabled={false}
-              onClickItem={() => {
-                onJoinRoom({ roomCode: room.roomCode, isPrivate: 'false' });
-              }}
-            />
-          );
-        }
         return (
           <RoomItem
             key={room.roomCode}
@@ -74,7 +58,7 @@ function RoomList() {
             createdAt={timeDisplay.timeSinceKorean(room.createdAt)}
             roomCapacity={ParticipantsLimit.PARTICIPATNS_MAX_COUNT}
             participantCount={room.participantCount}
-            disabled={true}
+            disabled={room.participantCount < ParticipantsLimit.PARTICIPATNS_MAX_COUNT ? false : true}
             onClickItem={() => {
               onJoinRoom({ roomCode: room.roomCode, isPrivate: 'false' });
             }}
