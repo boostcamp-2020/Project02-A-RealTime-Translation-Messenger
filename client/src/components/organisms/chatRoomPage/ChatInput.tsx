@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 
 import ChatInputMolecule from '../../molecules/chatRoomPage/ChatInput';
@@ -35,26 +35,50 @@ function ChatInput() {
   const [voice, setVoice] = useState(false);
   const { socketData } = useUser();
 
-  const { chatInputData, translationData, translationLoading, onSetChatInput } = useChatInput();
+  const { chatInputData, translationData, translationLoading, onSetChatInput, cycleData } = useChatInput();
+
+  const getSendingChat = () => ({
+    Korean: translationData.origin === 'Korean' ? chatInputData : translationData.translationText,
+    English: translationData.origin === 'English' ? chatInputData : translationData.translationText,
+    origin: translationData.origin,
+  });
+
+  const sendingChat = useRef(getSendingChat());
+
+  useEffect(() => {
+    sendingChat.current = getSendingChat();
+  }, [translationLoading]);
+
+  const sendChatWhenEnter = () => {
+    if (!socketData) return;
+    if (translationData.translationText.length === 0) return;
+    if (translationLoading) return;
+    if (cycleData === 'PROCESS') return;
+
+    socketData.emit('send chat', sendingChat.current);
+    onSetChatInput('');
+  };
 
   return (
     <>
       <Wrapper>
         <ChatInputMolecule
           value={chatInputData}
-          onChangeInput={(e) => onSetChatInput(e.target.value)}
+          onChangeInput={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+            const inputToReplace = e.target.value;
+
+            if (inputToReplace[inputToReplace.length - 1] !== '\n') {
+              onSetChatInput(e.target.value);
+              return;
+            }
+            sendChatWhenEnter();
+          }}
           clickMicFunc={() => {
             setVoice(true);
           }}
           clickSendFunc={() => {
             if (translationLoading || socketData === null) return;
-            const sendingChat = {
-              Korean: translationData.origin === 'Korean' ? chatInputData : translationData.translationText,
-              English: translationData.origin === 'English' ? chatInputData : translationData.translationText,
-              origin: translationData.origin,
-            };
-            socketData.emit('send chat', sendingChat);
-            // 필드 리셋 - 인풋 초기화
+            sendChatWhenEnter();
           }}
         />
         <ChatTranslationBox value={getPapagoStyleText(translationLoading, translationData.translationText)} />
