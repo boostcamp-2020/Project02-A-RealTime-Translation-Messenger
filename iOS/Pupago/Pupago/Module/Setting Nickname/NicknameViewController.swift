@@ -69,8 +69,9 @@ final class NicknameViewController: ViewController {
             .drive(onNext: { [unowned self] viewModel in
                 guard let window = self.view.window else { return }
                 checkAnimationView.play { _ in
-                    playCheckSoundAndPause(for: 700)
+                    playCheckSoundWithCompletion {
                     self.navigator.show(segue: .chatlist(viewModel: viewModel), sender: self, transition: .rootWithNavigation(in: window))
+                    }
                 }
             })
             .disposed(by: rx.disposeBag)
