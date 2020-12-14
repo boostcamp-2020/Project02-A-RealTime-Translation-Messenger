@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import Palette from '../../../@types/Palette';
 
@@ -31,14 +31,21 @@ const RoomTitle = styled(Text)`
   margin-bottom: 5px;
 `;
 
+const RoomCodeTextArea = styled.textarea`
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+`;
+
 export type ChatRoomHeaderPropsType = {
   title: string;
   roomCode: string;
   roomCodeOnClickFunc?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   leaveOnClick: () => void;
+  clipBoardRef: ((instance: HTMLTextAreaElement | null) => void) | React.RefObject<HTMLTextAreaElement> | null;
 };
 
-function ChatRoomHeader({ title, roomCode, roomCodeOnClickFunc, leaveOnClick }: ChatRoomHeaderPropsType) {
+function ChatRoomHeader({ title, roomCode, roomCodeOnClickFunc, leaveOnClick, clipBoardRef }: ChatRoomHeaderPropsType) {
   return (
     <Wrapper>
       <ExitButton iconType="Leave" color={Palette.PUPAGO_BLUE} onClick={leaveOnClick} />
@@ -47,6 +54,7 @@ function ChatRoomHeader({ title, roomCode, roomCodeOnClickFunc, leaveOnClick }: 
           {title}
         </RoomTitle>
         <RoomCode code={roomCode} onClick={roomCodeOnClickFunc} />
+        <RoomCodeTextArea value={roomCode} ref={clipBoardRef} />
       </TitleWrapper>
     </Wrapper>
   );
