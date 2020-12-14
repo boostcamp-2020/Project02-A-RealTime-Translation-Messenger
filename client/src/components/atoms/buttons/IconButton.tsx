@@ -15,6 +15,7 @@ export type IconButtonPropsType = {
 };
 
 const IconWrapper = styled.div`
+  width: 24px;
   cursor: pointer;
 `;
 
