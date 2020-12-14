@@ -18,3 +18,13 @@ extension Reactive where Base: UILabel {
     }
     
 }
+
+extension Reactive where Base: ValidatingLabel {
+    
+    var isValid: Binder<Bool> {
+        return Binder(self.base) { label, isValid in
+            label.isValid = isValid
+        }
+    }
+    
+}
