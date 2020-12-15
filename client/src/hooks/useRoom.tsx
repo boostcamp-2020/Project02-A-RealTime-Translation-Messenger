@@ -11,7 +11,7 @@ export default function useRoom() {
 
   const onSetRoomTitle = useCallback((title: string) => dispatch(setRoomTitle(title)), [dispatch]);
 
-  const onSetIsPrivate = useCallback((isPrivate: 'true' | 'false') => dispatch(setIsPrivate(isPrivate)), [dispatch]);
+  const onSetIsPrivate = useCallback((isPrivate: boolean) => dispatch(setIsPrivate(isPrivate)), [dispatch]);
 
   const onCreateRoom = useCallback((creatingRoom: CreatingRoomType) => dispatch(createRoom(creatingRoom)), [dispatch]);
 

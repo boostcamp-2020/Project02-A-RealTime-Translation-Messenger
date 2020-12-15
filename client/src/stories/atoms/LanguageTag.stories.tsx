@@ -2,6 +2,7 @@ import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
 import { LanguageTag, LanguageTagPropsType } from '../../components/atoms/resources/LanguageTag';
+import LangCode from '../../@types/langCode';
 
 export default {
   title: 'pupagoAtom/LanguageTag',
