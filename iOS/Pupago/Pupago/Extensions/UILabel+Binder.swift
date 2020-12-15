@@ -17,6 +17,12 @@ extension Reactive where Base: UILabel {
         }
     }
     
+    public var isActivate: Binder<Bool> {
+        return Binder(self.base) { label, isActivate in
+            label.isUserInteractionEnabled = isActivate
+        }
+    }
+    
 }
 
 extension Reactive where Base: ValidatingLabel {

@@ -18,3 +18,13 @@ extension Reactive where Base: Button {
     }
     
 }
+
+extension Reactive where Base: ActivatableButton {
+    
+    var isActivate: Binder<Bool> {
+        return Binder(self.base) { button, isActivate in
+            button.isActivate = isActivate
+        }
+    }
+    
+}

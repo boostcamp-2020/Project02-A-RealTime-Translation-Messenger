@@ -90,6 +90,7 @@
 		BD65A7FE25729A6700EE43BC /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD65A7FD25729A6700EE43BC /* Message.swift */; };
 		BD65A8062572A06500EE43BC /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD65A8052572A06500EE43BC /* Label.swift */; };
 		BD7832252588590600036023 /* KeyboardHandleable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7832242588590600036023 /* KeyboardHandleable.swift */; };
+		BD78323625888C7500036023 /* ActivatableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD78323525888C7500036023 /* ActivatableButton.swift */; };
 		BD7A7C3E25875B9500E84669 /* ValidatingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7A7C3D25875B9500E84669 /* ValidatingLabel.swift */; };
 		BD7A7C4325875FCB00E84669 /* UITextField+Binder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7A7C4225875FCB00E84669 /* UITextField+Binder.swift */; };
 		BD7A7C482587631200E84669 /* UIButton+Binder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7A7C472587631200E84669 /* UIButton+Binder.swift */; };
@@ -204,6 +205,7 @@
 		BD65A7FD25729A6700EE43BC /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		BD65A8052572A06500EE43BC /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		BD7832242588590600036023 /* KeyboardHandleable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHandleable.swift; sourceTree = "<group>"; };
+		BD78323525888C7500036023 /* ActivatableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivatableButton.swift; sourceTree = "<group>"; };
 		BD7A7C3D25875B9500E84669 /* ValidatingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatingLabel.swift; sourceTree = "<group>"; };
 		BD7A7C4225875FCB00E84669 /* UITextField+Binder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Binder.swift"; sourceTree = "<group>"; };
 		BD7A7C472587631200E84669 /* UIButton+Binder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Binder.swift"; sourceTree = "<group>"; };
@@ -364,6 +366,7 @@
 				BD65A8052572A06500EE43BC /* Label.swift */,
 				975C53F9256B7CD100739DCA /* GradientView.swift */,
 				975C53FE256B844C00739DCA /* SelectableButton.swift */,
+				BD78323525888C7500036023 /* ActivatableButton.swift */,
 				97CB75AA256E2CB900FE052A /* CollectionViewBaseCell.swift */,
 				975C540D256B907D00739DCA /* ViewModel.swift */,
 				97B4BEA4256BF5B0009A3825 /* ViewController.swift */,
@@ -856,6 +859,7 @@
 				975C5404256B8D3F00739DCA /* Localize.swift in Sources */,
 				BD55225A257DE96B008E3A1A /* SpeechManager.swift in Sources */,
 				97E8B57D2574EDE90009C938 /* MockAPI.swift in Sources */,
+				BD78323625888C7500036023 /* ActivatableButton.swift in Sources */,
 				975C540E256B907D00739DCA /* ViewModel.swift in Sources */,
 				97B4BE74256BE935009A3825 /* NSObject+Rx.swift in Sources */,
 				97B4BEA0256BEFD9009A3825 /* NicknameViewModel.swift in Sources */,
@@ -1050,7 +1054,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = EKU567YQE4;
+				DEVELOPMENT_TEAM = B3PWYBKFUK;
 				INFOPLIST_FILE = Pupago/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1071,7 +1075,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = EKU567YQE4;
+				DEVELOPMENT_TEAM = B3PWYBKFUK;
 				INFOPLIST_FILE = Pupago/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
