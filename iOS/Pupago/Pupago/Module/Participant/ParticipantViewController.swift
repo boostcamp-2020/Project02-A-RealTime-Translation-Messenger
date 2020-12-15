@@ -9,17 +9,25 @@ import UIKit
 
 final class ParticipantViewController: ViewController {
     
+    // MARK: - IBOutlet
+    
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var closeButton: UIButton!
     
+    // MARK: - Properties
+    
     private let tapGesture = UITapGestureRecognizer()
+    
+    // MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionViewLayout()
         configureGesture()
     }
+    
+    // MARK: - Bind ViewModel
     
     override func bindViewModel() {
         super.bindViewModel()
