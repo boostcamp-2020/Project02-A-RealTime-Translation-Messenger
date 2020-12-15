@@ -6,6 +6,7 @@ import CheckBox from '../../atoms/boxes/CheckBox';
 import Text from '../../atoms/texts/Text';
 import UnderLinedInput from '../../atoms/inputs/UnderLinedInput';
 import Palette from '../../../@types/Palette';
+import CharacterLimit from '../../../@types/characterLimit';
 
 export type RoomCreationPropsType = {
   TypedWordCount: number;
@@ -67,7 +68,7 @@ export const RoomCreation = ({
         <UnderLinedInput
           value={value}
           placeholder={formatMessage({ id: 'enterRoomTitle' })}
-          maxLength={30}
+          maxLength={CharacterLimit.ROOM_NAME_MAX}
           onChange={InputOnChange}
           valid={true}
         />

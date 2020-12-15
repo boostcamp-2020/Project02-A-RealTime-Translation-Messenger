@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import { useIntl } from 'react-intl';
 import { useHistory } from 'react-router-dom';
+import CharacterLimit from '../../../@types/characterLimit';
 
 import useRoom from '../../../hooks/useRoom';
 import MainButton from '../../atoms/buttons/MainButton';
 
 const roomTitleValidate = (title: string) => {
-  if (title.length < 2 || title.length > 30) return false;
+  if (title.length < CharacterLimit.ROOM_NAME_MIN || title.length > CharacterLimit.ROOM_NAME_MAX) return false;
   if (title.trim().length === 0) return false;
   return true;
 };

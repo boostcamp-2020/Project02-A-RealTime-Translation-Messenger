@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import Images from '../../../assets/images';
+
 const Logo = styled.img`
   display: block;
   width: 115px;
@@ -8,7 +10,7 @@ const Logo = styled.img`
 `;
 
 export function CryingPapago() {
-  return <Logo src="https://kr.object.ncloudstorage.com/pupago/assets/CryingPapago.png" alt="crying papago" />;
+  return <Logo src={Images.CRYING_PAPAGO} alt="crying papago" />;
 }
 
 export default CryingPapago;
