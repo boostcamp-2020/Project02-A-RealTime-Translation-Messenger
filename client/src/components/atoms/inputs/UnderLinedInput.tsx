@@ -5,7 +5,7 @@ import palette from '../../../@types/Palette';
 
 const StyledUnderLinedInput = styled.input<StyledUnderLinedInputPropsType>`
   display: block;
-  width: 344px;
+  width: 336px;
   outline: none;
   border: none;
   border-bottom: 1px solid ${palette.PUPAGO_BLUE};
