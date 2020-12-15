@@ -52,6 +52,7 @@ final class NicknameViewController: ViewController {
         output.showChattingListView
             .emit(onNext: { [unowned self] viewModel in
                 guard let window = self.view.window else { return }
+                startButton.isUserInteractionEnabled = false
                 checkAnimationView.play { _ in
                     playCheckSoundWithCompletion {
                     self.navigator.show(segue: .chatlist(viewModel: viewModel), sender: self, transition: .rootWithNavigation(in: window))

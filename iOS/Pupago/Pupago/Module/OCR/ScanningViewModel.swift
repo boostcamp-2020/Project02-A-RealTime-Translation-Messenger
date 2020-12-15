@@ -45,11 +45,11 @@ class ScanningViewModel: ViewModel, ViewModelType {
     
     let activate = BehaviorRelay<Bool>(value: false)
     let scanedImage = PublishRelay<UIImage>()
-    let translationViewState = PublishRelay<(text: String, isHidden: Bool)>()
+    let translationViewState = PublishRelay<TranslationViewState>()
     let chatInfo = PublishRelay<Translator.Text>()
     let animating = BehaviorRelay<Bool>(value: false)
     let originText = PublishRelay<String>()
-    let detailViewState = BehaviorRelay<(text: String, type: Bool)>(value: ("", false))
+    let detailViewState = BehaviorRelay<DetailViewState>(value: ("", false))
     let needFade = BehaviorRelay<Bool>(value: true)
     
     // MARK: - Transform
