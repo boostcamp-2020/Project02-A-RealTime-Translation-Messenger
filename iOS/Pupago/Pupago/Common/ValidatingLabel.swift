@@ -7,7 +7,10 @@
 
 import UIKit
 
+@IBDesignable
 class ValidatingLabel: UILabel {
+    @IBInspectable var correctColor: UIColor = UIColor.clear
+    @IBInspectable var warningColor: UIColor = UIColor.clear
     
     var isValid: Bool = true {
         didSet {
@@ -16,7 +19,7 @@ class ValidatingLabel: UILabel {
     }
     
     private func configureForValid() {
-        textColor = isValid ? .white : .systemRed
+        textColor = isValid ? correctColor : warningColor
     }
     
 }

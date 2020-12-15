@@ -33,7 +33,6 @@ final class ChattingListViewController: ViewController {
     
     override func bindViewModel() {
         super.bindViewModel()
-        
         guard let viewModel = viewModel as? ChattingListViewModel else { return }
         
         let input = ChattingListViewModel.Input(viewWillAppear: rx.viewWillAppear.asObservable(),
@@ -43,7 +42,6 @@ final class ChattingListViewController: ViewController {
                                                 reloadRoomDidTap: refreshControl.rx.controlEvent(.valueChanged).map {_ in},
                                                 placeHolderDidTap: placeHolderTapGesture.rx.event.map {_ in},
                                                 roomDidSelect: collectionView.rx.itemSelected.map { $0 })
-        
         let output = viewModel.transform(input)
         
         output.viewTexts
@@ -96,7 +94,6 @@ final class ChattingListViewController: ViewController {
         
         output.showChattingView
             .emit(onNext: { [unowned self] viewModel in
-                
                 navigator.show(segue: .chatting(viewModel: viewModel),
                                sender: self,
                                transition: .navigation)

@@ -29,7 +29,6 @@ final class LanguageViewModel: ViewModel, ViewModelType {
     // MARK: - Transform
     
     func transform(_ input: Input) -> Output {
-        
         input.engButtonDidTap
             .map { Localize.english }
             .bind(to: localize)

@@ -10,6 +10,11 @@
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="TimesNewRoman.ttf">
+            <string>.SFUI-Semibold</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Language View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -264,6 +269,14 @@
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="correctColor">
+                                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="warningColor">
+                                                <color key="value" systemColor="systemRedColor"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </label>
                                 </subviews>
                                 <constraints>
@@ -1460,7 +1473,7 @@
                                 <rect key="frame" x="31" y="184" width="352" height="528"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="Xrh-jP-Xdh">
-                                        <rect key="frame" x="35" y="78.5" width="282" height="318.5"/>
+                                        <rect key="frame" x="35" y="79" width="282" height="317.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="bKo-Wq-G6w">
                                                 <rect key="frame" x="0.0" y="0.0" width="282" height="184"/>
@@ -1474,7 +1487,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="hxr-vh-Q78">
-                                                <rect key="frame" x="0.0" y="208" width="282" height="110.5"/>
+                                                <rect key="frame" x="0.0" y="208" width="282" height="109.5"/>
                                                 <subviews>
                                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="gpw-rI-zEV" customClass="SegmentControl" customModule="Pupago" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="282" height="33"/>
@@ -1505,19 +1518,30 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                                 <integer key="value" value="5"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="maxLength">
+                                                                <integer key="value" value="30"/>
+                                                            </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="spf-Mw-0x6">
-                                                        <rect key="frame" x="0.0" y="96" width="165.5" height="14.5"/>
+                                                        <rect key="frame" x="0.0" y="96" width="158.5" height="13.5"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconNotification" translatesAutoresizingMaskIntoConstraints="NO" id="WFC-Nl-vDa">
-                                                                <rect key="frame" x="0.0" y="0.0" width="14" height="14.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="14" height="13.5"/>
                                                             </imageView>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="방 이름은 2~30자여야 합니다." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ncz-2n-flo">
-                                                                <rect key="frame" x="18" y="0.0" width="147.5" height="14.5"/>
-                                                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="12"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="방 이름은 2~30자여야 합니다." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ncz-2n-flo" customClass="ValidatingLabel" customModule="Pupago" customModuleProvider="target">
+                                                                <rect key="frame" x="18" y="0.0" width="140.5" height="13.5"/>
+                                                                <fontDescription key="fontDescription" name=".SFUI-Semibold" family=".AppleSystemUIFont" pointSize="12"/>
                                                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="correctColor">
+                                                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="warningColor">
+                                                                        <color key="value" systemColor="systemRedColor"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
                                                             </label>
                                                         </subviews>
                                                     </stackView>
@@ -2002,6 +2026,9 @@
         <designable name="GAF-io-Shw">
             <size key="intrinsicContentSize" width="5" height="25.5"/>
         </designable>
+        <designable name="Jxl-NG-DSk">
+            <size key="intrinsicContentSize" width="256.5" height="16"/>
+        </designable>
         <designable name="KKZ-u6-060">
             <size key="intrinsicContentSize" width="143" height="21"/>
         </designable>
@@ -2010,6 +2037,9 @@
         </designable>
         <designable name="N5k-gY-HCD">
             <size key="intrinsicContentSize" width="30" height="30"/>
+        </designable>
+        <designable name="Ncz-2n-flo">
+            <size key="intrinsicContentSize" width="140.5" height="13.5"/>
         </designable>
         <designable name="PEt-Pc-nuO">
             <size key="intrinsicContentSize" width="30" height="30"/>
@@ -2106,6 +2136,9 @@
         </systemColor>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

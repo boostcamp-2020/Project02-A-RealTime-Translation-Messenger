@@ -50,6 +50,7 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
     // MARK: - Transform
     
     func transform(_ input: Input) -> Output {
+        
         fetchThumbnail()
             .bind(to: thumbnailImage)
             .disposed(by: rx.disposeBag)
