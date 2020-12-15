@@ -1,10 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useIntl } from 'react-intl';
 
 import CheckBox from '../../atoms/boxes/CheckBox';
 import Text from '../../atoms/texts/Text';
 import UnderLinedInput from '../../atoms/inputs/UnderLinedInput';
 import Palette from '../../../@types/Palette';
+import CharacterLimit from '../../../@types/characterLimit';
 
 export type RoomCreationPropsType = {
   TypedWordCount: number;
@@ -51,22 +53,24 @@ export const RoomCreation = ({
   value,
   isPrivateOnClick,
 }: RoomCreationPropsType) => {
+  const { formatMessage } = useIntl();
   return (
     <>
       <CheckBoxWrapper>
         <CheckBox isChecked={privateSelected ? false : true} isPrivateOnClick={isPrivateOnClick} isPrivate={'false'}>
-          공개
+          {formatMessage({ id: 'public' })}
         </CheckBox>
         <CheckBox isChecked={privateSelected ? true : false} isPrivateOnClick={isPrivateOnClick} isPrivate={'true'}>
-          비공개
+          {formatMessage({ id: 'private' })}
         </CheckBox>
       </CheckBoxWrapper>
       <RoomCreationWrapper>
         <UnderLinedInput
           value={value}
-          placeholder={'방 제목을 입력해주세요.'}
-          maxLength={30}
+          placeholder={formatMessage({ id: 'enterRoomTitle' })}
+          maxLength={CharacterLimit.ROOM_NAME_MAX}
           onChange={InputOnChange}
+          valid={true}
         />
         <RightAlignedText
           size={14}

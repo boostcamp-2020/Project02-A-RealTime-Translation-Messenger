@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import Text from '../../atoms/texts/Text';
 import CryingPapago from '../../atoms/resources/CryingPapago';
+import { useIntl } from 'react-intl';
 
 const NoChatRoomBox = styled.div`
   display: flex;
@@ -22,11 +23,12 @@ const CreateRoomText = styled(Text)`
 `;
 
 function NoChatRoom() {
+  const { formatMessage } = useIntl();
   return (
     <NoChatRoomBox>
-      <NoChatRoomText size={14}>채팅방이 없어요!</NoChatRoomText>
+      <NoChatRoomText size={14}>{formatMessage({ id: 'thereIsNoChatRoom' })}</NoChatRoomText>
       <CryingPapago />
-      <CreateRoomText size={14}>방을 만들고 대화를 시작해보세요!</CreateRoomText>
+      <CreateRoomText size={14}>{formatMessage({ id: 'startYourOwnChatRoom' })}</CreateRoomText>
     </NoChatRoomBox>
   );
 }

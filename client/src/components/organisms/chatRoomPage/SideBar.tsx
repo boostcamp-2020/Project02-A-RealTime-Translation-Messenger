@@ -7,9 +7,9 @@ import { JoiningRoomType, SideBarStatus } from '../../../@types/types';
 import ParticipantList from './ParticipantList';
 import RoomSwitchModal from '../../molecules/chatRoomPage/RoomSwitchModal';
 import useReset from '../../../hooks/useReset';
-import useRoomList from '../../../hooks/useRoomList';
 import useRoom from '../../../hooks/useRoom';
 import { useHistory } from 'react-router-dom';
+import useUser from '../../../hooks/useUser';
 
 const SideBarWrapper = styled.div`
   position: relative;
@@ -30,9 +30,9 @@ function SideBar() {
     isPrivate: 'false',
   });
   const { onReset } = useReset();
-  const { onGetRoomList } = useRoomList();
   const { onJoinRoom } = useRoom();
   const history = useHistory();
+  const { socketData } = useUser();
 
   return (
     <SideBarWrapper>
@@ -40,11 +40,11 @@ function SideBar() {
         <RoomSwitchWrapper>
           <RoomSwitchModal
             onClickConfirm={() => {
-              setIsSwitching(false);
+              socketData?.disconnect();
               onReset();
               onJoinRoom(switchingRoom);
-              onGetRoomList();
               history.push('/loading');
+              setIsSwitching(false);
             }}
             onClickBackground={() => {
               setIsSwitching(false);

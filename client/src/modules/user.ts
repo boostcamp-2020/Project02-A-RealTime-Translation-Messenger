@@ -1,5 +1,6 @@
 import { createAsyncThunk, PayloadAction, createSlice } from '@reduxjs/toolkit';
 
+import LangCode from '../@types/langCode';
 import api from '../assets/api';
 
 const name = 'user';
@@ -17,7 +18,7 @@ type InitialStateType = {
     data: string;
   };
   language: {
-    data: 'Korean' | 'English';
+    data: LangCode;
   };
   imageLink: {
     data: string | null;
@@ -37,7 +38,7 @@ const initialState: InitialStateType = {
     data: '',
   },
   language: {
-    data: 'Korean',
+    data: LangCode.KOREAN,
   },
   imageLink: {
     data: null,
@@ -59,7 +60,7 @@ const user = createSlice({
     setNickname: (state, action: PayloadAction<string>) => {
       state.nickname.data = action.payload;
     },
-    setLanguage: (state, action: PayloadAction<'Korean' | 'English'>) => {
+    setLanguage: (state, action: PayloadAction<LangCode>) => {
       state.language.data = action.payload;
     },
     setSocket: (state, action: PayloadAction<SocketIOClient.Socket | null>) => {
@@ -80,7 +81,7 @@ const user = createSlice({
       .addCase(getRandomProfileImage.pending.type, (state) => {
         state.imageLink.loading = true;
       })
-      .addCase(getRandomProfileImage.fulfilled.type, (state, action: PayloadAction<'Korean' | 'English'>) => {
+      .addCase(getRandomProfileImage.fulfilled.type, (state, action: PayloadAction<LangCode>) => {
         state.imageLink.loading = false;
         state.imageLink.data = action.payload;
       })

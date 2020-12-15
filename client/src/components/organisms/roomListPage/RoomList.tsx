@@ -8,6 +8,7 @@ import RoomItem from '../../molecules/common/RoomItem';
 import timeDisplay from '../../../utils/timeDisplay';
 import CryingPapago from './CryingPapago';
 import ParticipantsLimit from '../../../@types/participantsLimit';
+import useUser from '../../../hooks/useUser';
 
 type WrapperType = {
   isEmpty: boolean;
@@ -44,6 +45,7 @@ function RoomList() {
   }, [roomData.roomCode]);
 
   const returnList = () => {
+    const { languageData } = useUser();
     if (roomListData === null) {
       return <></>;
     } else if (roomListData!.length === 0) {
@@ -55,7 +57,11 @@ function RoomList() {
             key={room.roomCode}
             size="big"
             title={room.title}
-            createdAt={timeDisplay.timeSinceKorean(room.createdAt)}
+            createdAt={
+              languageData === 'Korean'
+                ? timeDisplay.timeSinceKorean(room.createdAt)
+                : timeDisplay.timeSinceEnglish(room.createdAt)
+            }
             roomCapacity={ParticipantsLimit.PARTICIPATNS_MAX_COUNT}
             participantCount={room.participantCount}
             disabled={room.participantCount < ParticipantsLimit.PARTICIPATNS_MAX_COUNT ? false : true}

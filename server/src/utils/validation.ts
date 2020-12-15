@@ -42,14 +42,14 @@ const isNicknameValid = (nickname: string) => {
 };
 
 const isLanguageValid = (language: string) => {
-  if (language === 'Korean' || language === 'English') return true;
+  if (language === LangCode.KOREAN || language === LangCode.ENGLISH) return true;
 
   return false;
 };
 
 const isMessageValid = (sendChat: SendChatType) => {
   const { origin } = sendChat;
-  if (origin !== 'Korean' && origin !== 'English') return false;
+  if (origin !== LangCode.KOREAN && origin !== LangCode.ENGLISH) return false;
 
   const message = sendChat[origin];
   if (message.trim().length === 0) return false;

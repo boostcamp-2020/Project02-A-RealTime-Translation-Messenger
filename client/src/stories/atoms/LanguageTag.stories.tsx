@@ -12,12 +12,12 @@ const Template: Story<LanguageTagPropsType> = (args) => <LanguageTag {...args} /
 
 export const Active = Template.bind({});
 Active.args = {
-  language: 'Korean',
+  language: LangCode.KOREAN,
   isMe: true,
 };
 
 export const Disabled = Template.bind({});
 Disabled.args = {
-  language: 'English',
+  language: LangCode.ENGLISH,
   isMe: false,
 };

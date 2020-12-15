@@ -2,7 +2,6 @@ import { createAsyncThunk, PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 import { TranslateTextPropsType } from '../@types/types';
 import api from '../assets/api';
-import { getLanguageByLangCode, getLangCodeByLanguage } from '../utils/langCode';
 import LangCode from '../@types/langCode';
 import useUser from '../hooks/useUser';
 
@@ -10,7 +9,7 @@ const name = 'chatInput';
 
 const getTranslatedText = createAsyncThunk(
   `${name}/getLanguageOfInputText`,
-  async ({ text, origin }: { text: string; origin: 'Korean' | 'English' }, { rejectWithValue }) => {
+  async ({ text, origin }: { text: string; origin: LangCode }, { rejectWithValue }) => {
     try {
       if (text.trim().length === 0) return { translationText: '', origin: origin };
       const { langCode } = (await api.detectLanguage({ query: text })).data;
@@ -25,7 +24,7 @@ const getTranslatedText = createAsyncThunk(
       };
 
       const { translatedText } = (await api.translateText(translateTextProps)).data;
-      return { translationText: translatedText, origin: getLanguageByLangCode(source) };
+      return { translationText: translatedText, origin: source };
     } catch (e) {
       console.log(e);
       return rejectWithValue(e);
@@ -40,7 +39,7 @@ type InitialStateType = {
 
   translation: {
     data: {
-      origin: 'Korean' | 'English';
+      origin: LangCode;
       translationText: string;
     };
     loading: boolean;
@@ -58,7 +57,7 @@ const initialState: InitialStateType = {
   },
 
   translation: {
-    data: { origin: 'Korean', translationText: '' },
+    data: { origin: LangCode.KOREAN, translationText: '' },
     loading: false,
     error: null,
   },
@@ -80,7 +79,7 @@ const chatInput = createSlice({
     },
     resetChatInput: (state) => {
       state.chatInput.data = '';
-      state.translation.data = { origin: 'Korean', translationText: '' };
+      state.translation.data = { origin: LangCode.KOREAN, translationText: '' };
     },
     setCycle: (state, action: PayloadAction<'PROCESS' | 'DONE'>) => {
       state.cycle.data = action.payload;
@@ -93,7 +92,7 @@ const chatInput = createSlice({
       })
       .addCase(
         getTranslatedText.fulfilled.type,
-        (state, action: PayloadAction<{ translationText: string; origin: 'Korean' | 'English' }>) => {
+        (state, action: PayloadAction<{ translationText: string; origin: LangCode }>) => {
           state.translation.loading = false;
           state.translation.data = action.payload;
           state.cycle.data = 'DONE';
