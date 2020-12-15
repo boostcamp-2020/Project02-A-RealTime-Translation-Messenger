@@ -1,14 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Logo = styled.img`
+import Images from '../../../assets/images';
+
+const StyledLogo = styled.img`
   display: block;
   width: 53px;
   height: 72px;
 `;
 
 export function LogoWithText() {
-  return <Logo src="https://i.imgur.com/Lcng1gJ.png" alt="pupago logo with text" />;
+  return <StyledLogo src={Images.LOGO_WITH_THEXT} alt="pupago logo with text" />;
 }
 
 export default LogoWithText;

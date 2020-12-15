@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import ParticipantsLimit from '../../../@types/participantsLimit';
 
 import useParticipantsList from '../../../hooks/useParticipantsList';
 import useUser from '../../../hooks/useUser';
@@ -22,7 +23,10 @@ function ParticipantList() {
   return (
     <>
       <ParticipantCountWrapper>
-        <ParticipantCount participatingCount={participants.length} maxCapacity={8} />
+        <ParticipantCount
+          participatingCount={participants.length}
+          maxCapacity={ParticipantsLimit.PARTICIPATNS_MAX_COUNT}
+        />
       </ParticipantCountWrapper>
       {participants
         .filter((participant) => participant.socketId === socketIdData)

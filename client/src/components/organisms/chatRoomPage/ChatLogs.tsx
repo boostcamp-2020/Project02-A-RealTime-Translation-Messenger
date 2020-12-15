@@ -27,7 +27,7 @@ function ChatLogs() {
   const { data: chatLogs } = useChat();
   const { languageData, socketIdData } = useUser();
 
-  const divRef = useRef(null);
+  const divRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (divRef.current !== null) {
