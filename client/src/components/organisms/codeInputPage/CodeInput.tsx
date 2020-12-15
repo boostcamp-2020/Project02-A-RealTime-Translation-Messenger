@@ -1,6 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { useIntl } from 'react-intl';
-import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 import CharacterLimit from '../../../@types/characterLimit';
@@ -20,7 +19,6 @@ const isRoomCodeValid = (roomCode: string) => {
 
 function CodeInput() {
   const { data: room, error: roomError, onJoinRoom, onChangeRoomCode } = useRoom();
-  const history = useHistory();
   const [roomCodeStatus, setRoomCodeStatus] = useState({ code: room.roomCode, valid: true });
   const { code, valid } = roomCodeStatus;
   const { onReset } = useReset();

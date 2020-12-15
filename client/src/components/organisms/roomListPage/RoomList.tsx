@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useHistory } from 'react-router-dom';
 
 import useRoom from '../../../hooks/useRoom';
 import useRoomList from '../../../hooks/useRoomList';
@@ -30,8 +29,6 @@ const RoomListWrapper = styled.div<WrapperType>`
 function RoomList() {
   const { data: roomListData, onGetRoomList } = useRoomList();
   const { data: roomData, onJoinRoom, loading, error } = useRoom();
-
-  const history = useHistory();
 
   useEffect(() => {
     onGetRoomList();
