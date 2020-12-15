@@ -89,6 +89,7 @@
 		BD62700825709AC500569277 /* OthersChattingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD62700725709AC500569277 /* OthersChattingCell.swift */; };
 		BD65A7FE25729A6700EE43BC /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD65A7FD25729A6700EE43BC /* Message.swift */; };
 		BD65A8062572A06500EE43BC /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD65A8052572A06500EE43BC /* Label.swift */; };
+		BD7832252588590600036023 /* KeyboardHandleable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7832242588590600036023 /* KeyboardHandleable.swift */; };
 		BD7A7C3E25875B9500E84669 /* ValidatingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7A7C3D25875B9500E84669 /* ValidatingLabel.swift */; };
 		BD7A7C4325875FCB00E84669 /* UITextField+Binder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7A7C4225875FCB00E84669 /* UITextField+Binder.swift */; };
 		BD7A7C482587631200E84669 /* UIButton+Binder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7A7C472587631200E84669 /* UIButton+Binder.swift */; };
@@ -202,6 +203,7 @@
 		BD62700725709AC500569277 /* OthersChattingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OthersChattingCell.swift; sourceTree = "<group>"; };
 		BD65A7FD25729A6700EE43BC /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		BD65A8052572A06500EE43BC /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
+		BD7832242588590600036023 /* KeyboardHandleable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHandleable.swift; sourceTree = "<group>"; };
 		BD7A7C3D25875B9500E84669 /* ValidatingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatingLabel.swift; sourceTree = "<group>"; };
 		BD7A7C4225875FCB00E84669 /* UITextField+Binder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Binder.swift"; sourceTree = "<group>"; };
 		BD7A7C472587631200E84669 /* UIButton+Binder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Binder.swift"; sourceTree = "<group>"; };
@@ -372,6 +374,7 @@
 				978F5813257A89C80034846A /* SlideInTransition.swift */,
 				9789304325811ED100A1A40E /* Pulsing.swift */,
 				BD7A7C3D25875B9500E84669 /* ValidatingLabel.swift */,
+				BD7832242588590600036023 /* KeyboardHandleable.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -868,6 +871,7 @@
 				BD626FF82570997B00569277 /* StackView.swift in Sources */,
 				BD7A7C482587631200E84669 /* UIButton+Binder.swift in Sources */,
 				BD65A8062572A06500EE43BC /* Label.swift in Sources */,
+				BD7832252588590600036023 /* KeyboardHandleable.swift in Sources */,
 				975A9759257AA20D000C3AE5 /* Participant.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

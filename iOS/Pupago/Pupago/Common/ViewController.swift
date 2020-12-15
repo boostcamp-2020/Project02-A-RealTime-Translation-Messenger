@@ -5,7 +5,7 @@
 //  Created by 김근수 on 2020/11/23.
 //
 
-import UIKit
+import RxSwift
 import Lottie
 import AudioToolbox
 
@@ -40,7 +40,6 @@ class ViewController: UIViewController, Navigatable {
     override func viewDidLoad() {
         super.viewDidLoad()
         bindViewModel()
-        registerForKeyboardNotifications()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -48,7 +47,6 @@ class ViewController: UIViewController, Navigatable {
     }
     
     func bindViewModel() {}
-    func registerForKeyboardNotifications() {}
     
 }
 

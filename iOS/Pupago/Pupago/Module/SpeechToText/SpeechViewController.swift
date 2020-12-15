@@ -23,10 +23,9 @@ class SpeechViewController: ViewController {
     @IBOutlet weak var translationConstraint: NSLayoutConstraint!
     @IBOutlet weak var buttonConstraint: NSLayoutConstraint!
     
-    private var keyboardShown: Bool = false
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        bindKeyboard()
     }
     
     override func bindViewModel() {
@@ -83,19 +82,7 @@ class SpeechViewController: ViewController {
                 self.navigator.dismiss(sender: self)
             })
             .disposed(by: rx.disposeBag)
-    }
     
-    override func registerForKeyboardNotifications() {
-        super.registerForKeyboardNotifications()
-        
-        NotificationCenter.default
-            .addObserver(self, selector: #selector(keyboardWillShow),
-                               name: UIResponder.keyboardWillShowNotification,
-                               object: nil)
-        NotificationCenter.default
-            .addObserver(self, selector: #selector(keyboardWillHide),
-                               name: UIResponder.keyboardWillHideNotification,
-                               object: nil)
     }
     
 }
@@ -115,32 +102,21 @@ extension SpeechViewController {
         animatingLayer.removeFromSuperlayer()
     }
     
-    @objc func keyboardWillShow(notification: NSNotification) {
-        let responder = translationTextView.isFirstResponder
-        if responder, let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            if keyboardSize.height == 0.0 || keyboardShown { return }
-            
-            UIView.animate(withDuration: 0) {
-                let bottomPadding = self.view.safeAreaInsets.bottom
-                self.originConstraint.constant -= (keyboardSize.height - bottomPadding)
-                self.translationConstraint.constant -= (keyboardSize.height - bottomPadding)
-                self.buttonConstraint.constant += (keyboardSize.height - bottomPadding)
-                self.keyboardShown = true
-                self.view.layoutIfNeeded()
-            }
-        }
-    }
+}
+
+extension SpeechViewController: KeyboardHandleable {
     
-    @objc func keyboardWillHide(notification: NSNotification) {
-        if !keyboardShown { return }
-            
-        UIView.animate(withDuration: 0) {
-            self.originConstraint.constant = 0
-            self.translationConstraint.constant = 0
-            self.buttonConstraint.constant = 32
-            self.keyboardShown = false
-            self.view.layoutIfNeeded()
-        }
+    func bindKeyboard() {
+        keyboardHeight
+            .filter { [unowned self] _ in translationTextView.isFirstResponder }
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] keyboardHeight in
+                originConstraint.constant = -keyboardHeight
+                translationConstraint.constant = -keyboardHeight
+                buttonConstraint.constant = keyboardHeight
+                view.layoutIfNeeded()
+            })
+            .disposed(by: rx.disposeBag)
     }
     
 }

@@ -19,11 +19,10 @@ final class CreateRoomViewController: ViewController {
     @IBOutlet weak var privateSegment: SegmentControl!
     @IBOutlet weak var centerConstraint: NSLayoutConstraint!
     
-    private var keyboardShown: Bool = false
-    
     // MARK: - Object Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        bindKeyboard()
     }
     
     // MARK: - Bind ViewModel
@@ -73,46 +72,23 @@ final class CreateRoomViewController: ViewController {
                 self.navigator.dismiss(sender: self)
             })
             .disposed(by: rx.disposeBag)
+        
     }
     
-    override func registerForKeyboardNotifications() {
-        super.registerForKeyboardNotifications()
-        
-        NotificationCenter.default
-            .addObserver(self, selector: #selector(keyboardWillShow),
-                               name: UIResponder.keyboardWillShowNotification,
-                               object: nil)
-        NotificationCenter.default
-            .addObserver(self, selector: #selector(keyboardWillHide),
-                               name: UIResponder.keyboardWillHideNotification,
-                               object: nil)
-    }
 }
 
-// MARK: - KeyBoard Notification
-extension CreateRoomViewController {
+extension CreateRoomViewController: KeyboardHandleable {
     
-    @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            if keyboardSize.height == 0.0 || keyboardShown { return }
-            
-            UIView.animate(withDuration: 0) {
-                let bottomPadding = self.view.safeAreaInsets.bottom
-                self.centerConstraint.constant -= (keyboardSize.height - bottomPadding) / 2
-                self.keyboardShown = true
-                self.view.layoutIfNeeded()
-            }
-        }
+    func bindKeyboard() {
+        keyboardHeight
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] keyboardHeight in
+                let constraintHeight = keyboardHeight == 0 ? 0 : keyboardHeight - (view.safeAreaInsets.bottom) * 2
+                
+                centerConstraint.constant = -(constraintHeight) / 2
+                view.layoutIfNeeded()
+            })
+            .disposed(by: rx.disposeBag)
     }
     
-    @objc func keyboardWillHide(notification: NSNotification) {
-        if !keyboardShown { return }
-            
-        UIView.animate(withDuration: 0) {
-            self.centerConstraint.constant = 0
-            self.keyboardShown = false
-            self.view.layoutIfNeeded()
-        }
-    }
-  
 }

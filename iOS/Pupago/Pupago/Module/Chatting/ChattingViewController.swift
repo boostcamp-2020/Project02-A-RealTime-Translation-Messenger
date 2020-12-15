@@ -41,6 +41,7 @@ class ChattingViewController: ViewController {
         self.navigationItem.rightBarButtonItem = rightNavigationItem
         configureCollectionView()
         configureToasterView()
+        bindKeyboard()
     }
     
     override func bindViewModel() {
@@ -148,19 +149,7 @@ class ChattingViewController: ViewController {
                 Toast(text: toasterText).show()
             })
             .disposed(by: rx.disposeBag)
-    }
-    
-    override func registerForKeyboardNotifications() {
-        super.registerForKeyboardNotifications()
         
-        NotificationCenter.default
-            .addObserver(self, selector: #selector(keyboardWillShow),
-                               name: UIResponder.keyboardWillShowNotification,
-                               object: nil)
-        NotificationCenter.default
-            .addObserver(self, selector: #selector(keyboardWillHide),
-                               name: UIResponder.keyboardWillHideNotification,
-                               object: nil)
     }
     
     func resetTranslationView() {
@@ -208,39 +197,29 @@ extension ChattingViewController {
         self.collectionView.scrollToItem(at: indexPath, at: .bottom, animated: true)
     }
     
-    @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            if keyboardSize.height == 0.0 || keyboardShown { return }
-            
-            let bottomPadding = self.view.safeAreaInsets.bottom
-            inputBarBottomConstraint.constant = keyboardSize.height - bottomPadding
-            
-            UIView.animate(withDuration: 0) {
-                self.collectionView.contentInset.bottom = keyboardSize.height - bottomPadding
-                self.collectionView.verticalScrollIndicatorInsets.bottom = self.collectionView.contentInset.bottom - bottomPadding
-                self.keyboardShown = true
-                self.scrollDownChat()
-            }
-        }
-        
-    }
-    
-    @objc func keyboardWillHide(notification: NSNotification) {
-        if !keyboardShown { return }
-        self.inputBarBottomConstraint.constant = 0
-            
-        UIView.animate(withDuration: 0) {
-            self.collectionView.contentInset.bottom = 0
-            self.collectionView.verticalScrollIndicatorInsets.bottom = self.collectionView.contentInset.bottom
-            self.keyboardShown = false
-            self.scrollDownChat()
-            self.view.layoutIfNeeded()
-        }
-        
-    }
-    
     @objc func dismissKeyboard(_ : NSNotification) {
         self.view.endEditing(true)
+    }
+    
+}
+
+extension ChattingViewController: KeyboardHandleable {
+    
+    func bindKeyboard() {
+        keyboardHeight
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] keyboardHeight in
+                let bottomPadding = view.safeAreaInsets.bottom
+                let constraintHeight = keyboardHeight == 0 ? 0 : keyboardHeight - bottomPadding
+                let bottomHeight = keyboardHeight == 0 ? 0 : bottomPadding
+                
+                inputBarBottomConstraint.constant = constraintHeight
+                collectionView.contentInset.bottom = constraintHeight
+                collectionView.verticalScrollIndicatorInsets.bottom = collectionView.contentInset.bottom - bottomHeight
+                view.layoutIfNeeded()
+                scrollDownChat()
+            })
+            .disposed(by: rx.disposeBag)
     }
     
 }

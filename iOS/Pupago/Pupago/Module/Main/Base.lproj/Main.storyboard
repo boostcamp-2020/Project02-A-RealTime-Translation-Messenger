@@ -1177,7 +1177,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="drC-pd-RrJ" customClass="View" customModule="Pupago" customModuleProvider="target">
-                                <rect key="frame" x="31" y="161.5" width="352" height="573"/>
+                                <rect key="frame" x="31" y="156" width="352" height="566"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gC3-Gc-txn">
                                         <rect key="frame" x="20" y="20" width="20" height="18"/>
@@ -1190,7 +1190,7 @@
                                         </state>
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="3EH-dN-HcI">
-                                        <rect key="frame" x="24" y="60" width="304" height="481"/>
+                                        <rect key="frame" x="24" y="60" width="304" height="474"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -1226,23 +1226,24 @@
                             <constraint firstItem="Wu7-3A-B1X" firstAttribute="leading" secondItem="92K-XO-tDM" secondAttribute="leading" id="Kdc-LZ-Pwe"/>
                             <constraint firstItem="Wu7-3A-B1X" firstAttribute="trailing" secondItem="92K-XO-tDM" secondAttribute="trailing" id="Lb6-Ry-uwS"/>
                             <constraint firstItem="xyb-8b-7O8" firstAttribute="top" secondItem="92K-XO-tDM" secondAttribute="top" id="MUf-C5-GFC"/>
-                            <constraint firstItem="drC-pd-RrJ" firstAttribute="centerY" secondItem="pKV-u7-NdR" secondAttribute="centerY" id="NSE-DY-1QL"/>
                             <constraint firstItem="drC-pd-RrJ" firstAttribute="centerX" secondItem="pKV-u7-NdR" secondAttribute="centerX" id="PUN-DA-Dq5"/>
                             <constraint firstItem="BXN-L0-j7K" firstAttribute="top" secondItem="pKV-u7-NdR" secondAttribute="top" id="Rwy-zS-GFy"/>
                             <constraint firstItem="drC-pd-RrJ" firstAttribute="width" secondItem="92K-XO-tDM" secondAttribute="width" multiplier="0.85" id="Uwb-v2-HKM"/>
+                            <constraint firstItem="92K-XO-tDM" firstAttribute="bottom" secondItem="drC-pd-RrJ" secondAttribute="bottom" constant="140" id="YqK-rv-g6c"/>
                             <constraint firstItem="Smm-In-2mz" firstAttribute="height" secondItem="92K-XO-tDM" secondAttribute="height" multiplier="0.25" id="Zmx-9B-cz1"/>
                             <constraint firstItem="Wu7-3A-B1X" firstAttribute="top" secondItem="Smm-In-2mz" secondAttribute="bottom" constant="24" id="aab-We-yWM"/>
                             <constraint firstItem="92K-XO-tDM" firstAttribute="bottom" secondItem="xQh-ER-VxM" secondAttribute="bottom" id="ad2-AF-CeG"/>
                             <constraint firstItem="Smm-In-2mz" firstAttribute="leading" secondItem="92K-XO-tDM" secondAttribute="leading" constant="28" id="caX-xR-QfP"/>
                             <constraint firstItem="92K-XO-tDM" firstAttribute="trailing" secondItem="Smm-In-2mz" secondAttribute="trailing" constant="28" id="fBy-yh-6bw"/>
                             <constraint firstAttribute="trailing" secondItem="BXN-L0-j7K" secondAttribute="trailing" id="fKy-ML-GUI"/>
+                            <constraint firstItem="drC-pd-RrJ" firstAttribute="top" secondItem="xyb-8b-7O8" secondAttribute="bottom" constant="60" id="fVS-L9-7JQ"/>
                             <constraint firstItem="92K-XO-tDM" firstAttribute="trailing" secondItem="xQh-ER-VxM" secondAttribute="trailing" constant="28" id="fbI-E1-aoO"/>
                             <constraint firstItem="Smm-In-2mz" firstAttribute="top" secondItem="xyb-8b-7O8" secondAttribute="bottom" constant="52" id="ptJ-gb-LQR"/>
                             <constraint firstItem="xyb-8b-7O8" firstAttribute="leading" secondItem="92K-XO-tDM" secondAttribute="leading" id="y3S-Ru-jC2"/>
-                            <constraint firstItem="drC-pd-RrJ" firstAttribute="height" secondItem="92K-XO-tDM" secondAttribute="height" multiplier="0.7" id="zlq-HL-nEu"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="bottomConstraint" destination="YqK-rv-g6c" id="rDY-qk-vMx"/>
                         <outlet property="cancleButton" destination="gC3-Gc-txn" id="q7L-X1-R4l"/>
                         <outlet property="captureImageView" destination="Smm-In-2mz" id="aAj-Uj-zXV"/>
                         <outlet property="descriptionLabel" destination="JR2-FA-C1z" id="1aR-jk-ruL"/>
@@ -1260,7 +1261,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0fD-zH-PWQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3557.9439252336447" y="-632.39740820734346"/>
+            <point key="canvasLocation" x="3556.521739130435" y="-632.8125"/>
         </scene>
         <!--Participant View Controller-->
         <scene sceneID="ntu-Vc-PTC">

@@ -25,6 +25,7 @@ class ScanningViewController: ViewController {
     @IBOutlet weak var cancleButton: UIButton!
     @IBOutlet weak var seeMoreTextView: UITextView!
     @IBOutlet weak var seeMoreView: View!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
     private let originTapGesture = UITapGestureRecognizer()
     private let translationTapGesture = UITapGestureRecognizer()
@@ -32,6 +33,7 @@ class ScanningViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureGesture()
+        bindKeyboard()
     }
     
     override func bindViewModel() {
@@ -113,6 +115,22 @@ private extension ScanningViewController {
     func configureGesture() {
         originLabel.addGestureRecognizer(originTapGesture)
         translationLabel.addGestureRecognizer(translationTapGesture)
+    }
+    
+}
+
+extension ScanningViewController: KeyboardHandleable {
+    
+    func bindKeyboard() {
+        keyboardHeight
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] keyboardHeight in
+                let constraintHeight = keyboardHeight == 0 ? 160 : keyboardHeight
+                
+                bottomConstraint.constant = constraintHeight
+                view.layoutIfNeeded()
+            })
+            .disposed(by: rx.disposeBag)
     }
     
 }
