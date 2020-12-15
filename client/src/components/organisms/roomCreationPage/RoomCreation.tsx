@@ -2,6 +2,7 @@ import React from 'react';
 
 import RoomCreationMolecule from '../../molecules/roomCreationPage/RoomCreation';
 import useRoom from '../../../hooks/useRoom';
+import CharacterLimit from '../../../@types/characterLimit';
 
 function RoomCreation() {
   const { data: roomData, onSetRoomTitle, onSetIsPrivate } = useRoom();
@@ -10,8 +11,8 @@ function RoomCreation() {
     <div>
       <RoomCreationMolecule
         TypedWordCount={roomData.title.length}
-        MaxWordCount={30}
-        privateSelected={roomData.isPrivate === 'true' ? true : false}
+        MaxWordCount={CharacterLimit.ROOM_NAME_MAX}
+        privateSelected={roomData.isPrivate}
         value={roomData.title}
         isPrivateOnClick={onSetIsPrivate}
         InputOnChange={(e) => {

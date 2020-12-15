@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import LangCode from '../../../@types/langCode';
+import ParticipantsLimit from '../../../@types/participantsLimit';
+
 import useParticipantsList from '../../../hooks/useParticipantsList';
 import useUser from '../../../hooks/useUser';
 import ParticipantCount from '../../molecules/chatRoomPage/ParticipantCount';
@@ -22,7 +25,10 @@ function ParticipantList() {
   return (
     <>
       <ParticipantCountWrapper>
-        <ParticipantCount participatingCount={participants.length} maxCapacity={8} />
+        <ParticipantCount
+          participatingCount={participants.length}
+          maxCapacity={ParticipantsLimit.PARTICIPATNS_MAX_COUNT}
+        />
       </ParticipantCountWrapper>
       {participants
         .filter((participant) => participant.socketId === socketIdData)
@@ -30,7 +36,7 @@ function ParticipantList() {
           <ParticipantItemWrapper key={participant.socketId}>
             <ParticipantItem
               imageLink={participant.imageLink}
-              language={participant.language as 'Korean' | 'English'}
+              language={participant.language as LangCode}
               isMe={participant.socketId === socketIdData}
               nickname={participant.nickname}
             />
@@ -43,7 +49,7 @@ function ParticipantList() {
           <ParticipantItemWrapper key={participant.socketId}>
             <ParticipantItem
               imageLink={participant.imageLink}
-              language={participant.language as 'Korean' | 'English'}
+              language={participant.language as LangCode}
               isMe={participant.socketId === socketIdData}
               nickname={participant.nickname}
             />

@@ -6,6 +6,8 @@ import RoomItem from '../../molecules/common/RoomItem';
 import timeDisplay from '../../../utils/timeDisplay';
 import useRoom from '../../../hooks/useRoom';
 import { JoiningRoomType } from '../../../@types/types';
+import ParticipantsLimit from '../../../@types/participantsLimit';
+import useUser from '../../../hooks/useUser';
 
 type ChatRoomListPropsType = {
   setIsSwitching: React.Dispatch<React.SetStateAction<boolean>>;
@@ -15,6 +17,7 @@ type ChatRoomListPropsType = {
 function ChatRoomList({ setIsSwitching, setSwitchingRoom }: ChatRoomListPropsType) {
   const { data: rooms, onGetRoomList } = useRoomList();
   const { data: roomData } = useRoom();
+  const { languageData } = useUser();
 
   useEffect(() => {
     onGetRoomList();
@@ -29,14 +32,19 @@ function ChatRoomList({ setIsSwitching, setSwitchingRoom }: ChatRoomListPropsTyp
           <RoomItem
             key={room.roomCode}
             size="small"
-            createdAt={timeDisplay.timeSinceKorean(room.createdAt)}
+            createdAt={
+              languageData === 'ko'
+                ? timeDisplay.timeSinceKorean(room.createdAt)
+                : timeDisplay.timeSinceEnglish(room.createdAt)
+            }
             participantCount={room.participantCount}
-            roomCapacity={8}
+            roomCapacity={ParticipantsLimit.PARTICIPATNS_MAX_COUNT}
             title={room.title}
             onClickItem={() => {
               setIsSwitching(true);
-              setSwitchingRoom({ roomCode: room.roomCode, isPrivate: 'false' });
+              setSwitchingRoom({ roomCode: room.roomCode, isPrivate: false });
             }}
+            disabled={room.participantCount === ParticipantsLimit.PARTICIPATNS_MAX_COUNT}
           />
         ))}
     </div>

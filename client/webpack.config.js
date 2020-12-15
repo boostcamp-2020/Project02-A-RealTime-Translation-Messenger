@@ -2,10 +2,7 @@
 
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const dotenv = require('dotenv');
 const webpack = require('webpack');
-
-dotenv.config();
 
 module.exports = {
   entry: './src/index.tsx',
@@ -39,7 +36,7 @@ module.exports = {
       inject: false,
     }),
     new webpack.DefinePlugin({
-      'process.env.BASE_URL': JSON.stringify(process.env.BASE_URL),
+      'process.env.BASE_URL': JSON.stringify('https://pupago-server.kro.kr'),
     }),
   ],
   node: {

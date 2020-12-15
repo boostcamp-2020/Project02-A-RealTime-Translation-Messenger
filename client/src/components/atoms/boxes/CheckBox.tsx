@@ -6,8 +6,8 @@ import Palette from '../../../@types/Palette';
 export type CheckBoxTypes = {
   isChecked: boolean;
   children?: React.ReactNode;
-  isPrivateOnClick: (isPrivate: 'true' | 'false') => void;
-  isPrivate: 'true' | 'false';
+  isPrivateOnClick: (isPrivate: boolean) => void;
+  isPrivate: boolean;
 };
 
 type StyledCheckBoxTypes = {

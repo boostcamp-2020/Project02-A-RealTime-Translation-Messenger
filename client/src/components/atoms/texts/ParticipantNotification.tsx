@@ -2,6 +2,7 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 import styled from 'styled-components';
 
+import LangCode from '../../../@types/langCode';
 import Palette from '../../../@types/Palette';
 
 const StyledParticipantNotification = styled.div`
@@ -26,7 +27,7 @@ const NotificationText = styled.span`
 export type ParticipantNotificationPropsType = {
   nickname: string;
   isEnter: boolean;
-  language: 'Korean' | 'English';
+  language: LangCode;
 };
 
 function ParticipantNotification({ nickname, isEnter, language }: ParticipantNotificationPropsType) {

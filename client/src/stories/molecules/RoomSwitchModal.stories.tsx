@@ -8,6 +8,13 @@ export default {
   component: RoomSwitchModal,
 } as Meta;
 
-const Template: Story = (args) => <RoomSwitchModal {...args} />;
+const Template: Story = (args) => (
+  <RoomSwitchModal
+    onClickConfirm={() => {}}
+    onClickCancel={() => {}}
+    onClickBackground={() => {}}
+    onClickClose={() => {}}
+  />
+);
 
 export const Default = Template.bind({});
