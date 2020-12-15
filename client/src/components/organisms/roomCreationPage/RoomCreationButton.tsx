@@ -17,13 +17,6 @@ function RoomCreationButton() {
   const history = useHistory();
   const { formatMessage } = useIntl();
 
-  useEffect(() => {
-    if (!error && !loading && roomData.roomCode !== '') {
-      // 채팅 페이지로 이동
-      history.push('/chat');
-    }
-  }, [roomData.roomCode]);
-
   return (
     <MainButton
       disabled={!roomTitleValidate(roomData.title)}

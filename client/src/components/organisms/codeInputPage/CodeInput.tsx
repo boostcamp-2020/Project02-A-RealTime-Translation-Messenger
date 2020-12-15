@@ -44,8 +44,13 @@ function CodeInput() {
     if (code.length === CharacterLimit.CODE_INPUT && isRoomCodeValid(code)) {
       onChangeRoomCode(code);
       onJoinRoom({ roomCode: code, isPrivate: 'true' });
+      setRoomCodeStatus({ code: '', valid: true });
     }
   }, [roomCodeStatus]);
+
+  useEffect(() => {
+    setRoomCodeStatus({ code: '', valid: true });
+  }, []);
 
   useEffect(() => {
     if (roomError !== null) {
@@ -54,12 +59,6 @@ function CodeInput() {
       onReset();
     }
   }, [roomError]);
-
-  useEffect(() => {
-    if (room.title.length > 0) {
-      history.push('/chat');
-    }
-  }, [room]);
 
   return (
     <Wrapper>

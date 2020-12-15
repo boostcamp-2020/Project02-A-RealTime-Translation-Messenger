@@ -37,13 +37,6 @@ function RoomList() {
     onGetRoomList();
   }, []);
 
-  useEffect(() => {
-    if (!error && !loading && roomData.roomCode !== '') {
-      // 채팅 페이지로 이동
-      history.push('/chat');
-    }
-  }, [roomData.roomCode]);
-
   const returnList = () => {
     const { languageData } = useUser();
     if (roomListData === null) {
