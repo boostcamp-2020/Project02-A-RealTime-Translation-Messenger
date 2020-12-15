@@ -17,6 +17,7 @@ final class CreateRoomViewController: ViewController {
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var createButton: Button!
     @IBOutlet weak var privateSegment: SegmentControl!
+    @IBOutlet weak var dimmingView: UIView!
     @IBOutlet weak var centerConstraint: NSLayoutConstraint!
     
     // MARK: - Property
@@ -81,7 +82,7 @@ final class CreateRoomViewController: ViewController {
 private extension CreateRoomViewController {
     
     func configureGesture() {
-        view.addGestureRecognizer(tapGesture)
+        dimmingView.addGestureRecognizer(tapGesture)
     }
     
 }

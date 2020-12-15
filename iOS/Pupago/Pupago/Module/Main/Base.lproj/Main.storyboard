@@ -1469,6 +1469,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ACw-qI-hNe">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YV0-3q-qkN" customClass="View" customModule="Pupago" customModuleProvider="target">
                                 <rect key="frame" x="31" y="184" width="352" height="528"/>
                                 <subviews>
@@ -1652,9 +1656,13 @@
                         <viewLayoutGuide key="safeArea" id="frp-Dn-gvk"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="ACw-qI-hNe" firstAttribute="top" secondItem="Yq9-fP-VLy" secondAttribute="top" id="Al6-ef-Nuw"/>
                             <constraint firstItem="YV0-3q-qkN" firstAttribute="centerY" secondItem="Yq9-fP-VLy" secondAttribute="centerY" id="Hcw-rP-mBc"/>
                             <constraint firstItem="YV0-3q-qkN" firstAttribute="centerX" secondItem="Yq9-fP-VLy" secondAttribute="centerX" id="LJg-4x-rEV"/>
+                            <constraint firstItem="ACw-qI-hNe" firstAttribute="leading" secondItem="frp-Dn-gvk" secondAttribute="leading" id="LnD-Rt-1c5"/>
                             <constraint firstItem="YV0-3q-qkN" firstAttribute="width" secondItem="Yq9-fP-VLy" secondAttribute="width" multiplier="0.85" id="Owk-q7-4Ps"/>
+                            <constraint firstItem="frp-Dn-gvk" firstAttribute="trailing" secondItem="ACw-qI-hNe" secondAttribute="trailing" id="XWO-CR-9gF"/>
+                            <constraint firstAttribute="bottom" secondItem="ACw-qI-hNe" secondAttribute="bottom" id="n8C-0X-5Sd"/>
                         </constraints>
                     </view>
                     <connections>
@@ -1662,6 +1670,7 @@
                         <outlet property="closeButton" destination="wUq-SI-mhM" id="PTC-dy-pE4"/>
                         <outlet property="createButton" destination="bYc-3w-0hz" id="D5N-1G-p4V"/>
                         <outlet property="descriptionLabel" destination="Ncz-2n-flo" id="BxI-Hw-beY"/>
+                        <outlet property="dimmingView" destination="ACw-qI-hNe" id="HuP-Cx-2F5"/>
                         <outlet property="privateSegment" destination="gpw-rI-zEV" id="DvE-2T-NUt"/>
                         <outlet property="roomTextField" destination="Bqk-sa-4T0" id="bKs-2D-iSq"/>
                         <outlet property="titleLabel" destination="md1-ij-vxg" id="i1M-Uy-0WE"/>
@@ -1669,7 +1678,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qcU-hd-SF6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1837.8504672897195" y="755.50755939524845"/>
+            <point key="canvasLocation" x="1837.68115942029" y="755.35714285714278"/>
         </scene>
         <!--Join Room View Controller-->
         <scene sceneID="gvh-lW-P4a">
@@ -1679,6 +1688,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oj5-Yy-Lx1">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kjy-SD-jo6" customClass="View" customModule="Pupago" customModuleProvider="target">
                                 <rect key="frame" x="31" y="184" width="352" height="528"/>
                                 <subviews>
@@ -1863,15 +1876,20 @@
                         <viewLayoutGuide key="safeArea" id="Aqs-6B-lfk"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="Oj5-Yy-Lx1" firstAttribute="top" secondItem="lPe-uL-hRH" secondAttribute="top" id="0Qp-n0-x5M"/>
+                            <constraint firstItem="Oj5-Yy-Lx1" firstAttribute="leading" secondItem="Aqs-6B-lfk" secondAttribute="leading" id="3Gb-kI-Qxk"/>
                             <constraint firstItem="kjy-SD-jo6" firstAttribute="centerX" secondItem="lPe-uL-hRH" secondAttribute="centerX" id="9G7-1y-yCu"/>
                             <constraint firstItem="kjy-SD-jo6" firstAttribute="width" secondItem="lPe-uL-hRH" secondAttribute="width" multiplier="0.85" id="OeW-tk-htO"/>
                             <constraint firstItem="kjy-SD-jo6" firstAttribute="centerY" secondItem="lPe-uL-hRH" secondAttribute="centerY" id="S0X-MD-V9E"/>
+                            <constraint firstAttribute="bottom" secondItem="Oj5-Yy-Lx1" secondAttribute="bottom" id="Zfz-1d-Nh2"/>
                             <constraint firstItem="kjy-SD-jo6" firstAttribute="centerX" secondItem="lPe-uL-hRH" secondAttribute="centerX" id="dmk-D6-hLZ"/>
+                            <constraint firstItem="Aqs-6B-lfk" firstAttribute="trailing" secondItem="Oj5-Yy-Lx1" secondAttribute="trailing" id="j4c-FR-4jk"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="centerConstraint" destination="S0X-MD-V9E" id="uJZ-to-YfY"/>
                         <outlet property="closeButton" destination="9Ho-uW-wJe" id="0Kh-Ze-wjz"/>
+                        <outlet property="dimmingView" destination="Oj5-Yy-Lx1" id="scD-D7-ygU"/>
                         <outlet property="joinButton" destination="5Hn-sa-Vhi" id="ezl-bR-VQD"/>
                         <outlet property="titleLabel" destination="PAb-a4-nU2" id="dNQ-4v-9hu"/>
                         <outletCollection property="codeTextFields" destination="GAF-io-Shw" collectionClass="NSMutableArray" id="9Px-Aj-Z2A"/>
@@ -1882,7 +1900,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="72V-4g-1F0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2676" y="756.6502463054187"/>
+            <point key="canvasLocation" x="2675.36231884058" y="756.02678571428567"/>
         </scene>
         <!--Speech View Controller-->
         <scene sceneID="SUJ-fu-oSf">

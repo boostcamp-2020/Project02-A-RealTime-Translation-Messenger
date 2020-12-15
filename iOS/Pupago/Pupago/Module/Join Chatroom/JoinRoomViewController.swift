@@ -16,6 +16,7 @@ final class JoinRoomViewController: ViewController {
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var joinButton: Button!
     @IBOutlet var codeTextFields: [UITextField]!
+    @IBOutlet weak var dimmingView: UIView!
     @IBOutlet weak var centerConstraint: NSLayoutConstraint!
     
     // MARK: - Properties
@@ -80,7 +81,7 @@ private extension JoinRoomViewController {
     }
     
     func configureGesture() {
-        view.addGestureRecognizer(tapGesture)
+        dimmingView.addGestureRecognizer(tapGesture)
     }
     
 }
