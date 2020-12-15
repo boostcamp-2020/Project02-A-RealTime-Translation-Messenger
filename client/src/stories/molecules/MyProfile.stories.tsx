@@ -2,6 +2,7 @@ import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
 import MyProfile, { MyProfilePropsType } from '../../components/molecules/roomListPage/MyProfile';
+import LangCode from '../../@types/langCode';
 
 export default {
   title: 'pupagoMolecule/MyProfile',

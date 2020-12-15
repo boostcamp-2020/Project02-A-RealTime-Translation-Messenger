@@ -43,7 +43,7 @@ function CodeInput() {
   const onKeyUp = useCallback(() => {
     if (code.length === CharacterLimit.CODE_INPUT && isRoomCodeValid(code)) {
       onChangeRoomCode(code);
-      onJoinRoom({ roomCode: code, isPrivate: 'true' });
+      onJoinRoom({ roomCode: code, isPrivate: true });
     }
   }, [roomCodeStatus]);
 

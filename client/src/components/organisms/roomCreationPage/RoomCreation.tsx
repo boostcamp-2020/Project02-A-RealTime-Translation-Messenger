@@ -12,7 +12,7 @@ function RoomCreation() {
       <RoomCreationMolecule
         TypedWordCount={roomData.title.length}
         MaxWordCount={CharacterLimit.ROOM_NAME_MAX}
-        privateSelected={roomData.isPrivate === 'true' ? true : false}
+        privateSelected={roomData.isPrivate}
         value={roomData.title}
         isPrivateOnClick={onSetIsPrivate}
         InputOnChange={(e) => {

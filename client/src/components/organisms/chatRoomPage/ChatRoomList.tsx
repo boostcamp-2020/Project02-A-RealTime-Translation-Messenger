@@ -33,7 +33,7 @@ function ChatRoomList({ setIsSwitching, setSwitchingRoom }: ChatRoomListPropsTyp
             key={room.roomCode}
             size="small"
             createdAt={
-              languageData === 'Korean'
+              languageData === 'ko'
                 ? timeDisplay.timeSinceKorean(room.createdAt)
                 : timeDisplay.timeSinceEnglish(room.createdAt)
             }
@@ -42,7 +42,7 @@ function ChatRoomList({ setIsSwitching, setSwitchingRoom }: ChatRoomListPropsTyp
             title={room.title}
             onClickItem={() => {
               setIsSwitching(true);
-              setSwitchingRoom({ roomCode: room.roomCode, isPrivate: 'false' });
+              setSwitchingRoom({ roomCode: room.roomCode, isPrivate: false });
             }}
             disabled={room.participantCount === ParticipantsLimit.PARTICIPATNS_MAX_COUNT}
           />

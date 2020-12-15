@@ -27,7 +27,7 @@ function SideBar() {
   const [isSwitching, setIsSwitching] = useState(false);
   const [switchingRoom, setSwitchingRoom] = useState<JoiningRoomType>({
     roomCode: '',
-    isPrivate: 'false',
+    isPrivate: false,
   });
   const { onReset } = useReset();
   const { onJoinRoom } = useRoom();
