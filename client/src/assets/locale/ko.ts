@@ -24,4 +24,5 @@ export default {
   startYourOwnChatRoom: '방을 만들고 대화를 시작해보세요!',
   copiedToTheClipboard: '클립보드에 복사되었습니다.',
   create: '생성하기',
+  leaveRoomMessage: '채팅방을 나가시겠습니까?',
 };
