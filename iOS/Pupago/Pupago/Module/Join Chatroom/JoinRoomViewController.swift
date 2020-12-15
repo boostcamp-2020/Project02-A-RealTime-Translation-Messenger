@@ -5,11 +5,12 @@
 //  Created by 김근수 on 2020/11/25.
 //
 
-import UIKit
 import RxSwift
 import RxCocoa
 
 final class JoinRoomViewController: ViewController {
+    
+    // MARK: - IBOutlets
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var closeButton: UIButton!
@@ -17,61 +18,55 @@ final class JoinRoomViewController: ViewController {
     @IBOutlet var codeTextFields: [UITextField]!
     @IBOutlet weak var centerConstraint: NSLayoutConstraint!
     
-    // MARK: - Object Lifecycle
+    // MARK: - Properties
+    
+    let tapGesture = UITapGestureRecognizer()
+    
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         bindKeyboard()
-        setupTextFieldControls()
+        configureTextfieldControl()
+        configureGesture()
     }
     
     // MARK: - Bind ViewModel
+    
     override func bindViewModel() {
         super.bindViewModel()
-        
         guard let viewModel = viewModel as? JoinRoomViewModel else { return }
         
-        let roomCode: Observable<[String]> =  {
-            let observers = codeTextFields
-                .map { $0.rx.text.orEmpty.asObservable() }
-            return Observable.combineLatest(observers)
-        }()
-        let joinTrigger = joinButton.rx.tap.map { _ in }
-        let cancelTrigger = closeButton.rx.tap.map { _ in }
-        
+        let roomCode = Observable.combineLatest(codeTextFields.map { $0.rx.text.orEmpty.asObservable() })
         let input = JoinRoomViewModel.Input(roomCode: roomCode,
-                                            joinTrigger: joinTrigger,
-                                            cancelTrigger: cancelTrigger)
-        
+                                            dimmingViewDidTap: tapGesture.rx.event.map {_ in},
+                                            joinButtonDidTap: joinButton.rx.tap.asObservable(),
+                                            closeButtonDidTap: closeButton.rx.tap.asObservable())
         let output = viewModel.transform(input)
         
         output.viewTexts
             .drive(onNext: { [unowned self] texts in
-                self.titleLabel.text = texts.title
-                self.joinButton.setTitle(texts.joinButton, for: .normal)
+                titleLabel.text = texts.title
+                joinButton.setTitle(texts.joinButton, for: .normal)
             })
             .disposed(by: rx.disposeBag)
         
-        output.activate
-            .drive(onNext: { [unowned self] activate in
-                self.joinButton.isUserInteractionEnabled = activate
-                self.joinButton.backgroundColor = activate ? UIColor(named: "ButtonColor") : .systemGray6
-            })
+        output.isActive
+            .drive(joinButton.rx.isActive)
             .disposed(by: rx.disposeBag)
         
         output.dismiss
-            .drive(onNext: { [unowned self] in
-                self.navigator.dismiss(sender: self)
+            .emit(onNext: { [unowned self] in
+                navigator.dismiss(sender: self)
             })
             .disposed(by: rx.disposeBag)
-        
     }
     
 }
 
-// MARK: - TextFild Setup
 private extension JoinRoomViewController {
     
-    func setupTextFieldControls() {
+    func configureTextfieldControl() {
         codeTextFields.forEach { textField in
             textField.rx.controlEvent(.editingChanged)
                 .asObservable()
@@ -82,6 +77,10 @@ private extension JoinRoomViewController {
                 })
                 .disposed(by: rx.disposeBag)
         }
+    }
+    
+    func configureGesture() {
+        view.addGestureRecognizer(tapGesture)
     }
     
 }
