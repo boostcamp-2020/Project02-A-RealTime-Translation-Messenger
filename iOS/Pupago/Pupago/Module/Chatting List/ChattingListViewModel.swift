@@ -41,7 +41,7 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
     // MARK: - State
     
     private let rooms = BehaviorRelay<[Room]>(value: [])
-    private let roomInfo = PublishRelay<RoomInfo>()
+    let roomInfo = PublishRelay<RoomInfo>()
     private let thumbnailImage = PublishRelay<UIImage?>()
     private let socketEntered = PublishRelay<Room?>()
     private let isRefreshing = BehaviorRelay<Bool>(value: false)
@@ -71,7 +71,6 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
             .disposed(by: rx.disposeBag)
         
         input.roomDidSelect
-            .distinctUntilChanged()
             .map { [unowned self] indexPath -> (String, Bool) in
                 let idx = indexPath.row
                 return (rooms.value[idx].roomCode ?? "", false)
@@ -79,17 +78,20 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
             .bind(to: roomInfo)
             .disposed(by: rx.disposeBag)
         
-        roomInfo.asObservable()
-            .flatMap { [unowned self] in provider.join(code: $0.code, isPrivate: $0.isPrivate) }
-            .subscribe(onNext: { [unowned self] room in
-                Application.shared.currentRoomCode = room.roomCode ?? ""
-                socketManager.enterChatroom(roomCode: room.roomCode ?? "")
-                socketEntered.accept(room)
-            }, onError: { error in
-                if let error = error as? APIError {
-                    error == .roomNotExist ? print("Alert logic needed room not exist") : print("Alert logic needed")
-                }
-            })
+        roomInfo
+            .subscribe(onNext: { [unowned self] info in
+                provider.join(code: info.code, isPrivate: info.isPrivate)
+                    .subscribe(onNext: { [unowned self] room in
+                        Application.shared.currentRoomCode = room.roomCode ?? ""
+                            socketManager.enterChatroom(roomCode: room.roomCode ?? "")
+                            socketEntered.accept(room)
+                        }, onError: { error in
+                            if let error = error as? APIError {
+                                error == .roomNotExist ? print("Alert logic needed room not exist") :
+                                print("Alert logic needed")
+                            }})
+                    .disposed(by: rx.disposeBag)
+                })
             .disposed(by: rx.disposeBag)
         
         let viewText = localize.asDriver()

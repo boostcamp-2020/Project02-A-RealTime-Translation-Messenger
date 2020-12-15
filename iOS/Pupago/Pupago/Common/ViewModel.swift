@@ -23,7 +23,7 @@ class ViewModel: NSObject {
     
     init(provider: NetworkProviding) {
         self.provider = provider
-        localize = BehaviorRelay<Localize>(value: .korean)
+        localize = BehaviorRelay<Localize>(value: Application.shared.localize)
         socketManager = SocketIOManager.shared
         
         super.init()

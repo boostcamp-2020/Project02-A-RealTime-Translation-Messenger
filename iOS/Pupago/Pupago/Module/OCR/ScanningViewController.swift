@@ -5,12 +5,13 @@
 //  Created by 김근수 on 2020/12/10.
 //
 
-import UIKit
 import RxSwift
 import RxCocoa
 import VisionKit
 
-class ScanningViewController: ViewController {
+final class ScanningViewController: ViewController {
+    
+    // MARK: - IBOutlet
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -27,14 +28,20 @@ class ScanningViewController: ViewController {
     @IBOutlet weak var detailView: View!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
+    // MARK: - Properties
+    
     private let originTapGesture = UITapGestureRecognizer()
     private let translationTapGesture = UITapGestureRecognizer()
+    
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureGesture()
         bindKeyboard()
     }
+    
+    // MARK: Bind ViewModel
     
     override func bindViewModel() {
         super.bindViewModel()

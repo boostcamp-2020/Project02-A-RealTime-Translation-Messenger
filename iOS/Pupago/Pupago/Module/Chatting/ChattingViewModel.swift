@@ -44,7 +44,7 @@ class ChattingViewModel: ViewModel, ViewModelType {
     // MARK: - State
     
     private let chats = BehaviorRelay<[MessageSection]>(value: [MessageSection(header: "Chat", items: [])])
-    private let roomInfo = BehaviorRelay<RoomInfo>(value: (nil, nil))
+    let roomInfo = BehaviorRelay<RoomInfo>(value: (nil, nil))
     private let chatInfo = PublishRelay<Translator.Text>()
     private let isActive = BehaviorRelay<Bool>(value: false)
     private let downScroll = PublishRelay<Void>()

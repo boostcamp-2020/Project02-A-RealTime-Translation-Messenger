@@ -15,6 +15,13 @@ extension Reactive where Base: UIButton {
             button.tintColor = isActive ? UIColor(named: "OtherBlueColor") : .lightGray
         }
     }
+    
+    var isAvail: Binder<Bool> {
+        return Binder(self.base) { button, isAvail in
+            let image = isAvail ? "micing" : "miced"
+            button.setImage(UIImage(named: image), for: .normal)
+        }
+    }
 }
 
 extension Reactive where Base: Button {

@@ -9,7 +9,7 @@ import RxSwift
 import RxCocoa
 import VisionKit
 
-class ScanningViewModel: ViewModel, ViewModelType {
+final class ScanningViewModel: ViewModel, ViewModelType {
     
     typealias TranslationViewState = (text: String, isHidden: Bool)
     typealias DetailViewState = (text: String, type: Bool)
@@ -43,14 +43,14 @@ class ScanningViewModel: ViewModel, ViewModelType {
     
     // MARK: - State
     
-    let activate = BehaviorRelay<Bool>(value: false)
-    let scanedImage = PublishRelay<UIImage>()
-    let translationViewState = PublishRelay<TranslationViewState>()
-    let chatInfo = PublishRelay<Translator.Text>()
-    let animating = BehaviorRelay<Bool>(value: false)
-    let originText = PublishRelay<String>()
-    let detailViewState = BehaviorRelay<DetailViewState>(value: ("", false))
-    let needFade = BehaviorRelay<Bool>(value: true)
+    private let activate = BehaviorRelay<Bool>(value: false)
+    private let scanedImage = PublishRelay<UIImage>()
+    private let translationViewState = PublishRelay<TranslationViewState>()
+    private let chatInfo = PublishRelay<Translator.Text>()
+    private let animating = BehaviorRelay<Bool>(value: false)
+    private let originText = PublishRelay<String>()
+    private let detailViewState = BehaviorRelay<DetailViewState>(value: ("", false))
+    private let needFade = BehaviorRelay<Bool>(value: true)
     
     // MARK: - Transform
     
@@ -151,7 +151,7 @@ class ScanningViewModel: ViewModel, ViewModelType {
     }
 }
 
-extension ScanningViewModel {
+private extension ScanningViewModel {
     
     func fetchDetail(text: String, type: Bool) {
         detailViewState.accept((text, type))

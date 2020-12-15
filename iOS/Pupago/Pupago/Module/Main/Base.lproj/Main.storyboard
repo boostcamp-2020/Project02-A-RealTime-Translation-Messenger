@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -20,11 +21,11 @@
             <objects>
                 <viewController storyboardIdentifier="LanguageViewController" id="BYZ-38-t0r" customClass="LanguageViewController" customModule="Pupago" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="GradientView" customModule="Pupago" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HCK-bE-oQX">
-                                <rect key="frame" x="40" y="149.5" width="520" height="61"/>
+                                <rect key="frame" x="40" y="238.5" width="334" height="61"/>
                                 <string key="text">안녕하세요!
 실시간 번역 채팅 서비스입니다.
 글로벌 채팅을 즐겨보세요!</string>
@@ -33,13 +34,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="graphicSprinkle" translatesAutoresizingMaskIntoConstraints="NO" id="gqb-xe-un4">
-                                <rect key="frame" x="40" y="41.5" width="520" height="277"/>
+                                <rect key="frame" x="40" y="179.5" width="334" height="178.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="gqb-xe-un4" secondAttribute="height" multiplier="15:8" id="9Tq-Q6-xhh"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PEt-Pc-nuO" customClass="Button" customModule="Pupago" customModuleProvider="target">
-                                <rect key="frame" x="32" y="470" width="536" height="50"/>
+                                <rect key="frame" x="32" y="732" width="350" height="50"/>
                                 <color key="backgroundColor" name="ButtonColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="OdO-00-2lC"/>
@@ -69,7 +70,7 @@
                                 </userDefinedRuntimeAttributes>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="aMk-TA-sfj">
-                                <rect key="frame" x="225" y="290" width="150" height="50"/>
+                                <rect key="frame" x="132" y="445.5" width="150" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N5k-gY-HCD" customClass="SelectableButton" customModule="Pupago" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -135,7 +136,7 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="언어를 선택해주세요" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KzE-tm-jTi">
-                                <rect key="frame" x="232" y="245.5" width="136.5" height="20.5"/>
+                                <rect key="frame" x="139" y="401" width="136.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -184,11 +185,11 @@
             <objects>
                 <viewController storyboardIdentifier="NicknameViewController" id="S1a-HM-hIu" customClass="NicknameViewController" customModule="Pupago" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="s8N-Cg-a1I" customClass="GradientView" customModule="Pupago" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wkx-4t-E4G">
-                                <rect key="frame" x="40" y="159.5" width="520" height="41"/>
+                                <rect key="frame" x="40" y="248.5" width="334" height="41"/>
                                 <string key="text">다음으로
 닉네임을 입력해주세요.</string>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
@@ -196,19 +197,19 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="graphicSprinkle" translatesAutoresizingMaskIntoConstraints="NO" id="std-Pw-k5j">
-                                <rect key="frame" x="40" y="41.5" width="520" height="277"/>
+                                <rect key="frame" x="40" y="179.5" width="334" height="178.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="std-Pw-k5j" secondAttribute="height" multiplier="15:8" id="jkN-JH-tJj"/>
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="suM-7b-kNK">
-                                <rect key="frame" x="32" y="338.5" width="536" height="72"/>
+                                <rect key="frame" x="32" y="378" width="350" height="72"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5gg-Wq-yCe" customClass="View" customModule="Pupago" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="536" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="350" height="50"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="JAr-sM-xwT">
-                                                <rect key="frame" x="30" y="10.5" width="476" height="29"/>
+                                                <rect key="frame" x="30" y="10.5" width="290" height="29"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fZa-Nj-1FJ">
                                                         <rect key="frame" x="0.0" y="0.0" width="32" height="29"/>
@@ -219,7 +220,7 @@
                                                         <imageReference key="image" image="logo" symbolScale="large"/>
                                                     </imageView>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="닉네임을 입력해주세요" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="KKZ-u6-060" customClass="ValidatingTextField" customModule="Pupago" customModuleProvider="target">
-                                                        <rect key="frame" x="48" y="0.0" width="428" height="29"/>
+                                                        <rect key="frame" x="48" y="0.0" width="242" height="29"/>
                                                         <color key="tintColor" name="LabelColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                         <textInputTraits key="textInputTraits"/>
@@ -264,7 +265,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="닉네임은 2-12자여야 하며, 공백이 없어야 합니다." textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jxl-NG-DSk" customClass="ValidatingLabel" customModule="Pupago" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="60" width="536" height="12"/>
+                                        <rect key="frame" x="0.0" y="60" width="350" height="12"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -287,7 +288,7 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c14-eN-GRe" customClass="Button" customModule="Pupago" customModuleProvider="target">
-                                <rect key="frame" x="32" y="470" width="536" height="50"/>
+                                <rect key="frame" x="32" y="732" width="350" height="50"/>
                                 <color key="backgroundColor" name="ButtonColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Uek-hH-qwb"/>
@@ -317,7 +318,7 @@
                                 </userDefinedRuntimeAttributes>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="starSprinkle" translatesAutoresizingMaskIntoConstraints="NO" id="yZf-zB-2Ta">
-                                <rect key="frame" x="40" y="438.5" width="520" height="3.5"/>
+                                <rect key="frame" x="40" y="478" width="334" height="226"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="4eC-lh-lEL"/>
@@ -365,11 +366,11 @@
             <objects>
                 <viewController storyboardIdentifier="ChattingListViewController" id="WwO-lh-g7n" customClass="ChattingListViewController" customModule="Pupago" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eGx-N0-irZ">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tem-DC-u3z" customClass="GradientView" customModule="Pupago" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="231"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="275"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="firstColor">
@@ -381,23 +382,23 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="leftrain" translatesAutoresizingMaskIntoConstraints="NO" id="iQW-Ml-4r9">
-                                <rect key="frame" x="470" y="26" width="110" height="155"/>
+                                <rect key="frame" x="284" y="70" width="110" height="155"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="155" id="2cn-bM-AtG"/>
                                     <constraint firstAttribute="width" constant="110" id="JPc-Di-YmG"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rightrain" translatesAutoresizingMaskIntoConstraints="NO" id="2uH-hq-L53">
-                                <rect key="frame" x="32" y="50" width="90" height="147"/>
+                                <rect key="frame" x="32" y="94" width="90" height="147"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="147" id="de4-Xf-owl"/>
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="E7A-l8-cj2">
-                                <rect key="frame" x="134" y="44" width="332" height="137"/>
+                                <rect key="frame" x="134" y="88" width="146" height="137"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="-15" translatesAutoresizingMaskIntoConstraints="NO" id="OUS-cb-8Ym">
-                                        <rect key="frame" x="126" y="0.0" width="80" height="85"/>
+                                        <rect key="frame" x="33" y="0.0" width="80" height="85"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hYt-sT-mta">
                                                 <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
@@ -420,13 +421,13 @@
                                         </subviews>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="사용자이름이다" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ela-jb-BBV">
-                                        <rect key="frame" x="111.5" y="93" width="109" height="21.5"/>
+                                        <rect key="frame" x="18.5" y="93" width="109" height="21.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="한국어" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rFv-pS-SAZ">
-                                        <rect key="frame" x="150.5" y="122.5" width="31.5" height="14.5"/>
+                                        <rect key="frame" x="57.5" y="122.5" width="31.5" height="14.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -434,19 +435,19 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9M2-Ug-YDM" customClass="View" customModule="Pupago" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="201" width="600" height="399"/>
+                                <rect key="frame" x="0.0" y="245" width="414" height="651"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="U0P-mo-qaE">
-                                        <rect key="frame" x="24" y="20" width="552" height="26"/>
+                                        <rect key="frame" x="24" y="20" width="366" height="26"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" text="채팅방" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YOr-co-qxF">
-                                                <rect key="frame" x="0.0" y="0.0" width="467.5" height="26"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="281.5" height="26"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="R5e-9r-6DH">
-                                                <rect key="frame" x="477.5" y="0.0" width="74.5" height="26"/>
+                                                <rect key="frame" x="291.5" y="0.0" width="74.5" height="26"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KI0-Kr-eco">
                                                         <rect key="frame" x="0.0" y="0.0" width="27" height="26"/>
@@ -467,7 +468,7 @@
                                         </subviews>
                                     </stackView>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="D4u-3c-SH0">
-                                        <rect key="frame" x="0.0" y="62" width="600" height="337"/>
+                                        <rect key="frame" x="0.0" y="62" width="414" height="589"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="VKX-cF-tth">
                                             <size key="itemSize" width="414" height="122"/>
@@ -477,7 +478,7 @@
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ChattingListCell" id="zrV-nG-ezD" customClass="ChattingListCell" customModule="Pupago" customModuleProvider="target">
-                                                <rect key="frame" x="93" y="0.0" width="414" height="122"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="122"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Vgw-Cl-vZP">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="122"/>
@@ -571,16 +572,16 @@
                                         </cells>
                                     </collectionView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p8K-ce-Mqz">
-                                        <rect key="frame" x="210" y="38.5" width="180" height="282"/>
+                                        <rect key="frame" x="145" y="188" width="124" height="210"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sadpapago" translatesAutoresizingMaskIntoConstraints="NO" id="sCt-sf-kbR">
-                                                <rect key="frame" x="0.0" y="0.0" width="180" height="233.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="124" height="161.5"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="sCt-sf-kbR" secondAttribute="height" multiplier="111:144" id="VOb-8q-BX4"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="채팅방이 존재하지 않습니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xGq-X5-2qF">
-                                                <rect key="frame" x="-5" y="261.5" width="190" height="20.5"/>
+                                                <rect key="frame" x="-33" y="189.5" width="190" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                 <color key="textColor" name="LabelColor"/>
                                                 <nil key="highlightedColor"/>
@@ -680,14 +681,14 @@
             <objects>
                 <viewController storyboardIdentifier="ChattingViewController" id="kCN-9Y-att" customClass="ChattingViewController" customModule="Pupago" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wTn-wJ-TF7">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6eY-3D-wBG" customClass="GradientView" customModule="Pupago" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="160"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="160"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vI2-2T-qaj" customClass="Button" customModule="Pupago" customModuleProvider="target">
-                                        <rect key="frame" x="266" y="92" width="68" height="30"/>
+                                        <rect key="frame" x="173" y="92" width="68" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="68" id="DO2-GK-5cB"/>
                                         </constraints>
@@ -708,7 +709,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="한국어" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q3s-bi-oq7">
-                                        <rect key="frame" x="283" y="132" width="34" height="16"/>
+                                        <rect key="frame" x="190" y="132" width="34" height="16"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
                                         <color key="textColor" red="0.99994915719999999" green="0.8431761861" blue="0.0001815569703" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -732,7 +733,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="never" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Zsf-eg-09v">
-                                <rect key="frame" x="0.0" y="160" width="600" height="390"/>
+                                <rect key="frame" x="0.0" y="160" width="414" height="652"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="obb-oU-cAA">
                                     <size key="itemSize" width="128" height="128"/>
@@ -742,7 +743,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="OthersChattingCell" id="wLR-hW-gM9" customClass="OthersChattingCell" customModule="Pupago" customModuleProvider="target">
-                                        <rect key="frame" x="86" y="0.0" width="428" height="109"/>
+                                        <rect key="frame" x="0.0" y="10" width="428" height="109"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="dBB-sx-L8b">
                                             <rect key="frame" x="0.0" y="0.0" width="428" height="109"/>
@@ -852,7 +853,7 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MyChattingCell" id="9ll-O7-MwF" customClass="MyChattingCell" customModule="Pupago" customModuleProvider="target">
-                                        <rect key="frame" x="86" y="119" width="428" height="74"/>
+                                        <rect key="frame" x="0.0" y="129" width="428" height="74"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="EwB-J9-fcD">
                                             <rect key="frame" x="0.0" y="0.0" width="428" height="74"/>
@@ -905,7 +906,7 @@
                                 </cells>
                             </collectionView>
                             <textView hidden="YES" clipsSubviews="YES" alpha="0.69999999999999996" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="D4e-0y-Hkc">
-                                <rect key="frame" x="68" y="500" width="464" height="34"/>
+                                <rect key="frame" x="68" y="762" width="278" height="34"/>
                                 <color key="backgroundColor" name="TranslationColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" id="fon-qh-yrF"/>
@@ -923,11 +924,11 @@
                                 </userDefinedRuntimeAttributes>
                             </textView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wgv-NO-5fi">
-                                <rect key="frame" x="0.0" y="600" width="600" height="0.0"/>
+                                <rect key="frame" x="0.0" y="862" width="414" height="34"/>
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g0E-zh-DY2">
-                                <rect key="frame" x="0.0" y="550" width="600" height="50"/>
+                                <rect key="frame" x="0.0" y="812" width="414" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GYl-r4-msi">
                                         <rect key="frame" x="24" y="14" width="20" height="25"/>
@@ -937,14 +938,14 @@
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L6S-gd-vQm">
-                                        <rect key="frame" x="552.5" y="14" width="27.5" height="24.5"/>
+                                        <rect key="frame" x="366.5" y="14" width="27.5" height="24.5"/>
                                         <color key="tintColor" name="OtherBlueColor"/>
                                         <state key="normal">
                                             <imageReference key="image" image="arrow.up.message.fill" catalog="system" symbolScale="large"/>
                                         </state>
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="qBh-LD-tVb">
-                                        <rect key="frame" x="114.5" y="8" width="418" height="36"/>
+                                        <rect key="frame" x="114.5" y="8" width="232" height="36"/>
                                         <color key="backgroundColor" systemColor="systemGray3Color"/>
                                         <color key="tintColor" systemColor="labelColor"/>
                                         <constraints>
@@ -1026,11 +1027,11 @@
             <objects>
                 <viewController storyboardIdentifier="ScanningViewController" id="gh5-gI-nvz" customClass="ScanningViewController" customModule="Pupago" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pKV-u7-NdR">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xyb-8b-7O8" customClass="GradientView" customModule="Pupago" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="52"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="52"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tCV-NJ-Fd5">
                                         <rect key="frame" x="20" y="17" width="20" height="18"/>
@@ -1043,14 +1044,14 @@
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cnZ-wu-GBi">
-                                        <rect key="frame" x="549.5" y="14.5" width="30.5" height="22.5"/>
+                                        <rect key="frame" x="363.5" y="14.5" width="30.5" height="22.5"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal">
                                             <imageReference key="backgroundImage" image="camera.fill" catalog="system" symbolScale="large"/>
                                         </state>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이미지 인식" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N3m-bF-lp3">
-                                        <rect key="frame" x="263" y="16" width="74" height="20"/>
+                                        <rect key="frame" x="170" y="16" width="74" height="20"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -1076,11 +1077,11 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BXN-L0-j7K">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="0.0"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                 <color key="backgroundColor" name="GreenColor"/>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1200px--Portable_scanner_and_OCR_(video).webm" translatesAutoresizingMaskIntoConstraints="NO" id="Smm-In-2mz">
-                                <rect key="frame" x="28" y="104" width="544" height="150"/>
+                                <rect key="frame" x="28" y="148" width="358" height="204.5"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -1089,23 +1090,23 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이미지 인식을 시작하세요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JR2-FA-C1z">
-                                <rect key="frame" x="28" y="76" width="155" height="18"/>
+                                <rect key="frame" x="28" y="120" width="155" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" name="LabelColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wu7-3A-B1X">
-                                <rect key="frame" x="0.0" y="278" width="600" height="8"/>
+                                <rect key="frame" x="0.0" y="376.5" width="414" height="8"/>
                                 <color key="backgroundColor" name="BorderColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="8" id="PRP-oL-2IL"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xQh-ER-VxM">
-                                <rect key="frame" x="28" y="286" width="544" height="314"/>
+                                <rect key="frame" x="28" y="384.5" width="358" height="477.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mHs-Dp-J7B">
-                                        <rect key="frame" x="0.0" y="0.0" width="544" height="125.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="358" height="191"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="원본 메세지" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tEK-wK-1Z5">
                                                 <rect key="frame" x="0.0" y="20" width="69" height="18"/>
@@ -1114,7 +1115,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MYV-sW-hGS">
-                                                <rect key="frame" x="0.0" y="50" width="544" height="75.5"/>
+                                                <rect key="frame" x="0.0" y="50" width="358" height="114.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <color key="textColor" name="LabelColor"/>
                                                 <nil key="highlightedColor"/>
@@ -1131,7 +1132,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kup-79-bE7">
-                                        <rect key="frame" x="0.0" y="127.5" width="544" height="125.5"/>
+                                        <rect key="frame" x="0.0" y="193" width="358" height="191"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="번역 메세지" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vDp-62-J8r">
                                                 <rect key="frame" x="0.0" y="20" width="69" height="18"/>
@@ -1140,7 +1141,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vkM-lL-BI6">
-                                                <rect key="frame" x="0.0" y="50" width="544" height="75.5"/>
+                                                <rect key="frame" x="0.0" y="50" width="358" height="114.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" name="LabelColor"/>
                                                 <nil key="highlightedColor"/>
@@ -1157,11 +1158,11 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l9B-7b-k4p">
-                                        <rect key="frame" x="-28" y="125.5" width="600" height="2"/>
+                                        <rect key="frame" x="-28" y="191" width="414" height="2"/>
                                         <color key="backgroundColor" name="BorderColor"/>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6gs-8K-Npb" customClass="ActivatableButton" customModule="Pupago" customModuleProvider="target">
-                                        <rect key="frame" x="424" y="170" width="120" height="120"/>
+                                        <rect key="frame" x="275" y="370.5" width="83" height="83"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="6gs-8K-Npb" secondAttribute="height" multiplier="1:1" id="mxb-Px-64C"/>
                                         </constraints>
@@ -1189,7 +1190,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="drC-pd-RrJ" customClass="View" customModule="Pupago" customModuleProvider="target">
-                                <rect key="frame" x="45" y="112" width="510" height="348"/>
+                                <rect key="frame" x="31" y="156" width="352" height="566"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gC3-Gc-txn">
                                         <rect key="frame" x="20" y="20" width="20" height="18"/>
@@ -1202,7 +1203,7 @@
                                         </state>
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="3EH-dN-HcI">
-                                        <rect key="frame" x="24" y="60" width="462" height="256"/>
+                                        <rect key="frame" x="24" y="60" width="304" height="474"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -1280,11 +1281,11 @@
             <objects>
                 <viewController storyboardIdentifier="ParticipantViewController" id="pOB-6l-hmF" customClass="ParticipantViewController" customModule="Pupago" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2zx-Vf-UzX">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ONU-1D-PS6">
-                                <rect key="frame" x="0.0" y="40" width="600" height="510"/>
+                                <rect key="frame" x="0.0" y="84" width="414" height="728"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="BQn-ad-zJ8">
                                     <size key="itemSize" width="414" height="86"/>
@@ -1294,7 +1295,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ParticipantCell" id="Q1w-lB-Vhi" customClass="ParticipantCell" customModule="Pupago" customModuleProvider="target">
-                                        <rect key="frame" x="93" y="0.0" width="414" height="60"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="b51-WF-7iT">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
@@ -1315,13 +1316,13 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="KRG-n1-Gva">
                                                     <rect key="frame" x="80" y="7" width="334" height="46.5"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RCe-tO-gBe">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RCe-tO-gBe">
                                                             <rect key="frame" x="0.0" y="0.0" width="334" height="24"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                             <color key="textColor" name="FontColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ncp-dI-ImM">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ncp-dI-ImM">
                                                             <rect key="frame" x="0.0" y="32" width="334" height="14.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1349,7 +1350,7 @@
                                 </cells>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gTU-eF-BGs" customClass="GradientView" customModule="Pupago" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="40"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="40"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Kcf-mL-eMl"/>
@@ -1364,7 +1365,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Scj-kW-vCN">
-                                <rect key="frame" x="12" y="8" width="576" height="18.5"/>
+                                <rect key="frame" x="12" y="52" width="390" height="18.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="대화 상대" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ak-dE-Fkg">
                                         <rect key="frame" x="0.0" y="0.0" width="60" height="18.5"/>
@@ -1375,7 +1376,7 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GGD-ud-TtZ">
-                                <rect key="frame" x="0.0" y="550" width="600" height="50"/>
+                                <rect key="frame" x="0.0" y="812" width="414" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tqc-LV-IBr">
                                         <rect key="frame" x="8" y="11" width="28" height="28"/>
@@ -1395,11 +1396,11 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="js5-jX-WgC">
-                                <rect key="frame" x="0.0" y="600" width="600" height="0.0"/>
+                                <rect key="frame" x="0.0" y="862" width="414" height="34"/>
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AKg-Wj-FNU">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="0.0"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                 <color key="backgroundColor" name="GreenColor"/>
                             </view>
                         </subviews>
@@ -1465,24 +1466,24 @@
             <objects>
                 <viewController storyboardIdentifier="CreateRoomViewController" id="KI1-1p-qt4" customClass="CreateRoomViewController" customModule="Pupago" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Yq9-fP-VLy">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ACw-qI-hNe">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YV0-3q-qkN" customClass="View" customModule="Pupago" customModuleProvider="target">
-                                <rect key="frame" x="45" y="-82.5" width="510" height="765"/>
+                                <rect key="frame" x="31" y="184" width="352" height="528"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="Xrh-jP-Xdh">
-                                        <rect key="frame" x="51" y="144" width="408" height="400.5"/>
+                                        <rect key="frame" x="35" y="79" width="282" height="317.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="bKo-Wq-G6w">
-                                                <rect key="frame" x="0.0" y="0.0" width="408" height="267"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="282" height="184"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoline" translatesAutoresizingMaskIntoConstraints="NO" id="6SJ-U8-bKf">
-                                                        <rect key="frame" x="0.0" y="0.0" width="408" height="267"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="282" height="184"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="6SJ-U8-bKf" secondAttribute="height" multiplier="130:85" id="RIB-CP-aQh"/>
                                                         </constraints>
@@ -1490,10 +1491,10 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="hxr-vh-Q78">
-                                                <rect key="frame" x="0.0" y="291" width="408" height="109.5"/>
+                                                <rect key="frame" x="0.0" y="208" width="282" height="109.5"/>
                                                 <subviews>
                                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="gpw-rI-zEV" customClass="SegmentControl" customModule="Pupago" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="408" height="33"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="282" height="33"/>
                                                         <color key="backgroundColor" name="BlueColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="32" id="FR3-aA-0Yl"/>
@@ -1510,7 +1511,7 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </segmentedControl>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bqk-sa-4T0" customClass="ValidatingTextField" customModule="Pupago" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="42" width="408" height="44"/>
+                                                        <rect key="frame" x="0.0" y="42" width="282" height="44"/>
                                                         <color key="backgroundColor" systemColor="systemGray6Color"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="44" id="4nm-gU-OBc"/>
@@ -1563,7 +1564,7 @@
                                         </constraints>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u1L-q0-Cnl" customClass="View" customModule="Pupago" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="510" height="52"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="352" height="52"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wUq-SI-mhM">
                                                 <rect key="frame" x="20" y="18" width="16" height="16"/>
@@ -1575,7 +1576,7 @@
                                                 <state key="normal" image="cancle"/>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="방 생성하기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="md1-ij-vxg">
-                                                <rect key="frame" x="211.5" y="14.5" width="87" height="23"/>
+                                                <rect key="frame" x="132.5" y="14.5" width="87" height="23"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -1589,7 +1590,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fh3-eq-hpc">
-                                                <rect key="frame" x="490" y="32" width="20" height="20"/>
+                                                <rect key="frame" x="332" y="32" width="20" height="20"/>
                                                 <color key="backgroundColor" name="BlueColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="20" id="BIW-La-vez"/>
@@ -1616,7 +1617,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bYc-3w-0hz" customClass="Button" customModule="Pupago" customModuleProvider="target">
-                                        <rect key="frame" x="28" y="685" width="454" height="48"/>
+                                        <rect key="frame" x="28" y="448" width="296" height="48"/>
                                         <color key="backgroundColor" name="ButtonColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="r9L-Ue-Ffj"/>
@@ -1684,21 +1685,21 @@
             <objects>
                 <viewController storyboardIdentifier="JoinRoomViewController" id="gdb-bd-jYX" customClass="JoinRoomViewController" customModule="Pupago" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lPe-uL-hRH">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oj5-Yy-Lx1">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kjy-SD-jo6" customClass="View" customModule="Pupago" customModuleProvider="target">
-                                <rect key="frame" x="45" y="-82.5" width="510" height="765"/>
+                                <rect key="frame" x="31" y="184" width="352" height="528"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zw2-v9-2yS" customClass="View" customModule="Pupago" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="510" height="52"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="352" height="52"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="방 참가하기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PAb-a4-nU2">
-                                                <rect key="frame" x="211.5" y="14.5" width="87" height="23"/>
+                                                <rect key="frame" x="132.5" y="14.5" width="87" height="23"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -1713,7 +1714,7 @@
                                                 <state key="normal" image="cancle"/>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RW8-Rp-vTM">
-                                                <rect key="frame" x="490" y="32" width="20" height="20"/>
+                                                <rect key="frame" x="332" y="32" width="20" height="20"/>
                                                 <color key="backgroundColor" name="BlueColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="V3g-mB-DRO"/>
@@ -1748,16 +1749,16 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="36" translatesAutoresizingMaskIntoConstraints="NO" id="x2j-ak-IgN">
-                                        <rect key="frame" x="51" y="167" width="408" height="354.5"/>
+                                        <rect key="frame" x="35" y="101.5" width="282" height="272"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoline" translatesAutoresizingMaskIntoConstraints="NO" id="3XA-EU-Yhh">
-                                                <rect key="frame" x="0.0" y="0.0" width="408" height="266.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="282" height="184"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="3XA-EU-Yhh" secondAttribute="height" multiplier="130:85" id="aHZ-u8-xIq"/>
                                                 </constraints>
                                             </imageView>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="JGb-2g-qqD">
-                                                <rect key="frame" x="94" y="302.5" width="220" height="52"/>
+                                                <rect key="frame" x="31" y="220" width="220" height="52"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GAF-io-Shw" customClass="ValidatingTextField" customModule="Pupago" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="40" height="52"/>
@@ -1836,7 +1837,7 @@
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Hn-sa-Vhi" customClass="Button" customModule="Pupago" customModuleProvider="target">
-                                        <rect key="frame" x="28" y="685" width="454" height="48"/>
+                                        <rect key="frame" x="28" y="448" width="296" height="48"/>
                                         <color key="backgroundColor" name="ButtonColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="DjN-Ov-jzT"/>
@@ -1906,14 +1907,14 @@
             <objects>
                 <viewController storyboardIdentifier="SpeechViewController" id="bZw-lr-meS" customClass="SpeechViewController" customModule="Pupago" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bxc-4K-BHJ">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zox-go-5a4" customClass="GradientView" customModule="Pupago" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="282"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="384.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p2O-KS-zHR">
-                                        <rect key="frame" x="460" y="133" width="121" height="121"/>
+                                        <rect key="frame" x="311" y="272.5" width="84" height="84"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="p2O-KS-zHR" secondAttribute="height" multiplier="1:1" id="LdH-dS-m2O"/>
                                         </constraints>
@@ -1931,7 +1932,7 @@
                                         </state>
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="lYd-Uz-Oyf">
-                                        <rect key="frame" x="28" y="101" width="544" height="52"/>
+                                        <rect key="frame" x="28" y="147" width="358" height="52"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" id="eGo-xH-X4o"/>
                                             <constraint firstAttribute="height" relation="lessThanOrEqual" constant="200" id="yE8-Bn-d6A"/>
@@ -1941,7 +1942,7 @@
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="버튼을 눌러 음성인식을 시작하세요." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dWY-YV-Ex1">
-                                        <rect key="frame" x="181.5" y="102.5" width="237" height="62.5"/>
+                                        <rect key="frame" x="88.5" y="151.5" width="237" height="62.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -1967,8 +1968,8 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZXa-kk-Sej">
-                                <rect key="frame" x="460" y="448" width="120" height="120"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZXa-kk-Sej" customClass="ActivatableButton" customModule="Pupago" customModuleProvider="target">
+                                <rect key="frame" x="311" y="747" width="83" height="83"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ZXa-kk-Sej" secondAttribute="height" multiplier="1:1" id="Frd-Ww-5ml"/>
                                 </constraints>
@@ -1978,11 +1979,11 @@
                                 </state>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ah5-Px-gxQ">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="0.0"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                 <color key="backgroundColor" name="GreenColor"/>
                             </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="yFN-cZ-xvr">
-                                <rect key="frame" x="28" y="385" width="544" height="52"/>
+                                <rect key="frame" x="28" y="588" width="358" height="52"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" id="Qtv-q2-Txw"/>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="200" id="vji-DM-fLG"/>
@@ -2015,8 +2016,8 @@
                     </view>
                     <connections>
                         <outlet property="assistLabel" destination="dWY-YV-Ex1" id="dK6-Pp-IgS"/>
-                        <outlet property="backButton" destination="CjJ-5E-YxF" id="zAk-cq-3ta"/>
                         <outlet property="buttonConstraint" destination="wG1-bN-qQM" id="tJt-No-MyV"/>
+                        <outlet property="closeButton" destination="CjJ-5E-YxF" id="XhK-Ne-BdU"/>
                         <outlet property="micButton" destination="p2O-KS-zHR" id="rfr-lC-2uy"/>
                         <outlet property="originConstraint" destination="ZK3-ZM-lF4" id="lpp-hW-zEi"/>
                         <outlet property="originTextView" destination="lYd-Uz-Oyf" id="hHW-PW-uga"/>
@@ -2030,6 +2031,56 @@
             <point key="canvasLocation" x="3559.420289855073" y="756.02678571428567"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="5Hn-sa-Vhi">
+            <size key="intrinsicContentSize" width="52" height="30"/>
+        </designable>
+        <designable name="Bqk-sa-4T0">
+            <size key="intrinsicContentSize" width="5" height="21"/>
+        </designable>
+        <designable name="EzQ-3P-eRi">
+            <size key="intrinsicContentSize" width="5" height="25.5"/>
+        </designable>
+        <designable name="GAF-io-Shw">
+            <size key="intrinsicContentSize" width="5" height="25.5"/>
+        </designable>
+        <designable name="Jxl-NG-DSk">
+            <size key="intrinsicContentSize" width="256.5" height="16"/>
+        </designable>
+        <designable name="KKZ-u6-060">
+            <size key="intrinsicContentSize" width="143" height="21"/>
+        </designable>
+        <designable name="Mex-rH-CRs">
+            <size key="intrinsicContentSize" width="30" height="30"/>
+        </designable>
+        <designable name="N5k-gY-HCD">
+            <size key="intrinsicContentSize" width="30" height="30"/>
+        </designable>
+        <designable name="Ncz-2n-flo">
+            <size key="intrinsicContentSize" width="140.5" height="13.5"/>
+        </designable>
+        <designable name="PEt-Pc-nuO">
+            <size key="intrinsicContentSize" width="30" height="30"/>
+        </designable>
+        <designable name="bYc-3w-0hz">
+            <size key="intrinsicContentSize" width="52" height="30"/>
+        </designable>
+        <designable name="c14-eN-GRe">
+            <size key="intrinsicContentSize" width="52" height="30"/>
+        </designable>
+        <designable name="coH-G4-8K1">
+            <size key="intrinsicContentSize" width="5" height="25.5"/>
+        </designable>
+        <designable name="gpw-rI-zEV">
+            <size key="intrinsicContentSize" width="157" height="31"/>
+        </designable>
+        <designable name="mik-QG-06j">
+            <size key="intrinsicContentSize" width="5" height="25.5"/>
+        </designable>
+        <designable name="vI2-2T-qaj">
+            <size key="intrinsicContentSize" width="38" height="30"/>
+        </designable>
+    </designables>
     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>
         <image name="1200px--Portable_scanner_and_OCR_(video).webm" width="1200" height="675"/>

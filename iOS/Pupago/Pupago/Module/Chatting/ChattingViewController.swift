@@ -162,7 +162,7 @@ private extension ChattingViewController {
         ToastView.appearance().bottomOffsetLandscape = min(frame.width, frame.height) - marginTop
     }
     
-    private func scrollDownChat() {
+    func scrollDownChat() {
         self.view.layoutIfNeeded()
         
         let lastItemIndex = self.collectionView.numberOfItems(inSection: 0) - 1
