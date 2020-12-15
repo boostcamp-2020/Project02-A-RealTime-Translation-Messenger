@@ -34,7 +34,7 @@ const NicknameLength = styled(Text)`
   position: absolute;
   display: flex;
   justify-content: flex-end;
-  right: -8px;
+  right: 0px;
   width: 40px;
 `;
 

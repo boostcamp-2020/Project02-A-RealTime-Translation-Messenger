@@ -20,14 +20,14 @@ export type RoomCreationPropsType = {
 const RoomCreationWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 344px;
+  width: 336px;
   margin-bottom: 96px;
 `;
 
 const CheckBoxWrapper = styled.div`
   display: flex;
   justify-content: center;
-  width: 400px;
+  width: 336px;
   margin-bottom: 56px;
 
   & > div {
