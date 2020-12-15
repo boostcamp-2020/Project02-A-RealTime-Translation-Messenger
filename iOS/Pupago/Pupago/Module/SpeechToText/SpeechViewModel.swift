@@ -71,7 +71,7 @@ class SpeechViewModel: ViewModel, ViewModelType {
         
         input.originText
             .subscribe(onNext: { [unowned self] text in
-                let status = text.isEmpty ? ("", true) : (localize.value.translating, false)
+                let status = text.isEmpty ? ("", true) : (localize.value.userMessage.translating, false)
                 assistable.accept(!status.1)
                 translationViewState.accept(status)
                 available.accept(false)

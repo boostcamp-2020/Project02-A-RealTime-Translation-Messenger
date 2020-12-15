@@ -74,7 +74,7 @@ class ScanningViewModel: ViewModel, ViewModelType {
         originText
             .distinctUntilChanged()
             .subscribe(onNext: { [unowned self] text in
-                let state = text.isEmpty ? ("", true) : (localize.value.translating, false)
+                let state = text.isEmpty ? ("", true) : (localize.value.userMessage.translating, false)
                 translationViewState.accept(state)
                 activate.accept(false)
             })
