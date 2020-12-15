@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useIntl } from 'react-intl';
 
 import Text from '../../atoms/texts/Text';
 import LanguageSelectButton from '../../atoms/buttons/LanguageSelectButton';
@@ -9,7 +10,7 @@ const LanguageSelectionBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 169px;
+  width: 200px;
   height: 96px;
 `;
 
@@ -26,10 +27,12 @@ export type LanguageSelectionPropsType = {
 };
 
 function LanguageSelection({ selectedKorean = true, onClickLanguage }: LanguageSelectionPropsType) {
+  const { formatMessage } = useIntl();
+
   return (
     <LanguageSelectionBox>
       <Text size={18} color={Palette.DARK_GREY}>
-        언어를 선택해주세요
+        {formatMessage({ id: 'chooseYourLanguage' })}
       </Text>
       <LanguageButtonBox>
         <LanguageSelectButton

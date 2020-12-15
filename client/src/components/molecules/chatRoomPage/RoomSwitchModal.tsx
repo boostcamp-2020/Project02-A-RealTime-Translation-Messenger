@@ -6,6 +6,7 @@ import ChatModalBox from '../../atoms/boxes/ChatModalBox';
 import Text from '../../atoms/texts/Text';
 import MainButton from '../../atoms/buttons/MainButton';
 import Palette from '../../../@types/Palette';
+import { useIntl } from 'react-intl';
 
 type RoomSwitchModalPropsType = {
   onClickConfirm: () => void;
@@ -45,6 +46,7 @@ export const RoomSwitchModal = ({
   onClickBackground,
   onClickClose,
 }: RoomSwitchModalPropsType) => {
+  const { formatMessage } = useIntl();
   return (
     <div>
       <ChatModalBackground onClick={onClickBackground} />
@@ -52,12 +54,12 @@ export const RoomSwitchModal = ({
         <ChatModalBox onClickClose={onClickClose}>
           <ModalContentWrapper>
             <Text size={14} color={Palette.DARK_GREY}>
-              다른 채팅방으로 이동하시겠습니까?
+              {formatMessage({ id: 'switchRoom' })}
             </Text>
             <MainButton disabled={false} onClickButton={onClickConfirm}>
-              확인
+              {formatMessage({ id: 'ok' })}
             </MainButton>
-            <MainButton onClickButton={onClickCancel}>취소</MainButton>
+            <MainButton onClickButton={onClickCancel}>{formatMessage({ id: 'cancle' })}</MainButton>
           </ModalContentWrapper>
         </ChatModalBox>
       </ChatModalBoxWrapper>

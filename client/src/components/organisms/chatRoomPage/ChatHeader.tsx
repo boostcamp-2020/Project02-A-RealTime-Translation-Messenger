@@ -1,4 +1,6 @@
 import React, { useRef } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useIntl } from 'react-intl';
 
 import ChatRoomHeaderMolecule from '../../molecules/chatRoomPage/ChatRoomHeader';
 import useRoom from '../../../hooks/useRoom';
@@ -8,7 +10,6 @@ import useChatInput from '../../../hooks/useChatInput';
 import useParticipantsList from '../../../hooks/useParticipantsList';
 import useNavigation from '../../../hooks/useNavigation';
 import MainPageNavigation from '../../../@types/mainPageNavigation';
-import { useHistory } from 'react-router-dom';
 
 function ChatHeader() {
   const { data: roomData, onResetRoomState } = useRoom();
@@ -19,12 +20,13 @@ function ChatHeader() {
   const { onSetNavigation } = useNavigation();
   const clipBoardTextArea = useRef<HTMLTextAreaElement>(null);
   const history = useHistory();
+  const { formatMessage } = useIntl();
 
   const copyToClipboard = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (clipBoardTextArea.current !== null) {
       clipBoardTextArea.current.select();
       document.execCommand('copy');
-      alert('클립보드에 복사되었습니다.');
+      alert(formatMessage({ id: 'copiedToTheClipboard' }));
     }
   };
 

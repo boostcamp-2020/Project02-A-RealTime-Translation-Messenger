@@ -1,4 +1,5 @@
 import React from 'react';
+import { useIntl } from 'react-intl';
 import styled from 'styled-components';
 import MainPageNavigation from '../../../@types/mainPageNavigation';
 import useNavigation from '../../../hooks/useNavigation';
@@ -19,6 +20,7 @@ const userInfoValidate = (nickname: string, imageLink: string | null) => {
 function StartButtons() {
   const { nicknameData, imageLinkData } = useUser();
   const { onSetNavigation } = useNavigation();
+  const { formatMessage } = useIntl();
 
   return (
     <>
@@ -29,7 +31,7 @@ function StartButtons() {
             onSetNavigation(MainPageNavigation.ROOM_CREATION);
           }}
         >
-          + 방 만들기
+          {formatMessage({ id: 'createRoom' })}
         </MainButton>
       </RoomCreateButtonWrapper>
       <MainButton
@@ -38,7 +40,7 @@ function StartButtons() {
           onSetNavigation(MainPageNavigation.ROOM_LIST);
         }}
       >
-        참가하기
+        {formatMessage({ id: 'enterRoom' })}
       </MainButton>
     </>
   );

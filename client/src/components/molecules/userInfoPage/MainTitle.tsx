@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import LogoWithText from '../../atoms/logos/LogoWithText';
 import Text from '../../atoms/texts/Text';
 import Palette from '../../../@types/Palette';
+import { useIntl } from 'react-intl';
 
 const MainTitleWrapper = styled.div`
   display: flex;
@@ -21,14 +22,16 @@ const MarginedText = styled(Text)`
 `;
 
 export const MainTitle = () => {
+  const { formatMessage } = useIntl();
+
   return (
     <MainTitleWrapper>
       <LogoWithText />
       <MarginedText size={24} weight={'bold'} color={Palette.PUPAGO_BLUE}>
-        실시간 번역 채팅 푸파고!
+        {formatMessage({ id: 'mainTitle' })}
       </MarginedText>
       <Text size={18} color={Palette.DARK_GREY}>
-        글로벌 채팅을 즐겨보세요!
+        {formatMessage({ id: 'subTitle' })}
       </Text>
     </MainTitleWrapper>
   );

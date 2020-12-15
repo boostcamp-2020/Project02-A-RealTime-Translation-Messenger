@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
+import { useIntl } from 'react-intl';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -23,6 +24,7 @@ function CodeInput() {
   const [roomCodeStatus, setRoomCodeStatus] = useState({ code: room.roomCode, valid: true });
   const { code, valid } = roomCodeStatus;
   const { onReset } = useReset();
+  const { formatMessage } = useIntl();
 
   const onChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,7 +49,7 @@ function CodeInput() {
 
   useEffect(() => {
     if (roomError !== null) {
-      alert('잘못된 방 번호 입니다.');
+      alert(formatMessage({ id: 'wrongRoomCode' }));
       setRoomCodeStatus({ code: '', valid: true });
       onReset();
     }
