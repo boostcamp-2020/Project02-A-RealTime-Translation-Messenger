@@ -7,6 +7,7 @@ import timeDisplay from '../../../utils/timeDisplay';
 import useRoom from '../../../hooks/useRoom';
 import { JoiningRoomType } from '../../../@types/types';
 import ParticipantsLimit from '../../../@types/participantsLimit';
+import useUser from '../../../hooks/useUser';
 
 type ChatRoomListPropsType = {
   setIsSwitching: React.Dispatch<React.SetStateAction<boolean>>;
@@ -16,6 +17,7 @@ type ChatRoomListPropsType = {
 function ChatRoomList({ setIsSwitching, setSwitchingRoom }: ChatRoomListPropsType) {
   const { data: rooms, onGetRoomList } = useRoomList();
   const { data: roomData } = useRoom();
+  const { languageData } = useUser();
 
   useEffect(() => {
     onGetRoomList();
@@ -30,7 +32,11 @@ function ChatRoomList({ setIsSwitching, setSwitchingRoom }: ChatRoomListPropsTyp
           <RoomItem
             key={room.roomCode}
             size="small"
-            createdAt={timeDisplay.timeSinceKorean(room.createdAt)}
+            createdAt={
+              languageData === 'Korean'
+                ? timeDisplay.timeSinceKorean(room.createdAt)
+                : timeDisplay.timeSinceEnglish(room.createdAt)
+            }
             participantCount={room.participantCount}
             roomCapacity={ParticipantsLimit.PARTICIPATNS_MAX_COUNT}
             title={room.title}

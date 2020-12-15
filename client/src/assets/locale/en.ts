@@ -1,5 +1,5 @@
 export default {
-  ok: 'Okay',
+  ok: 'Confirm',
   cancle: 'Cancle',
   enterRoomAlert: '{name} has entered.',
   leaveRoomAlert: '{name} has left.',
@@ -23,4 +23,5 @@ export default {
   thereIsNoChatRoom: 'There is no chat room!',
   startYourOwnChatRoom: 'Start your own chat room!',
   copiedToTheClipboard: 'Copied to the clipboard.',
+  create: 'Create',
 };
