@@ -12,16 +12,16 @@ const Template: Story<CodeInputPropsType> = (args) => <CodeInput {...args} />;
 
 export const CodeInputExample = Template.bind({});
 CodeInputExample.args = {
-  roomCode: {
-    value: 'A33D',
+  roomCodeStatus: {
+    code: 'A33D',
     valid: true,
   },
 };
 
 export const CodeNotValidExample = Template.bind({});
 CodeNotValidExample.args = {
-  roomCode: {
-    value: 'A33D',
+  roomCodeStatus: {
+    code: 'A33D',
     valid: false,
   },
 };

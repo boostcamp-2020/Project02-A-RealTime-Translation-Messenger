@@ -5,6 +5,7 @@ import { useIntl } from 'react-intl';
 import Text from '../../atoms/texts/Text';
 import LanguageSelectButton from '../../atoms/buttons/LanguageSelectButton';
 import Palette from '../../../@types/Palette';
+import LangCode from '../../../@types/langCode';
 
 const LanguageSelectionBox = styled.div`
   display: flex;
@@ -23,7 +24,7 @@ const LanguageButtonBox = styled.div`
 
 export type LanguageSelectionPropsType = {
   selectedKorean: boolean;
-  onClickLanguage: (selectLanguage: 'Korean' | 'English') => void;
+  onClickLanguage: (selectLanguage: LangCode) => void;
 };
 
 function LanguageSelection({ selectedKorean = true, onClickLanguage }: LanguageSelectionPropsType) {
@@ -37,16 +38,16 @@ function LanguageSelection({ selectedKorean = true, onClickLanguage }: LanguageS
       <LanguageButtonBox>
         <LanguageSelectButton
           selected={selectedKorean}
-          language={'Korean'}
+          language={LangCode.KOREAN}
           onClick={() => {
-            onClickLanguage('Korean');
+            onClickLanguage(LangCode.KOREAN);
           }}
         ></LanguageSelectButton>
         <LanguageSelectButton
           selected={!selectedKorean}
-          language={'English'}
+          language={LangCode.ENGLISH}
           onClick={() => {
-            onClickLanguage('English');
+            onClickLanguage(LangCode.ENGLISH);
           }}
         ></LanguageSelectButton>
       </LanguageButtonBox>

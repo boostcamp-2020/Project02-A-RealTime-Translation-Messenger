@@ -4,6 +4,7 @@ import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognitio
 import VoiceRecognitionModal from '../../molecules/chatRoomPage/VoiceRecognitionModal';
 import useChatInput from '../../../hooks/useChatInput';
 import useUser from '../../../hooks/useUser';
+import LangCode from '../../../@types/langCode';
 
 export type VoiceRecognitionPropsType = {
   onClickBackground: () => void;
@@ -17,7 +18,7 @@ function VoiceRecognition({ onClickBackground }: VoiceRecognitionPropsType) {
   useEffect(() => {
     SpeechRecognition.startListening({
       continuous: true,
-      language: languageData === 'Korean' ? 'ko-KR' : 'en-US',
+      language: languageData === LangCode.KOREAN ? 'ko-KR' : 'en-US',
     });
     return () => {
       resetTranscript();

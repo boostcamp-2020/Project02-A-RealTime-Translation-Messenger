@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import LangCode from '../../../@types/langCode';
 import Palette from '../../../@types/Palette';
 
 export type LanguageTagPropsType = {
-  language: 'Korean' | 'English';
+  language: LangCode;
   isMe: boolean;
 };
 
@@ -24,7 +25,7 @@ const StyledLanguageTag = styled.div<LanguageTagPropsType>`
 export function LanguageTag({ language, isMe }: LanguageTagPropsType) {
   return (
     <StyledLanguageTag language={language} isMe={isMe}>
-      {language === 'Korean' ? '가' : 'A'}
+      {language === LangCode.KOREAN ? '가' : 'A'}
     </StyledLanguageTag>
   );
 }

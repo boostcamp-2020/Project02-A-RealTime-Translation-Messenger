@@ -11,6 +11,7 @@ import {
   resetSocket,
   getRandomProfileImage,
 } from '../modules/user';
+import LangCode from '../@types/langCode';
 
 export default function useUser() {
   const { nickname, language, socket, socketId, imageLink } = useSelector((state: RootState) => state.user);
@@ -24,7 +25,7 @@ export default function useUser() {
   );
 
   const onSetLanguage = useCallback(
-    (language: 'Korean' | 'English') => {
+    (language: LangCode) => {
       dispatch(setLanguage(language));
     },
     [dispatch],

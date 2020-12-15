@@ -6,6 +6,7 @@ import useChatInput from '../../../hooks/useChatInput';
 import ChatTranslationBox from '../../atoms/boxes/ChatTranslationBox';
 import VoiceRecognitionOrganism from '../../organisms/chatRoomPage/VoiceRecognition';
 import useUser from '../../../hooks/useUser';
+import LangCode from '../../../@types/langCode';
 
 const Wrapper = styled.div`
   position: relative;
@@ -38,9 +39,9 @@ function ChatInput() {
   const { chatInputData, translationData, translationLoading, onSetChatInput, cycleData } = useChatInput();
 
   const getSendingChat = () => ({
-    Korean: translationData.origin === 'Korean' ? chatInputData : translationData.translationText,
-    English: translationData.origin === 'English' ? chatInputData : translationData.translationText,
-    origin: translationData.origin,
+    Korean: translationData.origin === LangCode.KOREAN ? chatInputData : translationData.translationText,
+    English: translationData.origin === LangCode.ENGLISH ? chatInputData : translationData.translationText,
+    origin: translationData.origin === 'ko' ? 'Korean' : 'English',
   });
 
   const sendingChat = useRef(getSendingChat());

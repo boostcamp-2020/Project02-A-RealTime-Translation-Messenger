@@ -6,6 +6,7 @@ import ChatItemMolecule from '../../molecules/chatRoomPage/ChatItem';
 import ParticipantNotification from '../../atoms/texts/ParticipantNotification';
 import { ChatLogsType, ParticipantsUpdateType } from '../../../@types/types';
 import useUser from '../../../hooks/useUser';
+import LangCode from '../../../@types/langCode';
 
 type ChatLogWrapperType = {
   isMe: boolean;
@@ -46,8 +47,8 @@ function ChatLogs() {
           return (
             <ChatLogWrapper isMe={socketIdData === chatLog.senderId} key={index}>
               <ChatItemMolecule
-                leftMessage={languageData === 'Korean' ? chatLog.Korean : chatLog.English}
-                rightMessage={languageData === 'Korean' ? chatLog.English : chatLog.Korean}
+                leftMessage={languageData === LangCode.KOREAN ? chatLog.Korean : chatLog.English}
+                rightMessage={languageData === LangCode.KOREAN ? chatLog.English : chatLog.Korean}
                 isMe={socketIdData === chatLog.senderId}
                 imageLink={chatLog.imageLink}
                 nickname={chatLog.nickname}

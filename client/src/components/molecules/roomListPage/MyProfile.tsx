@@ -4,10 +4,11 @@ import styled from 'styled-components';
 import ProfileImage from '../../atoms/resources/ProfileImage';
 import LanguageTag from '../../atoms/resources/LanguageTag';
 import Text from '../../atoms/texts/Text';
+import LangCode from '../../../@types/langCode';
 
 export type MyProfilePropsType = {
   image: string | null;
-  language: 'Korean' | 'English';
+  language: LangCode;
   nickname: string;
 };
 

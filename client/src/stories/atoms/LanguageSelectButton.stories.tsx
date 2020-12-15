@@ -6,6 +6,7 @@ import {
   LanguageSelectButton,
   LanguageSelectButtonPropsType,
 } from '../../components/atoms/buttons/LanguageSelectButton';
+import LangCode from '../../@types/langCode';
 
 export default {
   title: 'pupagoAtom/LanguageSelectButton',
@@ -17,11 +18,11 @@ const Template: Story<LanguageSelectButtonPropsType> = (args) => <LanguageSelect
 export const Selected = Template.bind({});
 Selected.args = {
   selected: true,
-  language: 'Korean',
+  language: LangCode.KOREAN,
 };
 
 export const Disabled = Template.bind({});
 Disabled.args = {
   selected: false,
-  language: 'English',
+  language: LangCode.ENGLISH,
 };
