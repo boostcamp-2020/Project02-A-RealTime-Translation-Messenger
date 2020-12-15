@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import dotenv from 'dotenv';
 import io from 'socket.io-client';
 
 import ChatLogs from '../components/organisms/chatRoomPage/ChatLogs';
@@ -16,10 +15,6 @@ import useChatInput from '../hooks/useChatInput';
 import useNavigation from '../hooks/useNavigation';
 import MainPageNavigation from '../@types/mainPageNavigation';
 import { useHistory } from 'react-router-dom';
-
-dotenv.config();
-
-const { BASE_URL } = process.env;
 
 const Wrapper = styled.div`
   display: flex;
@@ -57,7 +52,7 @@ function ChatRoomPage() {
   const history = useHistory();
 
   useEffect(() => {
-    onSetSocket(io(BASE_URL as string));
+    onSetSocket(io(process.env.BASE_URL as string));
   }, []);
 
   useEffect(() => {
