@@ -7,35 +7,36 @@
 
 import UIKit
 
-class ParticipantViewController: ViewController {
+final class ParticipantViewController: ViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var dismissButton: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var closeButton: UIButton!
+    
+    private let tapGesture = UITapGestureRecognizer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionViewLayout()
+        configureGesture()
     }
     
     override func bindViewModel() {
         super.bindViewModel()
-        
         guard let viewModel = viewModel as? ParticipantViewModel else { return }
-        let viewWillAppear = rx.viewWillAppear.map { _ in }
-        let dismissTrigger = dismissButton.rx.tap.asObservable()
         
-        let input = ParticipantViewModel.Input(viewWillAppear: viewWillAppear,
-                                               dismissTrigger: dismissTrigger)
+        let input = ParticipantViewModel.Input(viewWillAppear: rx.viewWillAppear.map {_ in},
+                                               dimmingViewDidTap: tapGesture.rx.event.map {_ in},
+                                               closeButtonDidTap: closeButton.rx.tap.asObservable())
         let output = viewModel.transform(input)
         
         output.viewTexts
             .drive(onNext: { [unowned self] texts in
-                self.titleLabel.text = texts.title
+                titleLabel.text = texts.title
             })
             .disposed(by: rx.disposeBag)
         
-        output.item
+        output.participants
             .bind(to: collectionView.rx.items(
                     cellIdentifier: ParticipantCell.identifier,
                     cellType: ParticipantCell.self)) { row, item, cell in
@@ -44,18 +45,18 @@ class ParticipantViewController: ViewController {
             .disposed(by: rx.disposeBag)
         
         output.dismiss
-            .drive(onNext: { [unowned self] in
-                self.navigator.dismiss(sender: self)
+            .emit(onNext: { [unowned self] in
+                navigator.dismiss(sender: self)
             })
             .disposed(by: rx.disposeBag)
     }
 }
 
-extension ParticipantViewController {
+private extension ParticipantViewController {
     
-    private func configureCollectionViewLayout() {
+    func configureCollectionViewLayout() {
         let size = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                          heightDimension: .absolute(70))
+                                          heightDimension: .absolute(60))
         let item = NSCollectionLayoutItem(layoutSize: size)
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: size, subitem: item, count: 1)
         let section = NSCollectionLayoutSection(group: group)
@@ -65,6 +66,13 @@ extension ParticipantViewController {
         let layout = UICollectionViewCompositionalLayout(section: section)
         
         self.collectionView.collectionViewLayout = layout
+    }
+    
+    func configureGesture() {
+        guard let helper = transitioningDelegate as? SlidInTransitionHelper else { return }
+        
+        let dimmingView = helper.transition.dimmingView
+        dimmingView.addGestureRecognizer(tapGesture)
     }
     
 }
