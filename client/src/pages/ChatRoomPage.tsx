@@ -39,7 +39,7 @@ const StyledChatRoomBox = styled.div`
 `;
 
 function ChatRoomPage() {
-  const { onSetParticipantsList, onResetParticipantsList } = useParticipantsList();
+  const { data: participantsList, onSetParticipantsList, onResetParticipantsList } = useParticipantsList();
   const {
     nicknameData,
     languageData,
@@ -57,11 +57,12 @@ function ChatRoomPage() {
   const history = useHistory();
 
   useEffect(() => {
+    if (socketData !== null) return;
     onSetSocket(io(BASE_URL as string));
   }, []);
 
   useEffect(() => {
-    if (socketData !== null) {
+    if (socketData !== null && participantsList.length === 0) {
       socketData.emit('enter chatroom', {
         roomCode: roomData.roomCode,
         nickname: nicknameData,
