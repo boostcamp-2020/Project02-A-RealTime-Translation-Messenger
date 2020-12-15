@@ -5,89 +5,88 @@
 //  Created by 김근수 on 2020/11/25.
 //
 
-import Foundation
 import RxSwift
 import RxCocoa
 
 class ChattingViewModel: ViewModel, ViewModelType {
     
     typealias RoomInfo = (title: String?, code: String?)
-    typealias CopyInfo = (code: String?, localize: String?)
     typealias TranslationViewState = (text: String, isHidden: Bool)
-    typealias ParticipantState = (nickname: String, type: Bool)
+    
+    // MARK: - Input
     
     struct Input {
         let chatText: Observable<String>
-        let codeTrigger: Observable<Void>
-        let registTrigger: Observable<Void>
-        let micTrigger: Observable<Void>
-        let scanButtonTap: Observable<Void>
-        let showParticipantTrigger: Observable<Void>
-        let willLeave: Observable<Void>
+        let codeButtonDidTap: Observable<Void>
+        let sendButtonDidTap: Observable<Void>
+        let micButtonDidTap: Observable<Void>
+        let scanButtonDidTap: Observable<Void>
+        let participantButtonDidTap: Observable<Void>
+        let viewWillDisappear: Observable<Void>
     }
+    
+    // MARK: - Output
     
     struct Output {
-        let viewText: Driver<Localize.ChatroomViewText>
+        let viewTexts: Driver<Localize.ChatroomViewText>
         let roomInfo: Driver<RoomInfo>
-        let items: Driver<[MessageSection]>
+        let isActive: Driver<Bool>
+        let chats: Observable<[MessageSection]>
         let translationViewState: Observable<TranslationViewState>
-        let reset: Driver<String>
-        let scroll: Driver<Void>
-        let activate: Driver<Bool>
-        let showParticipant: Driver<ParticipantViewModel>
-        let speeched: Driver<SpeechViewModel>
-        let needScan: Signal<ScanningViewModel>
-        let status: Driver<ParticipantState>
-        let clipboard: Driver<CopyInfo>
+        let toasterMessage: Observable<String>
+        let needResetInput: Observable<Void>
+        let needScrollDown: Observable<Void>
+        let showParticipantView: Signal<ParticipantViewModel>
+        let showSpeechView: Signal<SpeechViewModel>
+        let showScanView: Signal<ScanningViewModel>
     }
     
-    let chats = BehaviorRelay<[MessageSection]>(value: [MessageSection(header: "Chat", items: [])])
-    let roomInfo = BehaviorRelay<RoomInfo>(value: (nil, nil))
-    let chatInfo = PublishRelay<Translator.Text>()
-    let activate = BehaviorRelay<Bool>(value: false)
-    let downScroll = PublishRelay<Void>()
-    let translationViewState = PublishRelay<(text: String, isHidden: Bool)>()
-    let reset = PublishRelay<Void>()
-    let status = BehaviorRelay<(ParticipantState)>(value: ("", false))
-    let clipboard = PublishRelay<CopyInfo>()
+    // MARK: - State
+    
+    private let chats = BehaviorRelay<[MessageSection]>(value: [MessageSection(header: "Chat", items: [])])
+    private let roomInfo = BehaviorRelay<RoomInfo>(value: (nil, nil))
+    private let chatInfo = PublishRelay<Translator.Text>()
+    private let isActive = BehaviorRelay<Bool>(value: false)
+    private let downScroll = PublishRelay<Void>()
+    private let toasterMessage = PublishRelay<String>()
+    private let translationViewState = PublishRelay<(text: String, isHidden: Bool)>()
+    private let reset = PublishRelay<Void>()
+    
+    // MARK: - Transform
     
     func transform(_ input: Input) -> Output {
-        
-        let socketManager = SocketIOManager.shared
-        let provider = PupagoAPI()
         let translator = Translator(provider: provider)
         
-        // MARK: - Socket Event Control
-        
+        // Handle receiving message
         socketManager.socket.rx.event(.receiveMessage)
-            .subscribe(onNext: { [unowned self] data in
-                if let msg = self.parse(data) {
-                    updateMessage(message: msg)
-                    downScroll.accept(())
-                }
+            .flatMap { [unowned self] data -> Observable<Message> in parse(data) }
+            .subscribe(onNext: { [unowned self] message in
+                updateMessage(message: message)
+                downScroll.accept(())
+            }, onError: { error in
+                print(error)
             })
             .disposed(by: rx.disposeBag)
         
+        // Handle receiving participant event
+        // Event occurs when someone came in or leave out
         socketManager.socket.rx.event(.list)
-            .subscribe(onNext: { [unowned self] data in
-                if let list = self.participantParse(data) {
-                    let nickname: String = list.diffNickname ?? ""
-                    let type = list.type == "enter" ? true : false
-                    self.status.accept((nickname, type))
-                }
+            .flatMap { [unowned self] data -> Observable<Participants> in parse(data) }
+            .subscribe(onNext: { [unowned self] result in
+                toasterMessage.accept(result.stateMessage)
+            }, onError: { error in
+                print(error)
             })
             .disposed(by: rx.disposeBag)
         
-        input.willLeave
-            .subscribe(onNext: {
+        input.viewWillDisappear
+            .subscribe(onNext: { [unowned self] in
                 Application.shared.currentRoomCode = ""
                 socketManager.leavChatroom()
                 socketManager.socket.off(SocketEndpoint.receiveMessage.eventName)
                 socketManager.socket.off(SocketEndpoint.list.eventName)
             })
             .disposed(by: rx.disposeBag)
-        
-        // MARK: - Translation
         
         input.chatText
             .distinctUntilChanged()
@@ -97,21 +96,19 @@ class ChattingViewModel: ViewModel, ViewModelType {
                 let translatedText = info.lang == "Korean" ? info.english : info.korean
                 translationViewState.accept((translatedText, false))
                 chatInfo.accept(info)
-                activate.accept(true)
+                isActive.accept(true)
             })
             .disposed(by: rx.disposeBag)
         
         input.chatText
             .subscribe(onNext: { [unowned self] text in
-                let status = text.isEmpty ? ("", true) : (localize.value.translating, false)
+                let status = text.isEmpty ? ("", true) : (localize.value.userMessage.translating, false)
                 translationViewState.accept(status)
-                activate.accept(false)
+                isActive.accept(false)
             })
             .disposed(by: rx.disposeBag)
         
-        // MARK: - InputBar
-        
-        input.registTrigger
+        input.sendButtonDidTap
             .withLatestFrom(chatInfo)
             .subscribe(onNext: { [unowned self] info in
                 socketManager.sendMessage(korean: info.korean,
@@ -122,77 +119,65 @@ class ChattingViewModel: ViewModel, ViewModelType {
             })
             .disposed(by: rx.disposeBag)
         
-        // MARK: - Drivers
-        
-        let viewText = localize.asDriver().map { $0.chatroomViewText }
-        let info = roomInfo.asDriver(onErrorJustReturn: (nil, nil))
-        let chatItem = chats.asDriver(onErrorJustReturn: [])
-        let showParticipant = input.showParticipantTrigger
+        input.codeButtonDidTap
             .withLatestFrom(roomInfo)
-            .map { _, code -> ParticipantViewModel in
-                let code = code ?? ""
-                return ParticipantViewModel(provider: provider, roomCode: code)
-            }
-            .asDriver(onErrorJustReturn: ParticipantViewModel(provider: provider, roomCode: ""))
-        
-        let speeched = input.micTrigger
-            .asDriver(onErrorJustReturn: ())
-            .map { _ in SpeechViewModel(provider: provider) }
-        
-        let needScan = input.scanButtonTap
-            .asSignal(onErrorJustReturn: ())
-            .map { _ in ScanningViewModel(provider: provider) }
-        
-        input.codeTrigger
-            .withLatestFrom(roomInfo)
-            .subscribe(onNext: { [unowned self] info in
-                let localText = localize.value.chatroomViewText.copy
-                clipboard.accept((info.code, localText))
+            .map { $0.code }
+            .subscribe(onNext: { [unowned self] code in
+                UIPasteboard.general.string = code
+                toasterMessage.accept("\(code ?? "")\(localize.value.userMessage.copy)")
             })
             .disposed(by: rx.disposeBag)
         
-        return Output(viewText: viewText,
-                      roomInfo: info,
-                      items: chatItem,
+        let viewTexts = localize.asDriver()
+            .map { $0.chatroomViewText }
+        
+        let showParticipant = input.participantButtonDidTap.asSignal(onErrorJustReturn: ())
+            .map { [unowned self] () -> ParticipantViewModel in
+                return ParticipantViewModel(provider: provider, roomCode: roomInfo.value.code ?? "")
+            }
+        
+        let showSpeechView = input.micButtonDidTap.asSignal(onErrorJustReturn: ())
+            .map { [unowned self] _ in SpeechViewModel(provider: provider) }
+        
+        let showScanView = input.scanButtonDidTap.asSignal(onErrorJustReturn: ())
+            .map { [unowned self] _ in ScanningViewModel(provider: provider) }
+        
+        return Output(viewTexts: viewTexts,
+                      roomInfo: roomInfo.asDriver(onErrorJustReturn: (nil, nil)),
+                      isActive: isActive.asDriver(onErrorJustReturn: false),
+                      chats: chats.asObservable(),
                       translationViewState: translationViewState.asObservable(),
-                      reset: reset.map { "" }.asDriver(onErrorJustReturn: ""),
-                      scroll: downScroll.asDriver(onErrorJustReturn: ()),
-                      activate: activate.asDriver(),
-                      showParticipant: showParticipant,
-                      speeched: speeched,
-                      needScan: needScan,
-                      status: status.asDriver(),
-                      clipboard: clipboard.asDriver(onErrorJustReturn: ("", "")))
+                      toasterMessage: toasterMessage.asObservable(),
+                      needResetInput: reset.asObservable(),
+                      needScrollDown: downScroll.asObservable(),
+                      showParticipantView: showParticipant,
+                      showSpeechView: showSpeechView,
+                      showScanView: showScanView)
     }
     
 }
 
 private extension ChattingViewModel {
     
-    private func updateMessage(message: Message) {
+    func updateMessage(message: Message) {
         guard var section = chats.value.first else { return }
         section.items.append(message)
         chats.accept([section])
     }
     
-    private func parse(_ data: [Any]?) -> Message? {
-        guard
-            let dataString = data?[0] as? String,
-            let data = dataString.data(using: .utf8),
-            let message = try? JSONDecoder().decode(Message.self, from: data)
-        else { return nil }
-        
-        return message
-    }
-    
-    private func participantParse(_ data: [Any]?) -> Participants? {
-        guard
-            let dataString = data?[0] as? String,
-            let data = dataString.data(using: .utf8),
-            let participants = try? JSONDecoder().decode(Participants.self, from: data)
-        else { return nil }
-        
-        return participants
+    func parse<ResultType: Decodable>(_ data: [Any]?) -> Observable<ResultType> {
+        return Observable.create { observer in
+            guard let dataString = data?[0] as? String,
+                  let data = dataString.data(using: .utf8)
+            else { return Disposables.create() }
+            do {
+                let result = try JSONDecoder().decode(ResultType.self, from: data)
+                observer.onNext(result)
+            } catch {
+                observer.onError(error)
+            }
+            return Disposables.create()
+        }
     }
     
 }

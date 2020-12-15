@@ -8,6 +8,15 @@
 import RxSwift
 import RxCocoa
 
+extension Reactive where Base: UIButton {
+    var isActive: Binder<Bool> {
+        return Binder(self.base) { button, isActive in
+            button.isUserInteractionEnabled = isActive
+            button.tintColor = isActive ? UIColor(named: "OtherBlueColor") : .lightGray
+        }
+    }
+}
+
 extension Reactive where Base: Button {
     
     var isActive: Binder<Bool> {

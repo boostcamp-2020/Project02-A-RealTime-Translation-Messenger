@@ -5,24 +5,28 @@
 //  Created by 김근수 on 2020/11/25.
 //
 
-import UIKit
 import RxSwift
 import RxCocoa
 import RxDataSources
-import Toaster
 import RxAnimated
+import Toaster
 
 class ChattingViewController: ViewController {
-
+    
+    // MARK: - IBOutlet
+    
     @IBOutlet weak var languageLabel: UILabel!
     @IBOutlet weak var codeButton: Button!
     @IBOutlet weak var inputText: UITextView!
-    @IBOutlet weak var registButton: UIButton!
+    @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var micButton: UIButton!
     @IBOutlet weak var scanButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var translationTextView: UITextView!
     @IBOutlet weak var inputBarBottomConstraint: NSLayoutConstraint!
+    
+    // MARK: - Properties
+    
     private lazy var rightNavigationItem: UIBarButtonItem = {
         let item = UIBarButtonItem(image: UIImage(systemName: "list.bullet"),
                                    style: .plain,
@@ -30,11 +34,8 @@ class ChattingViewController: ViewController {
                                    action: nil)
         return item
     }()
-
-    private var didSetupViewConstraints = false
-    private var keyboardShown: Bool = false
-    private var enterStatus: String = ""
-    private var leaveStatus: String = ""
+    
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,41 +45,32 @@ class ChattingViewController: ViewController {
         bindKeyboard()
     }
     
+    // MARK: Bind ViewModel
+    
     override func bindViewModel() {
         super.bindViewModel()
-        
         guard let viewModel = viewModel as? ChattingViewModel else { return }
+        
         let dataSource = MessageDataSource()
         
-        let chatText = inputText.rx.text.orEmpty.asObservable()
-        let codeTrigger = codeButton.rx.tap.asObservable()
-        let registTrigger = registButton.rx.tap.asObservable()
-        let micTrigger = micButton.rx.tap.asObservable()
-        let showParticipantTrigger = rightNavigationItem.rx.tap.asObservable()
-        let willLeave = rx.viewWillDisappear.map { _ in }
-        
-        let input = ChattingViewModel.Input(chatText: chatText,
-                                            codeTrigger: codeTrigger,
-                                            registTrigger: registTrigger,
-                                            micTrigger: micTrigger,
-                                            scanButtonTap: scanButton.rx.tap.asObservable(),
-                                            showParticipantTrigger: showParticipantTrigger,
-                                            willLeave: willLeave)
-        
+        let input = ChattingViewModel.Input(chatText: inputText.rx.text.orEmpty.asObservable(),
+                                            codeButtonDidTap: codeButton.rx.tap.asObservable(),
+                                            sendButtonDidTap: sendButton.rx.tap.asObservable(),
+                                            micButtonDidTap: micButton.rx.tap.asObservable(),
+                                            scanButtonDidTap: scanButton.rx.tap.asObservable(),
+                                            participantButtonDidTap: rightNavigationItem.rx.tap.asObservable(),
+                                            viewWillDisappear: rx.viewWillDisappear.map {_ in})
         let output = viewModel.transform(input)
         
-        output.viewText
-            .drive(onNext: { [unowned self] text in
-                self.languageLabel.text = text.language
-                self.enterStatus = text.enter
-                self.leaveStatus = text.leave
-            })
+        output.viewTexts
+            .map { $0.language }
+            .drive(languageLabel.rx.text)
             .disposed(by: rx.disposeBag)
         
         output.roomInfo
             .drive(onNext: { [unowned self] info in
-                self.navigationItem.title = info.title
-                self.codeButton.setTitle(info.code, for: .normal)
+                navigationItem.title = info.title
+                codeButton.setTitle(info.code, for: .normal)
             })
             .disposed(by: rx.disposeBag)
         
@@ -86,79 +78,63 @@ class ChattingViewController: ViewController {
             .bind(to: translationTextView.rx.state)
             .disposed(by: rx.disposeBag)
         
-        output.items.asObservable()
+        output.chats
             .bind(to: self.collectionView.rx.items(dataSource: dataSource))
             .disposed(by: rx.disposeBag)
         
-        output.reset
-            .drive(inputText.rx.text)
+        output.needResetInput
+            .map { "" }
+            .bind(to: inputText.rx.text)
             .disposed(by: rx.disposeBag)
         
-        output.scroll
-            .drive(onNext: { [unowned self] _ in
+        output.needScrollDown
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] _ in
                 scrollDownChat()
             })
             .disposed(by: rx.disposeBag)
         
-        output.activate
-            .drive(onNext: { [unowned self] activate in
-                self.registButton.isUserInteractionEnabled = activate
-                self.registButton.tintColor = activate ? UIColor(named: "OtherBlueColor") : .lightGray
+        output.isActive
+            .bind(animated: sendButton.rx.isActive)
+            .disposed(by: rx.disposeBag)
+        
+        output.toasterMessage
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { msg in
+                Toast(text: msg).show()
             })
             .disposed(by: rx.disposeBag)
         
-        output.showParticipant
-            .drive(onNext: { [unowned self] viewModel in
+        output.showParticipantView
+            .emit(onNext: { [unowned self] viewModel in
                 self.navigator.show(segue: .participant(viewModel: viewModel),
                                     sender: self,
                                     transition: .slideIn)
             })
             .disposed(by: rx.disposeBag)
         
-        output.speeched
-            .drive(onNext: { [unowned self] viewModel in
+        output.showSpeechView
+            .emit(onNext: { [unowned self] viewModel in
                 self.navigator.show(segue: .speech(viewModel: viewModel),
                                     sender: self,
                                     transition: .modal)
-                        
+                
             })
             .disposed(by: rx.disposeBag)
         
-        output.needScan
+        output.showScanView
             .emit(onNext: { [unowned self] viewModel in
                 navigator.show(segue: .scan(viewModel: viewModel),
                                sender: self,
                                transition: .modal)
             })
             .disposed(by: rx.disposeBag)
-        
-        output.status
-            .drive(onNext: { [unowned self] status in
-                var toasterText = status.nickname
-                toasterText += status.type == true ? enterStatus : leaveStatus
-                status.nickname == "" ? nil : Toast(text: toasterText).show()
-            })
-            .disposed(by: rx.disposeBag)
-        
-        output.clipboard
-            .drive(onNext: { info in
-                let pasteboard = UIPasteboard.general
-                let toasterText = "[\(info.code ?? "")]\(info.localize ?? "")"
-                pasteboard.string = info.code
-                
-                Toast(text: toasterText).show()
-            })
-            .disposed(by: rx.disposeBag)
-        
     }
     
-    func resetTranslationView() {
-        self.translationTextView.text = ""
-        self.translationTextView.isHidden = true
-    }
 }
 
-extension ChattingViewController {
+private extension ChattingViewController {
+    
     func configureCollectionView() {
         let size = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                           heightDimension: .estimated(74))
@@ -176,7 +152,6 @@ extension ChattingViewController {
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         self.collectionView.addGestureRecognizer(tap)
-        
     }
     
     func configureToasterView() {
