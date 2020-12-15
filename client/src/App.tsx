@@ -11,7 +11,7 @@ import Background from './components/atoms/resources/Background';
 import ko from './assets/locale/ko';
 import en from './assets/locale/en';
 import useUser from './hooks/useUser';
-import { getLangCodeByLanguage } from './utils/langCode';
+import LangCode from './@types/langCode';
 
 export const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -43,7 +43,7 @@ function App() {
     <>
       <GlobalStyle />
       <Background>
-        <IntlProvider locale={getLangCodeByLanguage(languageData)} messages={languageData === 'Korean' ? ko : en}>
+        <IntlProvider locale={languageData} messages={languageData === LangCode.KOREAN ? ko : en}>
           <Switch>
             <Route path="/" component={MainPage} exact />
             <Route path="/chat" component={ChatRoomPage} exact />

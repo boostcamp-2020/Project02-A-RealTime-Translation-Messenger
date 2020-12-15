@@ -65,7 +65,7 @@ function ChatRoomPage() {
       socketData.emit('enter chatroom', {
         roomCode: roomData.roomCode,
         nickname: nicknameData,
-        language: languageData,
+        language: languageData === 'ko' ? 'Korean' : 'English',
         imageLink: imageLinkData,
       });
       socketData.on('receive participants list', (participantsList: string) => {

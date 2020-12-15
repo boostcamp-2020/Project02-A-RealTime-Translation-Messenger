@@ -1,3 +1,5 @@
+import LangCode from './langCode';
+
 type RoomListType = {
   roomCode: string;
   title: string;
@@ -49,8 +51,8 @@ type ParticipantsUpdateType = {
 };
 
 type TranslateTextPropsType = {
-  source: 'ko' | 'en';
-  target: 'ko' | 'en';
+  source: LangCode;
+  target: LangCode;
   text: string;
 };
 

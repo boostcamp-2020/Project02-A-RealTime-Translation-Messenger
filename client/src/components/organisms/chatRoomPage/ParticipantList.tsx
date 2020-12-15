@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import LangCode from '../../../@types/langCode';
 
 import useParticipantsList from '../../../hooks/useParticipantsList';
 import useUser from '../../../hooks/useUser';
@@ -30,7 +31,7 @@ function ParticipantList() {
           <ParticipantItemWrapper key={participant.socketId}>
             <ParticipantItem
               imageLink={participant.imageLink}
-              language={participant.language as 'Korean' | 'English'}
+              language={participant.language as LangCode}
               isMe={participant.socketId === socketIdData}
               nickname={participant.nickname}
             />
@@ -43,7 +44,7 @@ function ParticipantList() {
           <ParticipantItemWrapper key={participant.socketId}>
             <ParticipantItem
               imageLink={participant.imageLink}
-              language={participant.language as 'Korean' | 'English'}
+              language={participant.language as LangCode}
               isMe={participant.socketId === socketIdData}
               nickname={participant.nickname}
             />
