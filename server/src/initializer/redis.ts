@@ -2,7 +2,7 @@ import roomGroup from '../models/roomGroup';
 import socketsInRoom from '../models/socketsInRoom';
 import roomCodeOnSocket from '../models/roomCodeOnSocket';
 
-const redisLoader = async () => {
+const redisInitializer = async () => {
   try {
     await roomGroup.flushAll();
     await socketsInRoom.flushAll();
@@ -10,4 +10,4 @@ const redisLoader = async () => {
   } catch (err) {}
 };
 
-export default redisLoader;
+export default redisInitializer;
