@@ -128,6 +128,7 @@ class ChattingViewModel: ViewModel, ViewModelType {
             })
             .disposed(by: rx.disposeBag)
         
+        
         let viewTexts = localize.asDriver()
             .map { $0.chatroomViewText }
         
