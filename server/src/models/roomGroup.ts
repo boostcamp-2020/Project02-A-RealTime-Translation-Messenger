@@ -1,11 +1,12 @@
 import client from './redisConnection';
 import Database from '../@types/databaseName';
 import dateUtil from '../utils/date';
-import { RoomInfoType } from '../@types/dataType';
+import RoomInfo from '../@types/roomInfo';
+import { RoomType } from '../@types/dataType';
 
 const removeRoom = (roomCode: string) => {
   return new Promise<number>((resolve, reject) => {
-    client.select(Database.ROOM_INFO, () => {
+    client.select(Database.ROOM_GROUP, () => {
       client.del(roomCode, (err, res) => {
         if (err) return reject(err);
         return resolve(res);
@@ -14,9 +15,9 @@ const removeRoom = (roomCode: string) => {
   });
 };
 
-const getRoomCodeList = () => {
+const getRoomCodes = () => {
   return new Promise<string[]>((resolve, reject) => {
-    client.select(Database.ROOM_INFO, () => {
+    client.select(Database.ROOM_GROUP, () => {
       client.keys('*', (err, codes) => {
         if (err) return reject(err);
         return resolve(codes);
@@ -25,8 +26,8 @@ const getRoomCodeList = () => {
   });
 };
 
-const getRoomInfo = (roomCode: string) => {
-  return new Promise<RoomInfoType>((resolve, reject) => {
+const getRoom = (roomCode: string) => {
+  return new Promise<RoomType>((resolve, reject) => {
     client.hgetall(roomCode, (err, res) => {
       if (err) return reject(err);
       return resolve({ roomCode, ...Object.assign(res) });
@@ -34,9 +35,9 @@ const getRoomInfo = (roomCode: string) => {
   });
 };
 
-const isRoomCodeExisting = (roomCode: string) => {
+const checkExistedCode = (roomCode: string) => {
   return new Promise<boolean>((resolve, reject) => {
-    client.select(Database.ROOM_INFO, () => {
+    client.select(Database.ROOM_GROUP, () => {
       client.exists(roomCode, (err, res) => {
         if (err) return reject(err);
         if (res === 1) return resolve(true);
@@ -46,9 +47,9 @@ const isRoomCodeExisting = (roomCode: string) => {
   });
 };
 
-const setRoom = (roomCode: string, title: string, isPrivate: string) => {
+const saveRoom = (roomCode: string, title: string, isPrivate: string) => {
   return new Promise<'OK'>((resolve, reject) => {
-    client.select(Database.ROOM_INFO, () => {
+    client.select(Database.ROOM_GROUP, () => {
       client.hmset(roomCode, 'title', title, 'createdAt', dateUtil.getNow(), 'isPrivate', isPrivate, (err, res) => {
         if (err) return reject(err);
         return resolve(res);
@@ -59,10 +60,10 @@ const setRoom = (roomCode: string, title: string, isPrivate: string) => {
 
 const isRoomPrivate = (roomCode: string) => {
   return new Promise<boolean>((resolve, reject) => {
-    client.select(Database.ROOM_INFO, () => {
+    client.select(Database.ROOM_GROUP, () => {
       client.hget(roomCode, 'isPrivate', (err, res) => {
         if (err) return reject(err);
-        if (res === 'true') return resolve(true);
+        if (res === RoomInfo.PRIVATE) return resolve(true);
         return resolve(false);
       });
     });
@@ -71,7 +72,7 @@ const isRoomPrivate = (roomCode: string) => {
 
 const getTitle = (roomCode: string) => {
   return new Promise<string>((resolve, reject) => {
-    client.select(Database.ROOM_INFO, () => {
+    client.select(Database.ROOM_GROUP, () => {
       client.hget(roomCode, 'title', (err, res) => {
         if (err) return reject(err);
         return resolve(res);
@@ -82,7 +83,7 @@ const getTitle = (roomCode: string) => {
 
 const flushAll = () => {
   return new Promise<string>((resolve, reject) => {
-    client.select(Database.ROOM_INFO, () => {
+    client.select(Database.ROOM_GROUP, () => {
       client.flushall((err, res) => {
         if (err) return reject(err);
         return resolve(res);
@@ -91,15 +92,15 @@ const flushAll = () => {
   });
 };
 
-const roomInfoModel = {
+const roomGroup = {
   removeRoom,
-  getRoomCodeList,
-  getRoomInfo,
-  isRoomCodeExisting,
-  setRoom,
+  getRoomCodes,
+  getRoom,
+  checkExistedCode,
+  saveRoom,
   isRoomPrivate,
   getTitle,
   flushAll,
 };
 
-export default roomInfoModel;
+export default roomGroup;

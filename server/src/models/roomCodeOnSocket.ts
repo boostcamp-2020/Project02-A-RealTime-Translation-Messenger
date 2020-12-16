@@ -1,9 +1,9 @@
 import client from './redisConnection';
 import Database from '../@types/databaseName';
 
-const setRoomBySocket = (socketId: string, roomCode: string) => {
+const saveRoomCode = (socketId: string, roomCode: string) => {
   return new Promise<'OK'>((resolve, reject) => {
-    client.select(Database.SOCKET_ROOM, () => {
+    client.select(Database.ROOM_CODE_ON_SOCKET, () => {
       client.set(socketId, roomCode, (err, res) => {
         if (err) return reject(err);
         return resolve(res);
@@ -12,9 +12,9 @@ const setRoomBySocket = (socketId: string, roomCode: string) => {
   });
 };
 
-const getRoomBySocket = (socketId: string) => {
+const getRoomCode = (socketId: string) => {
   return new Promise<string>((resolve, reject) => {
-    client.select(Database.SOCKET_ROOM, () => {
+    client.select(Database.ROOM_CODE_ON_SOCKET, () => {
       client.get(socketId, (err, res) => {
         if (err || res === null) return reject(err);
         return resolve(res);
@@ -25,7 +25,7 @@ const getRoomBySocket = (socketId: string) => {
 
 const removeSocket = (socketId: string) => {
   return new Promise<number>((resolve, reject) => {
-    client.select(Database.SOCKET_ROOM, () => {
+    client.select(Database.ROOM_CODE_ON_SOCKET, () => {
       client.del(socketId, (err, res) => {
         if (err) return reject(err);
         return resolve(res);
@@ -36,7 +36,7 @@ const removeSocket = (socketId: string) => {
 
 const flushAll = () => {
   return new Promise<string>((resolve, reject) => {
-    client.select(Database.SOCKET_ROOM, () => {
+    client.select(Database.ROOM_CODE_ON_SOCKET, () => {
       client.flushall((err, res) => {
         if (err) return reject(err);
         return resolve(res);
@@ -45,11 +45,11 @@ const flushAll = () => {
   });
 };
 
-const socketRoomModel = {
-  setRoomBySocket,
-  getRoomBySocket,
+const roomCodeOnSocket = {
+  saveRoomCode,
+  getRoomCode,
   removeSocket,
   flushAll,
 };
 
-export default socketRoomModel;
+export default roomCodeOnSocket;
