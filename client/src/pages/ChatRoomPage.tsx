@@ -53,7 +53,7 @@ function ChatRoomPage() {
 
   useEffect(() => {
     if (socketData !== null) return;
-    onSetSocket(io(BASE_URL as string));
+    onSetSocket(io(process.env.BASE_URL as string));
   }, []);
 
   useEffect(() => {
