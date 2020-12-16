@@ -10,7 +10,7 @@ const createRoom = createAsyncThunk(
   `${name}/createRoom`,
   async ({ title, isPrivate }: CreatingRoomType, { rejectWithValue }) => {
     try {
-      const response = (await api.createRoom(title, isPrivate)).data;
+      const response = (await api.createRoom(title, isPrivate ? 'true' : 'false')).data;
       history.push('/chat');
       return response;
     } catch (e) {
@@ -23,7 +23,7 @@ const joinRoom = createAsyncThunk(
   `${name}/joinRoom`,
   async ({ roomCode, isPrivate }: JoiningRoomType, { rejectWithValue }) => {
     try {
-      const response = (await api.joinRoom(roomCode, isPrivate)).data;
+      const response = (await api.joinRoom(roomCode, isPrivate ? 'true' : 'false')).data;
       history.push('/chat');
       return response;
     } catch (e) {
