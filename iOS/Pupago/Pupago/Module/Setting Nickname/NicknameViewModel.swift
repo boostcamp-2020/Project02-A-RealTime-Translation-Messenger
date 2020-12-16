@@ -34,6 +34,8 @@ final class NicknameViewModel: ViewModel, ViewModelType {
     private let nickname = BehaviorRelay<String>(value: "")
     private let needShake = BehaviorRelay<Bool>(value: false)
     
+    //MARK: - Transform
+    
     func transform(_ input: Input) -> Output {
         input.nickname
             .subscribe(onNext: { [unowned self] in

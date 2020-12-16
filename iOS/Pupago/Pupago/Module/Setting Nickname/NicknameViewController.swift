@@ -10,14 +10,20 @@ import RxCocoa
 
 final class NicknameViewController: ViewController {
     
+    // MARK: - IBOutlet
+    
     @IBOutlet weak var introLabel: UILabel!
     @IBOutlet weak var descriptionLabel: ValidatingLabel!
     @IBOutlet weak var nameTextField: ValidatingTextField!
     @IBOutlet weak var startButton: Button!
     
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    // MARK: - Bind ViewModel
     
     override func bindViewModel() {
         super.bindViewModel()
