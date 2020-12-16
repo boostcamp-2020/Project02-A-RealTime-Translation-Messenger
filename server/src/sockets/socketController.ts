@@ -24,7 +24,7 @@ const enterChatroom = async (socket: Socket, io: SocketIO.Server, userData: User
 
   try {
     await socketService.insertSocketInfoIntoDB(socket.id, roomCode, nickname, language, imageLink);
-    const participants = await socketService.getParticipantsFromRoomCode(roomCode);
+    const participants = await socketService.getParticipants(roomCode);
     const participantsIncludeNickname = { participantsList: participants, type: 'enter', diffNickname: nickname };
     io.to(roomCode).emit('receive participants list', JSON.stringify(participantsIncludeNickname));
   } catch (err) {
@@ -52,14 +52,14 @@ const disconnect = async (socket: Socket, io: SocketIO.Server) => {
     const { nickname }: { nickname: string } = JSON.parse(socketInfo);
 
     if (roomCode !== null) {
-      await socketService.removeSocketFromDB(socket.id, roomCode);
+      await socketService.removeSocket(socket.id, roomCode);
 
       if (await socketsInRoom.isRoomEmpty(roomCode)) {
         await roomGroup.removeRoom(roomCode);
         return;
       }
 
-      const participants = await socketService.getParticipantsFromRoomCode(roomCode);
+      const participants = await socketService.getParticipants(roomCode);
       const participantsIncludeNickname = { participantsList: participants, type: 'leave', diffNickname: nickname };
       io.to(roomCode).emit('receive participants list', JSON.stringify(participantsIncludeNickname));
     }

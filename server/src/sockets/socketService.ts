@@ -4,7 +4,7 @@ import dateUtil from '../utils/date';
 import { ReceiveChatType, ParticipantType } from '../@types/dataType';
 import { Socket } from 'socket.io';
 
-const getParticipantsFromRoomCode = async (roomCode: string) => {
+const getParticipants = async (roomCode: string) => {
   const participantsInDB = await socketsInRoom.getSockets(roomCode);
   const participants: ParticipantType[] = Object.entries(participantsInDB).map(([key, value]) => {
     const { nickname, language, imageLink }: { nickname: string; language: string; imageLink: string } = JSON.parse(
@@ -46,7 +46,7 @@ const createReceiveChat = async (socketId: string, Korean: string, English: stri
   return { roomCode, receiveChat };
 };
 
-const removeSocketFromDB = async (socketId: string, roomCode: string) => {
+const removeSocket = async (socketId: string, roomCode: string) => {
   await socketsInRoom.removeSocket(roomCode, socketId);
   await roomCodeOnSocket.removeSocket(socketId);
   return true;
@@ -57,10 +57,10 @@ const emitSocketError = (socket: Socket, errorMessage: string) => {
 };
 
 const socketService = {
-  getParticipantsFromRoomCode,
+  getParticipants,
   insertSocketInfoIntoDB,
   createReceiveChat,
-  removeSocketFromDB,
+  removeSocket,
   emitSocketError,
 };
 
