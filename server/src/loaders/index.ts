@@ -1,16 +1,14 @@
 import express from 'express';
-import http from 'http';
+import https from 'https';
 
 import envLoader from './env';
 import expressLoader from './express';
 import socketLoader from '../sockets/socket';
-import databaseLoader from './database';
+import redisLoader from './redis';
 
-export default async (expressApp: express.Application, server: http.Server): Promise<void> => {
+export default async (expressApp: express.Application, server: https.Server): Promise<void> => {
   envLoader();
   expressLoader(expressApp);
   socketLoader(server);
-  await databaseLoader();
-
-  console.log('✌️ Express loaded');
+  await redisLoader();
 };

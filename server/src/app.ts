@@ -10,9 +10,7 @@ const startServer = async () => {
   const server = https.createServer(optionInitialize, app);
   await loader(app, server);
 
-  server.listen(SERVER_PORT, () => {
-    console.log(`Express App Init in ${SERVER_PORT}!`);
-  });
+  server.listen(SERVER_PORT, () => {});
 };
 
 startServer();
