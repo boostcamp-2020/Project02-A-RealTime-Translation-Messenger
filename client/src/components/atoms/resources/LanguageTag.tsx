@@ -22,7 +22,7 @@ const StyledLanguageTag = styled.div<LanguageTagPropsType>`
   color: white;
 `;
 
-export function LanguageTag({ language, isMe }: LanguageTagPropsType) {
+function LanguageTag({ language, isMe }: LanguageTagPropsType) {
   return (
     <StyledLanguageTag language={language} isMe={isMe}>
       {language === LangCode.KOREAN ? '가' : 'A'}

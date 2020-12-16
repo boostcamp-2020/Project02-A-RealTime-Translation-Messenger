@@ -35,7 +35,7 @@ const StyledRoomItemBox = styled.div<StyledRoomItemBoxPropsType>`
   ${(props) => (props.disabled ? '' : 'cursor: pointer;')}
 `;
 
-export function RoomItemBox({ size = 'big', children, onClickButton, disabled }: RoomItemBoxTypes) {
+function RoomItemBox({ size = 'big', children, onClickButton, disabled }: RoomItemBoxTypes) {
   return (
     <StyledRoomItemBox
       size={size}

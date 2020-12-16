@@ -19,7 +19,7 @@ const IconWrapper = styled.div`
   cursor: pointer;
 `;
 
-export function IconButton({ iconType = 'Edit', color = 'black', onClick, className }: IconButtonPropsType) {
+function IconButton({ iconType = 'Edit', color = 'black', onClick, className }: IconButtonPropsType) {
   let icon;
   const defaultIconProps = { fontSize: 24, color: color };
 

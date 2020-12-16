@@ -14,7 +14,7 @@ const StyledMainpageBox = styled.div<MainPageBoxPropsType>`
   background-color: rgba(255, 255, 255, 0.6);
 `;
 
-export function MainPageBox({ children }: MainPageBoxPropsType) {
+function MainPageBox({ children }: MainPageBoxPropsType) {
   return <StyledMainpageBox>{children}</StyledMainpageBox>;
 }
 

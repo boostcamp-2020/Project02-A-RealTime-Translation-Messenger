@@ -40,7 +40,7 @@ const Button = styled.button<StyledButtonPropsType>`
   ${(props) => (props.disabled ? '' : 'cursor: pointer;')}
 `;
 
-export function MainButton({ disabled, children, onClickButton }: ButtonPropsType) {
+function MainButton({ disabled, children, onClickButton }: ButtonPropsType) {
   return (
     <Button
       type="button"

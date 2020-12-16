@@ -17,7 +17,7 @@ const StyledChatLogsBox = styled.div<ChatLogsBoxPropsType>`
   }
 `;
 
-export function ChatLogsBox({ children }: ChatLogsBoxPropsType) {
+function ChatLogsBox({ children }: ChatLogsBoxPropsType) {
   return <StyledChatLogsBox>{children}</StyledChatLogsBox>;
 }
 

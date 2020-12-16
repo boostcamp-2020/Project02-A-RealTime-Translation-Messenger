@@ -9,7 +9,7 @@ const StyledLogo = styled.img`
   height: 72px;
 `;
 
-export function LogoWithText() {
+function LogoWithText() {
   return <StyledLogo src={Images.LOGO_WITH_THEXT} alt="pupago logo with text" />;
 }
 
