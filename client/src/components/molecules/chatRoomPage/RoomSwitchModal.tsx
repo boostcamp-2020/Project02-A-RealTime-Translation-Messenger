@@ -40,12 +40,7 @@ const ModalContentWrapper = styled.div`
   height: inherit;
 `;
 
-export const RoomSwitchModal = ({
-  onClickConfirm,
-  onClickCancel,
-  onClickBackground,
-  onClickClose,
-}: RoomSwitchModalPropsType) => {
+function RoomSwitchModal({ onClickConfirm, onClickCancel, onClickBackground, onClickClose }: RoomSwitchModalPropsType) {
   const { formatMessage } = useIntl();
   return (
     <div>
@@ -65,6 +60,6 @@ export const RoomSwitchModal = ({
       </ChatModalBoxWrapper>
     </div>
   );
-};
+}
 
 export default RoomSwitchModal;

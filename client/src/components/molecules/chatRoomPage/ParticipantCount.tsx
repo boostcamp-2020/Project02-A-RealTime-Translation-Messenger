@@ -22,7 +22,7 @@ const MarginedText = styled(Text)`
   margin-top: 2px;
 `;
 
-export const ParticipantCount = ({ maxCapacity, participatingCount }: ParticipantCountPropsType) => {
+function ParticipantCount({ maxCapacity, participatingCount }: ParticipantCountPropsType) {
   return (
     <ParticipantCountWrapper>
       <MiniLogo />
@@ -31,6 +31,6 @@ export const ParticipantCount = ({ maxCapacity, participatingCount }: Participan
       </MarginedText>
     </ParticipantCountWrapper>
   );
-};
+}
 
 export default ParticipantCount;

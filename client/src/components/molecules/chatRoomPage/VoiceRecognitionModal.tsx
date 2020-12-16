@@ -14,7 +14,7 @@ const VoiceRecognitionWrapper = styled.div`
   top: 240px;
 `;
 
-export const VoiceRecognitionModal = ({ onClickBackground }: VoiceRecognitionModalPropsType) => {
+function VoiceRecognitionModal({ onClickBackground }: VoiceRecognitionModalPropsType) {
   return (
     <div>
       <ChatModalBackground onClick={onClickBackground} />
@@ -23,6 +23,6 @@ export const VoiceRecognitionModal = ({ onClickBackground }: VoiceRecognitionMod
       </VoiceRecognitionWrapper>
     </div>
   );
-};
+}
 
 export default VoiceRecognitionModal;

@@ -25,7 +25,7 @@ const TextWrapper = styled.div`
   width: 152px;
 `;
 
-export const ParticipantItem = ({ imageLink, language, isMe, nickname }: ParticipantItemPropsType) => {
+function ParticipantItem({ imageLink, language, isMe, nickname }: ParticipantItemPropsType) {
   return (
     <ParticipantItemWrapper>
       <ProfileImage size="size-40" image={imageLink} isMe={isMe} />
@@ -37,6 +37,6 @@ export const ParticipantItem = ({ imageLink, language, isMe, nickname }: Partici
       <LanguageTag language={language} isMe={isMe} />
     </ParticipantItemWrapper>
   );
-};
+}
 
 export default ParticipantItem;

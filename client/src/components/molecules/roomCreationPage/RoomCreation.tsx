@@ -45,14 +45,14 @@ const RightAlignedText = styled(Text)`
   margin-top: 4px;
 `;
 
-export const RoomCreation = ({
+function RoomCreation({
   TypedWordCount,
   MaxWordCount,
   privateSelected,
   InputOnChange,
   value,
   isPrivateOnClick,
-}: RoomCreationPropsType) => {
+}: RoomCreationPropsType) {
   const { formatMessage } = useIntl();
   return (
     <>
@@ -79,6 +79,6 @@ export const RoomCreation = ({
       </RoomCreationWrapper>
     </>
   );
-};
+}
 
 export default RoomCreation;
