@@ -1,4 +1,3 @@
-import client from '../models/redisConnection';
 import roomInfoModel from '../models/roomInfoModel';
 import roomSocketsInfoModel from '../models/roomSocketsInfoModel';
 import socketRoomModel from '../models/socketRoomModel';

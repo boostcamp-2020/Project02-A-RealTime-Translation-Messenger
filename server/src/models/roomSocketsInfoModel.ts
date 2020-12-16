@@ -1,5 +1,5 @@
 import client from './redisConnection';
-import Database from '../types/databaseNames';
+import Database from '../@types/databaseName';
 
 const setSocketInfo = (roomCode: string, socketId: string, socketInfo: string) => {
   return new Promise<number>((resolve, reject) => {
