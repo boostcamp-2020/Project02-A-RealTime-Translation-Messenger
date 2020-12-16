@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { useHistory } from 'react-router-dom';
 
 import useRoom from '../../../hooks/useRoom';
 import useRoomList from '../../../hooks/useRoomList';
@@ -31,18 +30,9 @@ function RoomList() {
   const { data: roomListData, onGetRoomList } = useRoomList();
   const { data: roomData, onJoinRoom, loading, error } = useRoom();
 
-  const history = useHistory();
-
   useEffect(() => {
     onGetRoomList();
   }, []);
-
-  useEffect(() => {
-    if (!error && !loading && roomData.roomCode !== '') {
-      // 채팅 페이지로 이동
-      history.push('/chat');
-    }
-  }, [roomData.roomCode]);
 
   const returnList = () => {
     const { languageData } = useUser();
