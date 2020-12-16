@@ -24,7 +24,8 @@ class ChattingViewController: ViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var translationTextView: UITextView!
     @IBOutlet weak var inputBarBottomConstraint: NSLayoutConstraint!
-    
+    @IBOutlet weak var translationViewConstraint: NSLayoutConstraint!
+
     // MARK: - Properties
     
     private lazy var rightNavigationItem: UIBarButtonItem = {
@@ -43,6 +44,7 @@ class ChattingViewController: ViewController {
         configureCollectionView()
         configureToasterView()
         bindKeyboard()
+        //translationTextView.delegate = self
     }
     
     // MARK: Bind ViewModel
@@ -129,6 +131,13 @@ class ChattingViewController: ViewController {
                                transition: .modal)
             })
             .disposed(by: rx.disposeBag)
+        
+        translationTextView.rx.text
+            .distinctUntilChanged()
+            .subscribe(onNext: {[unowned self] _ in
+                adjustTranslationViewSize(translationTextView.contentSize.height >= 120)
+            })
+            .disposed(by: rx.disposeBag)
     }
     
 }
@@ -170,6 +179,12 @@ private extension ChattingViewController {
         
         let indexPath = IndexPath(row: lastItemIndex, section: 0)
         self.collectionView.scrollToItem(at: indexPath, at: .bottom, animated: true)
+    }
+    
+    func adjustTranslationViewSize(_ isScroll: Bool) {
+        translationViewConstraint.constant = isScroll ? 120 : translationTextView.contentSize.height
+        translationTextView.isScrollEnabled = isScroll
+        view.layoutIfNeeded()
     }
     
     @objc func dismissKeyboard(_ : NSNotification) {
