@@ -5,7 +5,6 @@
 //  Created by 김근수 on 2020/11/30.
 //
 
-import Foundation
 import RxSwift
 
 class PupagoAPI: NetworkProviding {
@@ -41,4 +40,5 @@ class PupagoAPI: NetworkProviding {
     func ocr(data: String, timestamp: Int, requestId: String) -> Observable<OCRResponse> {
         return request(endpoint: ClovaEndpoint.detect(data: data, timestamp: timestamp, requestId: requestId))
     }
+    
 }

@@ -5,57 +5,48 @@
 //  Created by kimn on 2020/12/07.
 //
 
-import Foundation
 import RxSwift
 import RxCocoa
 
-class SpeechViewModel: ViewModel, ViewModelType {
+final class SpeechViewModel: ViewModel, ViewModelType {
     
     typealias TranslationViewState = (text: String, isHidden: Bool)
     
+    // MARK: - Input
+    
     struct Input {
-        let micTrigger: Observable<Void>
-        let sendTrigger: Observable<Void>
-        let backTrigger: Observable<Void>
         let originText: Observable<String>
+        let micButtonDidTap: Observable<Void>
+        let sendButtonDidTap: Observable<Void>
+        let closeButtonDidTap: Observable<Void>
     }
+    
+    // MARK: - Output
+    
     struct Output {
         let viewTexts: Observable<String>
-        let activate: Driver<Bool>
-        let available: Driver<Bool>
-        let assitable: Observable<Bool>
         let originText: Observable<String>
         let translationViewState: Observable<TranslationViewState>
-        let dismiss: Driver<Void>
+        let needAssist: Observable<Bool>
+        let isMicRunning: Driver<Bool>
+        let isActive: Observable<Bool>
+        let dismiss: Signal<Void>
     }
     
-    let activate = BehaviorRelay<Bool>(value: false)
-    let speechState = BehaviorRelay<Bool>(value: false)
-    let originText = PublishRelay<String>()
-    let chatInfo = PublishRelay<Translator.Text>()
-    let available = BehaviorRelay<Bool>(value: false)
-    let assistable = BehaviorRelay<Bool>(value: false)
-    let translationViewState = PublishRelay<(text: String, isHidden: Bool)>()
-    let dismiss = PublishRelay<Void>()
+    // MARK: - State
+    
+    private let originText = PublishRelay<String>()
+    private let chatInfo = PublishRelay<Translator.Text>()
+    private let isActive = BehaviorRelay<Bool>(value: false)
+    private let isMicRunning = BehaviorRelay<Bool>(value: false)
+    private let needAssist = BehaviorRelay<Bool>(value: true)
+    private let translationViewState = PublishRelay<TranslationViewState>()
+    
+    // MARK: - Transform
     
     func transform(_ input: Input) -> Output {
-        
-        let socketManager = SocketIOManager.shared
-        let speechManager = SpeechManager()
-        let provider = PupagoAPI()
         let translator = Translator(provider: provider)
-        
-        let viewtext = localize.asDriver()
-            .map { $0.speechViewText.assist }
-        
-        input.micTrigger
-            .subscribe(onNext: { [unowned self] _ in
-                speechManager.speechToText()
-                let state = activate.value == false ? true : false
-                activate.accept(state)
-                assistable.accept(true)
-            })
-            .disposed(by: rx.disposeBag)
+        let speechManager = SpeechManager()
         
         input.originText
             .distinctUntilChanged()
@@ -63,49 +54,55 @@ class SpeechViewModel: ViewModel, ViewModelType {
             .flatMap { translator.translate(with: $0) }
             .subscribe(onNext: { [unowned self] info in
                 let translatedText = info.lang == "Korean" ? info.english : info.korean
-                translationViewState.accept((translatedText, false))
                 chatInfo.accept(info)
-                available.accept(true)
+                isActive.accept(true)
+                translationViewState.accept((translatedText, false))
             })
             .disposed(by: rx.disposeBag)
         
         input.originText
             .subscribe(onNext: { [unowned self] text in
-                let status = text.isEmpty ? ("", true) : (localize.value.translating, false)
-                assistable.accept(!status.1)
+                let status = text.isEmpty ? ("", true) : (localize.value.userMessage.translating, false)
+                needAssist.accept(status.1)
                 translationViewState.accept(status)
-                available.accept(false)
+                isActive.accept(false)
             })
             .disposed(by: rx.disposeBag)
         
-        input.sendTrigger
+        input.micButtonDidTap
+            .subscribe(onNext: { [unowned self] _ in
+                speechManager.speechToText()
+                isMicRunning.accept(!isMicRunning.value)
+                needAssist.accept(false)
+            })
+            .disposed(by: rx.disposeBag)
+        
+        input.sendButtonDidTap
             .withLatestFrom(chatInfo)
             .subscribe(onNext: { [unowned self] info in
                 socketManager.sendMessage(korean: info.korean,
                                           english: info.english,
                                           origin: info.lang)
-                dismiss.accept(())
-            })
-            .disposed(by: rx.disposeBag)
-        
-        input.backTrigger
-            .subscribe(onNext: { [unowned self] _ in
-                dismiss.accept(())
             })
             .disposed(by: rx.disposeBag)
         
         speechManager.recognizedSpeech
-            .subscribe(onNext: { [unowned self] speech in
-                originText.accept(speech)
-            })
+            .bind(to: originText)
             .disposed(by: rx.disposeBag)
         
+        let viewtext = localize.asDriver()
+            .map { $0.speechViewText.assist }
+        
+        let dismiss = Observable.of(input.sendButtonDidTap, input.closeButtonDidTap).merge()
+            .asSignal(onErrorJustReturn: ())
+        
         return Output(viewTexts: viewtext.asObservable(),
-                      activate: activate.asDriver(),
-                      available: available.asDriver(),
-                      assitable: assistable.asObservable(),
                       originText: originText.asObservable(),
                       translationViewState: translationViewState.asObservable(),
-                      dismiss: dismiss.asDriver(onErrorJustReturn: ()))
+                      needAssist: needAssist.asObservable(),
+                      isMicRunning: isMicRunning.asDriver(),
+                      isActive: isActive.asObservable(),
+                      dismiss: dismiss)
+        
     }
 }

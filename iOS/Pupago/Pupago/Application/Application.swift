@@ -18,7 +18,7 @@ final class Application: NSObject {
     var userName: String
     var localize: Localize
     var profile: String
-    var currentRoomCode = ""
+    var currentRoomCode: String
     
     let isSocketValid = PublishRelay<Bool>()
     let socketManager = SocketIOManager.shared
@@ -28,6 +28,7 @@ final class Application: NSObject {
         userName = ""
         localize = .korean
         profile = ""
+        currentRoomCode = ""
     }
     
     func setUpSocket() {
@@ -50,10 +51,9 @@ final class Application: NSObject {
         guard let window = window else { return }
         self.window = window
         
-        let viewModel = LanguageViewModel()
+        let viewModel = LanguageViewModel(provider: PupagoAPI())
         navigator.show(segue: .language(viewModel: viewModel),
                        sender: nil,
                        transition: .root(in: window))
-        
     }
 }

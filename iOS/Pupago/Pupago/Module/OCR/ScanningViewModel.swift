@@ -5,54 +5,58 @@
 //  Created by 김근수 on 2020/12/10.
 //
 
-//import UIKit
 import RxSwift
 import RxCocoa
 import VisionKit
 
-class ScanningViewModel: ViewModel, ViewModelType {
+final class ScanningViewModel: ViewModel, ViewModelType {
     
     typealias TranslationViewState = (text: String, isHidden: Bool)
-    typealias SeeMoreViewState = (text: String, type: Bool)
+    typealias DetailViewState = (text: String, type: Bool)
+    
+    // MARK: - Input
     
     struct Input {
-        let seeMoreText: Observable<String>
-        let originSeeMoreTap: Observable<Void>
-        let translationSeeMoreTap: Observable<Void>
-        let cancleButtonTap: Observable<Void>
-        let scanButtonTap: Observable<Void>
-        let sendButtonTap: Observable<Void>
-        let dismissButtonTap: Observable<Void>
+        let detailText: Observable<String>
+        let originDetailDidTap: Observable<Void>
+        let translationDetailDidTap: Observable<Void>
+        let cancleButtonDidTap: Observable<Void>
+        let scanButtonDidTap: Observable<Void>
+        let sendButtonDidTap: Observable<Void>
+        let closeButtonDidTap: Observable<Void>
     }
+    
+    // MARK: - Output
     
     struct Output {
         let viewText: Driver<Localize.ScanningViewText>
-        let activate: Driver<Bool>
+        let isActive: Observable<Bool>
         let needScanning: Signal<VNDocumentCameraViewController>
         let originText: Observable<String>
         let translationViewState: Observable<TranslationViewState>
-        let seeMoreViewState: Driver<SeeMoreViewState>
-        let seeMoreState: Observable<Bool>
+        let detailViewState: Driver<DetailViewState>
+        let needFade: Observable<Bool>
         let scanedImage: Observable<UIImage>
         let needAnimation: Observable<Bool>
         let dismiss: Signal<Void>
     }
     
-    let activate = BehaviorRelay<Bool>(value: false)
-    let available = BehaviorRelay<Bool>(value: true)
-    let scanedImage = PublishRelay<UIImage>()
-    let translationViewState = PublishRelay<(text: String, isHidden: Bool)>()
-    let chatInfo = PublishRelay<Translator.Text>()
-    let animating = BehaviorRelay<Bool>(value: false)
-    let originText = PublishRelay<String>()
-    let seeMoreViewState = BehaviorRelay<(text: String, type: Bool)>(value: ("", false))
-    let seeMoreState = BehaviorRelay<Bool>(value: true)
+    // MARK: - State
+    
+    private let activate = BehaviorRelay<Bool>(value: false)
+    private let scanedImage = PublishRelay<UIImage>()
+    private let translationViewState = PublishRelay<TranslationViewState>()
+    private let chatInfo = PublishRelay<Translator.Text>()
+    private let animating = BehaviorRelay<Bool>(value: false)
+    private let originText = PublishRelay<String>()
+    private let detailViewState = BehaviorRelay<DetailViewState>(value: ("", false))
+    private let needFade = BehaviorRelay<Bool>(value: true)
+    
+    // MARK: - Transform
     
     func transform(_ input: Input) -> Output {
-        
-        let provider = PupagoAPI()
-        let socketManager = SocketIOManager.shared
         let translator = Translator(provider: provider)
+        
         let viewText = localize.asDriver().map { $0.scanningViewText }
         
         originText
@@ -68,9 +72,10 @@ class ScanningViewModel: ViewModel, ViewModelType {
             .disposed(by: rx.disposeBag)
         
         originText
+            .distinctUntilChanged()
             .subscribe(onNext: { [unowned self] text in
-                let status = text.isEmpty ? ("", true) : (localize.value.translating, false)
-                translationViewState.accept(status)
+                let state = text.isEmpty ? ("", true) : (localize.value.userMessage.translating, false)
+                translationViewState.accept(state)
                 activate.accept(false)
             })
             .disposed(by: rx.disposeBag)
@@ -88,28 +93,27 @@ class ScanningViewModel: ViewModel, ViewModelType {
             })
             .disposed(by: rx.disposeBag)
         
-        input.seeMoreText
+        input.detailText
             .subscribe(onNext: { [unowned self] text in
-                seeMoreViewState.value.type ? translationViewState.accept((text, false)) : (available.value ? available.accept(false) : originText.accept(text))
-                
+                detailViewState.value.type ? translationViewState.accept((text, false)) : originText.accept(text)
             })
             .disposed(by: rx.disposeBag)
         
-        input.cancleButtonTap
+        input.cancleButtonDidTap
             .map { return true }
-            .bind(to: seeMoreState, activate, available)
+            .bind(to: needFade, activate)
             .disposed(by: rx.disposeBag)
         
-        input.sendButtonTap
+        input.sendButtonDidTap
             .withLatestFrom(chatInfo)
-            .subscribe(onNext: { info in
+            .subscribe(onNext: {[unowned self] info in
                 socketManager.sendMessage(korean: info.korean,
                                           english: info.english,
                                           origin: info.lang)
             })
             .disposed(by: rx.disposeBag)
         
-        let needScan = input.scanButtonTap.asSignal(onErrorJustReturn: ())
+        let needScan = input.scanButtonDidTap.asSignal(onErrorJustReturn: ())
             .map { [unowned self] () -> VNDocumentCameraViewController in
                 let cameraViewController = VNDocumentCameraViewController()
                 cameraViewController.rx.didFinish
@@ -118,34 +122,41 @@ class ScanningViewModel: ViewModel, ViewModelType {
                 return cameraViewController
             }
         
-        input.originSeeMoreTap
+        input.originDetailDidTap
             .withLatestFrom(originText)
             .subscribe(onNext: { [unowned self] text in
-                seeMoreViewState.accept((text, false))
-                seeMoreState.accept(false)
-                available.accept(true)
-                activate.accept(false)
+                fetchDetail(text: text, type: false)
             })
             .disposed(by: rx.disposeBag)
         
-        input.translationSeeMoreTap
+        input.translationDetailDidTap
             .withLatestFrom(translationViewState)
-            .subscribe(onNext: { [unowned self] state in
-                seeMoreViewState.accept((state.text, true))
-                seeMoreState.accept(false)
-                activate.accept(false)
+            .map { $0.text }
+            .subscribe(onNext: { [unowned self] text in
+                fetchDetail(text: text, type: true)
             })
             .disposed(by: rx.disposeBag)
         
         return Output(viewText: viewText,
-                      activate: activate.asDriver(),
+                      isActive: activate.asObservable(),
                       needScanning: needScan,
                       originText: originText.asObservable(),
                       translationViewState: translationViewState.asObservable(),
-                      seeMoreViewState: seeMoreViewState.asDriver(),
-                      seeMoreState: seeMoreState.asObservable(),
+                      detailViewState: detailViewState.asDriver(),
+                      needFade: needFade.asObservable(),
                       scanedImage: scanedImage.asObservable(),
                       needAnimation: animating.asObservable(),
-                      dismiss: Observable.of(input.sendButtonTap, input.dismissButtonTap).merge().asSignal(onErrorJustReturn: ()))
+                      dismiss: Observable.of(input.sendButtonDidTap,
+                                             input.closeButtonDidTap).merge().asSignal(onErrorJustReturn: ()))
     }
+}
+
+private extension ScanningViewModel {
+    
+    func fetchDetail(text: String, type: Bool) {
+        detailViewState.accept((text, type))
+        needFade.accept(false)
+        activate.accept(false)
+    }
+    
 }

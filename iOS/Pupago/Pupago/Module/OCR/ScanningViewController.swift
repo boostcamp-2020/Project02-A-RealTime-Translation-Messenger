@@ -5,46 +5,55 @@
 //  Created by 김근수 on 2020/12/10.
 //
 
-import UIKit
 import RxSwift
 import RxCocoa
 import VisionKit
 
-class ScanningViewController: ViewController {
+final class ScanningViewController: ViewController {
+    
+    // MARK: - IBOutlet
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var originMessageLabel: UILabel!
+    @IBOutlet weak var originIndicatorLabel: UILabel!
     @IBOutlet weak var originLabel: UILabel!
-    @IBOutlet weak var translationMessageLabel: UILabel!
+    @IBOutlet weak var translationIndicatorLabel: UILabel!
     @IBOutlet weak var translationLabel: UILabel!
-    @IBOutlet weak var captureImageView: UIImageView!
-    @IBOutlet weak var sendButton: UIButton!
+    @IBOutlet weak var scanImageView: UIImageView!
+    @IBOutlet weak var sendButton: ActivatableButton!
     @IBOutlet weak var scanButton: UIButton!
-    @IBOutlet weak var dismissButton: UIButton!
     @IBOutlet weak var cancleButton: UIButton!
-    @IBOutlet weak var seeMoreTextView: UITextView!
-    @IBOutlet weak var seeMoreView: View!
+    @IBOutlet weak var closeButton: UIButton!
+    @IBOutlet weak var detailTextView: UITextView!
+    @IBOutlet weak var detailView: View!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    
+    // MARK: - Properties
     
     private let originTapGesture = UITapGestureRecognizer()
     private let translationTapGesture = UITapGestureRecognizer()
     
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureGesture()
+        bindKeyboard()
     }
+    
+    // MARK: Bind ViewModel
     
     override func bindViewModel() {
         super.bindViewModel()
         guard let viewModel = viewModel as? ScanningViewModel else { return }
      
-        let input = ScanningViewModel.Input(seeMoreText: seeMoreTextView.rx.text.orEmpty.asObservable(),
-                                            originSeeMoreTap: originTapGesture.rx.event.map { _ in },
-                                            translationSeeMoreTap: translationTapGesture.rx.event.map { _ in },
-                                            cancleButtonTap: cancleButton.rx.tap.asObservable(),
-                                            scanButtonTap: scanButton.rx.tap.asObservable(),
-                                            sendButtonTap: sendButton.rx.tap.asObservable(),
-                                            dismissButtonTap: dismissButton.rx.tap.asObservable())
+        let input = ScanningViewModel.Input(detailText: detailTextView.rx.text.orEmpty.asObservable(),
+                                            originDetailDidTap: originTapGesture.rx.event.map { _ in },
+                                            translationDetailDidTap: translationTapGesture.rx.event.map { _ in },
+                                            cancleButtonDidTap: cancleButton.rx.tap.asObservable(),
+                                            scanButtonDidTap: scanButton.rx.tap.asObservable(),
+                                            sendButtonDidTap: sendButton.rx.tap.asObservable(),
+                                            closeButtonDidTap: closeButton.rx.tap.asObservable())
         
         let output = viewModel.transform(input)
         
@@ -52,21 +61,17 @@ class ScanningViewController: ViewController {
             .drive(onNext: { [unowned self] texts in
                 titleLabel.text = texts.title
                 descriptionLabel.text = texts.description
-                originMessageLabel.text = texts.originText
-                translationMessageLabel.text = texts.translationText
+                originIndicatorLabel.text = texts.originText
+                translationIndicatorLabel.text = texts.translationText
             })
             .disposed(by: rx.disposeBag)
         
-        output.activate
-            .drive(onNext: { [unowned self] activate in
-                self.sendButton.isUserInteractionEnabled = activate
-                originLabel.isUserInteractionEnabled = activate
-                translationLabel.isUserInteractionEnabled = activate
-                let image = activate ? "arrow" : "arrowed"
-                self.sendButton.setImage(UIImage(named: image), for: .normal)
-            })
+        output.isActive
+            .bind(to: sendButton.rx.isActivate,
+                  originLabel.rx.isActivate,
+                  translationLabel.rx.isActivate)
             .disposed(by: rx.disposeBag)
-        
+            
         output.originText
             .bind(to: originLabel.rx.text)
             .disposed(by: rx.disposeBag)
@@ -75,18 +80,17 @@ class ScanningViewController: ViewController {
             .bind(to: translationLabel.rx.state)
             .disposed(by: rx.disposeBag)
         
-        output.seeMoreViewState
-            .drive(onNext: { [unowned self] info in
-                seeMoreTextView.text = info.text
-            })
+        output.detailViewState
+            .map { $0.text }
+            .drive(detailTextView.rx.text)
             .disposed(by: rx.disposeBag)
         
-        output.seeMoreState
-            .bind(animated: seeMoreView.rx.animated.fade(duration: 0.2).isHidden)
+        output.needFade
+            .bind(animated: detailView.rx.animated.fade(duration: 0.2).isHidden)
             .disposed(by: rx.disposeBag)
         
         output.scanedImage
-            .bind(to: captureImageView.rx.image)
+            .bind(to: scanImageView.rx.image)
             .disposed(by: rx.disposeBag)
         
         output.needScanning
@@ -113,6 +117,22 @@ private extension ScanningViewController {
     func configureGesture() {
         originLabel.addGestureRecognizer(originTapGesture)
         translationLabel.addGestureRecognizer(translationTapGesture)
+    }
+    
+}
+
+extension ScanningViewController: KeyboardHandleable {
+    
+    func bindKeyboard() {
+        keyboardHeight
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] keyboardHeight in
+                let constraintHeight = keyboardHeight == 0 ? 160 : keyboardHeight
+                
+                bottomConstraint.constant = constraintHeight
+                view.layoutIfNeeded()
+            })
+            .disposed(by: rx.disposeBag)
     }
     
 }

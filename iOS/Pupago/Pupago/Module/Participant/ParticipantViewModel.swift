@@ -5,47 +5,58 @@
 //  Created by 김근수 on 2020/12/05.
 //
 
-import Foundation
 import RxSwift
 import RxCocoa
 
 class ParticipantViewModel: ViewModel, ViewModelType {
     
+    // MARK: - Input
+    
     struct Input {
         let viewWillAppear: Observable<Void>
-        let dismissTrigger: Observable<Void>
+        let dimmingViewDidTap: Observable<Void>
+        let closeButtonDidTap: Observable<Void>
     }
+    
+    // MARK: - Output
+    
     struct Output {
         let viewTexts: Driver<Localize.ParticipantViewText>
-        let item: Observable<[Participant]>
-        let dismiss: Driver<Void>
+        let participants: Observable<[Participant]>
+        let dismiss: Signal<Void>
     }
     
-    init(roomCode: String) {
+    // MARK: - State
+    
+    private var roomCode: String
+    private let participants = BehaviorRelay<[Participant]>(value: [])
+    
+    // MARK: - Init
+    
+    init(provider: NetworkProviding, roomCode: String) {
         self.roomCode = roomCode
+        super.init(provider: provider)
     }
-    
-    let roomCode: String
-    let participants = BehaviorRelay<[Participant]>(value: [])
+
+    // MARK: - Transform
     
     func transform(_ input: Input) -> Output {
-        let provider = PupagoAPI()
-        
         input.viewWillAppear
             .flatMap { [unowned self] in provider.participantList(roomCode: roomCode) }
-            .subscribe(onNext: { [unowned self] result in
-                participants.accept(result.participantsList)
+            .map { $0.participantsList }
+            .subscribe(onNext: { [unowned self] participantsList in
+                participants.accept(participantsList)
             })
             .disposed(by: rx.disposeBag)
         
         let viewText = localize.asDriver()
             .map { $0.participantViewText }
         
-        let item = participants.asObservable()
-        let dismiss = input.dismissTrigger.asDriver(onErrorJustReturn: ())
+        let dismiss = Observable.of(input.dimmingViewDidTap, input.closeButtonDidTap).merge()
+            .asSignal(onErrorJustReturn: ())
         
         return Output(viewTexts: viewText,
-                      item: item,
+                      participants: participants.asObservable(),
                       dismiss: dismiss)
     }
     

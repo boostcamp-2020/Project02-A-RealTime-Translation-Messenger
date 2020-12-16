@@ -19,6 +19,6 @@ protocol EndpointType {
 
 extension EndpointType {
     var baseUrl: String {
-        return "http://118.67.134.11:3000/api/"
+        return "https://pupago-server.kro.kr/api/"
     }
 }

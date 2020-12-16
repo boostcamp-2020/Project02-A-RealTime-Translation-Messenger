@@ -11,6 +11,13 @@ enum Localize {
     case korean
     case english
     
+    struct UserMessage {
+        let translating: String
+        let enter: String
+        let leave: String
+        let copy: String
+    }
+    
     struct SettingLanguageViewText {
         let intro: String
         let description: String
@@ -46,9 +53,6 @@ enum Localize {
     
     struct ChatroomViewText {
         var language: String
-        var enter: String
-        var leave: String
-        var copy: String
     }
     
     struct ParticipantViewText {
@@ -87,14 +91,22 @@ extension Localize {
         }
     }
     
-    var translating: String {
+    var userMessage: UserMessage {
         switch self {
         case .korean:
-            return "번역중..."
+            return .init(translating: "번역중...",
+                         enter: "님이 들어왔습니다.",
+                         leave: "님이 나갔습니다.",
+                         copy: "가 복사되었습니다.")
         case .english:
-            return "translating..."
+            return .init(translating: "translating...",
+                         enter: " came in.",
+                         leave: " went out.",
+                         copy: " has been copied.")
         }
     }
+    
+    
     
     var languageViewText: SettingLanguageViewText {
         switch self {
@@ -171,15 +183,9 @@ extension Localize {
     var chatroomViewText: ChatroomViewText {
         switch self {
         case .korean:
-            return .init(language: "한국어",
-                         enter: "님이 들어왔습니다.",
-                         leave: "님이 나갔습니다.",
-                         copy: "가 복사되었습니다.")
+            return .init(language: "한국어")
         case .english:
-            return .init(language: "English",
-                         enter: " Came In",
-                         leave: " Went Out",
-                         copy: " has been copied.")
+            return .init(language: "English")
         }
     }
     
