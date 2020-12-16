@@ -1,9 +1,9 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 import styled from 'styled-components';
+
 import MainPageNavigation from '../../../@types/mainPageNavigation';
 import useNavigation from '../../../hooks/useNavigation';
-import useRoom from '../../../hooks/useRoom';
 import MainButton from '../../atoms/buttons/MainButton';
 import NoChatRoomMolecule from '../../molecules/roomListPage/NoChatRoom';
 

@@ -1,7 +1,7 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import Palette from '../../../@types/Palette';
 
+import Palette from '../../../@types/Palette';
 import IconButton from '../../atoms/buttons/IconButton';
 import RoomCode from '../../atoms/texts/RoomCode';
 import Text from '../../atoms/texts/Text';

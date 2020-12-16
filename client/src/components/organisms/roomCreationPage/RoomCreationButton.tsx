@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useIntl } from 'react-intl';
 import { useHistory } from 'react-router-dom';
-import CharacterLimit from '../../../@types/characterLimit';
 
+import CharacterLimit from '../../../@types/characterLimit';
 import useRoom from '../../../hooks/useRoom';
 import MainButton from '../../atoms/buttons/MainButton';
 

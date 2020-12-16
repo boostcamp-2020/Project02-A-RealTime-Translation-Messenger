@@ -3,7 +3,6 @@ import { createAsyncThunk, PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { TranslateTextPropsType } from '../@types/types';
 import api from '../assets/api';
 import LangCode from '../@types/langCode';
-import useUser from '../hooks/useUser';
 
 const name = 'chatInput';
 

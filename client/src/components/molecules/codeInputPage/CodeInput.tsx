@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import { useIntl } from 'react-intl';
 import styled from 'styled-components';
 

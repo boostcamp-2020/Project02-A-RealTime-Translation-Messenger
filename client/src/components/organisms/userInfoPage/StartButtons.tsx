@@ -1,10 +1,10 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 import styled from 'styled-components';
+
 import MainPageNavigation from '../../../@types/mainPageNavigation';
 import useNavigation from '../../../hooks/useNavigation';
 import useUser from '../../../hooks/useUser';
-
 import MainButton from '../../atoms/buttons/MainButton';
 
 const RoomCreateButtonWrapper = styled.div`

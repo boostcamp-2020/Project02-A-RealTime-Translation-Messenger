@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 import LangCode from '../../../@types/langCode';
 import ParticipantsLimit from '../../../@types/participantsLimit';
-
 import useParticipantsList from '../../../hooks/useParticipantsList';
 import useUser from '../../../hooks/useUser';
 import ParticipantCount from '../../molecules/chatRoomPage/ParticipantCount';

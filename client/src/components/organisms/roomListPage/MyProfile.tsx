@@ -1,5 +1,5 @@
 import React from 'react';
-import useRoomList from '../../../hooks/useRoomList';
+
 import useUser from '../../../hooks/useUser';
 
 import MyProfileMolecule from '../../molecules/roomListPage/MyProfile';
