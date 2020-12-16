@@ -8,8 +8,11 @@
 import RxSwift
 import RxCocoa
 import Kingfisher
+import Toaster
 
 final class ChattingListViewController: ViewController {
+    
+    // MARK: - IBOutlet
     
     @IBOutlet weak var nicknameLabel: UILabel!
     @IBOutlet weak var languageLabel: UILabel!
@@ -21,15 +24,21 @@ final class ChattingListViewController: ViewController {
     @IBOutlet weak var placeHolderView: UIView!
     @IBOutlet weak var placeHolderLabel: UILabel!
     
+    // MARK: - Properties
+    
     private let thumbnailTapGesture = UITapGestureRecognizer()
     private let placeHolderTapGesture = UITapGestureRecognizer()
     private let refreshControl = UIRefreshControl()
+    
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
         configureGesture()
     }
+    
+    // MARK: - Bind ViewModel
     
     override func bindViewModel() {
         super.bindViewModel()
@@ -74,6 +83,13 @@ final class ChattingListViewController: ViewController {
         output.needShake
             .map { !$0 }
             .bind(animated: placeHolderView.rx.animated.tick(duration: 0.6).isHidden)
+            .disposed(by: rx.disposeBag)
+        
+        output.toasterMessage
+            .subscribeOn(MainScheduler.instance)
+            .subscribe(onNext: { msg in
+                Toast(text: msg).show()
+            })
             .disposed(by: rx.disposeBag)
         
         output.showCreateRoomView

@@ -33,6 +33,7 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
         let thumbnailImage: Driver<UIImage?>
         let isReloading: Driver<Bool>
         let needShake: Driver<Bool>
+        let toasterMessage: Observable<String>
         let showCreateRoomView: Signal<CreateRoomViewModel>
         let showJoinRoomView: Signal<JoinRoomViewModel>
         let showChattingView: Signal<ChattingViewModel>
@@ -44,6 +45,7 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
     let roomInfo = PublishRelay<RoomInfo>()
     private let thumbnailImage = PublishRelay<UIImage?>()
     private let socketEntered = PublishRelay<Room?>()
+    private let toasterMessage = PublishRelay<String>()
     private let isRefreshing = BehaviorRelay<Bool>(value: false)
     private let isBlank = PublishRelay<Bool>()
     
@@ -85,10 +87,11 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
                         Application.shared.currentRoomCode = room.roomCode ?? ""
                             socketManager.enterChatroom(roomCode: room.roomCode ?? "")
                             socketEntered.accept(room)
-                        }, onError: { error in
+                        }, onError: { [unowned self] error in
                             if let error = error as? APIError {
-                                error == .roomNotExist ? print("Alert logic needed room not exist") :
-                                print("Alert logic needed")
+                                let msg = error == .roomNotExist ? localize.value.userMessage.roomNotExist
+                                    :localize.value.userMessage.unknownedError
+                                toasterMessage.accept(msg)
                             }})
                     .disposed(by: rx.disposeBag)
                 })
@@ -128,6 +131,7 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
                       thumbnailImage: thumbnailImage.asDriver(onErrorJustReturn: nil),
                       isReloading: isRefreshing.asDriver(),
                       needShake: isBlank.asDriver(onErrorJustReturn: false),
+                      toasterMessage: toasterMessage.asObservable(),
                       showCreateRoomView: showCreateView,
                       showJoinRoomView: showJoinView,
                       showChattingView: showChatView)

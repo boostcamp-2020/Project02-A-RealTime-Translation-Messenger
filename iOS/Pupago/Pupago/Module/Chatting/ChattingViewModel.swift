@@ -57,7 +57,7 @@ class ChattingViewModel: ViewModel, ViewModelType {
     func transform(_ input: Input) -> Output {
         let translator = Translator(provider: provider)
         
-        // Handle receiving message
+        /// Handle receiving message
         socketManager.socket.rx.event(.receiveMessage)
             .flatMap { [unowned self] data -> Observable<Message> in parse(data) }
             .subscribe(onNext: { [unowned self] message in
@@ -68,8 +68,8 @@ class ChattingViewModel: ViewModel, ViewModelType {
             })
             .disposed(by: rx.disposeBag)
         
-        // Handle receiving participant event
-        // Event occurs when someone came in or leave out
+        /// Handle receiving participant event
+        /// Event occurs when someone came in or leave out
         socketManager.socket.rx.event(.list)
             .flatMap { [unowned self] data -> Observable<Participants> in parse(data) }
             .subscribe(onNext: { [unowned self] result in

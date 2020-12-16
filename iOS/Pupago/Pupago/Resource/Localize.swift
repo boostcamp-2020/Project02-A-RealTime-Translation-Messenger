@@ -16,6 +16,8 @@ enum Localize {
         let enter: String
         let leave: String
         let copy: String
+        let roomNotExist: String
+        let unknownedError: String
     }
     
     struct SettingLanguageViewText {
@@ -97,16 +99,18 @@ extension Localize {
             return .init(translating: "번역중...",
                          enter: "님이 들어왔습니다.",
                          leave: "님이 나갔습니다.",
-                         copy: "가 복사되었습니다.")
+                         copy: "가 복사되었습니다.",
+                         roomNotExist: "존재하지 않는 방입니다.",
+                         unknownedError: "알수없는 에러가 발생했습니다.")
         case .english:
             return .init(translating: "translating...",
                          enter: " came in.",
                          leave: " went out.",
-                         copy: " has been copied.")
+                         copy: " has been copied.",
+                         roomNotExist: "Room does not exist.",
+                         unknownedError: "Undefined erorr occured.")
         }
     }
-    
-    
     
     var languageViewText: SettingLanguageViewText {
         switch self {
