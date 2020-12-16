@@ -1,6 +1,6 @@
 import express from 'express';
 
-import papagoController from '../controllers/papagoController';
+import papagoController from '../controllers/papago';
 
 const router = express.Router();
 
