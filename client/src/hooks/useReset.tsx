@@ -1,8 +1,8 @@
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
+
 import useChat from './useChat';
 import useRoom from './useRoom';
 import useChatInput from './useChatInput';
-import useNavigation from './useNavigation';
 import { useDispatch } from 'react-redux';
 import useParticipantsList from './useParticipantsList';
 import useUser from './useUser';

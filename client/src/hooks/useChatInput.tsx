@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import CharacterLimit from '../@types/characterLimit';
 
+import CharacterLimit from '../@types/characterLimit';
 import { RootState } from '../modules';
 import { getTranslatedText, setChatInput, setTranslation, resetChatInput, setCycle } from '../modules/chatInput';
 

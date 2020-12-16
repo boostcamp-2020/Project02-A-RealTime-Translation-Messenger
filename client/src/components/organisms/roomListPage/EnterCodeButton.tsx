@@ -1,5 +1,6 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
+
 import MainPageNavigation from '../../../@types/mainPageNavigation';
 import useNavigation from '../../../hooks/useNavigation';
 import MainButton from '../../atoms/buttons/MainButton';

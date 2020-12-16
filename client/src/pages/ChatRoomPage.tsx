@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import io from 'socket.io-client';
+import { useHistory } from 'react-router-dom';
 
 import ChatLogs from '../components/organisms/chatRoomPage/ChatLogs';
 import SideBar from '../components/organisms/chatRoomPage/SideBar';
@@ -14,7 +15,6 @@ import useChat from '../hooks/useChat';
 import useChatInput from '../hooks/useChatInput';
 import useNavigation from '../hooks/useNavigation';
 import MainPageNavigation from '../@types/mainPageNavigation';
-import { useHistory } from 'react-router-dom';
 
 const Wrapper = styled.div`
   display: flex;

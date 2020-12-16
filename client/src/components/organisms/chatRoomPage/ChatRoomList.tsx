@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 import useRoomList from '../../../hooks/useRoomList';
 import RefreshButton from '../../atoms/buttons/RefreshButton';
