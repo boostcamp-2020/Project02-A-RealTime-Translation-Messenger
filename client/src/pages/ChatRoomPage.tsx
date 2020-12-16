@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import io from 'socket.io-client';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 import ChatLogs from '../components/organisms/chatRoomPage/ChatLogs';
 import SideBar from '../components/organisms/chatRoomPage/SideBar';
@@ -50,11 +50,15 @@ function ChatRoomPage() {
   const { onResetChatInput } = useChatInput();
   const { onSetNavigation } = useNavigation();
   const history = useHistory();
+  const location = useLocation();
 
   useEffect(() => {
-    if (socketData !== null) return;
+    if (socketData !== null) {
+      history.replace('/');
+      return;
+    }
     onSetSocket(io(process.env.BASE_URL as string));
-  }, []);
+  }, [location]);
 
   useEffect(() => {
     if (socketData !== null && participantsList.length === 0) {

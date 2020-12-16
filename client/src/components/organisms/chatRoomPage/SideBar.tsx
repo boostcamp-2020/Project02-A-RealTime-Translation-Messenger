@@ -43,7 +43,6 @@ function SideBar() {
               socketData?.disconnect();
               onReset();
               onJoinRoom(switchingRoom);
-              history.push('/loading');
               setIsSwitching(false);
             }}
             onClickBackground={() => {
