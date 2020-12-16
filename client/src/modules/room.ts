@@ -45,7 +45,7 @@ const initialState: InitialStateType = {
     data: {
       roomCode: '',
       title: '',
-      isPrivate: 'false',
+      isPrivate: false,
     },
     loading: false,
     error: null,
@@ -59,7 +59,7 @@ const room = createSlice({
     setRoomTitle: (state, action: PayloadAction<string>) => {
       state.room.data.title = action.payload;
     },
-    setIsPrivate: (state, action: PayloadAction<'true' | 'false'>) => {
+    setIsPrivate: (state, action: PayloadAction<boolean>) => {
       state.room.data.isPrivate = action.payload;
     },
     changeRoomCode: (state, action: PayloadAction<string>) => {
@@ -67,7 +67,7 @@ const room = createSlice({
     },
     resetRoomState: (state) => {
       state.room.data.title = '';
-      state.room.data.isPrivate = 'false';
+      state.room.data.isPrivate = false;
       state.room.data.roomCode = '';
       state.room.loading = false;
       state.room.error = null;

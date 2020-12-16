@@ -24,4 +24,5 @@ export default {
   startYourOwnChatRoom: 'Start your own chat room!',
   copiedToTheClipboard: 'Copied to the clipboard.',
   create: 'Create',
+  leaveRoomMessage: 'Would you like to leave the room?',
 };

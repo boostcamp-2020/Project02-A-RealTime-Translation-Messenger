@@ -36,6 +36,7 @@ function ChatHeader() {
         title={roomData.title}
         roomCode={roomData.roomCode}
         leaveOnClick={() => {
+          if (!window.confirm(formatMessage({ id: 'leaveRoomMessage' }))) return;
           onResetSocketId();
           onResetChats();
           onResetChatInput();

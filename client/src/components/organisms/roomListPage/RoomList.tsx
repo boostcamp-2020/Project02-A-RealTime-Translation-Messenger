@@ -48,7 +48,7 @@ function RoomList() {
             size="big"
             title={room.title}
             createdAt={
-              languageData === 'Korean'
+              languageData === 'ko'
                 ? timeDisplay.timeSinceKorean(room.createdAt)
                 : timeDisplay.timeSinceEnglish(room.createdAt)
             }
@@ -56,7 +56,7 @@ function RoomList() {
             participantCount={room.participantCount}
             disabled={room.participantCount < ParticipantsLimit.PARTICIPATNS_MAX_COUNT ? false : true}
             onClickItem={() => {
-              onJoinRoom({ roomCode: room.roomCode, isPrivate: 'false' });
+              onJoinRoom({ roomCode: room.roomCode, isPrivate: false });
             }}
           />
         );

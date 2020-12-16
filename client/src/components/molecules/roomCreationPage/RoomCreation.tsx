@@ -14,20 +14,20 @@ export type RoomCreationPropsType = {
   privateSelected?: boolean;
   InputOnChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   value: string;
-  isPrivateOnClick: (isPrivate: 'true' | 'false') => void;
+  isPrivateOnClick: (isPrivate: boolean) => void;
 };
 
 const RoomCreationWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 344px;
+  width: 336px;
   margin-bottom: 96px;
 `;
 
 const CheckBoxWrapper = styled.div`
   display: flex;
   justify-content: center;
-  width: 400px;
+  width: 336px;
   margin-bottom: 56px;
 
   & > div {
@@ -57,10 +57,10 @@ export const RoomCreation = ({
   return (
     <>
       <CheckBoxWrapper>
-        <CheckBox isChecked={privateSelected ? false : true} isPrivateOnClick={isPrivateOnClick} isPrivate={'false'}>
+        <CheckBox isChecked={privateSelected ? false : true} isPrivateOnClick={isPrivateOnClick} isPrivate={false}>
           {formatMessage({ id: 'public' })}
         </CheckBox>
-        <CheckBox isChecked={privateSelected ? true : false} isPrivateOnClick={isPrivateOnClick} isPrivate={'true'}>
+        <CheckBox isChecked={privateSelected ? true : false} isPrivateOnClick={isPrivateOnClick} isPrivate={true}>
           {formatMessage({ id: 'private' })}
         </CheckBox>
       </CheckBoxWrapper>

@@ -5,7 +5,7 @@ type RoomListType = {
   title: string;
   createdAt: string;
   participantCount: number;
-  isPrivate: 'true' | 'false';
+  isPrivate: boolean;
 };
 
 type ParticipantsType = {
@@ -31,6 +31,12 @@ type ReceiveChatType = {
 };
 
 type CreatedRoomType = {
+  roomCode: string;
+  title: string;
+  isPrivate: boolean;
+};
+
+type CreatedRoomResponseType = {
   roomCode: string;
   title: string;
   isPrivate: 'true' | 'false';
@@ -64,12 +70,12 @@ type TranslateTextReturnType = {
 
 type JoiningRoomType = {
   roomCode: string;
-  isPrivate: 'true' | 'false';
+  isPrivate: boolean;
 };
 
 type CreatingRoomType = {
   title: string;
-  isPrivate: 'true' | 'false';
+  isPrivate: boolean;
 };
 
 enum SideBarStatus {
@@ -87,6 +93,7 @@ export {
   ChatLogsType,
   ParticipantsUpdateType,
   CreatedRoomType,
+  CreatedRoomResponseType,
   SideBarStatus,
   JoiningRoomType,
   CreatingRoomType,
