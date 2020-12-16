@@ -1,6 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { useIntl } from 'react-intl';
-import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 import CharacterLimit from '../../../@types/characterLimit';
@@ -20,7 +19,6 @@ const isRoomCodeValid = (roomCode: string) => {
 
 function CodeInput() {
   const { data: room, error: roomError, onJoinRoom, onChangeRoomCode } = useRoom();
-  const history = useHistory();
   const [roomCodeStatus, setRoomCodeStatus] = useState({ code: room.roomCode, valid: true });
   const { code, valid } = roomCodeStatus;
   const { onReset } = useReset();
@@ -43,9 +41,14 @@ function CodeInput() {
   const onKeyUp = useCallback(() => {
     if (code.length === CharacterLimit.CODE_INPUT && isRoomCodeValid(code)) {
       onChangeRoomCode(code);
-      onJoinRoom({ roomCode: code, isPrivate: true });
+      onJoinRoom({ roomCode: code, isPrivate: 'true' });
+      setRoomCodeStatus({ code: '', valid: true });
     }
   }, [roomCodeStatus]);
+
+  useEffect(() => {
+    setRoomCodeStatus({ code: '', valid: true });
+  }, []);
 
   useEffect(() => {
     if (roomError !== null) {
@@ -54,12 +57,6 @@ function CodeInput() {
       onReset();
     }
   }, [roomError]);
-
-  useEffect(() => {
-    if (room.title.length > 0) {
-      history.push('/chat');
-    }
-  }, [room]);
 
   return (
     <Wrapper>

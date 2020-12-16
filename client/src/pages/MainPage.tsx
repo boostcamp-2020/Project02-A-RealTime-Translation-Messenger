@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 import UserInfoPage from './UserInfoPage';
@@ -8,6 +8,8 @@ import MainPageBox from '../components/atoms/boxes/MainPageBox';
 import MainPageNavigation from '../@types/mainPageNavigation';
 import CodeInputPage from './CodeInputPage';
 import useNavigation from '../hooks/useNavigation';
+import useReset from '../hooks/useReset';
+import useUser from '../hooks/useUser';
 
 const Wrapper = styled.div`
   display: flex;
@@ -19,6 +21,13 @@ const Wrapper = styled.div`
 
 function MainPage() {
   const { navigation } = useNavigation();
+  const { onReset } = useReset();
+  const { socketData } = useUser();
+
+  useEffect(() => {
+    socketData?.disconnect();
+    onReset();
+  }, []);
 
   const renderMainPage = (navigation: MainPageNavigation) => {
     switch (navigation) {
