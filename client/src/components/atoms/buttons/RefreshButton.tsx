@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import RefreshIcon from '@material-ui/icons/Refresh';
 
 import Palette from '../../../@types/Palette';
-import { Size } from '../../../@types/types';
+import { Size, TextSize } from '../../../@types/types';
 
 export type RefreshButtonTypes = {
   onClickRefresh: () => void;
@@ -40,7 +40,7 @@ function RefreshButton({ onClickRefresh, size }: RefreshButtonTypes) {
   return (
     <RefrshButtonWrapper onClick={onClickRefresh} size={size}>
       <IconWrapper size={size}>
-        <RefreshIcon style={{ fontSize: 24, color: Palette.WHITE }} />
+        <RefreshIcon style={{ fontSize: TextSize.MEGA, color: Palette.WHITE }} />
       </IconWrapper>
     </RefrshButtonWrapper>
   );

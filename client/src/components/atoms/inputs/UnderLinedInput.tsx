@@ -27,13 +27,7 @@ export type UnderLinedInputType = {
   valid: boolean;
 };
 
-function UnderLinedInput({
-  value = '',
-  placeholder = '',
-  onChange = undefined,
-  maxLength,
-  valid = true,
-}: UnderLinedInputType) {
+function UnderLinedInput({ value = '', placeholder = '', onChange = undefined, valid = true }: UnderLinedInputType) {
   return (
     <StyledUnderLinedInput type="text" value={value} placeholder={placeholder} onChange={onChange} valid={valid} />
   );

@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import palette from '../../../@types/Palette';
+import { TextSize } from '../../../@types/types';
 
 const StyledText = styled.span<StyledTextPropsType>`
   display: block;
@@ -24,7 +25,13 @@ export type TextPropsType = {
   children: React.ReactNode;
 };
 
-function Text({ size = 12, weight = 'normal', color = palette.DARK_GREY, children, className }: TextPropsType) {
+function Text({
+  size = TextSize.SMALL,
+  weight = 'normal',
+  color = palette.DARK_GREY,
+  children,
+  className,
+}: TextPropsType) {
   return (
     <StyledText size={size} weight={weight} color={color} className={className}>
       {children}
