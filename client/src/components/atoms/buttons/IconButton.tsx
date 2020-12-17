@@ -6,9 +6,10 @@ import SendIcon from '@material-ui/icons/Send';
 import MicIcon from '@material-ui/icons/Mic';
 import LeaveIcon from '@material-ui/icons/ExitToApp';
 import CloseIcon from '@material-ui/icons/Close';
+import { IconType } from '../../../@types/types';
 
 export type IconButtonPropsType = {
-  iconType: 'Edit' | 'ArrowBack' | 'Send' | 'Mic' | 'Leave' | 'Close';
+  iconType: IconType;
   color: string;
   onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   className?: string;
@@ -19,27 +20,27 @@ const IconWrapper = styled.div`
   cursor: pointer;
 `;
 
-function IconButton({ iconType = 'Edit', color = 'black', onClick, className }: IconButtonPropsType) {
+function IconButton({ iconType = IconType.EDIT, color = 'black', onClick, className }: IconButtonPropsType) {
   let icon;
   const defaultIconProps = { fontSize: 24, color: color };
 
   switch (iconType) {
-    case 'Edit':
+    case IconType.EDIT:
       icon = <EditIcon style={defaultIconProps} />;
       break;
-    case 'Send':
+    case IconType.SEND:
       icon = <SendIcon style={defaultIconProps} />;
       break;
-    case 'Mic':
+    case IconType.MIC:
       icon = <MicIcon style={defaultIconProps} />;
       break;
-    case 'Leave':
+    case IconType.LEAVE:
       icon = <LeaveIcon style={{ ...defaultIconProps, transform: 'rotate(180deg)' }} />;
       break;
-    case 'Close':
+    case IconType.CLOSE:
       icon = <CloseIcon style={defaultIconProps} />;
       break;
-    case 'ArrowBack':
+    case IconType.ARROW_BACK:
       icon = <ArrowBackIcon style={defaultIconProps} />;
       break;
     default:

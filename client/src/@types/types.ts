@@ -105,6 +105,15 @@ enum TextSize {
   MEGA = 24,
 }
 
+enum IconType {
+  EDIT,
+  ARROW_BACK,
+  SEND,
+  MIC,
+  LEAVE,
+  CLOSE,
+}
+
 export {
   RoomListType,
   ParticipantsType,
@@ -123,4 +132,5 @@ export {
   TranslationCycle,
   Size,
   TextSize,
+  IconType,
 };
