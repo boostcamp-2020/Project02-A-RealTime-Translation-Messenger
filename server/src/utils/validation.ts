@@ -1,14 +1,12 @@
-import dotenv from 'dotenv';
-
 import roomGroup from '../models/roomGroup';
 import LangCode from '../@types/language';
-import { SendChatType } from '../@types/dataType';
 import room from '../@types/roomInfo';
-
-dotenv.config();
+import RegExpression from '../@types/regExpression';
+import { SendChatType } from '../@types/dataType';
 
 const isValidRoomCode = (roomCode: string) => {
-  if (!/^[A-Z|0-9]{4}$/.test(roomCode)) return false;
+  const regex = new RegExp(RegExpression.ROOM_CODE, RegExpression.RANGE);
+  if (!regex.test(roomCode)) return false;
 
   return true;
 };
@@ -38,7 +36,8 @@ const isValidTitle = (title: string) => {
 };
 
 const isValidNickname = (nickname: string) => {
-  if (!/^[A-Z|a-z|가-힣]{2,12}$/.test(nickname)) return false;
+  const regex = new RegExp(RegExpression.NICKNAME, RegExpression.RANGE);
+  if (!regex.test(nickname)) return false;
 
   return true;
 };
@@ -61,8 +60,7 @@ const isValidMessage = (sendChat: SendChatType) => {
 };
 
 const isValidImageLink = (imageLink: string) => {
-  const { IMAGE_ENDPOINT } = process.env;
-  const regex = new RegExp(`^${IMAGE_ENDPOINT!}/pupago/.*\.jpg$`, 'g');
+  const regex = new RegExp(RegExpression.IMAGE_LINK, RegExpression.RANGE);
   if (!regex.test(imageLink)) return false;
   return true;
 };
