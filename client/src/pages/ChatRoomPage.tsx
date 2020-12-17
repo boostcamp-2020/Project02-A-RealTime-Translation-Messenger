@@ -12,11 +12,11 @@ import ChatInput from '../components/organisms/chatRoomPage/ChatInput';
 import useUser from '../hooks/useUser';
 import useRoom from '../hooks/useRoom';
 import useChat from '../hooks/useChat';
-import useChatInput from '../hooks/useChatInput';
 import useNavigation from '../hooks/useNavigation';
 import MainPageNavigation from '../@types/mainPageNavigation';
 import LangCode from '../@types/langCode';
 import { LangCodeFormattedForServer } from '../@types/types';
+import useReset from '../hooks/useReset';
 
 const Wrapper = styled.div`
   position: relative;
@@ -36,21 +36,12 @@ const StyledChatRoomBox = styled.div`
 `;
 
 function ChatRoomPage() {
-  const { data: participantsList, onSetParticipantsList, onResetParticipantsList } = useParticipantsList();
-  const {
-    nicknameData,
-    languageData,
-    socketData,
-    onSetSocketId,
-    onSetSocket,
-    onResetSocketId,
-    onResetSocket,
-    imageLinkData,
-  } = useUser();
-  const { onStackChats, onResetChats } = useChat();
-  const { data: roomData, onResetRoomState } = useRoom();
-  const { onResetChatInput } = useChatInput();
+  const { data: participantsList, onSetParticipantsList } = useParticipantsList();
+  const { nicknameData, languageData, socketData, onSetSocketId, onSetSocket, imageLinkData } = useUser();
+  const { onStackChats } = useChat();
+  const { data: roomData } = useRoom();
   const { onSetNavigation } = useNavigation();
+  const { onResetStates } = useReset();
   const history = useHistory();
   const location = useLocation();
 
@@ -82,14 +73,9 @@ function ChatRoomPage() {
       });
       socketData.on('socket error', (errorMessage: { errorMessage: string }) => {
         alert(errorMessage);
-        onResetSocketId();
-        onResetChats();
-        onResetChatInput();
-        onResetParticipantsList();
-        onResetRoomState();
-        onSetNavigation(MainPageNavigation.USER_INFO);
         socketData.disconnect();
-        onResetSocket();
+        onResetStates();
+        onSetNavigation(MainPageNavigation.USER_INFO);
         history.push('/');
       });
     }

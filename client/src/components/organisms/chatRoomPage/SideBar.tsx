@@ -29,7 +29,7 @@ function SideBar() {
     roomCode: '',
     isPrivate: false,
   });
-  const { onReset } = useReset();
+  const { onResetStates } = useReset();
   const { onJoinRoom } = useRoom();
   const { socketData } = useUser();
   const location = useLocation();
@@ -45,7 +45,7 @@ function SideBar() {
           <RoomSwitchModal
             onClickConfirm={() => {
               socketData?.disconnect();
-              onReset();
+              onResetStates();
               onJoinRoom(switchingRoom);
               setIsSwitching(false);
             }}

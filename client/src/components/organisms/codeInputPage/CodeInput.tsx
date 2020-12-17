@@ -17,7 +17,7 @@ function CodeInput() {
   const { data: room, error: roomError, onJoinRoom, onChangeRoomCode } = useRoom();
   const [roomCodeStatus, setRoomCodeStatus] = useState({ code: room.roomCode, valid: true });
   const { code, valid } = roomCodeStatus;
-  const { onReset } = useReset();
+  const { onResetStates } = useReset();
   const { formatMessage } = useIntl();
 
   const onChange = useCallback(
@@ -50,7 +50,7 @@ function CodeInput() {
     if (roomError !== null) {
       alert(formatMessage({ id: 'wrongRoomCode' }));
       setRoomCodeStatus({ code: '', valid: true });
-      onReset();
+      onResetStates();
     }
   }, [roomError]);
 

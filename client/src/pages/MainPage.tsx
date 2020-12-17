@@ -22,12 +22,12 @@ const Wrapper = styled.div`
 
 function MainPage() {
   const { navigation, onSetNavigation } = useNavigation();
-  const { onReset } = useReset();
+  const { onResetStates } = useReset();
   const { socketData } = useUser();
 
   useEffect(() => {
     socketData?.disconnect();
-    onReset();
+    onResetStates();
     onSetNavigation(MainPageNavigation.USER_INFO);
   }, []);
 
