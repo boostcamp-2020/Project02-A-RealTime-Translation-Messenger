@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
-import { LogoWithText } from '../../components/atoms/logos/LogoWithText';
+import LogoWithText from '../../components/atoms/logos/LogoWithText';
 
 export default {
   title: 'pupagoAtom/LogoWithText',

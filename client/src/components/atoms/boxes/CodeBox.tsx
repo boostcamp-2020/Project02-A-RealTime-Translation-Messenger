@@ -27,7 +27,7 @@ const StyledCodeText = styled.p`
   font-size: 48px;
 `;
 
-export function CodeBox({ isEntered, children }: CodeBoxPropsType) {
+function CodeBox({ isEntered, children }: CodeBoxPropsType) {
   return (
     <StyledCodeBox isEntered={isEntered}>
       <StyledCodeText>{children}</StyledCodeText>

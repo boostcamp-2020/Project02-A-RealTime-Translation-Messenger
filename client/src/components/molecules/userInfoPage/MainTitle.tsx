@@ -21,7 +21,7 @@ const MarginedText = styled(Text)`
   margin-bottom: 8px;
 `;
 
-export const MainTitle = () => {
+function MainTitle() {
   const { formatMessage } = useIntl();
 
   return (
@@ -35,6 +35,6 @@ export const MainTitle = () => {
       </Text>
     </MainTitleWrapper>
   );
-};
+}
 
 export default MainTitle;

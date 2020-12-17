@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
-import { ChatModalBox } from '../../components/atoms/boxes/ChatModalBox';
+import ChatModalBox from '../../components/atoms/boxes/ChatModalBox';
 
 export default {
   title: 'pupagoAtom/ChatModalBox',

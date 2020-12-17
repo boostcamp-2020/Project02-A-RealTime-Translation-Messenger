@@ -24,13 +24,13 @@ const AbsoluteIcon = styled(IconButton)`
   top: 16px;
 `;
 
-export const ChatModalBox = ({ onClickClose, children }: ChatModalPropsType) => {
+function ChatModalBox({ onClickClose, children }: ChatModalPropsType) {
   return (
     <StyledChatModalBox>
       <AbsoluteIcon onClick={onClickClose} iconType="Close" color={Palette.DARK_GREY} />
       {children}
     </StyledChatModalBox>
   );
-};
+}
 
 export default ChatModalBox;

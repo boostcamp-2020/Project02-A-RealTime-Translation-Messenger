@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
-import { ParticipantItem, ParticipantItemPropsType } from '../../components/molecules/chatRoomPage/ParticipantItem';
+import ParticipantItem, { ParticipantItemPropsType } from '../../components/molecules/chatRoomPage/ParticipantItem';
 import LangCode from '../../@types/langCode';
 
 export default {

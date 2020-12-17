@@ -35,7 +35,7 @@ const RefrshButtonWrapper = styled.div<RefreshButtonStyleType>`
   }
 `;
 
-export function RefreshButton({ onClickRefresh, size }: RefreshButtonTypes) {
+function RefreshButton({ onClickRefresh, size }: RefreshButtonTypes) {
   return (
     <RefrshButtonWrapper onClick={onClickRefresh} size={size}>
       <IconWrapper size={size}>

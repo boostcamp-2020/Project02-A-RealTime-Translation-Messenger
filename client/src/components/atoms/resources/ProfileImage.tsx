@@ -51,7 +51,7 @@ const StyledProfileImage = styled.div<ProfileImagePropsType>`
   background-color: WHITE;
 `;
 
-export function ProfileImage({ size, isMe, image }: ProfileImagePropsType) {
+function ProfileImage({ size, isMe, image }: ProfileImagePropsType) {
   return (
     <StyledProfileImage size={size} isMe={isMe} image={image}>
       {image && <StyledProfileImageSrc alt="profile image" src={image} imageSize={size}></StyledProfileImageSrc>}

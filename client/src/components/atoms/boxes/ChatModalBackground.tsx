@@ -12,8 +12,8 @@ const StyledChatModalBackground = styled.div`
   background-color: rgba(0, 0, 0, 0.4);
 `;
 
-export const ChatModalBackground = ({ ...props }: ChatModalBackgroundPropsType) => {
+function ChatModalBackground({ ...props }: ChatModalBackgroundPropsType) {
   return <StyledChatModalBackground {...props} />;
-};
+}
 
 export default ChatModalBackground;
