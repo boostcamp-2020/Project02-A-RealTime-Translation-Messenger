@@ -14,7 +14,7 @@ const getPublicRooms = async (req: Request, res: Response) => {
     const rooms = await roomService.getRooms(roomCodes);
     const filteredRooms = rooms.filter((room) => room.isPrivate === RoomInfo.PUBLIC);
 
-    return res.status(StatusCode.OK).json({ roomList: filteredRooms });
+    return res.status(StatusCode.OK).json({ rooms: filteredRooms });
   } catch (err) {
     return res.status(StatusCode.SERVER_ERROR).json();
   }
@@ -39,8 +39,8 @@ const getParticipantsList = async (req: Request, res: Response) => {
   const roomCode = req.params.roomCode;
   if (!validationUtil.isValidRoomCode(roomCode)) return res.status(StatusCode.CLIENT_ERROR).json();
   try {
-    const participantsList = await socketService.getParticipants(roomCode);
-    return res.status(StatusCode.OK).json({ participantsList });
+    const participants = await socketService.getParticipants(roomCode);
+    return res.status(StatusCode.OK).json({ participants });
   } catch (err) {
     return res.status(StatusCode.SERVER_ERROR).json();
   }
