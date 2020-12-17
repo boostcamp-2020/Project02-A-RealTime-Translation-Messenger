@@ -6,6 +6,6 @@ const router = express.Router();
 
 router.get('/', roomController.getPublicRooms);
 router.post('/', roomController.createRoom);
-router.get('/participantsList/:roomCode', roomController.getParticipantsList);
+router.get('/participants/:roomCode', roomController.getParticipants);
 
 export default router;

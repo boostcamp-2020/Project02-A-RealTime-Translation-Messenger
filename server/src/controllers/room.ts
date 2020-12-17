@@ -35,7 +35,7 @@ const createRoom = async (req: Request, res: Response) => {
   }
 };
 
-const getParticipantsList = async (req: Request, res: Response) => {
+const getParticipants = async (req: Request, res: Response) => {
   const roomCode = req.params.roomCode;
   if (!validationUtil.isValidRoomCode(roomCode)) return res.status(StatusCode.CLIENT_ERROR).json();
   try {
@@ -49,7 +49,7 @@ const getParticipantsList = async (req: Request, res: Response) => {
 const roomController = {
   getPublicRooms,
   createRoom,
-  getParticipantsList,
+  getParticipants,
 };
 
 export default roomController;
