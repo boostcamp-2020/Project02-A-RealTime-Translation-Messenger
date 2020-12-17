@@ -7,6 +7,7 @@ import MicIcon from '@material-ui/icons/Mic';
 import LeaveIcon from '@material-ui/icons/ExitToApp';
 import CloseIcon from '@material-ui/icons/Close';
 import { IconType } from '../../../@types/types';
+import Palette from '../../../@types/Palette';
 
 export type IconButtonPropsType = {
   iconType: IconType;
@@ -20,7 +21,7 @@ const IconWrapper = styled.div`
   cursor: pointer;
 `;
 
-function IconButton({ iconType = IconType.EDIT, color = 'black', onClick, className }: IconButtonPropsType) {
+function IconButton({ iconType = IconType.EDIT, color = Palette.BLACK, onClick, className }: IconButtonPropsType) {
   let icon;
   const defaultIconProps = { fontSize: 24, color: color };
 

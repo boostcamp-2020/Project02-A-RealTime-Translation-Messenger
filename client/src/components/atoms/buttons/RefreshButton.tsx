@@ -40,7 +40,7 @@ function RefreshButton({ onClickRefresh, size }: RefreshButtonTypes) {
   return (
     <RefrshButtonWrapper onClick={onClickRefresh} size={size}>
       <IconWrapper size={size}>
-        <RefreshIcon style={{ fontSize: 24, color: 'white' }} />
+        <RefreshIcon style={{ fontSize: 24, color: Palette.WHITE }} />
       </IconWrapper>
     </RefrshButtonWrapper>
   );

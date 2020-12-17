@@ -16,8 +16,8 @@ const StyledButton = styled.button<LanguageSelectButtonPropsType>`
   outline: none;
   border-radius: 10px;
   border: solid 3px #ffffff;
-  background-color: ${(props) => (props.selected ? 'white' : 'transparent')};
-  color: ${(props) => (props.selected ? Palette.DARK_GREY : 'white')};
+  background-color: ${(props) => (props.selected ? Palette.WHITE : 'transparent')};
+  color: ${(props) => (props.selected ? Palette.DARK_GREY : Palette.WHITE)};
   font-size: 28px;
   cursor: pointer;
 `;

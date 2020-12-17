@@ -16,7 +16,7 @@ const StyledSideBarTabWrapper = styled.div<SideBarTabStyleProps>`
   height: 72px;
   border-radius: ${(props) => (props.isTabNameParticipant ? '0 0 30px 0' : '0 30px 0 30px')};
   background-color: ${(props) => (props.isSelected ? 'transparent' : 'rgba(92, 167, 228, 0.8)')};
-  color: ${(props) => (props.isSelected ? Palette.PUPAGO_BLUE : 'white')};
+  color: ${(props) => (props.isSelected ? Palette.PUPAGO_BLUE : Palette.WHITE)};
   font-size: 14px;
   cursor: pointer;
   user-select: none;

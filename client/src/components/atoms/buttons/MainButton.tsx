@@ -22,7 +22,7 @@ const setButtonColor = (disabled: boolean | undefined) => {
     case false:
       return Palette.ACTIVE_YELLOW;
     default:
-      return 'white';
+      return Palette.WHITE;
   }
 };
 

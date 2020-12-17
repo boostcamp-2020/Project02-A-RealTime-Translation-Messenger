@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Palette from '../../../@types/Palette';
 import { Size } from '../../../@types/types';
 
 export type RoomItemBoxTypes = {
@@ -19,9 +20,9 @@ const setButtonColor = (disabled: boolean | undefined) => {
     case true:
       return 'rgba(255, 255, 255, 0.5)';
     case false:
-      return 'white';
+      return Palette.WHITE;
     default:
-      return 'white';
+      return Palette.WHITE;
   }
 };
 

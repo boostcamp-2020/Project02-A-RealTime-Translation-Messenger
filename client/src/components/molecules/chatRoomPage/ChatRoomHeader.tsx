@@ -51,7 +51,7 @@ function ChatRoomHeader({ title, roomCode, roomCodeOnClickFunc, leaveOnClick, cl
     <Wrapper>
       <ExitButton iconType={IconType.LEAVE} color={Palette.PUPAGO_BLUE} onClick={leaveOnClick} />
       <TitleWrapper>
-        <RoomTitle weight="bold" size={TextSize.BIG} color={'black'}>
+        <RoomTitle weight="bold" size={TextSize.BIG} color={Palette.BLACK}>
           {title}
         </RoomTitle>
         <RoomCode code={roomCode} onClick={roomCodeOnClickFunc} />
