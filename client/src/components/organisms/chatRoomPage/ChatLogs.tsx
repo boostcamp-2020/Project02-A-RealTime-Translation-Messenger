@@ -27,7 +27,6 @@ const ParticipantLogWrapper = styled.div`
 function ChatLogs() {
   const { data: chatLogs } = useChat();
   const { languageData, socketIdData } = useUser();
-
   const divRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -38,7 +37,7 @@ function ChatLogs() {
 
   const returnLogs = () => {
     if (chatLogs.length === 0) {
-      return <></>;
+      return null;
     } else {
       return chatLogs.map((data, index) => {
         const log = data as ParticipantsUpdateType;

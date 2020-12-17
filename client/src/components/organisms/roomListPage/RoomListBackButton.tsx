@@ -7,6 +7,7 @@ import MainPageNavigation from '../../../@types/mainPageNavigation';
 
 function RoomListBackButton() {
   const { onSetNavigation } = useNavigation();
+
   return (
     <IconButton
       iconType={'ArrowBack'}

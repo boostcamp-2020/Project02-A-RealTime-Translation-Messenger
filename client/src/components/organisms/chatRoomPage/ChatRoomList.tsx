@@ -8,6 +8,7 @@ import useRoom from '../../../hooks/useRoom';
 import { JoiningRoomType } from '../../../@types/types';
 import ParticipantsLimit from '../../../@types/participantsLimit';
 import useUser from '../../../hooks/useUser';
+import LangCode from '../../../@types/langCode';
 
 type ChatRoomListPropsType = {
   setIsSwitching: React.Dispatch<React.SetStateAction<boolean>>;
@@ -33,7 +34,7 @@ function ChatRoomList({ setIsSwitching, setSwitchingRoom }: ChatRoomListPropsTyp
             key={room.roomCode}
             size="small"
             createdAt={
-              languageData === 'ko'
+              languageData === LangCode.KOREAN
                 ? timeDisplay.timeSinceKorean(room.createdAt)
                 : timeDisplay.timeSinceEnglish(room.createdAt)
             }

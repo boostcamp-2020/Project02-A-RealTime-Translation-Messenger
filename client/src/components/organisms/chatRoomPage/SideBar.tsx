@@ -8,7 +8,6 @@ import ParticipantList from './ParticipantList';
 import RoomSwitchModal from '../../molecules/chatRoomPage/RoomSwitchModal';
 import useReset from '../../../hooks/useReset';
 import useRoom from '../../../hooks/useRoom';
-import { useHistory } from 'react-router-dom';
 import useUser from '../../../hooks/useUser';
 
 const SideBarWrapper = styled.div`
@@ -31,7 +30,6 @@ function SideBar() {
   });
   const { onReset } = useReset();
   const { onJoinRoom } = useRoom();
-  const history = useHistory();
   const { socketData } = useUser();
 
   return (
