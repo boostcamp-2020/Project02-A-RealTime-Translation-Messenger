@@ -34,7 +34,7 @@ class MockAPI: NetworkProviding {
         return Observable.empty()
     }
     
-    func profile() -> Observable<Profile> {
+    func thumbnail() -> Observable<Thumbnail> {
         return Observable.empty()
     }
     

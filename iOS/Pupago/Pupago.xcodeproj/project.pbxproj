@@ -80,7 +80,7 @@
 		BD552255257DE89F008E3A1A /* SpeechViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD552254257DE89F008E3A1A /* SpeechViewModel.swift */; };
 		BD55225A257DE96B008E3A1A /* SpeechManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD552259257DE96B008E3A1A /* SpeechManager.swift */; };
 		BD5928612577E4A800F091F1 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5928602577E4A800F091F1 /* DateManager.swift */; };
-		BD5C2CD1257E4F3200C910AE /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5C2CD0257E4F3200C910AE /* Profile.swift */; };
+		BD5C2CD1257E4F3200C910AE /* Thumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5C2CD0257E4F3200C910AE /* Thumbnail.swift */; };
 		BD5F6160256D204400D63CCD /* ChattingListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5F615F256D204400D63CCD /* ChattingListViewModel.swift */; };
 		BD5F6165256D207600D63CCD /* ChattingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5F6164256D207600D63CCD /* ChattingListViewController.swift */; };
 		BD5F616D256D23E300D63CCD /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5F616C256D23E300D63CCD /* NavigationController.swift */; };
@@ -195,7 +195,7 @@
 		BD552254257DE89F008E3A1A /* SpeechViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechViewModel.swift; sourceTree = "<group>"; };
 		BD552259257DE96B008E3A1A /* SpeechManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechManager.swift; sourceTree = "<group>"; };
 		BD5928602577E4A800F091F1 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
-		BD5C2CD0257E4F3200C910AE /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		BD5C2CD0257E4F3200C910AE /* Thumbnail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Thumbnail.swift; sourceTree = "<group>"; };
 		BD5F615F256D204400D63CCD /* ChattingListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingListViewModel.swift; sourceTree = "<group>"; };
 		BD5F6164256D207600D63CCD /* ChattingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingListViewController.swift; sourceTree = "<group>"; };
 		BD5F616C256D23E300D63CCD /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
@@ -620,7 +620,7 @@
 				970EB6042578F53B000C577C /* Language.swift */,
 				970EB6092578F80D000C577C /* Translation.swift */,
 				975A9758257AA20D000C3AE5 /* Participant.swift */,
-				BD5C2CD0257E4F3200C910AE /* Profile.swift */,
+				BD5C2CD0257E4F3200C910AE /* Thumbnail.swift */,
 				979F2FC325828E8100619871 /* OCR.swift */,
 			);
 			path = Model;
@@ -927,7 +927,7 @@
 				975C540E256B907D00739DCA /* ViewModel.swift in Sources */,
 				97B4BE74256BE935009A3825 /* NSObject+Rx.swift in Sources */,
 				97B4BEA0256BEFD9009A3825 /* NicknameViewModel.swift in Sources */,
-				BD5C2CD1257E4F3200C910AE /* Profile.swift in Sources */,
+				BD5C2CD1257E4F3200C910AE /* Thumbnail.swift in Sources */,
 				97FB232D256FE93000F7E21E /* RegexManager.swift in Sources */,
 				BD55224D257DE87A008E3A1A /* SpeechViewController.swift in Sources */,
 				BD62700825709AC500569277 /* OthersChattingCell.swift in Sources */,

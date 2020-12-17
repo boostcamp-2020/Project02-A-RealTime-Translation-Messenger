@@ -142,10 +142,10 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
 private extension ChattingListViewModel {
     
     func fetchThumbnail() -> Observable<UIImage> {
-        return provider.profile()
-            .flatMap { profile -> Observable<UIImage> in
-                Application.shared.profile = profile.imageLink
-                return KingfisherManager.shared.rx.image(url: profile.imageLink)
+        return provider.thumbnail()
+            .flatMap { thumbnail -> Observable<UIImage> in
+                Application.shared.thumbnail = thumbnail.imageLink
+                return KingfisherManager.shared.rx.image(url: thumbnail.imageLink)
             }
     }
     

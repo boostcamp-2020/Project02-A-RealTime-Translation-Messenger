@@ -28,8 +28,8 @@ class SocketIOManager {
     func enterChatroom(roomCode: String) {
         let nickname = Application.shared.userName
         let language = Application.shared.localize.toString
-        let profile = Application.shared.profile
-        let item = ["roomCode": roomCode, "nickname": nickname, "language": language, "imageLink": profile]
+        let thumbnail = Application.shared.thumbnail
+        let item = ["roomCode": roomCode, "nickname": nickname, "language": language, "imageLink": thumbnail]
         
         socket.emit(SocketEndpoint.enter.eventName, item)
     }

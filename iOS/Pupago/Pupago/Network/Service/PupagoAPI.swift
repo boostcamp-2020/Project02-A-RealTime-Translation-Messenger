@@ -33,8 +33,8 @@ class PupagoAPI: NetworkProviding {
         return request(endpoint: PapagoEndpoint.translate(source: source, target: target, text: text))
     }
     
-    func profile() -> Observable<Profile> {
-        return request(endpoint: RoomEndpoint.profile)
+    func thumbnail() -> Observable<Thumbnail> {
+        return request(endpoint: RoomEndpoint.thumbnail)
     }
     
     func ocr(data: String, timestamp: Int, requestId: String) -> Observable<OCRResponse> {

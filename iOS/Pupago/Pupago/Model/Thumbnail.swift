@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct Profile: Codable {
+struct Thumbnail: Codable {
     let imageLink: String
 }
