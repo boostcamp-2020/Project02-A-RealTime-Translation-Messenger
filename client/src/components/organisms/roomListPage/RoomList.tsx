@@ -28,7 +28,7 @@ const RoomListWrapper = styled.div<WrapperType>`
 function RoomList() {
   const { data: roomListData, onGetRoomList } = useRoomList();
   const { onJoinRoom } = useRoom();
-  const { timeSince } = useTimeDisplay();
+  const { onTimeSince } = useTimeDisplay();
 
   useEffect(() => {
     onGetRoomList();
@@ -46,7 +46,7 @@ function RoomList() {
             key={room.roomCode}
             size="big"
             title={room.title}
-            createdAt={timeSince(room.createdAt)}
+            createdAt={onTimeSince(room.createdAt)}
             roomCapacity={ParticipantsLimit.PARTICIPATNS_MAX_COUNT}
             participantCount={room.participantCount}
             disabled={room.participantCount < ParticipantsLimit.PARTICIPATNS_MAX_COUNT ? false : true}

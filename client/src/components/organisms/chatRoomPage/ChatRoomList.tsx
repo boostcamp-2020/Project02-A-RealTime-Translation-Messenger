@@ -16,7 +16,7 @@ type ChatRoomListPropsType = {
 function ChatRoomList({ setIsSwitching, setSwitchingRoom }: ChatRoomListPropsType) {
   const { data: rooms, onGetRoomList } = useRoomList();
   const { data: roomData } = useRoom();
-  const { timeSince } = useTimeDisplay();
+  const { onTimeSince } = useTimeDisplay();
 
   useEffect(() => {
     onGetRoomList();
@@ -31,7 +31,7 @@ function ChatRoomList({ setIsSwitching, setSwitchingRoom }: ChatRoomListPropsTyp
           <RoomItem
             key={room.roomCode}
             size="small"
-            createdAt={timeSince(room.createdAt)}
+            createdAt={onTimeSince(room.createdAt)}
             participantCount={room.participantCount}
             roomCapacity={ParticipantsLimit.PARTICIPATNS_MAX_COUNT}
             title={room.title}

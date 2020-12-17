@@ -1,14 +1,8 @@
 import { useIntl } from 'react-intl';
 
-enum InSeconds {
-  YEAR = 31536000,
-  MONTH = 2592000,
-  DAY = 86400,
-  HOUR = 3600,
-  MINUTE = 60,
-}
+import TimeInSeconds from '../@types/TimeInSeconds';
 
-function TimeDisplay() {
+function useTimeDisplay() {
   const { formatMessage } = useIntl();
 
   function displayConcat(intervalWithUnit: { interval: number; timeUnit: string }) {
@@ -18,28 +12,29 @@ function TimeDisplay() {
       : flooredInterval + formatMessage({ id: `${intervalWithUnit.timeUnit}sAgo` });
   }
 
-  const timeSince = (Stringdate: string) => {
+  const onTimeSince = (Stringdate: string) => {
     const date = new Date(Stringdate);
-    let seconds = Math.floor((new Date().getTime() - date.getTime()) / 1000);
+    const oneSecondInMilliseconds = 1000;
+    let seconds = Math.floor((new Date().getTime() - date.getTime()) / oneSecondInMilliseconds);
 
-    let interval = seconds / InSeconds.YEAR;
+    let interval = seconds / TimeInSeconds.YEAR;
 
     if (interval > 1) {
       return displayConcat({ interval, timeUnit: 'year' });
     }
-    interval = seconds / InSeconds.MONTH;
+    interval = seconds / TimeInSeconds.MONTH;
     if (interval > 1) {
       return displayConcat({ interval, timeUnit: 'month' });
     }
-    interval = seconds / InSeconds.DAY;
+    interval = seconds / TimeInSeconds.DAY;
     if (interval > 1) {
       return displayConcat({ interval, timeUnit: 'day' });
     }
-    interval = seconds / InSeconds.HOUR;
+    interval = seconds / TimeInSeconds.HOUR;
     if (interval > 1) {
       return displayConcat({ interval, timeUnit: 'hour' });
     }
-    interval = seconds / InSeconds.MINUTE;
+    interval = seconds / TimeInSeconds.MINUTE;
     if (interval > 1) {
       return displayConcat({ interval, timeUnit: 'minute' });
     }
@@ -47,8 +42,8 @@ function TimeDisplay() {
   };
 
   return {
-    timeSince,
+    onTimeSince,
   };
 }
 
-export default TimeDisplay;
+export default useTimeDisplay;
