@@ -5,6 +5,7 @@ import VoiceRecognitionModal from '../../molecules/chatRoomPage/VoiceRecognition
 import useChatInput from '../../../hooks/useChatInput';
 import useUser from '../../../hooks/useUser';
 import LangCode from '../../../@types/langCode';
+import timer from '../../../@types/timer';
 
 export type VoiceRecognitionPropsType = {
   onClickBackground: () => void;
@@ -27,23 +28,24 @@ function VoiceRecognition({ onClickBackground }: VoiceRecognitionPropsType) {
   }, []);
 
   useEffect(() => {
-    let timer: number = 0;
-    if (transcript !== '') {
-      timer = setTimeout(() => {
+    let voiceTimer: number = 0;
+
+    const createTimer = (time: number) => {
+      return (voiceTimer = setTimeout(() => {
         SpeechRecognition.stopListening();
         resetTranscript();
         onClickBackground();
-      }, 2000);
+      }, time));
+    };
+
+    if (transcript !== '') {
+      voiceTimer = createTimer(timer.TRANSCRIPT_EXISTS);
       onSetChatInput(transcript);
     } else {
-      timer = setTimeout(() => {
-        SpeechRecognition.stopListening();
-        resetTranscript();
-        onClickBackground();
-      }, 5000);
+      voiceTimer = createTimer(timer.NO_TRANSCRIPT);
     }
     return () => {
-      clearTimeout(timer);
+      clearTimeout(voiceTimer);
     };
   }, [transcript]);
 
