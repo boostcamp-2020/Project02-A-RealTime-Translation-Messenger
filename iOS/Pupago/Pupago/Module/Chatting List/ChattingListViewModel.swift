@@ -65,7 +65,7 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
             .debounce(.milliseconds(500), scheduler: MainScheduler.instance)
             .flatMap { [unowned self] in provider.rooms() }
             .subscribe(onNext: {[unowned self] result in
-                updateRoomList(result.roomList)
+                updateRoomList(result.rooms)
             }, onError: { error in
                 print(error)
             })

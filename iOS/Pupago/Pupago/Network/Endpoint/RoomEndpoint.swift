@@ -24,7 +24,7 @@ extension RoomEndpoint: EndpointType {
         case .join:
             return "join"
         case .getParticipant(let roomCode):
-            return "room/participantsList/\(roomCode)"
+            return "room/participants/\(roomCode)"
         case .thumbnail:
             return "profileImage"
         }

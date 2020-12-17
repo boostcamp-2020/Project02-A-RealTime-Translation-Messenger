@@ -168,10 +168,9 @@ private extension ChattingViewModel {
     
     func parse<ResultType: Decodable>(_ data: [Any]?) -> Observable<ResultType> {
         return Observable.create { observer in
-            guard let dataString = data?[0] as? String,
-                  let data = dataString.data(using: .utf8)
-            else { return Disposables.create() }
+            guard let anyData = data?[0] else { return Disposables.create() }
             do {
+                let data = try JSONSerialization.data(withJSONObject: anyData, options: [])
                 let result = try JSONDecoder().decode(ResultType.self, from: data)
                 observer.onNext(result)
             } catch {
