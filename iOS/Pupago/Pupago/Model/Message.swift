@@ -5,8 +5,6 @@
 //  Created by kimn on 2020/11/28.
 //
 
-import Foundation
-import RxSwift
 import RxDataSources
 
 struct MessageSection {

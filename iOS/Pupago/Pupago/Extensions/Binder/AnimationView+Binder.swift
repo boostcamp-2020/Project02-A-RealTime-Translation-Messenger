@@ -11,7 +11,7 @@ import RxCocoa
 
 extension Reactive where Base: AnimationView {
     
-    public var isOn: Binder<Bool> {
+    var isOn: Binder<Bool> {
         return Binder(self.base) { view, isOn in
             view.isHidden = !isOn
             isOn ? view.play() : view.stop()

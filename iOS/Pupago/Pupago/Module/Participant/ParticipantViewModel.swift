@@ -8,7 +8,7 @@
 import RxSwift
 import RxCocoa
 
-class ParticipantViewModel: ViewModel, ViewModelType {
+final class ParticipantViewModel: ViewModel, ViewModelType {
     
     // MARK: - Input
     
@@ -43,7 +43,7 @@ class ParticipantViewModel: ViewModel, ViewModelType {
     func transform(_ input: Input) -> Output {
         input.viewWillAppear
             .flatMap { [unowned self] in provider.participantList(roomCode: roomCode) }
-            .map { $0.participantsList }
+            .map { $0.participants }
             .subscribe(onNext: { [unowned self] participantsList in
                 participants.accept(participantsList)
             })

@@ -8,7 +8,7 @@
 import RxSwift
 import RxCocoa
 
-class ChattingViewModel: ViewModel, ViewModelType {
+final class ChattingViewModel: ViewModel, ViewModelType {
     
     typealias RoomInfo = (title: String?, code: String?)
     typealias TranslationViewState = (text: String, isHidden: Bool)
@@ -44,20 +44,20 @@ class ChattingViewModel: ViewModel, ViewModelType {
     // MARK: - State
     
     private let chats = BehaviorRelay<[MessageSection]>(value: [MessageSection(header: "Chat", items: [])])
-    let roomInfo = BehaviorRelay<RoomInfo>(value: (nil, nil))
     private let chatInfo = PublishRelay<Translator.Text>()
     private let isActive = BehaviorRelay<Bool>(value: false)
     private let downScroll = PublishRelay<Void>()
     private let toasterMessage = PublishRelay<String>()
-    private let translationViewState = PublishRelay<(text: String, isHidden: Bool)>()
+    private let translationViewState = PublishRelay<TranslationViewState>()
     private let reset = PublishRelay<Void>()
+    let roomInfo = BehaviorRelay<RoomInfo>(value: (nil, nil))
     
     // MARK: - Transform
     
     func transform(_ input: Input) -> Output {
         let translator = Translator(provider: provider)
         
-        // Handle receiving message
+        /// Handle receiving message
         socketManager.socket.rx.event(.receiveMessage)
             .flatMap { [unowned self] data -> Observable<Message> in parse(data) }
             .subscribe(onNext: { [unowned self] message in
@@ -68,8 +68,8 @@ class ChattingViewModel: ViewModel, ViewModelType {
             })
             .disposed(by: rx.disposeBag)
         
-        // Handle receiving participant event
-        // Event occurs when someone came in or leave out
+        /// Handle receiving participant event
+        /// Event occurs when someone came in or leave out
         socketManager.socket.rx.event(.list)
             .flatMap { [unowned self] data -> Observable<Participants> in parse(data) }
             .subscribe(onNext: { [unowned self] result in
@@ -79,6 +79,7 @@ class ChattingViewModel: ViewModel, ViewModelType {
             })
             .disposed(by: rx.disposeBag)
         
+        /// Remove socket handlers when go out
         input.viewWillDisappear
             .subscribe(onNext: { [unowned self] in
                 Application.shared.currentRoomCode = ""
@@ -167,10 +168,9 @@ private extension ChattingViewModel {
     
     func parse<ResultType: Decodable>(_ data: [Any]?) -> Observable<ResultType> {
         return Observable.create { observer in
-            guard let dataString = data?[0] as? String,
-                  let data = dataString.data(using: .utf8)
-            else { return Disposables.create() }
+            guard let anyData = data?[0] else { return Disposables.create() }
             do {
+                let data = try JSONSerialization.data(withJSONObject: anyData, options: [])
                 let result = try JSONDecoder().decode(ResultType.self, from: data)
                 observer.onNext(result)
             } catch {

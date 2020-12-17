@@ -5,7 +5,6 @@
 //  Created by 김근수 on 2020/11/30.
 //
 
-import Foundation
 import RxSwift
 
 class MockAPI: NetworkProviding {
@@ -35,7 +34,7 @@ class MockAPI: NetworkProviding {
         return Observable.empty()
     }
     
-    func profile() -> Observable<Profile> {
+    func thumbnail() -> Observable<Thumbnail> {
         return Observable.empty()
     }
     

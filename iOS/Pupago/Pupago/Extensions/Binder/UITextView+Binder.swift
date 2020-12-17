@@ -10,7 +10,7 @@ import RxCocoa
 
 extension Reactive where Base: UITextView {
     
-    public var state: Binder<(text: String, isHidden: Bool)> {
+    var state: Binder<(text: String, isHidden: Bool)> {
         return Binder(self.base) { textView, state in
             textView.text = state.text
             textView.isHidden = state.isHidden

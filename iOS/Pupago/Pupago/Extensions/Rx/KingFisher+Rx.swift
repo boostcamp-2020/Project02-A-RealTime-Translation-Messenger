@@ -8,7 +8,7 @@
 import RxSwift
 import Kingfisher
 
-public extension Reactive where Base: KingfisherManager {
+extension Reactive where Base: KingfisherManager {
     
     func image(url: String) -> Observable<UIImage> {
         return Observable.create { observer in

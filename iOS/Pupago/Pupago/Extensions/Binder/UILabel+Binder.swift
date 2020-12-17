@@ -10,14 +10,14 @@ import RxCocoa
 
 extension Reactive where Base: UILabel {
     
-    public var state: Binder<(text: String, isHidden: Bool)> {
+    var state: Binder<(text: String, isHidden: Bool)> {
         return Binder(self.base) { label, state in
             label.text = state.text
             label.isHidden = state.isHidden
         }
     }
     
-    public var isActivate: Binder<Bool> {
+    var isActivate: Binder<Bool> {
         return Binder(self.base) { label, isActivate in
             label.isUserInteractionEnabled = isActivate
         }

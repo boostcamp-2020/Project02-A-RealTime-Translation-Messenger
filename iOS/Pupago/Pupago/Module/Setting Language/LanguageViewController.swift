@@ -10,15 +10,21 @@ import RxCocoa
 
 final class LanguageViewController: ViewController {
     
-    @IBOutlet weak var introLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var engButton: SelectableButton!
-    @IBOutlet weak var korButton: SelectableButton!
-    @IBOutlet weak var nextButton: Button!
+    // MARK: - IBOutlet
+    
+    @IBOutlet private weak var introLabel: UILabel!
+    @IBOutlet private weak var descriptionLabel: UILabel!
+    @IBOutlet private weak var engButton: SelectableButton!
+    @IBOutlet private weak var korButton: SelectableButton!
+    @IBOutlet private weak var nextButton: Button!
+    
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    // MARK: - Bind ViewModel
     
     override func bindViewModel() {
         super.bindViewModel()

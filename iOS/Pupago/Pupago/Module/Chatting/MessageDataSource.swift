@@ -5,10 +5,9 @@
 //  Created by 김근수 on 2020/12/04.
 //
 
-import Foundation
 import RxDataSources
 
-class MessageDataSource: RxCollectionViewSectionedReloadDataSource<MessageSection> {
+final class MessageDataSource: RxCollectionViewSectionedReloadDataSource<MessageSection> {
     
     init() {
         super.init(configureCell: { _, collectionView, indexPath, item in

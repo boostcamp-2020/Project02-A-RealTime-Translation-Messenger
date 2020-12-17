@@ -33,6 +33,7 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
         let thumbnailImage: Driver<UIImage?>
         let isReloading: Driver<Bool>
         let needShake: Driver<Bool>
+        let toasterMessage: Observable<String>
         let showCreateRoomView: Signal<CreateRoomViewModel>
         let showJoinRoomView: Signal<JoinRoomViewModel>
         let showChattingView: Signal<ChattingViewModel>
@@ -41,16 +42,16 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
     // MARK: - State
     
     private let rooms = BehaviorRelay<[Room]>(value: [])
-    let roomInfo = PublishRelay<RoomInfo>()
+    private let roomInfo = PublishRelay<RoomInfo>()
     private let thumbnailImage = PublishRelay<UIImage?>()
     private let socketEntered = PublishRelay<Room?>()
+    private let toasterMessage = PublishRelay<String>()
     private let isRefreshing = BehaviorRelay<Bool>(value: false)
     private let isBlank = PublishRelay<Bool>()
     
     // MARK: - Transform
     
     func transform(_ input: Input) -> Output {
-        
         fetchThumbnail()
             .bind(to: thumbnailImage)
             .disposed(by: rx.disposeBag)
@@ -64,7 +65,7 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
             .debounce(.milliseconds(500), scheduler: MainScheduler.instance)
             .flatMap { [unowned self] in provider.rooms() }
             .subscribe(onNext: {[unowned self] result in
-                updateRoomList(result.roomList)
+                updateRoomList(result.rooms)
             }, onError: { error in
                 print(error)
             })
@@ -85,10 +86,11 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
                         Application.shared.currentRoomCode = room.roomCode ?? ""
                             socketManager.enterChatroom(roomCode: room.roomCode ?? "")
                             socketEntered.accept(room)
-                        }, onError: { error in
+                        }, onError: { [unowned self] error in
                             if let error = error as? APIError {
-                                error == .roomNotExist ? print("Alert logic needed room not exist") :
-                                print("Alert logic needed")
+                                let msg = error == .roomNotExist ? localize.value.userMessage.roomNotExist
+                                    :localize.value.userMessage.unknownedError
+                                toasterMessage.accept(msg)
                             }})
                     .disposed(by: rx.disposeBag)
                 })
@@ -128,6 +130,7 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
                       thumbnailImage: thumbnailImage.asDriver(onErrorJustReturn: nil),
                       isReloading: isRefreshing.asDriver(),
                       needShake: isBlank.asDriver(onErrorJustReturn: false),
+                      toasterMessage: toasterMessage.asObservable(),
                       showCreateRoomView: showCreateView,
                       showJoinRoomView: showJoinView,
                       showChattingView: showChatView)
@@ -138,10 +141,10 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
 private extension ChattingListViewModel {
     
     func fetchThumbnail() -> Observable<UIImage> {
-        return provider.profile()
-            .flatMap { profile -> Observable<UIImage> in
-                Application.shared.profile = profile.imageLink
-                return KingfisherManager.shared.rx.image(url: profile.imageLink)
+        return provider.thumbnail()
+            .flatMap { thumbnail -> Observable<UIImage> in
+                Application.shared.thumbnail = thumbnail.imageLink
+                return KingfisherManager.shared.rx.image(url: thumbnail.imageLink)
             }
     }
     

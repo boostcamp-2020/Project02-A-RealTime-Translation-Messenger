@@ -5,7 +5,6 @@
 //  Created by 김근수 on 2020/11/30.
 //
 
-import Foundation
 import Alamofire
 
 enum RoomEndpoint {
@@ -13,7 +12,7 @@ enum RoomEndpoint {
     case get
     case join(code: String, isPrivate: Bool)
     case getParticipant(roomCode: String)
-    case profile
+    case thumbnail
 }
 
 extension RoomEndpoint: EndpointType {
@@ -25,8 +24,8 @@ extension RoomEndpoint: EndpointType {
         case .join:
             return "join"
         case .getParticipant(let roomCode):
-            return "room/participantsList/\(roomCode)"
-        case .profile:
+            return "room/participants/\(roomCode)"
+        case .thumbnail:
             return "profileImage"
         }
     }
@@ -39,14 +38,14 @@ extension RoomEndpoint: EndpointType {
         switch self {
         case .create, .join:
             return .post
-        case .get, .getParticipant, .profile:
+        case .get, .getParticipant, .thumbnail:
             return .get
         }
     }
     
     var parameter: [String: Any]? {
         switch self {
-        case .get, .getParticipant, .profile:
+        case .get, .getParticipant, .thumbnail:
             return nil
         case .join(let code, let isPrivate):
             let isPrivate = isPrivate ? "true" : "false"

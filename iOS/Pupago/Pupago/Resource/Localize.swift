@@ -16,6 +16,8 @@ enum Localize {
         let enter: String
         let leave: String
         let copy: String
+        let roomNotExist: String
+        let unknownedError: String
     }
     
     struct SettingLanguageViewText {
@@ -97,27 +99,29 @@ extension Localize {
             return .init(translating: "번역중...",
                          enter: "님이 들어왔습니다.",
                          leave: "님이 나갔습니다.",
-                         copy: "가 복사되었습니다.")
+                         copy: "가 복사되었습니다.",
+                         roomNotExist: "존재하지 않는 방입니다.",
+                         unknownedError: "알수없는 에러가 발생했습니다.")
         case .english:
             return .init(translating: "translating...",
                          enter: " came in.",
                          leave: " went out.",
-                         copy: " has been copied.")
+                         copy: " has been copied.",
+                         roomNotExist: "Room does not exist.",
+                         unknownedError: "Undefined erorr occured.")
         }
     }
-    
-    
     
     var languageViewText: SettingLanguageViewText {
         switch self {
         case .korean:
             return .init(intro: "안녕하세요!\n실시간 번역 채팅 서비스입니다\n글로벌 채팅을 즐겨보세요!",
-                            description: "언어를 선택해주세요",
-                            nextButton: "다음")
+                         description: "언어를 선택해주세요",
+                         nextButton: "다음")
         case .english:
             return .init(intro: "Hello!\nWelcome to Realtime Chat\nEnjoy Global Chatting!",
-                            description: "Select your Language",
-                            nextButton: "Next")
+                         description: "Select your Language",
+                         nextButton: "Next")
         }
     }
     
@@ -160,7 +164,7 @@ extension Localize {
                          privateRoom: "비공개 채팅방",
                          createButton: "생성하기")
         case .english:
-
+            
             return .init(title: "Create Room",
                          description: "Room must be 2-30 characters.",
                          publicRoom: "Public Chat",
@@ -221,4 +225,5 @@ extension Localize {
                          translationText: "Translation Message")
         }
     }
+    
 }

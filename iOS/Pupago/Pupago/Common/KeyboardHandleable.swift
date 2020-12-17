@@ -13,6 +13,7 @@ protocol KeyboardHandleable {
 }
 
 extension KeyboardHandleable {
+    
     var keyboardHeight: Observable<CGFloat> {
         return Observable
             .from([
@@ -25,4 +26,5 @@ extension KeyboardHandleable {
                 ])
             .merge()
     }
+    
 }

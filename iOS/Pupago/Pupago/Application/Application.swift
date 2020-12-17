@@ -5,7 +5,6 @@
 //  Created by 김근수 on 2020/11/24.
 //
 
-import UIKit
 import RxCocoa
 
 final class Application: NSObject {
@@ -17,7 +16,7 @@ final class Application: NSObject {
     let navigator: Navigator
     var userName: String
     var localize: Localize
-    var profile: String
+    var thumbnail: String
     var currentRoomCode: String
     
     let isSocketValid = PublishRelay<Bool>()
@@ -27,7 +26,7 @@ final class Application: NSObject {
         navigator = Navigator.default
         userName = ""
         localize = .korean
-        profile = ""
+        thumbnail = ""
         currentRoomCode = ""
     }
     

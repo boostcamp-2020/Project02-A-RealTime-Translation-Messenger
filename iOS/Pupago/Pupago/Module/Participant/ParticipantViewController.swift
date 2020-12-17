@@ -11,9 +11,9 @@ final class ParticipantViewController: ViewController {
     
     // MARK: - IBOutlet
     
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var closeButton: UIButton!
+    @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var closeButton: UIButton!
     
     // MARK: - Properties
     

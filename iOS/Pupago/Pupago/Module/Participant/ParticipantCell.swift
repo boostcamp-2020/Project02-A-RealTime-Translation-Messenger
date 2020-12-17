@@ -8,13 +8,13 @@
 import UIKit
 import Kingfisher
 
-class ParticipantCell: CollectionViewBaseCell {
+final class ParticipantCell: CollectionViewBaseCell {
     
     static let identifier = "ParticipantCell"
     
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var langLabel: UILabel!
-    @IBOutlet weak var thumbnailImageView: UIImageView!
+    @IBOutlet private weak var nameLabel: UILabel!
+    @IBOutlet private weak var langLabel: UILabel!
+    @IBOutlet private weak var thumbnailImageView: UIImageView!
     
     override func makeUI() {
         super.makeUI()

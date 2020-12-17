@@ -16,10 +16,10 @@ class ActivatableButton: UIButton {
     }
     
     private func configureForActivate() {
-        let image = isActivate ? "arrow" : "arrowed"
+        let image = isActivate ? Image.arrow.value : Image.arrowed.value
         
         isUserInteractionEnabled = isActivate
-        setImage(UIImage(named: image), for: .normal)
+        setImage(image, for: .normal)
     }
     
 }
