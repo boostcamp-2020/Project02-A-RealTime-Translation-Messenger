@@ -5,7 +5,7 @@ import roomCodeUtil from '../utils/roomCode';
 import StatusCode from '../@types/statusCode';
 import roomService from '../services/room';
 import validationUtil from '../utils/validation';
-import socketService from '../sockets/socketService';
+import socketService from '../services/socket';
 import RoomInfo from '../@types/roomInfo';
 
 const getPublicRooms = async (req: Request, res: Response) => {
