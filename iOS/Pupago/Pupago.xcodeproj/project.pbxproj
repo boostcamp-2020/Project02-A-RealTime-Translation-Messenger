@@ -159,7 +159,7 @@
 		978F581E257A962A0034846A /* ParticipantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantViewModel.swift; sourceTree = "<group>"; };
 		979F2FAC2582649D00619871 /* ScanningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanningViewController.swift; sourceTree = "<group>"; };
 		979F2FB1258265B400619871 /* ScanningViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanningViewModel.swift; sourceTree = "<group>"; };
-		979F2FB925826E6400619871 /* VNDocumentCameraViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VNDocumentCameraViewController+Rx.swift"; sourceTree = "<group>"; };
+		979F2FB925826E6400619871 /* VNDocumentCameraViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "VNDocumentCameraViewController+Rx.swift"; path = "../VNDocumentCameraViewController+Rx.swift"; sourceTree = "<group>"; };
 		979F2FBE25828DC500619871 /* ClovaEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClovaEndpoint.swift; sourceTree = "<group>"; };
 		979F2FC325828E8100619871 /* OCR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCR.swift; sourceTree = "<group>"; };
 		979F2FCB25828FDF00619871 /* UIImage+Base64.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Base64.swift"; sourceTree = "<group>"; };
@@ -361,23 +361,15 @@
 		975C53EC256B5B2900739DCA /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				976C371125762D6000BD8094 /* SegementedControl.swift */,
-				975C53F4256B6DFF00739DCA /* Button.swift */,
-				BD65A8052572A06500EE43BC /* Label.swift */,
-				975C53F9256B7CD100739DCA /* GradientView.swift */,
-				975C53FE256B844C00739DCA /* SelectableButton.swift */,
-				BD78323525888C7500036023 /* ActivatableButton.swift */,
-				97CB75AA256E2CB900FE052A /* CollectionViewBaseCell.swift */,
 				975C540D256B907D00739DCA /* ViewModel.swift */,
 				97B4BEA4256BF5B0009A3825 /* ViewController.swift */,
-				97F534F4256CC008005998EE /* ValidatingTextField.swift */,
-				97F534F9256CD087005998EE /* View.swift */,
-				BD626FF72570997B00569277 /* StackView.swift */,
-				BD5F616C256D23E300D63CCD /* NavigationController.swift */,
-				978F5813257A89C80034846A /* SlideInTransition.swift */,
-				9789304325811ED100A1A40E /* Pulsing.swift */,
-				BD7A7C3D25875B9500E84669 /* ValidatingLabel.swift */,
 				BD7832242588590600036023 /* KeyboardHandleable.swift */,
+				97BC6CC6258AF7A600BD4AE9 /* View */,
+				97BC6CC7258AF7E400BD4AE9 /* Controller */,
+				97BC6CC8258AF80700BD4AE9 /* Label */,
+				97BC6CC9258AF80B00BD4AE9 /* Button */,
+				97BC6CCA258AF83300BD4AE9 /* TextField */,
+				97BC6CCB258AF84600BD4AE9 /* Animating */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -413,17 +405,9 @@
 		97B4BE72256BE921009A3825 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				97B4BE73256BE935009A3825 /* NSObject+Rx.swift */,
-				976C373A2576352B00BD8094 /* SocketIO+Rx.swift */,
-				975A264B2577D9030096C918 /* UIViewController+Rx.swift */,
-				BD7A7C472587631200E84669 /* UIButton+Binder.swift */,
-				BDB9EB4125837F8A00C54A5C /* UILabel+Binder.swift */,
-				978F5803257A44B90034846A /* UITextView+Binder.swift */,
-				BD7A7C4225875FCB00E84669 /* UITextField+Binder.swift */,
-				971746F22580BA0700F8E9DE /* KingFisher+Rx.swift */,
-				979F2FB925826E6400619871 /* VNDocumentCameraViewController+Rx.swift */,
 				979F2FCB25828FDF00619871 /* UIImage+Base64.swift */,
-				97C45C532582A81800899711 /* AnimationView+Binder.swift */,
+				97BC6CD0258AF8B600BD4AE9 /* Rx */,
+				97BC6CCC258AF88E00BD4AE9 /* Binder */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -435,6 +419,86 @@
 				97B4BE9F256BEFD9009A3825 /* NicknameViewModel.swift */,
 			);
 			path = "Setting Nickname";
+			sourceTree = "<group>";
+		};
+		97BC6CC6258AF7A600BD4AE9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				97CB75AA256E2CB900FE052A /* CollectionViewBaseCell.swift */,
+				975C53F9256B7CD100739DCA /* GradientView.swift */,
+				BD626FF72570997B00569277 /* StackView.swift */,
+				97F534F9256CD087005998EE /* View.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		97BC6CC7258AF7E400BD4AE9 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				BD5F616C256D23E300D63CCD /* NavigationController.swift */,
+				976C371125762D6000BD8094 /* SegementedControl.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		97BC6CC8258AF80700BD4AE9 /* Label */ = {
+			isa = PBXGroup;
+			children = (
+				BD65A8052572A06500EE43BC /* Label.swift */,
+				BD7A7C3D25875B9500E84669 /* ValidatingLabel.swift */,
+			);
+			path = Label;
+			sourceTree = "<group>";
+		};
+		97BC6CC9258AF80B00BD4AE9 /* Button */ = {
+			isa = PBXGroup;
+			children = (
+				975C53F4256B6DFF00739DCA /* Button.swift */,
+				975C53FE256B844C00739DCA /* SelectableButton.swift */,
+				BD78323525888C7500036023 /* ActivatableButton.swift */,
+			);
+			path = Button;
+			sourceTree = "<group>";
+		};
+		97BC6CCA258AF83300BD4AE9 /* TextField */ = {
+			isa = PBXGroup;
+			children = (
+				97F534F4256CC008005998EE /* ValidatingTextField.swift */,
+			);
+			path = TextField;
+			sourceTree = "<group>";
+		};
+		97BC6CCB258AF84600BD4AE9 /* Animating */ = {
+			isa = PBXGroup;
+			children = (
+				978F5813257A89C80034846A /* SlideInTransition.swift */,
+				9789304325811ED100A1A40E /* Pulsing.swift */,
+			);
+			path = Animating;
+			sourceTree = "<group>";
+		};
+		97BC6CCC258AF88E00BD4AE9 /* Binder */ = {
+			isa = PBXGroup;
+			children = (
+				BD7A7C472587631200E84669 /* UIButton+Binder.swift */,
+				BDB9EB4125837F8A00C54A5C /* UILabel+Binder.swift */,
+				978F5803257A44B90034846A /* UITextView+Binder.swift */,
+				BD7A7C4225875FCB00E84669 /* UITextField+Binder.swift */,
+				97C45C532582A81800899711 /* AnimationView+Binder.swift */,
+			);
+			path = Binder;
+			sourceTree = "<group>";
+		};
+		97BC6CD0258AF8B600BD4AE9 /* Rx */ = {
+			isa = PBXGroup;
+			children = (
+				97B4BE73256BE935009A3825 /* NSObject+Rx.swift */,
+				976C373A2576352B00BD8094 /* SocketIO+Rx.swift */,
+				975A264B2577D9030096C918 /* UIViewController+Rx.swift */,
+				971746F22580BA0700F8E9DE /* KingFisher+Rx.swift */,
+				979F2FB925826E6400619871 /* VNDocumentCameraViewController+Rx.swift */,
+			);
+			path = Rx;
 			sourceTree = "<group>";
 		};
 		97CB75B2256E3E0000FE052A /* Create Chatroom */ = {
