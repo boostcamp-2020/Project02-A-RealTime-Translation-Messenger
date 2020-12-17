@@ -20,9 +20,10 @@ const Wrapper = styled.div`
 `;
 
 const VoiceWrapper = styled.div`
-  position: absolute;
-  bottom: 0px;
-  left: 0px;
+  position: relative;
+  bottom: 720px;
+  left: 140px;
+  z-index: 1;
   display: flex;
   justify-content: center;
   align-items: center;
