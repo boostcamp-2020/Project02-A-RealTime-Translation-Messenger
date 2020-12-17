@@ -73,12 +73,12 @@ function ChatRoomPage() {
       });
       socketData.on('receive participants list', (participantsList: string) => {
         onSetSocketId(socketData.id);
-        const participants = JSON.parse(participantsList);
-        onSetParticipantsList(participants.participantsList);
+        const participants: any = participantsList;
+        onSetParticipantsList(participants.participants);
         onStackChats({ type: participants.type, diffNickname: participants.diffNickname });
       });
-      socketData.on('receive chat', (receiveChat: string) => {
-        onStackChats(JSON.parse(receiveChat));
+      socketData.on('receive chat', (receiveChat: any) => {
+        onStackChats(receiveChat);
       });
       socketData.on('socket error', (errorMessage: { errorMessage: string }) => {
         alert(errorMessage);
