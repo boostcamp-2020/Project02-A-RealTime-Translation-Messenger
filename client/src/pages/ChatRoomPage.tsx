@@ -19,6 +19,7 @@ import LangCode from '../@types/langCode';
 import { LangCodeFormattedForServer } from '../@types/types';
 
 const Wrapper = styled.div`
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -27,7 +28,6 @@ const Wrapper = styled.div`
 `;
 
 const StyledChatRoomBox = styled.div`
-  position: relative;
   width: 1000px;
   height: 720px;
   box-shadow: 5px 5px 100px 0 rgba(0, 0, 0, 0.25);
