@@ -57,8 +57,6 @@ final class ScanningViewModel: ViewModel, ViewModelType {
     func transform(_ input: Input) -> Output {
         let translator = Translator(provider: provider)
         
-        let viewText = localize.asDriver().map { $0.scanningViewText }
-        
         originText
             .distinctUntilChanged()
             .debounce(.milliseconds(200), scheduler: MainScheduler.instance)
@@ -113,15 +111,6 @@ final class ScanningViewModel: ViewModel, ViewModelType {
             })
             .disposed(by: rx.disposeBag)
         
-        let needScan = input.scanButtonDidTap.asSignal(onErrorJustReturn: ())
-            .map { [unowned self] () -> VNDocumentCameraViewController in
-                let cameraViewController = VNDocumentCameraViewController()
-                cameraViewController.rx.didFinish
-                    .bind(to: scanedImage)
-                    .disposed(by: rx.disposeBag)
-                return cameraViewController
-            }
-        
         input.originDetailDidTap
             .withLatestFrom(originText)
             .subscribe(onNext: { [unowned self] text in
@@ -136,6 +125,17 @@ final class ScanningViewModel: ViewModel, ViewModelType {
                 fetchDetail(text: text, type: true)
             })
             .disposed(by: rx.disposeBag)
+        
+        let viewText = localize.asDriver().map { $0.scanningViewText }
+        
+        let needScan = input.scanButtonDidTap.asSignal(onErrorJustReturn: ())
+            .map { [unowned self] () -> VNDocumentCameraViewController in
+                let cameraViewController = VNDocumentCameraViewController()
+                cameraViewController.rx.didFinish
+                    .bind(to: scanedImage)
+                    .disposed(by: rx.disposeBag)
+                return cameraViewController
+            }
         
         return Output(viewText: viewText,
                       isActive: activate.asObservable(),

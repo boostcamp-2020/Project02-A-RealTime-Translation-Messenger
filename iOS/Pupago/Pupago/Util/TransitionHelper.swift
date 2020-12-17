@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SlidInTransitionHelper: NSObject, UIViewControllerTransitioningDelegate {
+final class SlidInTransitionHelper: NSObject, UIViewControllerTransitioningDelegate {
     
     let transition = SlideInTransition()
     

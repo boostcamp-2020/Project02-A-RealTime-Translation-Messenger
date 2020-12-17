@@ -8,7 +8,7 @@
 import RxSwift
 import Speech
 
-final class SpeechManager: NSObject {
+final class SpeechManager: NSObject, SFSpeechRecognizerDelegate {
     
     private let audioEngine = AVAudioEngine()
     private let speechRecognizer = SFSpeechRecognizer(locale: Application.shared.localize.toLocale)
@@ -35,7 +35,11 @@ final class SpeechManager: NSObject {
         playBackSound()
     }
     
-    private func recoding() {
+}
+
+private extension SpeechManager {
+    
+    func recoding() {
         if recognitionTask != nil {
             recognitionTask?.cancel()
             recognitionTask = nil
@@ -45,7 +49,7 @@ final class SpeechManager: NSObject {
         configureRecognition()
     }
     
-    private func configureAVAudioSession() {
+    func configureAVAudioSession() {
         let audioSession = AVAudioSession.sharedInstance()
         
         do {
@@ -57,7 +61,7 @@ final class SpeechManager: NSObject {
         }
     }
     
-    private func configureRecognition() {
+    func configureRecognition() {
         let inputNode = audioEngine.inputNode
         recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
         
@@ -69,7 +73,7 @@ final class SpeechManager: NSObject {
         configureTask(by: recognitionRequest, on: inputNode)
     }
     
-    private func configureTask(by request: SFSpeechAudioBufferRecognitionRequest, on inputNode: AVAudioInputNode) {
+    func configureTask(by request: SFSpeechAudioBufferRecognitionRequest, on inputNode: AVAudioInputNode) {
         recognitionTask = speechRecognizer?.recognitionTask(with: request, resultHandler: { [weak self] (result, error) in
             var isFinal = false
             
@@ -88,7 +92,7 @@ final class SpeechManager: NSObject {
         configureSpeechInput(on: inputNode)
     }
     
-    private func configureSpeechInput(on inputNode: AVAudioInputNode) {
+    func configureSpeechInput(on inputNode: AVAudioInputNode) {
         let recordingFormat = inputNode.outputFormat(forBus: 0)
         
         inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { (buffer, _) in
@@ -102,9 +106,6 @@ final class SpeechManager: NSObject {
             print("audioEngine couldn't start because of an error.")
         }
     }
-}
-
-extension SpeechManager: SFSpeechRecognizerDelegate {
     
     func playBackSound() {
         let audioSession = AVAudioSession.sharedInstance()
@@ -116,7 +117,7 @@ extension SpeechManager: SFSpeechRecognizerDelegate {
         } catch let error as NSError {
             print(error)
         }
-    
+        
         AudioServicesPlaySystemSound(1112)
     }
     

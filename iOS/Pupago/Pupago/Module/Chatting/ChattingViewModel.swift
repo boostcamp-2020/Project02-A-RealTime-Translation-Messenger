@@ -8,7 +8,7 @@
 import RxSwift
 import RxCocoa
 
-class ChattingViewModel: ViewModel, ViewModelType {
+final class ChattingViewModel: ViewModel, ViewModelType {
     
     typealias RoomInfo = (title: String?, code: String?)
     typealias TranslationViewState = (text: String, isHidden: Bool)
@@ -44,13 +44,13 @@ class ChattingViewModel: ViewModel, ViewModelType {
     // MARK: - State
     
     private let chats = BehaviorRelay<[MessageSection]>(value: [MessageSection(header: "Chat", items: [])])
-    let roomInfo = BehaviorRelay<RoomInfo>(value: (nil, nil))
     private let chatInfo = PublishRelay<Translator.Text>()
     private let isActive = BehaviorRelay<Bool>(value: false)
     private let downScroll = PublishRelay<Void>()
     private let toasterMessage = PublishRelay<String>()
-    private let translationViewState = PublishRelay<(text: String, isHidden: Bool)>()
+    private let translationViewState = PublishRelay<TranslationViewState>()
     private let reset = PublishRelay<Void>()
+    let roomInfo = BehaviorRelay<RoomInfo>(value: (nil, nil))
     
     // MARK: - Transform
     
@@ -79,6 +79,7 @@ class ChattingViewModel: ViewModel, ViewModelType {
             })
             .disposed(by: rx.disposeBag)
         
+        /// Remove socket handlers when go out
         input.viewWillDisappear
             .subscribe(onNext: { [unowned self] in
                 Application.shared.currentRoomCode = ""
@@ -127,7 +128,6 @@ class ChattingViewModel: ViewModel, ViewModelType {
                 toasterMessage.accept("\(code ?? "")\(localize.value.userMessage.copy)")
             })
             .disposed(by: rx.disposeBag)
-        
         
         let viewTexts = localize.asDriver()
             .map { $0.chatroomViewText }

@@ -12,15 +12,15 @@ final class SpeechViewController: ViewController {
     
     // MARK: - IBOutlet
     
-    @IBOutlet weak var originTextView: UITextView!
-    @IBOutlet weak var translationTextView: UITextView!
-    @IBOutlet weak var assistLabel: UILabel!
-    @IBOutlet weak var micButton: UIButton!
-    @IBOutlet weak var sendButton: ActivatableButton!
-    @IBOutlet weak var closeButton: UIButton!
-    @IBOutlet weak var originConstraint: NSLayoutConstraint!
-    @IBOutlet weak var translationConstraint: NSLayoutConstraint!
-    @IBOutlet weak var buttonConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var originTextView: UITextView!
+    @IBOutlet private weak var translationTextView: UITextView!
+    @IBOutlet private weak var assistLabel: UILabel!
+    @IBOutlet private weak var micButton: UIButton!
+    @IBOutlet private weak var sendButton: ActivatableButton!
+    @IBOutlet private weak var closeButton: UIButton!
+    @IBOutlet private weak var originConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var translationConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var buttonConstraint: NSLayoutConstraint!
     
     // MARK: - Lifecycle
     
@@ -75,7 +75,6 @@ final class SpeechViewController: ViewController {
                 self.navigator.dismiss(sender: self)
             })
             .disposed(by: rx.disposeBag)
-    
     }
     
 }

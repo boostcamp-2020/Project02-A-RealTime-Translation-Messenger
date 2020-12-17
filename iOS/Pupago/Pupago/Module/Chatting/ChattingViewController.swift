@@ -11,40 +11,36 @@ import RxDataSources
 import RxAnimated
 import Toaster
 
-class ChattingViewController: ViewController {
+final class ChattingViewController: ViewController {
     
     // MARK: - IBOutlet
     
-    @IBOutlet weak var languageLabel: UILabel!
-    @IBOutlet weak var codeButton: Button!
-    @IBOutlet weak var inputText: UITextView!
-    @IBOutlet weak var sendButton: UIButton!
-    @IBOutlet weak var micButton: UIButton!
-    @IBOutlet weak var scanButton: UIButton!
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var translationTextView: UITextView!
-    @IBOutlet weak var inputBarBottomConstraint: NSLayoutConstraint!
-    @IBOutlet weak var translationViewConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var languageLabel: UILabel!
+    @IBOutlet private weak var codeButton: Button!
+    @IBOutlet private weak var inputText: UITextView!
+    @IBOutlet private weak var sendButton: UIButton!
+    @IBOutlet private weak var micButton: UIButton!
+    @IBOutlet private weak var scanButton: UIButton!
+    @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet private weak var translationTextView: UITextView!
+    @IBOutlet private weak var inputBarBottomConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var translationViewConstraint: NSLayoutConstraint!
 
     // MARK: - Properties
     
-    private lazy var rightNavigationItem: UIBarButtonItem = {
-        let item = UIBarButtonItem(image: UIImage(systemName: "list.bullet"),
-                                   style: .plain,
-                                   target: self,
-                                   action: nil)
-        return item
-    }()
+    private var rightNavigationItem = UIBarButtonItem(image: UIImage(systemName: "list.bullet"),
+                                                      style: .plain,
+                                                      target: self,
+                                                      action: nil)
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.rightBarButtonItem = rightNavigationItem
+        configureNavigationButton()
         configureCollectionView()
         configureToasterView()
         bindKeyboard()
-        //translationTextView.delegate = self
     }
     
     // MARK: Bind ViewModel
@@ -143,6 +139,10 @@ class ChattingViewController: ViewController {
 }
 
 private extension ChattingViewController {
+    
+    func configureNavigationButton() {
+        self.navigationItem.rightBarButtonItem = rightNavigationItem
+    }
     
     func configureCollectionView() {
         let size = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),

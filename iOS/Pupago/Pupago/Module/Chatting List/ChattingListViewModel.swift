@@ -42,7 +42,7 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
     // MARK: - State
     
     private let rooms = BehaviorRelay<[Room]>(value: [])
-    let roomInfo = PublishRelay<RoomInfo>()
+    private let roomInfo = PublishRelay<RoomInfo>()
     private let thumbnailImage = PublishRelay<UIImage?>()
     private let socketEntered = PublishRelay<Room?>()
     private let toasterMessage = PublishRelay<String>()
@@ -52,7 +52,6 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
     // MARK: - Transform
     
     func transform(_ input: Input) -> Output {
-        
         fetchThumbnail()
             .bind(to: thumbnailImage)
             .disposed(by: rx.disposeBag)

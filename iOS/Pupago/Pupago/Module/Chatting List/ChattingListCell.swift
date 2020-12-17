@@ -11,9 +11,9 @@ final class ChattingListCell: CollectionViewBaseCell {
     
     static let identifier = "ChattingListCell"
     
-    @IBOutlet weak var createAtLabel: UILabel!
-    @IBOutlet weak var numberOfPeopleLabel: UILabel!
-    @IBOutlet weak var roomNameLabel: UILabel!
+    @IBOutlet private weak var createAtLabel: UILabel!
+    @IBOutlet private weak var numberOfPeopleLabel: UILabel!
+    @IBOutlet private weak var roomNameLabel: UILabel!
     
     override func makeUI() {
         super.makeUI()

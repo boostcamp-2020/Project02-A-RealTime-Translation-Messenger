@@ -10,14 +10,14 @@ import RxCocoa
 
 final class CreateRoomViewController: ViewController {
     
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: ValidatingLabel!
-    @IBOutlet weak var roomTextField: ValidatingTextField!
-    @IBOutlet weak var closeButton: UIButton!
-    @IBOutlet weak var createButton: Button!
-    @IBOutlet weak var privateSegment: SegmentControl!
-    @IBOutlet weak var dimmingView: UIView!
-    @IBOutlet weak var centerConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var descriptionLabel: ValidatingLabel!
+    @IBOutlet private weak var roomTextField: ValidatingTextField!
+    @IBOutlet private weak var closeButton: UIButton!
+    @IBOutlet private weak var createButton: Button!
+    @IBOutlet private weak var privateSegment: SegmentControl!
+    @IBOutlet private weak var dimmingView: UIView!
+    @IBOutlet private weak var centerConstraint: NSLayoutConstraint!
     
     // MARK: - Property
     
@@ -35,7 +35,6 @@ final class CreateRoomViewController: ViewController {
   
     override func bindViewModel() {
         super.bindViewModel()
-        
         guard let viewModel = viewModel as? CreateRoomViewModel else { return }
       
         let input = CreateRoomViewModel.Input(roomName: roomTextField.rx.text.orEmpty.asObservable(),

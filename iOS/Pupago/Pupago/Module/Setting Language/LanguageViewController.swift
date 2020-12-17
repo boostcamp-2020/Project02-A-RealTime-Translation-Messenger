@@ -12,12 +12,11 @@ final class LanguageViewController: ViewController {
     
     // MARK: - IBOutlet
     
-    @IBOutlet weak var introLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var engButton: SelectableButton!
-    @IBOutlet weak var korButton: SelectableButton!
-    @IBOutlet weak var nextButton: Button!
-    
+    @IBOutlet private weak var introLabel: UILabel!
+    @IBOutlet private weak var descriptionLabel: UILabel!
+    @IBOutlet private weak var engButton: SelectableButton!
+    @IBOutlet private weak var korButton: SelectableButton!
+    @IBOutlet private weak var nextButton: Button!
     
     // MARK: - Lifecycle
     

@@ -50,6 +50,15 @@ final class CreateRoomViewModel: ViewModel, ViewModelType {
             })
             .disposed(by: rx.disposeBag)
         
+        input.createButtonTap
+            .withLatestFrom(Observable.combineLatest(input.roomName, input.privateDidSelect))
+            .flatMap { [unowned self] (name, isPrivate) in
+                provider.createRoom(title: name, isPrivate: isPrivate)
+            }
+            .map { ($0.roomCode ?? "", $0.isPrivate == "true") }
+            .bind(to: roomInfo)
+            .disposed(by: rx.disposeBag)
+        
         let viewText = localize.asDriver()
             .map { $0.createRoomViewText }
         
@@ -59,15 +68,6 @@ final class CreateRoomViewModel: ViewModel, ViewModelType {
         let isActive = Observable.combineLatest(isEmpty, isValid)
             .map { !$0 && $1 }
             .asDriver(onErrorJustReturn: false)
-    
-        input.createButtonTap
-            .withLatestFrom(Observable.combineLatest(input.roomName, input.privateDidSelect))
-            .flatMap { [unowned self] (name, isPrivate) in
-                provider.createRoom(title: name, isPrivate: isPrivate)
-            }
-            .map { ($0.roomCode ?? "", $0.isPrivate == "true") }
-            .bind(to: roomInfo)
-            .disposed(by: rx.disposeBag)
         
         let dismiss = Observable.of(roomInfo.asObservable().map {_ in},
                                     input.cancelButtonTap,

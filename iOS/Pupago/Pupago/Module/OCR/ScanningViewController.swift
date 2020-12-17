@@ -12,20 +12,20 @@ final class ScanningViewController: ViewController {
     
     // MARK: - IBOutlet
     
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var originIndicatorLabel: UILabel!
-    @IBOutlet weak var originLabel: UILabel!
-    @IBOutlet weak var translationIndicatorLabel: UILabel!
-    @IBOutlet weak var translationLabel: UILabel!
-    @IBOutlet weak var scanImageView: UIImageView!
-    @IBOutlet weak var sendButton: ActivatableButton!
-    @IBOutlet weak var scanButton: UIButton!
-    @IBOutlet weak var cancleButton: UIButton!
-    @IBOutlet weak var closeButton: UIButton!
-    @IBOutlet weak var detailTextView: UITextView!
-    @IBOutlet weak var detailView: View!
-    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var descriptionLabel: UILabel!
+    @IBOutlet private weak var originIndicatorLabel: UILabel!
+    @IBOutlet private weak var originLabel: UILabel!
+    @IBOutlet private weak var translationIndicatorLabel: UILabel!
+    @IBOutlet private weak var translationLabel: UILabel!
+    @IBOutlet private weak var scanImageView: UIImageView!
+    @IBOutlet private weak var sendButton: ActivatableButton!
+    @IBOutlet private weak var scanButton: UIButton!
+    @IBOutlet private weak var cancleButton: UIButton!
+    @IBOutlet private weak var closeButton: UIButton!
+    @IBOutlet private weak var detailTextView: UITextView!
+    @IBOutlet private weak var detailView: View!
+    @IBOutlet private weak var bottomConstraint: NSLayoutConstraint!
     
     // MARK: - Properties
     
@@ -45,7 +45,7 @@ final class ScanningViewController: ViewController {
     override func bindViewModel() {
         super.bindViewModel()
         guard let viewModel = viewModel as? ScanningViewModel else { return }
-     
+        
         let input = ScanningViewModel.Input(detailText: detailTextView.rx.text.orEmpty.asObservable(),
                                             originDetailDidTap: originTapGesture.rx.event.map { _ in },
                                             translationDetailDidTap: translationTapGesture.rx.event.map { _ in },
@@ -53,7 +53,6 @@ final class ScanningViewController: ViewController {
                                             scanButtonDidTap: scanButton.rx.tap.asObservable(),
                                             sendButtonDidTap: sendButton.rx.tap.asObservable(),
                                             closeButtonDidTap: closeButton.rx.tap.asObservable())
-        
         let output = viewModel.transform(input)
         
         output.viewText
@@ -70,7 +69,7 @@ final class ScanningViewController: ViewController {
                   originLabel.rx.isActivate,
                   translationLabel.rx.isActivate)
             .disposed(by: rx.disposeBag)
-            
+        
         output.originText
             .bind(to: originLabel.rx.text)
             .disposed(by: rx.disposeBag)
@@ -108,7 +107,7 @@ final class ScanningViewController: ViewController {
             })
             .disposed(by: rx.disposeBag)
     }
-
+    
 }
 
 private extension ScanningViewController {

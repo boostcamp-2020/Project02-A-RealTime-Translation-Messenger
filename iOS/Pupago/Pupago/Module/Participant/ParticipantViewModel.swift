@@ -8,7 +8,7 @@
 import RxSwift
 import RxCocoa
 
-class ParticipantViewModel: ViewModel, ViewModelType {
+final class ParticipantViewModel: ViewModel, ViewModelType {
     
     // MARK: - Input
     

@@ -8,15 +8,15 @@
 import UIKit
 import Kingfisher
 
-class OthersChattingCell: CollectionViewBaseCell {
+final class OthersChattingCell: CollectionViewBaseCell {
     
     static let identifier = "OthersChattingCell"
     
-    @IBOutlet weak var profileImage: UIImageView!
-    @IBOutlet weak var userNameLabel: UILabel!
-    @IBOutlet weak var originChatTextView: UITextView!
-    @IBOutlet weak var translationChatTextView: UITextView!
-    @IBOutlet weak var createAtLabel: UILabel!
+    @IBOutlet private weak var profileImage: UIImageView!
+    @IBOutlet private weak var userNameLabel: UILabel!
+    @IBOutlet private weak var originChatTextView: UITextView!
+    @IBOutlet private weak var translationChatTextView: UITextView!
+    @IBOutlet private weak var createAtLabel: UILabel!
     
     func configure(with item: Message) {
         let myLang = Application.shared.localize

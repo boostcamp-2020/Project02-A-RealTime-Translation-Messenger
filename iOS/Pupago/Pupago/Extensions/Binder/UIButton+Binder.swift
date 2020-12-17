@@ -9,6 +9,7 @@ import RxSwift
 import RxCocoa
 
 extension Reactive where Base: UIButton {
+    
     var isActive: Binder<Bool> {
         return Binder(self.base) { button, isActive in
             button.isUserInteractionEnabled = isActive
@@ -16,12 +17,6 @@ extension Reactive where Base: UIButton {
         }
     }
     
-    var isAvail: Binder<Bool> {
-        return Binder(self.base) { button, isAvail in
-            let image = isAvail ? "micing" : "miced"
-            button.setImage(UIImage(named: image), for: .normal)
-        }
-    }
 }
 
 extension Reactive where Base: Button {

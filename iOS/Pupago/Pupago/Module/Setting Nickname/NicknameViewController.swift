@@ -12,10 +12,10 @@ final class NicknameViewController: ViewController {
     
     // MARK: - IBOutlet
     
-    @IBOutlet weak var introLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: ValidatingLabel!
-    @IBOutlet weak var nameTextField: ValidatingTextField!
-    @IBOutlet weak var startButton: Button!
+    @IBOutlet private weak var introLabel: UILabel!
+    @IBOutlet private weak var descriptionLabel: ValidatingLabel!
+    @IBOutlet private weak var nameTextField: ValidatingTextField!
+    @IBOutlet private weak var startButton: Button!
     
     // MARK: - Lifecycle
     
@@ -61,7 +61,7 @@ final class NicknameViewController: ViewController {
                 startButton.isUserInteractionEnabled = false
                 checkAnimationView.play { _ in
                     playCheckSoundWithCompletion {
-                    self.navigator.show(segue: .chatlist(viewModel: viewModel), sender: self, transition: .rootWithNavigation(in: window))
+                        self.navigator.show(segue: .chatlist(viewModel: viewModel), sender: self, transition: .rootWithNavigation(in: window))
                     }
                 }
             })

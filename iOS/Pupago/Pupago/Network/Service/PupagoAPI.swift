@@ -7,7 +7,7 @@
 
 import RxSwift
 
-class PupagoAPI: NetworkProviding {
+final class PupagoAPI: NetworkProviding {
     
     func rooms() -> Observable<RoomList> {
         return request(endpoint: RoomEndpoint.get)

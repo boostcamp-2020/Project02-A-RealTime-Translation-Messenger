@@ -11,8 +11,8 @@ final class MyChattingCell: CollectionViewBaseCell {
     
     static let identifier = "MyChattingCell"
     
-    @IBOutlet weak var chatTextField: UITextView!
-    @IBOutlet weak var createAtLabel: UILabel!
+    @IBOutlet private weak var chatTextField: UITextView!
+    @IBOutlet private weak var createAtLabel: UILabel!
     
     func configure(with item: Message) {
         let myLang = Application.shared.localize

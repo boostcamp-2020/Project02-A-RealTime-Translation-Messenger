@@ -7,7 +7,7 @@
 
 import SocketIO
 
-class SocketIOManager {
+final class SocketIOManager {
     
     static let shared = SocketIOManager()
     let manager = SocketManager(socketURL: SocketEndpoint.baseUrl, config: [.log(false), .compress])
