@@ -5,7 +5,7 @@ import VoiceRecognitionModal from '../../molecules/chatRoomPage/VoiceRecognition
 import useChatInput from '../../../hooks/useChatInput';
 import useUser from '../../../hooks/useUser';
 import LangCode from '../../../@types/langCode';
-import timer from '../../../@types/timer';
+import Timer from '../../../@types/timer';
 
 export type VoiceRecognitionPropsType = {
   onClickBackground: () => void;
@@ -39,10 +39,10 @@ function VoiceRecognition({ onClickBackground }: VoiceRecognitionPropsType) {
     };
 
     if (transcript !== '') {
-      voiceTimer = createTimer(timer.TRANSCRIPT_EXISTS);
+      voiceTimer = createTimer(Timer.TRANSCRIPT_EXISTS);
       onSetChatInput(transcript);
     } else {
-      voiceTimer = createTimer(timer.NO_TRANSCRIPT);
+      voiceTimer = createTimer(Timer.NO_TRANSCRIPT);
     }
     return () => {
       clearTimeout(voiceTimer);
