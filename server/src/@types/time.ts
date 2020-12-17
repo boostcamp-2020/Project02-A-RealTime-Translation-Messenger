@@ -1,5 +1,3 @@
-import { TimeCreated } from 'aws-sdk/clients/support';
-
 enum Time {
   DEVIDE_DATE = '-',
   DEVIDE_TIME = ':',
