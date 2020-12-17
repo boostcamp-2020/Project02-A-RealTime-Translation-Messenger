@@ -7,7 +7,6 @@
 
 import RxSwift
 import RxCocoa
-import RxAnimated
 
 final class SpeechViewController: ViewController {
     

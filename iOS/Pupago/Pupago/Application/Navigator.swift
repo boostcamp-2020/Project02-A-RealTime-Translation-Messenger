@@ -37,14 +37,6 @@ final class Navigator {
         case modal
     }
     
-    lazy var transition: CATransition = {
-        var transition = CATransition()
-        transition.duration = 5.0
-        transition.type = CATransitionType.push
-        transition.subtype = CATransitionSubtype.fromRight
-        return transition
-    }()
-    
     func get(segue: Scene) -> UIViewController? {
         
         switch segue {

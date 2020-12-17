@@ -9,6 +9,7 @@ import UIKit
 
 @IBDesignable
 class ValidatingLabel: UILabel {
+    
     @IBInspectable var correctColor: UIColor = UIColor.clear
     @IBInspectable var warningColor: UIColor = UIColor.clear
     

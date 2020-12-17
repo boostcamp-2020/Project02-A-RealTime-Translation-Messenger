@@ -7,7 +7,6 @@
 
 import RxSwift
 import RxCocoa
-import VisionKit
 
 final class ScanningViewController: ViewController {
     

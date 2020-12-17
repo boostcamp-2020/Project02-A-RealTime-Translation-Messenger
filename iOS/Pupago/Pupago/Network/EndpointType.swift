@@ -5,7 +5,6 @@
 //  Created by 김근수 on 2020/11/30.
 //
 
-import Foundation
 import RxSwift
 import Alamofire
 

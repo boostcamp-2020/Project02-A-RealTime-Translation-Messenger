@@ -28,4 +28,5 @@ class NavigationController: UINavigationController {
         navigationBar.clipsToBounds = true
         navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
     }
+    
 }

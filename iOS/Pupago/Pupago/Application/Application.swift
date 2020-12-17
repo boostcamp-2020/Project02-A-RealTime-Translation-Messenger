@@ -5,7 +5,6 @@
 //  Created by 김근수 on 2020/11/24.
 //
 
-import UIKit
 import RxCocoa
 
 final class Application: NSObject {
