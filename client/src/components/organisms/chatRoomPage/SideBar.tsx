@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { lazy, useState, useEffect, Suspense } from 'react';
 import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
 
+const ChatRoomList = lazy(() => import('./ChatRoomList'));
+const ParticipantList = lazy(() => import('./ParticipantList'));
 import SideBarMolecule from '../../molecules/chatRoomPage/SideBar';
-import ChatRoomList from './ChatRoomList';
 import { JoiningRoomType, SideBarStatus } from '../../../@types/types';
-import ParticipantList from './ParticipantList';
 import RoomSwitchModal from '../../molecules/chatRoomPage/RoomSwitchModal';
 import useReset from '../../../hooks/useReset';
 import useRoom from '../../../hooks/useRoom';
@@ -62,11 +62,13 @@ function SideBar() {
         </RoomSwitchWrapper>
       )}
       <SideBarMolecule selected={sideBarStatus} onClickSideBarTab={setSideBarStatus}>
-        {sideBarStatus === SideBarStatus.PARTICIPANTS ? (
-          <ParticipantList />
-        ) : (
-          <ChatRoomList setIsSwitching={setIsSwitching} setSwitchingRoom={setSwitchingRoom} />
-        )}
+        <Suspense fallback={<div />}>
+          {sideBarStatus === SideBarStatus.PARTICIPANTS ? (
+            <ParticipantList />
+          ) : (
+            <ChatRoomList setIsSwitching={setIsSwitching} setSwitchingRoom={setSwitchingRoom} />
+          )}
+        </Suspense>
       </SideBarMolecule>
     </SideBarWrapper>
   );
