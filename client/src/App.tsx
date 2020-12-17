@@ -14,7 +14,7 @@ import useUser from './hooks/useUser';
 import LangCode from './@types/langCode';
 
 export const GlobalStyle = createGlobalStyle`
-  ${reset}
+  ${reset} 
 
   @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { useLocation } from 'react-router-dom';
 
 import SideBarMolecule from '../../molecules/chatRoomPage/SideBar';
 import ChatRoomList from './ChatRoomList';
@@ -8,7 +9,6 @@ import ParticipantList from './ParticipantList';
 import RoomSwitchModal from '../../molecules/chatRoomPage/RoomSwitchModal';
 import useReset from '../../../hooks/useReset';
 import useRoom from '../../../hooks/useRoom';
-import { useLocation } from 'react-router-dom';
 import useUser from '../../../hooks/useUser';
 
 const SideBarWrapper = styled.div`

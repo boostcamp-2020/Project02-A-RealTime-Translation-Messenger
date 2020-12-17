@@ -15,6 +15,8 @@ import useChat from '../hooks/useChat';
 import useChatInput from '../hooks/useChatInput';
 import useNavigation from '../hooks/useNavigation';
 import MainPageNavigation from '../@types/mainPageNavigation';
+import LangCode from '../@types/langCode';
+import { LangCodeFormattedForServer } from '../@types/types';
 
 const Wrapper = styled.div`
   display: flex;
@@ -65,7 +67,8 @@ function ChatRoomPage() {
       socketData.emit('enter chatroom', {
         roomCode: roomData.roomCode,
         nickname: nicknameData,
-        language: languageData === 'ko' ? 'Korean' : 'English',
+        language:
+          languageData === LangCode.KOREAN ? LangCodeFormattedForServer.KOREAN : LangCodeFormattedForServer.ENGLISH,
         imageLink: imageLinkData,
       });
       socketData.on('receive participants list', (participantsList: string) => {

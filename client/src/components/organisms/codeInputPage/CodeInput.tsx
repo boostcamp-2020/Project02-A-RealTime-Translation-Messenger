@@ -5,17 +5,13 @@ import styled from 'styled-components';
 import CharacterLimit from '../../../@types/characterLimit';
 import useReset from '../../../hooks/useReset';
 import useRoom from '../../../hooks/useRoom';
+import validation from '../../../utils/validation';
 import CodeInputMolecule from '../../molecules/codeInputPage/CodeInput';
 
 const Wrapper = styled.div`
   display: flex;
   margin-top: 198px;
 `;
-
-const isRoomCodeValid = (roomCode: string) => {
-  if (roomCode.length === 0) return true;
-  return /^[A-Za-z0-9]*$/.test(roomCode);
-};
 
 function CodeInput() {
   const { data: room, error: roomError, onJoinRoom, onChangeRoomCode } = useRoom();
@@ -29,7 +25,7 @@ function CodeInput() {
       const { value } = e.target;
       const cuttedValue = value.substr(0, CharacterLimit.CODE_INPUT).toUpperCase();
 
-      if (!isRoomCodeValid(value)) {
+      if (!validation.isValidRoomCode(value)) {
         setRoomCodeStatus({ code, valid: false });
         return;
       }
@@ -39,7 +35,7 @@ function CodeInput() {
   );
 
   const onKeyUp = useCallback(() => {
-    if (code.length === CharacterLimit.CODE_INPUT && isRoomCodeValid(code)) {
+    if (code.length === CharacterLimit.CODE_INPUT && validation.isValidRoomCode(code)) {
       onChangeRoomCode(code);
       onJoinRoom({ roomCode: code, isPrivate: true });
       setRoomCodeStatus({ code: '', valid: true });

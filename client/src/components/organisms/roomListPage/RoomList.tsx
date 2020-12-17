@@ -8,6 +8,7 @@ import timeDisplay from '../../../utils/timeDisplay';
 import CryingPapago from './CryingPapago';
 import ParticipantsLimit from '../../../@types/participantsLimit';
 import useUser from '../../../hooks/useUser';
+import LangCode from '../../../@types/langCode';
 
 type WrapperType = {
   isEmpty: boolean;
@@ -48,7 +49,7 @@ function RoomList() {
             size="big"
             title={room.title}
             createdAt={
-              languageData === 'ko'
+              languageData === LangCode.KOREAN
                 ? timeDisplay.timeSinceKorean(room.createdAt)
                 : timeDisplay.timeSinceEnglish(room.createdAt)
             }

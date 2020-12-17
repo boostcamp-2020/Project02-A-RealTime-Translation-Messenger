@@ -7,9 +7,7 @@ function ProfilePictureSelection() {
   const { imageLinkData, onGetRandomProfileImage } = useUser();
 
   useEffect(() => {
-    if (!imageLinkData) {
-      onGetRandomProfileImage();
-    }
+    if (!imageLinkData) onGetRandomProfileImage();
   }, []);
 
   return <ProfilePictureSelectionMolecule image={imageLinkData!} onClickRefresh={onGetRandomProfileImage} />;

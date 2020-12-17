@@ -16,7 +16,7 @@ function RoomCreation() {
         value={roomData.title}
         isPrivateOnClick={onSetIsPrivate}
         InputOnChange={(e) => {
-          onSetRoomTitle(e.target.value.substring(0, 30));
+          onSetRoomTitle(e.target.value.substring(0, CharacterLimit.ROOM_NAME_MAX));
         }}
       />
     </div>

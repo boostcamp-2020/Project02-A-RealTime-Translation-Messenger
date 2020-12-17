@@ -83,6 +83,16 @@ enum SideBarStatus {
   CHAT_ROOMS,
 }
 
+enum LangCodeFormattedForServer {
+  KOREAN = 'Korean',
+  ENGLISH = 'English',
+}
+
+enum TranslationCycle {
+  PROCESS,
+  DONE,
+}
+
 export {
   RoomListType,
   ParticipantsType,
@@ -97,4 +107,6 @@ export {
   SideBarStatus,
   JoiningRoomType,
   CreatingRoomType,
+  LangCodeFormattedForServer,
+  TranslationCycle,
 };

@@ -1,6 +1,6 @@
 import { createAsyncThunk, PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import { TranslateTextPropsType } from '../@types/types';
+import { TranslateTextPropsType, TranslationCycle } from '../@types/types';
 import api from '../assets/api';
 import LangCode from '../@types/langCode';
 
@@ -46,7 +46,7 @@ type InitialStateType = {
   };
 
   cycle: {
-    data: 'PROCESS' | 'DONE';
+    data: TranslationCycle;
   };
 };
 
@@ -62,7 +62,7 @@ const initialState: InitialStateType = {
   },
 
   cycle: {
-    data: 'DONE',
+    data: TranslationCycle.DONE,
   },
 };
 
@@ -80,7 +80,7 @@ const chatInput = createSlice({
       state.chatInput.data = '';
       state.translation.data = { origin: LangCode.KOREAN, translationText: '' };
     },
-    setCycle: (state, action: PayloadAction<'PROCESS' | 'DONE'>) => {
+    setCycle: (state, action: PayloadAction<TranslationCycle>) => {
       state.cycle.data = action.payload;
     },
   },
@@ -94,7 +94,7 @@ const chatInput = createSlice({
         (state, action: PayloadAction<{ translationText: string; origin: LangCode }>) => {
           state.translation.loading = false;
           state.translation.data = action.payload;
-          state.cycle.data = 'DONE';
+          state.cycle.data = TranslationCycle.DONE;
         },
       )
       .addCase(getTranslatedText.rejected.type, (state, action: PayloadAction<Error>) => {

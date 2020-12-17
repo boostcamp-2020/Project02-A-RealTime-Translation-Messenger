@@ -7,6 +7,7 @@ import IconButton from '../../atoms/buttons/IconButton';
 
 function BackButton() {
   const { onSetNavigation } = useNavigation();
+
   return (
     <IconButton
       iconType="ArrowBack"
