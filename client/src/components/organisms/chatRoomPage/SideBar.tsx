@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import SideBarMolecule from '../../molecules/chatRoomPage/SideBar';
@@ -8,7 +8,7 @@ import ParticipantList from './ParticipantList';
 import RoomSwitchModal from '../../molecules/chatRoomPage/RoomSwitchModal';
 import useReset from '../../../hooks/useReset';
 import useRoom from '../../../hooks/useRoom';
-import { useHistory } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import useUser from '../../../hooks/useUser';
 
 const SideBarWrapper = styled.div`
@@ -31,8 +31,12 @@ function SideBar() {
   });
   const { onReset } = useReset();
   const { onJoinRoom } = useRoom();
-  const history = useHistory();
   const { socketData } = useUser();
+  const location = useLocation();
+
+  useEffect(() => {
+    setSideBarStatus(SideBarStatus.PARTICIPANTS);
+  }, [location]);
 
   return (
     <SideBarWrapper>
