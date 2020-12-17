@@ -1,12 +1,12 @@
-import { Request, Response } from 'express';
 import request from 'request';
 import dotenv from 'dotenv';
+import { Request, Response } from 'express';
 
 import StatusCode from '../@types/statusCode';
 
 dotenv.config();
 
-const { NCP_BASE_URL, X_NCP_APIGW_API_KEY_ID, X_NCP_APIGW_API_KEY } = process.env;
+const { NCP_BASE_URL, NCP_API_KEY_ID, NCP_API_KEY } = process.env;
 
 const detection = async (req: Request, res: Response) => {
   const query = req.body.query;
@@ -14,8 +14,8 @@ const detection = async (req: Request, res: Response) => {
     url: `${NCP_BASE_URL!}/langs/v1/dect`,
     form: { query: query },
     headers: {
-      'X-NCP-APIGW-API-KEY-ID': X_NCP_APIGW_API_KEY_ID,
-      'X-NCP-APIGW-API-KEY': X_NCP_APIGW_API_KEY,
+      'X-NCP-APIGW-API-KEY-ID': NCP_API_KEY_ID,
+      'X-NCP-APIGW-API-KEY': NCP_API_KEY,
     },
   };
 
@@ -33,8 +33,8 @@ const translation = async (req: Request, res: Response) => {
     url: `${NCP_BASE_URL!}/nmt/v1/translation`,
     form: req.body,
     headers: {
-      'X-NCP-APIGW-API-KEY-ID': X_NCP_APIGW_API_KEY_ID,
-      'X-NCP-APIGW-API-KEY': X_NCP_APIGW_API_KEY,
+      'X-NCP-APIGW-API-KEY-ID': NCP_API_KEY_ID,
+      'X-NCP-APIGW-API-KEY': NCP_API_KEY,
     },
   };
 

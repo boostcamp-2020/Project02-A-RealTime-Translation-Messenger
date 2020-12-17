@@ -1,20 +1,20 @@
 import { Request, Response } from 'express';
 
-import roomInfoModel from '../models/roomInfoModel';
+import roomGroup from '../models/roomGroup';
 import roomCodeUtil from '../utils/roomCode';
 import StatusCode from '../@types/statusCode';
-import roomService from '../services/roomService';
+import roomService from '../services/room';
 import validationUtil from '../utils/validation';
 import socketService from '../sockets/socketService';
-import { CreatedRoomType } from '../@types/dataType';
+import RoomInfo from '../@types/roomInfo';
 
-const getPublicRoomList = async (req: Request, res: Response) => {
+const getPublicRooms = async (req: Request, res: Response) => {
   try {
-    const roomCodeList = await roomInfoModel.getRoomCodeList();
-    const roomLists = await roomService.getRoomInfoList(roomCodeList);
-    const filteredRoomLists = roomLists.filter((room) => room.isPrivate === 'false');
+    const roomCodes = await roomGroup.getRoomCodes();
+    const rooms = await roomService.getRooms(roomCodes);
+    const filteredRooms = rooms.filter((room) => room.isPrivate === RoomInfo.PUBLIC);
 
-    return res.status(StatusCode.OK).json({ roomList: filteredRoomLists });
+    return res.status(StatusCode.OK).json({ roomList: filteredRooms });
   } catch (err) {
     return res.status(StatusCode.SERVER_ERROR).json();
   }
@@ -22,13 +22,13 @@ const getPublicRoomList = async (req: Request, res: Response) => {
 
 const createRoom = async (req: Request, res: Response) => {
   const { title, isPrivate } = req.body;
-  if (!(validationUtil.isTitleValid(title) && validationUtil.isIsPrivateValid(isPrivate)))
+  if (!(validationUtil.isValidTitle(title) && validationUtil.isValidRoomDisclosureStatus(isPrivate)))
     return res.status(StatusCode.CLIENT_ERROR).json();
 
   try {
     const roomCode = await roomCodeUtil.getRandomCode();
-    await roomInfoModel.setRoom(roomCode, title, isPrivate);
-    const createdRoom: CreatedRoomType = { roomCode, title, isPrivate };
+    await roomGroup.saveRoom(roomCode, title, isPrivate);
+    const createdRoom = { roomCode, title, isPrivate };
     return res.status(StatusCode.OK).json(createdRoom);
   } catch (err) {
     return res.status(StatusCode.SERVER_ERROR).json();
@@ -37,9 +37,9 @@ const createRoom = async (req: Request, res: Response) => {
 
 const getParticipantsList = async (req: Request, res: Response) => {
   const roomCode = req.params.roomCode;
-  if (!validationUtil.isRoomCodeValid(roomCode)) return res.status(StatusCode.CLIENT_ERROR).json();
+  if (!validationUtil.isValidRoomCode(roomCode)) return res.status(StatusCode.CLIENT_ERROR).json();
   try {
-    const participantsList = await socketService.getParticipantsListFromRoomCode(roomCode);
+    const participantsList = await socketService.getParticipantsFromRoomCode(roomCode);
     return res.status(StatusCode.OK).json({ participantsList });
   } catch (err) {
     return res.status(StatusCode.SERVER_ERROR).json();
@@ -47,7 +47,7 @@ const getParticipantsList = async (req: Request, res: Response) => {
 };
 
 const roomController = {
-  getPublicRoomList,
+  getPublicRooms,
   createRoom,
   getParticipantsList,
 };

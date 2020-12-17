@@ -1,8 +1,8 @@
 const getNow = () => {
   const date = new Date().toLocaleDateString().split('-');
-  const times = new Date().toLocaleTimeString().split(' ');
-  const time = times[0].split(':');
-  const meridiem = times[2].substring(0, 2);
+  const timeIncludeMeridiem = new Date().toLocaleTimeString().split(' ');
+  const time = timeIncludeMeridiem[0].split(':');
+  const meridiem = timeIncludeMeridiem[2].substring(0, 2);
 
   if (date[1].length < 2) date[1] = '0' + date[1];
   if (date[2].length < 2) date[2] = '0' + date[2];

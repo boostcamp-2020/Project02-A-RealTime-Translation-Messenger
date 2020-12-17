@@ -1,16 +1,14 @@
-import http from 'http';
+import https from 'https';
 import socketIO, { Socket } from 'socket.io';
 
 import socketController from './socketController';
-import { UserDataType, SendChatType } from '../@types/dataType';
+import { UserType, SendChatType } from '../@types/dataType';
 
-const socketLoader = (server: http.Server) => {
+const socketLoader = (server: https.Server) => {
   const io = socketIO(server);
 
   io.on('connection', (socket: Socket) => {
-    console.log(socket.id);
-
-    socket.on('enter chatroom', (userData: UserDataType) => {
+    socket.on('enter chatroom', (userData: UserType) => {
       socketController.enterChatroom(socket, io, userData);
     });
 
