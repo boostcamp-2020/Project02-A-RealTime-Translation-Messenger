@@ -36,10 +36,15 @@ type CreatedRoomType = {
   isPrivate: boolean;
 };
 
+enum StringifiedBoolean {
+  TRUE = 'true',
+  FALSE = 'false',
+}
+
 type CreatedRoomResponseType = {
   roomCode: string;
   title: string;
-  isPrivate: 'true' | 'false';
+  isPrivate: StringifiedBoolean;
 };
 
 type ChatLogsType = {
@@ -133,4 +138,5 @@ export {
   Size,
   TextSize,
   IconType,
+  StringifiedBoolean,
 };

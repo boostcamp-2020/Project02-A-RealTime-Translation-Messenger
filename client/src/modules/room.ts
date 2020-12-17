@@ -1,7 +1,7 @@
 import { createAsyncThunk, PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 import api from '../assets/api';
-import { CreatedRoomType, CreatingRoomType, JoiningRoomType } from '../@types/types';
+import { CreatedRoomType, CreatingRoomType, JoiningRoomType, StringifiedBoolean } from '../@types/types';
 import { history } from '..';
 
 const name = 'room';
@@ -10,7 +10,8 @@ const createRoom = createAsyncThunk(
   `${name}/createRoom`,
   async ({ title, isPrivate }: CreatingRoomType, { rejectWithValue }) => {
     try {
-      const response = (await api.createRoom(title, isPrivate ? 'true' : 'false')).data;
+      const response = (await api.createRoom(title, isPrivate ? StringifiedBoolean.TRUE : StringifiedBoolean.FALSE))
+        .data;
       history.push('/chat');
       return response;
     } catch (e) {
@@ -23,7 +24,8 @@ const joinRoom = createAsyncThunk(
   `${name}/joinRoom`,
   async ({ roomCode, isPrivate }: JoiningRoomType, { rejectWithValue }) => {
     try {
-      const response = (await api.joinRoom(roomCode, isPrivate ? 'true' : 'false')).data;
+      const response = (await api.joinRoom(roomCode, isPrivate ? StringifiedBoolean.TRUE : StringifiedBoolean.FALSE))
+        .data;
       history.push('/chat');
       return response;
     } catch (e) {

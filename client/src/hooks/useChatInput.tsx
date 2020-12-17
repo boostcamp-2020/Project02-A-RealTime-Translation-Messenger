@@ -6,6 +6,8 @@ import { TranslationCycle } from '../@types/types';
 import { RootState } from '../modules';
 import { getTranslatedText, setChatInput, setTranslation, resetChatInput, setCycle } from '../modules/chatInput';
 
+const DEBOUNCE_TIME = 200;
+
 function useTranslate() {
   const { chatInput, translation, cycle } = useSelector((state: RootState) => state.chatInput);
   const dispatch = useDispatch();
@@ -15,10 +17,11 @@ function useTranslate() {
       dispatch(setTranslation(''));
       return;
     }
+
     dispatch(setCycle(TranslationCycle.PROCESS));
     const handler = setTimeout(() => {
       dispatch(getTranslatedText({ text: chatInput.data, origin: translation.data.origin }));
-    }, 200);
+    }, DEBOUNCE_TIME);
 
     return () => {
       clearTimeout(handler);
