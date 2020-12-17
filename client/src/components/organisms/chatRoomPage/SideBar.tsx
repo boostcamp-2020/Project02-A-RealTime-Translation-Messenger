@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { useLocation } from 'react-router-dom';
 
 import SideBarMolecule from '../../molecules/chatRoomPage/SideBar';
 import ChatRoomList from './ChatRoomList';
@@ -31,6 +32,11 @@ function SideBar() {
   const { onReset } = useReset();
   const { onJoinRoom } = useRoom();
   const { socketData } = useUser();
+  const location = useLocation();
+
+  useEffect(() => {
+    setSideBarStatus(SideBarStatus.PARTICIPANTS);
+  }, [location]);
 
   return (
     <SideBarWrapper>

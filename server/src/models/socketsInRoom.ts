@@ -1,9 +1,9 @@
 import client from './redisConnection';
 import Database from '../@types/databaseName';
 
-const setSocketInfo = (roomCode: string, socketId: string, socketInfo: string) => {
+const setSocket = (roomCode: string, socketId: string, socketInfo: string) => {
   return new Promise<number>((resolve, reject) => {
-    client.select(Database.ROOM_SOCKETS_INFO, () => {
+    client.select(Database.SOCKETS_IN_ROOM, () => {
       client.hset([roomCode, socketId, socketInfo], (err, res) => {
         if (err) reject(err);
         return resolve(res);
@@ -12,9 +12,9 @@ const setSocketInfo = (roomCode: string, socketId: string, socketInfo: string) =
   });
 };
 
-const getSocketsByRoom = (roomCode: string) => {
+const getSockets = (roomCode: string) => {
   return new Promise<{ [key: string]: string }>((resolve, reject) => {
-    client.select(Database.ROOM_SOCKETS_INFO, () => {
+    client.select(Database.SOCKETS_IN_ROOM, () => {
       client.hgetall(roomCode, (err, res) => {
         if (err) return reject(err);
         return resolve(res);
@@ -23,9 +23,9 @@ const getSocketsByRoom = (roomCode: string) => {
   });
 };
 
-const removeSocketByRoom = (roomCode: string, socketId: string) => {
+const removeSocket = (roomCode: string, socketId: string) => {
   return new Promise<number>((resolve, reject) => {
-    client.select(Database.ROOM_SOCKETS_INFO, () => {
+    client.select(Database.SOCKETS_IN_ROOM, () => {
       client.hdel(roomCode, socketId, (err, res) => {
         if (err) return reject(err);
         return resolve(res);
@@ -36,7 +36,7 @@ const removeSocketByRoom = (roomCode: string, socketId: string) => {
 
 const isRoomEmpty = (roomCode: string) => {
   return new Promise<boolean>((resolve, reject) => {
-    client.select(Database.ROOM_SOCKETS_INFO, () => {
+    client.select(Database.SOCKETS_IN_ROOM, () => {
       client.keys('*', (err, res) => {
         if (err) return reject(err);
         if (res.includes(roomCode)) return resolve(false);
@@ -46,9 +46,9 @@ const isRoomEmpty = (roomCode: string) => {
   });
 };
 
-const getSocketCountByRoom = (roomCode: string) => {
+const getSocketCountInRoom = (roomCode: string) => {
   return new Promise<number>((resolve, reject) => {
-    client.select(Database.ROOM_SOCKETS_INFO, () => {
+    client.select(Database.SOCKETS_IN_ROOM, () => {
       client.hlen(roomCode, (err, res) => {
         if (err) return reject(err);
         return resolve(res);
@@ -57,9 +57,9 @@ const getSocketCountByRoom = (roomCode: string) => {
   });
 };
 
-const getSocketInfo = (roomCode: string, socketId: string) => {
+const getSocket = (roomCode: string, socketId: string) => {
   return new Promise<string>((resolve, reject) => {
-    client.select(Database.ROOM_SOCKETS_INFO, () => {
+    client.select(Database.SOCKETS_IN_ROOM, () => {
       client.hget(roomCode, socketId, (err, res) => {
         if (err) return reject(err);
         return resolve(res);
@@ -70,7 +70,7 @@ const getSocketInfo = (roomCode: string, socketId: string) => {
 
 const flushAll = () => {
   return new Promise<string>((resolve, reject) => {
-    client.select(Database.ROOM_SOCKETS_INFO, () => {
+    client.select(Database.SOCKETS_IN_ROOM, () => {
       client.flushall((err, res) => {
         if (err) return reject(err);
         return resolve(res);
@@ -79,14 +79,14 @@ const flushAll = () => {
   });
 };
 
-const roomSocketsInfoModel = {
-  setSocketInfo,
-  getSocketsByRoom,
-  removeSocketByRoom,
+const socketsInRoom = {
+  setSocket,
+  getSockets,
+  removeSocket,
   isRoomEmpty,
-  getSocketCountByRoom,
-  getSocketInfo,
+  getSocketCountInRoom,
+  getSocket,
   flushAll,
 };
 
-export default roomSocketsInfoModel;
+export default socketsInRoom;

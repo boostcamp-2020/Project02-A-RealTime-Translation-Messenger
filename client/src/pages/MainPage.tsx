@@ -20,13 +20,14 @@ const Wrapper = styled.div`
 `;
 
 function MainPage() {
-  const { navigation } = useNavigation();
+  const { navigation, onSetNavigation } = useNavigation();
   const { onReset } = useReset();
   const { socketData } = useUser();
 
   useEffect(() => {
     socketData?.disconnect();
     onReset();
+    onSetNavigation(MainPageNavigation.USER_INFO);
   }, []);
 
   const renderMainPage = (navigation: MainPageNavigation) => {

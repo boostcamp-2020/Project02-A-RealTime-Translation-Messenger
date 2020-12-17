@@ -21,7 +21,7 @@ const StyledRefreshIcon = styled(RefreshIcon)`
   color: white;
 `;
 
-export function ProfileChangeButton() {
+function ProfileChangeButton() {
   return (
     <StyledProfileChangeButton>
       <StyledRefreshIcon />

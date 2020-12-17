@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
-import { CheckBox, CheckBoxTypes } from '../../components/atoms/boxes/CheckBox';
+import CheckBox, { CheckBoxTypes } from '../../components/atoms/boxes/CheckBox';
 
 export default {
   title: 'pupagoAtom/CheckBox',

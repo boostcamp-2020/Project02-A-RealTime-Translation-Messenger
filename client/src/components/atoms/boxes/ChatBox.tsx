@@ -34,7 +34,7 @@ export type ChatBoxPropsType = {
   isMe: boolean;
 };
 
-export function ChatBox({ leftMessage = '', rightMessage = '', isMe }: ChatBoxPropsType) {
+function ChatBox({ leftMessage = '', rightMessage = '', isMe }: ChatBoxPropsType) {
   return (
     <StyledChatBoxWrapper>
       <LeftBox isMe={isMe}>{leftMessage}</LeftBox>

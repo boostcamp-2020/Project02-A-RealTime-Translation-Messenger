@@ -1,18 +1,18 @@
-type UserDataType = {
+type UserType = {
   roomCode: string;
   nickname: string;
   language: string;
   imageLink: string;
 };
 
-type ParticipantsType = {
+type ParticipantType = {
   socketId: string;
   nickname: string;
   language: string;
 };
 
 type ParticipantsListType = {
-  participantsList: ParticipantsType[];
+  participants: ParticipantType[];
   type: string;
   diffNickname: string;
 };
@@ -32,34 +32,11 @@ type ReceiveChatType = {
   createdAt: string;
 };
 
-type RoomInfoType = {
+type RoomType = {
   roomCode: string;
   title: string;
   createdAt: string;
   isPrivate: string;
 };
 
-type RoomListType = {
-  roomCode: string;
-  title: string;
-  createdAt: string;
-  isPrivate: string;
-  participantCount: number;
-};
-
-type CreatedRoomType = {
-  roomCode: string;
-  title: string;
-  isPrivate: string;
-};
-
-export {
-  UserDataType,
-  ParticipantsListType,
-  SendChatType,
-  ReceiveChatType,
-  RoomInfoType,
-  RoomListType,
-  CreatedRoomType,
-  ParticipantsType,
-};
+export { UserType, ParticipantType, ParticipantsListType, SendChatType, ReceiveChatType, RoomType };

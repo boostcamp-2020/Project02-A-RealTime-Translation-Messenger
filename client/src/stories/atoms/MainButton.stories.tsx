@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
-import { MainButton, ButtonPropsType } from '../../components/atoms/buttons/MainButton';
+import MainButton, { ButtonPropsType } from '../../components/atoms/buttons/MainButton';
 
 export default {
   title: 'pupagoAtom/MainButton',

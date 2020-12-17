@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
-import { ChatModalBackground } from '../../components/atoms/boxes/ChatModalBackground';
+import ChatModalBackground from '../../components/atoms/boxes/ChatModalBackground';
 
 export default {
   title: 'pupagoAtom/ChatModalBackground',

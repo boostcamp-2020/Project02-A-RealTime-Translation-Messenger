@@ -22,7 +22,7 @@ const StyledButton = styled.button<LanguageSelectButtonPropsType>`
   cursor: pointer;
 `;
 
-export function LanguageSelectButton({
+function LanguageSelectButton({
   selected = true,
   language = LangCode.KOREAN,
   ...props
