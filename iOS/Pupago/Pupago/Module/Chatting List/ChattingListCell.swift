@@ -23,7 +23,7 @@ final class ChattingListCell: CollectionViewBaseCell {
     func confiture(with room: Room) {
         roomNameLabel.text = room.title
         numberOfPeopleLabel.text = "\(room.participantCount ?? 0)/8"
-        createAtLabel.text = room.createdAt
+        createAtLabel.text = DateManager.stringFormat(of: room.createdAt ?? "") 
     }
     
     private func configureShadow() {
