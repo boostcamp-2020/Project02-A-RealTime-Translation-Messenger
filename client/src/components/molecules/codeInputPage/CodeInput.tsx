@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { useIntl } from 'react-intl';
 import styled from 'styled-components';
+import { TextSize } from '../../../@types/types';
 
 import CodeBox from '../../atoms/boxes/CodeBox';
 import Text from '../../atoms/texts/Text';
@@ -53,8 +54,8 @@ function CodeInput({ roomCodeStatus, onChange, onKeyUp }: CodeInputPropsType) {
 
   return (
     <Wrapper>
-      <InputCodeText size={14}>{formatMessage({ id: 'enterTheCode' })}</InputCodeText>
-      <WarningText size={14} color={'red'} isValidText={valid}>
+      <InputCodeText size={TextSize.NORMAL}>{formatMessage({ id: 'enterTheCode' })}</InputCodeText>
+      <WarningText size={TextSize.NORMAL} color={'red'} isValidText={valid}>
         {formatMessage({ id: 'codeFormatAlert' })}
       </WarningText>
       <FakeInput

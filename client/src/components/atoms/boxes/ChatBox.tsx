@@ -28,6 +28,7 @@ const LeftBox = styled(StyledChatBox)`
 const RightBox = styled(StyledChatBox)`
   border-radius: 0 10px 10px 0;
 `;
+
 export type ChatBoxPropsType = {
   leftMessage: string;
   rightMessage: string;

@@ -1,15 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Size } from '../../../@types/types';
 
 export type RoomItemBoxTypes = {
-  size: 'big' | 'small';
+  size: Size;
   children: React.ReactNode;
   onClickButton: () => void;
   disabled: boolean;
 };
 
 type StyledRoomItemBoxPropsType = {
-  size: 'big' | 'small';
+  size: Size;
   disabled: boolean;
 };
 
@@ -25,17 +26,17 @@ const setButtonColor = (disabled: boolean | undefined) => {
 };
 
 const StyledRoomItemBox = styled.div<StyledRoomItemBoxPropsType>`
-  width: ${(props) => (props.size === 'big' ? '344px' : '232px')};
-  height: ${(props) => (props.size === 'big' ? '80px' : '64px')};
+  width: ${(props) => (props.size === Size.BIG ? '344px' : '232px')};
+  height: ${(props) => (props.size === Size.BIG ? '80px' : '64px')};
   box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.25);
   margin-bottom: 26px;
-  padding: ${(props) => (props.size === 'big' ? '12px 12px 0 12px' : '8px 8px 0 8px')};
+  padding: ${(props) => (props.size === Size.BIG ? '12px 12px 0 12px' : '8px 8px 0 8px')};
   border-radius: 10px;
   background-color: ${(props) => setButtonColor(props.disabled)};
   ${(props) => (props.disabled ? '' : 'cursor: pointer;')}
 `;
 
-function RoomItemBox({ size = 'big', children, onClickButton, disabled }: RoomItemBoxTypes) {
+function RoomItemBox({ size = Size.BIG, children, onClickButton, disabled }: RoomItemBoxTypes) {
   return (
     <StyledRoomItemBox
       size={size}

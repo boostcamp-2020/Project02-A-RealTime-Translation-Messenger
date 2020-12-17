@@ -93,6 +93,18 @@ enum TranslationCycle {
   DONE,
 }
 
+enum Size {
+  BIG,
+  SMALL,
+}
+
+enum TextSize {
+  SMALL = 12,
+  NORMAL = 14,
+  BIG = 18,
+  MEGA = 24,
+}
+
 export {
   RoomListType,
   ParticipantsType,
@@ -109,4 +121,6 @@ export {
   CreatingRoomType,
   LangCodeFormattedForServer,
   TranslationCycle,
+  Size,
+  TextSize,
 };

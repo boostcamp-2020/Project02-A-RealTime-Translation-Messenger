@@ -6,6 +6,7 @@ import Text from '../../atoms/texts/Text';
 import LanguageSelectButton from '../../atoms/buttons/LanguageSelectButton';
 import Palette from '../../../@types/Palette';
 import LangCode from '../../../@types/langCode';
+import { TextSize } from '../../../@types/types';
 
 const LanguageSelectionBox = styled.div`
   display: flex;
@@ -32,7 +33,7 @@ function LanguageSelection({ selectedKorean = true, onClickLanguage }: LanguageS
 
   return (
     <LanguageSelectionBox>
-      <Text size={18} color={Palette.DARK_GREY}>
+      <Text size={TextSize.BIG} color={Palette.DARK_GREY}>
         {formatMessage({ id: 'chooseYourLanguage' })}
       </Text>
       <LanguageButtonBox>

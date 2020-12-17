@@ -5,6 +5,7 @@ import LogoWithText from '../../atoms/logos/LogoWithText';
 import Text from '../../atoms/texts/Text';
 import Palette from '../../../@types/Palette';
 import { useIntl } from 'react-intl';
+import { TextSize } from '../../../@types/types';
 
 const MainTitleWrapper = styled.div`
   display: flex;
@@ -27,10 +28,10 @@ function MainTitle() {
   return (
     <MainTitleWrapper>
       <LogoWithText />
-      <MarginedText size={24} weight={'bold'} color={Palette.PUPAGO_BLUE}>
+      <MarginedText size={TextSize.MEGA} weight={'bold'} color={Palette.PUPAGO_BLUE}>
         {formatMessage({ id: 'mainTitle' })}
       </MarginedText>
-      <Text size={18} color={Palette.DARK_GREY}>
+      <Text size={TextSize.BIG} color={Palette.DARK_GREY}>
         {formatMessage({ id: 'subTitle' })}
       </Text>
     </MainTitleWrapper>

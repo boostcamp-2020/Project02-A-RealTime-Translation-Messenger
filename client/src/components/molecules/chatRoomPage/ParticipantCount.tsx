@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import MiniLogo from '../../atoms/logos/MiniLogo';
 import Text from '../../atoms/texts/Text';
 import Palette from '../../../@types/Palette';
+import { TextSize } from '../../../@types/types';
 
 export type ParticipantCountPropsType = {
   maxCapacity: number;
@@ -26,7 +27,7 @@ function ParticipantCount({ maxCapacity, participatingCount }: ParticipantCountP
   return (
     <ParticipantCountWrapper>
       <MiniLogo />
-      <MarginedText size={14} color={Palette.PUPAGO_BLUE}>
+      <MarginedText size={TextSize.NORMAL} color={Palette.PUPAGO_BLUE}>
         {participatingCount} / {maxCapacity}
       </MarginedText>
     </ParticipantCountWrapper>

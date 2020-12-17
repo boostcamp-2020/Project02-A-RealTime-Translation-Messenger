@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Text from '../../atoms/texts/Text';
 import CryingPapago from '../../atoms/resources/CryingPapago';
 import { useIntl } from 'react-intl';
+import { TextSize } from '../../../@types/types';
 
 const NoChatRoomBox = styled.div`
   display: flex;
@@ -26,9 +27,9 @@ function NoChatRoom() {
   const { formatMessage } = useIntl();
   return (
     <NoChatRoomBox>
-      <NoChatRoomText size={14}>{formatMessage({ id: 'thereIsNoChatRoom' })}</NoChatRoomText>
+      <NoChatRoomText size={TextSize.NORMAL}>{formatMessage({ id: 'thereIsNoChatRoom' })}</NoChatRoomText>
       <CryingPapago />
-      <CreateRoomText size={14}>{formatMessage({ id: 'startYourOwnChatRoom' })}</CreateRoomText>
+      <CreateRoomText size={TextSize.NORMAL}>{formatMessage({ id: 'startYourOwnChatRoom' })}</CreateRoomText>
     </NoChatRoomBox>
   );
 }

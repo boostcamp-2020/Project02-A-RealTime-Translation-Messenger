@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import Palette from '../../../@types/Palette';
+import { TextSize } from '../../../@types/types';
 import IconButton from '../../atoms/buttons/IconButton';
 import RoomCode from '../../atoms/texts/RoomCode';
 import Text from '../../atoms/texts/Text';
@@ -50,7 +51,7 @@ function ChatRoomHeader({ title, roomCode, roomCodeOnClickFunc, leaveOnClick, cl
     <Wrapper>
       <ExitButton iconType="Leave" color={Palette.PUPAGO_BLUE} onClick={leaveOnClick} />
       <TitleWrapper>
-        <RoomTitle weight="bold" size={18} color={'black'}>
+        <RoomTitle weight="bold" size={TextSize.BIG} color={'black'}>
           {title}
         </RoomTitle>
         <RoomCode code={roomCode} onClick={roomCodeOnClickFunc} />

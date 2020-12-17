@@ -7,6 +7,7 @@ import Text from '../../atoms/texts/Text';
 import UnderLinedInput from '../../atoms/inputs/UnderLinedInput';
 import Palette from '../../../@types/Palette';
 import CharacterLimit from '../../../@types/characterLimit';
+import { TextSize } from '../../../@types/types';
 
 export type RoomCreationPropsType = {
   TypedWordCount: number;
@@ -73,7 +74,7 @@ function RoomCreation({
           valid={true}
         />
         <RightAlignedText
-          size={14}
+          size={TextSize.NORMAL}
           color={Palette.PUPAGO_BLUE}
         >{`${TypedWordCount} / ${MaxWordCount}`}</RightAlignedText>
       </RoomCreationWrapper>

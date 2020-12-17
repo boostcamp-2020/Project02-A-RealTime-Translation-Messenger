@@ -5,6 +5,7 @@ import ProfileImage from '../../atoms/resources/ProfileImage';
 import LanguageTag from '../../atoms/resources/LanguageTag';
 import Text from '../../atoms/texts/Text';
 import LangCode from '../../../@types/langCode';
+import { TextSize } from '../../../@types/types';
 
 export type ParticipantItemPropsType = {
   imageLink: string;
@@ -30,7 +31,7 @@ function ParticipantItem({ imageLink, language, isMe, nickname }: ParticipantIte
     <ParticipantItemWrapper>
       <ProfileImage size="size-40" image={imageLink} isMe={isMe} />
       <TextWrapper>
-        <Text size={14} color="black">
+        <Text size={TextSize.NORMAL} color="black">
           {nickname}
         </Text>
       </TextWrapper>
