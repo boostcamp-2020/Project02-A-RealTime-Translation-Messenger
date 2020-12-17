@@ -59,8 +59,8 @@ final class SpeechViewController: ViewController {
         
         output.isMicRunning
             .drive(onNext: {[unowned self] isMicRunning in
-                let image = isMicRunning ? "micing" : "miced"
-                micButton.setImage(UIImage(named: image), for: .normal)
+                let image = isMicRunning ? Image.micing.value : Image.miced.value
+                micButton.setImage(image, for: .normal)
                 isMicRunning ? startPulse() : stopPulse()
             })
             .disposed(by: rx.disposeBag)
