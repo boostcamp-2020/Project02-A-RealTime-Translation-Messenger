@@ -25,8 +25,8 @@ const enterChatroom = async (socket: Socket, io: SocketIO.Server, userData: User
   try {
     await socketService.insertSocketInfoIntoDB(socket.id, roomCode, nickname, language, imageLink);
     const participants = await socketService.getParticipants(roomCode);
-    const participantsIncludeNickname = { participantsList: participants, type: 'enter', diffNickname: nickname };
-    io.to(roomCode).emit('receive participants list', JSON.stringify(participantsIncludeNickname));
+    const participantsIncludeNickname = { participants, type: 'enter', diffNickname: nickname };
+    io.to(roomCode).emit('receive participants list', participantsIncludeNickname);
   } catch (err) {
     return socketService.emitSocketError(socket, SocketErrorMessage.SERVER);
   }
@@ -39,7 +39,7 @@ const sendChat = async (socket: Socket, io: SocketIO.Server, sendChat: SendChatT
 
   try {
     const { roomCode, receiveChat } = await socketService.createReceiveChat(socket.id, Korean, English);
-    io.to(roomCode).emit('receive chat', JSON.stringify(receiveChat));
+    io.to(roomCode).emit('receive chat', receiveChat);
   } catch (err) {
     return socketService.emitSocketError(socket, SocketErrorMessage.SERVER);
   }
@@ -60,8 +60,8 @@ const disconnect = async (socket: Socket, io: SocketIO.Server) => {
       }
 
       const participants = await socketService.getParticipants(roomCode);
-      const participantsIncludeNickname = { participantsList: participants, type: 'leave', diffNickname: nickname };
-      io.to(roomCode).emit('receive participants list', JSON.stringify(participantsIncludeNickname));
+      const participantsIncludeNickname = { participants, type: 'leave', diffNickname: nickname };
+      io.to(roomCode).emit('receive participants list', participantsIncludeNickname);
     }
   } catch (err) {
     throw new Error(err);
