@@ -1,5 +1,5 @@
 enum Time {
-  DEVIDE_DATE = '-',
+  DEVIDE_DATE = '/',
   DEVIDE_TIME = ':',
   DEVIDE_MERIDIEM = ' ',
   STANDARD_MERIDIEM = 'PM',
