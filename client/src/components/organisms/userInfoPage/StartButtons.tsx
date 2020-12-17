@@ -5,17 +5,12 @@ import styled from 'styled-components';
 import MainPageNavigation from '../../../@types/mainPageNavigation';
 import useNavigation from '../../../hooks/useNavigation';
 import useUser from '../../../hooks/useUser';
+import validation from '../../../utils/validation';
 import MainButton from '../../atoms/buttons/MainButton';
 
 const RoomCreateButtonWrapper = styled.div`
   margin-bottom: 32px;
 `;
-
-const userInfoValidate = (nickname: string, imageLink: string | null) => {
-  if (!/^[A-Z|a-z|가-힣]{2,12}$/.test(nickname)) return false;
-  if (!imageLink) return false;
-  return true;
-};
 
 function StartButtons() {
   const { nicknameData, imageLinkData } = useUser();
@@ -26,7 +21,7 @@ function StartButtons() {
     <>
       <RoomCreateButtonWrapper>
         <MainButton
-          disabled={!userInfoValidate(nicknameData, imageLinkData)}
+          disabled={!validation.isValidUserInfo(nicknameData, imageLinkData)}
           onClickButton={() => {
             onSetNavigation(MainPageNavigation.ROOM_CREATION);
           }}
@@ -35,7 +30,7 @@ function StartButtons() {
         </MainButton>
       </RoomCreateButtonWrapper>
       <MainButton
-        disabled={!userInfoValidate(nicknameData, imageLinkData)}
+        disabled={!validation.isValidUserInfo(nicknameData, imageLinkData)}
         onClickButton={() => {
           onSetNavigation(MainPageNavigation.ROOM_LIST);
         }}
