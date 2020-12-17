@@ -4,11 +4,9 @@ import styled from 'styled-components';
 import useRoom from '../../../hooks/useRoom';
 import useRoomList from '../../../hooks/useRoomList';
 import RoomItem from '../../molecules/common/RoomItem';
-import timeDisplay from '../../../utils/timeDisplay';
 import CryingPapago from './CryingPapago';
 import ParticipantsLimit from '../../../@types/participantsLimit';
-import useUser from '../../../hooks/useUser';
-import LangCode from '../../../@types/langCode';
+import useTimeDisplay from '../../../hooks/useTimeDisplay';
 
 type WrapperType = {
   isEmpty: boolean;
@@ -29,14 +27,14 @@ const RoomListWrapper = styled.div<WrapperType>`
 
 function RoomList() {
   const { data: roomListData, onGetRoomList } = useRoomList();
-  const { data: roomData, onJoinRoom, loading, error } = useRoom();
+  const { onJoinRoom } = useRoom();
+  const { timeSince } = useTimeDisplay();
 
   useEffect(() => {
     onGetRoomList();
   }, []);
 
   const returnList = () => {
-    const { languageData } = useUser();
     if (roomListData === null) {
       return <></>;
     } else if (roomListData!.length === 0) {
@@ -48,11 +46,7 @@ function RoomList() {
             key={room.roomCode}
             size="big"
             title={room.title}
-            createdAt={
-              languageData === LangCode.KOREAN
-                ? timeDisplay.timeSinceKorean(room.createdAt)
-                : timeDisplay.timeSinceEnglish(room.createdAt)
-            }
+            createdAt={timeSince(room.createdAt)}
             roomCapacity={ParticipantsLimit.PARTICIPATNS_MAX_COUNT}
             participantCount={room.participantCount}
             disabled={room.participantCount < ParticipantsLimit.PARTICIPATNS_MAX_COUNT ? false : true}
