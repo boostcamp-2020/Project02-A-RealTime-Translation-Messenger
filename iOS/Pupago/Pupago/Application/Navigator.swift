@@ -14,7 +14,7 @@ protocol Navigatable {
 final class Navigator {
     
     static let `default` = Navigator()
-    let transitionHelper = SlidInTransitionHelper()
+    private let transitionHelper = SlidInTransitionHelper()
     
     enum Scene {
         case language(viewModel: LanguageViewModel)
@@ -36,14 +36,6 @@ final class Navigator {
         case slideIn
         case modal
     }
-    
-    lazy var transition: CATransition = {
-        var transition = CATransition()
-        transition.duration = 5.0
-        transition.type = CATransitionType.push
-        transition.subtype = CATransitionSubtype.fromRight
-        return transition
-    }()
     
     func get(segue: Scene) -> UIViewController? {
         
@@ -69,13 +61,18 @@ final class Navigator {
         }
     }
     
-    func dismiss(sender: UIViewController?) {
-        sender?.dismiss(animated: true, completion: nil)
-    }
-    
     func show(segue: Scene, sender: UIViewController?, transition: Transition) {
         guard let target = get(segue: segue) else { return }
         show(target: target, sender: sender, transition: transition)
+    }
+    
+    func pop(sender: UIViewController?) {
+        guard let navigationController = sender?.navigationController else { return }
+        navigationController.popViewController(animated: true)
+    }
+    
+    func dismiss(sender: UIViewController?) {
+        sender?.dismiss(animated: true, completion: nil)
     }
     
     private func show(target: UIViewController, sender: UIViewController?, transition: Transition) {
@@ -119,11 +116,6 @@ final class Navigator {
             sender.present(target, animated: true, completion: nil)
         default: break
         }
-    }
-    
-    func pop(sender: UIViewController) {
-        guard let navigationController = sender.navigationController else { return }
-        navigationController.popViewController(animated: true)
     }
     
     private func instantiateFromStoryBoard<T>(type: T.Type, viewModel: ViewModel) -> UIViewController? {

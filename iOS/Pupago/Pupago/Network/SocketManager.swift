@@ -5,10 +5,9 @@
 //  Created by 김근수 on 2020/12/01.
 //
 
-import Foundation
 import SocketIO
 
-class SocketIOManager {
+final class SocketIOManager {
     
     static let shared = SocketIOManager()
     let manager = SocketManager(socketURL: SocketEndpoint.baseUrl, config: [.log(false), .compress])
@@ -29,8 +28,8 @@ class SocketIOManager {
     func enterChatroom(roomCode: String) {
         let nickname = Application.shared.userName
         let language = Application.shared.localize.toString
-        let profile = Application.shared.profile
-        let item = ["roomCode": roomCode, "nickname": nickname, "language": language, "imageLink": profile]
+        let thumbnail = Application.shared.thumbnail
+        let item = ["roomCode": roomCode, "nickname": nickname, "language": language, "imageLink": thumbnail]
         
         socket.emit(SocketEndpoint.enter.eventName, item)
     }

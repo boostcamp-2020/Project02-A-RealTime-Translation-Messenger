@@ -9,10 +9,9 @@ import RxSwift
 import RxCocoa
 import VisionKit
 
-class RxVNDocumentCameraViewControllerDelegateProxy: 
-    DelegateProxy<VNDocumentCameraViewController, VNDocumentCameraViewControllerDelegate>,
-    DelegateProxyType,
-    VNDocumentCameraViewControllerDelegate {
+class RxVNDocumentCameraViewControllerDelegateProxy: DelegateProxy<VNDocumentCameraViewController, VNDocumentCameraViewControllerDelegate>,
+                                                     DelegateProxyType,
+                                                     VNDocumentCameraViewControllerDelegate {
     
     static func registerKnownImplementations() {
         self.register { (vnDocViewController) -> RxVNDocumentCameraViewControllerDelegateProxy in

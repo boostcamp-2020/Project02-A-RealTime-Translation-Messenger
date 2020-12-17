@@ -42,7 +42,7 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
     // MARK: - State
     
     private let rooms = BehaviorRelay<[Room]>(value: [])
-    let roomInfo = PublishRelay<RoomInfo>()
+    private let roomInfo = PublishRelay<RoomInfo>()
     private let thumbnailImage = PublishRelay<UIImage?>()
     private let socketEntered = PublishRelay<Room?>()
     private let toasterMessage = PublishRelay<String>()
@@ -52,7 +52,6 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
     // MARK: - Transform
     
     func transform(_ input: Input) -> Output {
-        
         fetchThumbnail()
             .bind(to: thumbnailImage)
             .disposed(by: rx.disposeBag)
@@ -66,7 +65,7 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
             .debounce(.milliseconds(500), scheduler: MainScheduler.instance)
             .flatMap { [unowned self] in provider.rooms() }
             .subscribe(onNext: {[unowned self] result in
-                updateRoomList(result.roomList)
+                updateRoomList(result.rooms)
             }, onError: { error in
                 print(error)
             })
@@ -142,10 +141,10 @@ final class ChattingListViewModel: ViewModel, ViewModelType {
 private extension ChattingListViewModel {
     
     func fetchThumbnail() -> Observable<UIImage> {
-        return provider.profile()
-            .flatMap { profile -> Observable<UIImage> in
-                Application.shared.profile = profile.imageLink
-                return KingfisherManager.shared.rx.image(url: profile.imageLink)
+        return provider.thumbnail()
+            .flatMap { thumbnail -> Observable<UIImage> in
+                Application.shared.thumbnail = thumbnail.imageLink
+                return KingfisherManager.shared.rx.image(url: thumbnail.imageLink)
             }
     }
     

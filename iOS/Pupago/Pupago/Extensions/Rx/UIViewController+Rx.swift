@@ -8,7 +8,7 @@
 import RxCocoa
 import RxSwift
 
-public extension Reactive where Base: UIViewController {
+extension Reactive where Base: UIViewController {
     
     var viewDidLoad: ControlEvent<Void> {
         let source = self.methodInvoked(#selector(Base.viewDidLoad)).map { _ in }

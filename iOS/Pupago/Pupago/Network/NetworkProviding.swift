@@ -22,7 +22,7 @@ protocol NetworkProviding {
     func participantList(roomCode: String) -> Observable<Participants>
     func langDetect(_ str: String) -> Observable<Language>
     func translate(source: String, target: String, text: String) -> Observable<TranslationData>
-    func profile() -> Observable<Profile>
+    func thumbnail() -> Observable<Thumbnail>
     func ocr(data: String, timestamp: Int, requestId: String) -> Observable<OCRResponse>
 }
 

@@ -16,7 +16,7 @@ struct Field: Codable {
     let inferConfidence: Double?
 }
 
-struct Image: Codable {
+struct ImageData: Codable {
     let uid: String?
     let name: String?
     let inferResult: String?
@@ -29,7 +29,7 @@ struct OCRResponse: Codable {
     let version: String?
     let requestId: String?
     let timestamp: Int?
-    let images: [Image]
+    let images: [ImageData]
     
     var concatedString: String {
         guard let image = images.first else { return "" }

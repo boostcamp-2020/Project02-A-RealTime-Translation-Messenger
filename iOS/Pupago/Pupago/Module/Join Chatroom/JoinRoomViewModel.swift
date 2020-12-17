@@ -29,8 +29,8 @@ final class JoinRoomViewModel: ViewModel, ViewModelType {
     
     // MARK: - State
     
-    let isFull = BehaviorRelay<Bool>(value: false)
-    let isValid = BehaviorRelay<Bool>(value: false)
+    private let isFull = BehaviorRelay<Bool>(value: false)
+    private let isValid = BehaviorRelay<Bool>(value: false)
     let roomInfo = PublishSubject<(code: String, isPrivate: Bool)>()
     
     // MARK: - Transform

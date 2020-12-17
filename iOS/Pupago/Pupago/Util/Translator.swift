@@ -5,11 +5,10 @@
 //  Created by 김근수 on 2020/12/04.
 //
 
-import Foundation
 import RxSwift
 import RxCocoa
 
-class Translator: NSObject {
+final class Translator: NSObject {
     typealias Text = (korean: String, english: String, lang: String)
     
     private let provider: NetworkProviding

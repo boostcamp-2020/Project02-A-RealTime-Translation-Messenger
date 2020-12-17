@@ -11,9 +11,9 @@ final class ChattingListCell: CollectionViewBaseCell {
     
     static let identifier = "ChattingListCell"
     
-    @IBOutlet weak var createAtLabel: UILabel!
-    @IBOutlet weak var numberOfPeopleLabel: UILabel!
-    @IBOutlet weak var roomNameLabel: UILabel!
+    @IBOutlet private weak var createAtLabel: UILabel!
+    @IBOutlet private weak var numberOfPeopleLabel: UILabel!
+    @IBOutlet private weak var roomNameLabel: UILabel!
     
     override func makeUI() {
         super.makeUI()
@@ -23,7 +23,7 @@ final class ChattingListCell: CollectionViewBaseCell {
     func confiture(with room: Room) {
         roomNameLabel.text = room.title
         numberOfPeopleLabel.text = "\(room.participantCount ?? 0)/8"
-        createAtLabel.text = room.createdAt
+        createAtLabel.text = DateManager.stringFormat(of: room.createdAt ?? "") 
     }
     
     private func configureShadow() {

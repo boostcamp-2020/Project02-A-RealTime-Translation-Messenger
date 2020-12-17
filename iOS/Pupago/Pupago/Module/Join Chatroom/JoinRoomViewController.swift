@@ -12,16 +12,16 @@ final class JoinRoomViewController: ViewController {
     
     // MARK: - IBOutlets
     
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var closeButton: UIButton!
-    @IBOutlet weak var joinButton: Button!
-    @IBOutlet var codeTextFields: [UITextField]!
-    @IBOutlet weak var dimmingView: UIView!
-    @IBOutlet weak var centerConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var closeButton: UIButton!
+    @IBOutlet private weak var joinButton: Button!
+    @IBOutlet private var codeTextFields: [UITextField]!
+    @IBOutlet private weak var dimmingView: UIView!
+    @IBOutlet private weak var centerConstraint: NSLayoutConstraint!
     
     // MARK: - Properties
     
-    let tapGesture = UITapGestureRecognizer()
+    private let tapGesture = UITapGestureRecognizer()
     
     // MARK: - Lifecycle
     

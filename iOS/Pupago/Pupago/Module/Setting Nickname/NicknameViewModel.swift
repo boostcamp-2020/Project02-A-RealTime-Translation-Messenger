@@ -34,7 +34,7 @@ final class NicknameViewModel: ViewModel, ViewModelType {
     private let nickname = BehaviorRelay<String>(value: "")
     private let needShake = BehaviorRelay<Bool>(value: false)
     
-    //MARK: - Transform
+    // MARK: - Transform
     
     func transform(_ input: Input) -> Output {
         input.nickname
@@ -62,19 +62,19 @@ final class NicknameViewModel: ViewModel, ViewModelType {
                 saveNickname(nickname: nickname.value)
                 return ChattingListViewModel(provider: provider)
             }
-            
+        
         return Output(viewTexts: viewText,
                       isValidNickname: isValidNickname,
                       isActive: isActive,
                       needShake: needShake.asObservable(),
                       showChattingListView: showChattingListView)
     }
-
+    
 }
 
 private extension NicknameViewModel {
     
-    private func validate(nickname: String) -> Bool {
+    func validate(nickname: String) -> Bool {
         guard nickname.count >= 2,
               RegexManager.validate(of: nickname, for: .nickname)
         else { return false }
@@ -82,13 +82,13 @@ private extension NicknameViewModel {
         return true
     }
     
-    private func validateLength(nickname: String) -> Bool {
+    func validateLength(nickname: String) -> Bool {
         guard nickname.count == 12 else { return false }
         
         return true
     }
     
-    private func saveNickname(nickname: String) {
+    func saveNickname(nickname: String) {
         Application.shared.userName = nickname
     }
     
