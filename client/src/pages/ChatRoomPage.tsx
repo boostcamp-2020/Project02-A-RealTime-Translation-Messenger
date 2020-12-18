@@ -81,7 +81,6 @@ function ChatRoomPage() {
         onStackChats(receiveChat);
       });
       socketData.on('socket error', (errorMessage: { errorMessage: string }) => {
-        alert(errorMessage);
         onResetSocketId();
         onResetChats();
         onResetChatInput();
