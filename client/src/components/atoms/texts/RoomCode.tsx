@@ -30,7 +30,7 @@ const StyledRoomCodeText = styled.p`
   letter-spacing: 1.4px;
 `;
 
-export function RoomCode({ code, onClick }: RoomCodeTextPropsType) {
+function RoomCode({ code, onClick }: RoomCodeTextPropsType) {
   return (
     <StyledRoomCode onClick={onClick}>
       <StyledRoomCodeText>{code}</StyledRoomCodeText>

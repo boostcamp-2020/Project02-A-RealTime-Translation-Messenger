@@ -7,7 +7,7 @@ const { REDIS_HOST, REDIS_PORT, REDIS_PASSWORD } = process.env;
 
 const client = redis.createClient({
   host: REDIS_HOST,
-  port: parseInt(REDIS_PORT as string),
+  port: parseInt(REDIS_PORT!),
   password: REDIS_PASSWORD,
 });
 

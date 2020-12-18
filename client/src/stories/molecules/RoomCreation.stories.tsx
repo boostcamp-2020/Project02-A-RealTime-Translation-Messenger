@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
-import { RoomCreation, RoomCreationPropsType } from '../../components/molecules/roomCreationPage/RoomCreation';
+import RoomCreation, { RoomCreationPropsType } from '../../components/molecules/roomCreationPage/RoomCreation';
 
 export default {
   title: 'pupagoMolecule/RoomCreation',

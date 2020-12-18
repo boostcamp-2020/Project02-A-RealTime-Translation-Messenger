@@ -8,6 +8,7 @@ import MainButton from '../../atoms/buttons/MainButton';
 function EnterCodeButton() {
   const { onSetNavigation } = useNavigation();
   const { formatMessage } = useIntl();
+
   return (
     <div>
       <MainButton

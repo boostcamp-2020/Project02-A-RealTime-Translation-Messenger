@@ -1,12 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { lazy, Suspense, useEffect } from 'react';
 import styled from 'styled-components';
 
-import UserInfoPage from './UserInfoPage';
-import RoomCreationPage from './RoomCreationPage';
-import RoomListPage from './RoomListPage';
+const UserInfoPage = lazy(() => import('./UserInfoPage'));
+const RoomCreationPage = lazy(() => import('./RoomCreationPage'));
+const RoomListPage = lazy(() => import('./RoomListPage'));
+const CodeInputPage = lazy(() => import('./CodeInputPage'));
+
 import MainPageBox from '../components/atoms/boxes/MainPageBox';
 import MainPageNavigation from '../@types/mainPageNavigation';
-import CodeInputPage from './CodeInputPage';
 import useNavigation from '../hooks/useNavigation';
 import useReset from '../hooks/useReset';
 import useUser from '../hooks/useUser';
@@ -20,13 +21,14 @@ const Wrapper = styled.div`
 `;
 
 function MainPage() {
-  const { navigation } = useNavigation();
+  const { navigation, onSetNavigation } = useNavigation();
   const { onReset } = useReset();
   const { socketData } = useUser();
 
   useEffect(() => {
     socketData?.disconnect();
     onReset();
+    onSetNavigation(MainPageNavigation.USER_INFO);
   }, []);
 
   const renderMainPage = (navigation: MainPageNavigation) => {
@@ -46,7 +48,9 @@ function MainPage() {
 
   return (
     <Wrapper>
-      <MainPageBox>{renderMainPage(navigation)}</MainPageBox>
+      <MainPageBox>
+        <Suspense fallback={<div />}>{renderMainPage(navigation)}</Suspense>
+      </MainPageBox>
     </Wrapper>
   );
 }

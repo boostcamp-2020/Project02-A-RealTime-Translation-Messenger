@@ -1,6 +1,6 @@
 import express from 'express';
 
-import profileImageController from '../controllers/profileImageController';
+import profileImageController from '../controllers/profileImage';
 
 const router = express.Router();
 

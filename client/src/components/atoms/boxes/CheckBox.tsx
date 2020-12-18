@@ -36,7 +36,7 @@ const CheckBoxWrapper = styled.div`
   align-items: center;
 `;
 
-export function CheckBox({ isChecked = false, children, isPrivateOnClick, isPrivate }: CheckBoxTypes) {
+function CheckBox({ isChecked = false, children, isPrivateOnClick, isPrivate }: CheckBoxTypes) {
   return (
     <CheckBoxWrapper>
       <StyledCheckBox

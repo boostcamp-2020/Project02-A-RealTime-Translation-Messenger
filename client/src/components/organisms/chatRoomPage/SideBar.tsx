@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import React, { lazy, useState, useEffect, Suspense } from 'react';
 import styled from 'styled-components';
+import { useLocation } from 'react-router-dom';
 
+const ChatRoomList = lazy(() => import('./ChatRoomList'));
+const ParticipantList = lazy(() => import('./ParticipantList'));
 import SideBarMolecule from '../../molecules/chatRoomPage/SideBar';
-import ChatRoomList from './ChatRoomList';
 import { JoiningRoomType, SideBarStatus } from '../../../@types/types';
-import ParticipantList from './ParticipantList';
 import RoomSwitchModal from '../../molecules/chatRoomPage/RoomSwitchModal';
 import useReset from '../../../hooks/useReset';
 import useRoom from '../../../hooks/useRoom';
-import { useHistory } from 'react-router-dom';
 import useUser from '../../../hooks/useUser';
 
 const SideBarWrapper = styled.div`
@@ -31,8 +31,12 @@ function SideBar() {
   });
   const { onReset } = useReset();
   const { onJoinRoom } = useRoom();
-  const history = useHistory();
   const { socketData } = useUser();
+  const location = useLocation();
+
+  useEffect(() => {
+    setSideBarStatus(SideBarStatus.PARTICIPANTS);
+  }, [location]);
 
   return (
     <SideBarWrapper>
@@ -43,7 +47,6 @@ function SideBar() {
               socketData?.disconnect();
               onReset();
               onJoinRoom(switchingRoom);
-              history.push('/loading');
               setIsSwitching(false);
             }}
             onClickBackground={() => {
@@ -59,11 +62,13 @@ function SideBar() {
         </RoomSwitchWrapper>
       )}
       <SideBarMolecule selected={sideBarStatus} onClickSideBarTab={setSideBarStatus}>
-        {sideBarStatus === SideBarStatus.PARTICIPANTS ? (
-          <ParticipantList />
-        ) : (
-          <ChatRoomList setIsSwitching={setIsSwitching} setSwitchingRoom={setSwitchingRoom} />
-        )}
+        <Suspense fallback={<div />}>
+          {sideBarStatus === SideBarStatus.PARTICIPANTS ? (
+            <ParticipantList />
+          ) : (
+            <ChatRoomList setIsSwitching={setIsSwitching} setSwitchingRoom={setSwitchingRoom} />
+          )}
+        </Suspense>
       </SideBarMolecule>
     </SideBarWrapper>
   );

@@ -7,6 +7,7 @@ import ChatTranslationBox from '../../atoms/boxes/ChatTranslationBox';
 import VoiceRecognitionOrganism from '../../organisms/chatRoomPage/VoiceRecognition';
 import useUser from '../../../hooks/useUser';
 import LangCode from '../../../@types/langCode';
+import { LangCodeFormattedForServer, TranslationCycle } from '../../../@types/types';
 
 const Wrapper = styled.div`
   position: relative;
@@ -19,9 +20,10 @@ const Wrapper = styled.div`
 `;
 
 const VoiceWrapper = styled.div`
-  position: absolute;
-  bottom: 0px;
-  left: 0px;
+  position: relative;
+  bottom: 720px;
+  left: 140px;
+  z-index: 1;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -35,13 +37,15 @@ const getPapagoStyleText = (loading: boolean, data: string) => {
 function ChatInput() {
   const [voice, setVoice] = useState(false);
   const { socketData } = useUser();
-
   const { chatInputData, translationData, translationLoading, onSetChatInput, cycleData } = useChatInput();
 
   const getSendingChat = () => ({
     Korean: translationData.origin === LangCode.KOREAN ? chatInputData : translationData.translationText,
     English: translationData.origin === LangCode.ENGLISH ? chatInputData : translationData.translationText,
-    origin: translationData.origin === 'ko' ? 'Korean' : 'English',
+    origin:
+      translationData.origin === LangCode.KOREAN
+        ? LangCodeFormattedForServer.KOREAN
+        : LangCodeFormattedForServer.ENGLISH,
   });
 
   const sendingChat = useRef(getSendingChat());
@@ -54,7 +58,7 @@ function ChatInput() {
     if (!socketData) return;
     if (translationData.translationText.length === 0) return;
     if (translationLoading) return;
-    if (cycleData === 'PROCESS') return;
+    if (cycleData === TranslationCycle.PROCESS) return;
 
     socketData.emit('send chat', sendingChat.current);
     onSetChatInput('');

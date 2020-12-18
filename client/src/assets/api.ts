@@ -20,7 +20,7 @@ const joinRoom = async (roomCode: string, isPrivate: 'true' | 'false') => {
 };
 
 const getRoomList = async () => {
-  return backend.get<{ roomList: RoomListType[] }>('/api/room');
+  return backend.get<{ rooms: RoomListType[] }>('/api/room');
 };
 
 const detectLanguage = async ({ query }: { query: string }) => {

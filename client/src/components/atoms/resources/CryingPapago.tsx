@@ -9,7 +9,7 @@ const Logo = styled.img`
   height: 144px;
 `;
 
-export function CryingPapago() {
+function CryingPapago() {
   return <Logo src={Images.CRYING_PAPAGO} alt="crying papago" />;
 }
 

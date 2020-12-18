@@ -20,6 +20,7 @@ const Wrapper = styled.div`
 function CryingPapago() {
   const { onSetNavigation } = useNavigation();
   const { formatMessage } = useIntl();
+
   return (
     <Wrapper>
       <NoChatRoomMolecule />

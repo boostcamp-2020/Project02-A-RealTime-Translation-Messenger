@@ -1,53 +1,54 @@
+import roomGroup from '../models/roomGroup';
+import LangCode from '../@types/language';
+import room from '../@types/roomInfo';
+import RegExpression from '../@types/regExpression';
 import { SendChatType } from '../@types/dataType';
-import roomInfoModel from '../models/roomInfoModel';
-import dotenv from 'dotenv';
-import MaxParticipants from '../@types/maxParticipantsInRoom';
 
-dotenv.config();
-
-const isRoomCodeValid = (roomCode: string) => {
-  if (!/^[A-Z|0-9]{4}$/.test(roomCode)) return false;
+const isValidRoomCode = (roomCode: string) => {
+  const regex = new RegExp(RegExpression.ROOM_CODE, RegExpression.RANGE);
+  if (!regex.test(roomCode)) return false;
 
   return true;
 };
 
-const isRoomValid = async (roomCode: string, isPrivate: string) => {
-  if (!isRoomCodeValid(roomCode)) return false;
+const isValidRoom = async (roomCode: string, isPrivate: string) => {
+  if (!isValidRoomCode(roomCode)) return false;
 
-  if (!(await roomInfoModel.isRoomCodeExisting(roomCode))) return false;
+  if (!(await roomGroup.checkExistedCode(roomCode))) return false;
 
-  if (isPrivate === 'true') {
-    if (!(await roomInfoModel.isRoomPrivate(roomCode))) return false;
-  } else if (await roomInfoModel.isRoomPrivate(roomCode)) return false;
-
-  return true;
-};
-
-const isIsPrivateValid = (isPrivate: string) => {
-  if (isPrivate !== 'true' && isPrivate !== 'false') return false;
+  if (isPrivate === room.PRIVATE) {
+    if (!(await roomGroup.isRoomPrivate(roomCode))) return false;
+  } else if (await roomGroup.isRoomPrivate(roomCode)) return false;
 
   return true;
 };
 
-const isTitleValid = (title: string) => {
-  if (title.length >= 2 && title.length <= 30) return true;
+const isValidRoomDisclosureStatus = (isPrivate: string) => {
+  if (isPrivate !== room.PRIVATE && isPrivate !== room.PUBLIC) return false;
+
+  return true;
+};
+
+const isValidTitle = (title: string) => {
+  if (title.length >= room.MIN_TITLE_LENGTH && title.length <= room.MAX_TITLE_LENGTH) return true;
 
   return false;
 };
 
-const isNicknameValid = (nickname: string) => {
-  if (!/^[A-Z|a-z|가-힣]{2,12}$/.test(nickname)) return false;
+const isValidNickname = (nickname: string) => {
+  const regex = new RegExp(RegExpression.NICKNAME, RegExpression.RANGE);
+  if (!regex.test(nickname)) return false;
 
   return true;
 };
 
-const isLanguageValid = (language: string) => {
+const isValidLanguage = (language: string) => {
   if (language === LangCode.KOREAN || language === LangCode.ENGLISH) return true;
 
   return false;
 };
 
-const isMessageValid = (sendChat: SendChatType) => {
+const isValidMessage = (sendChat: SendChatType) => {
   const { origin } = sendChat;
   if (origin !== LangCode.KOREAN && origin !== LangCode.ENGLISH) return false;
 
@@ -58,28 +59,21 @@ const isMessageValid = (sendChat: SendChatType) => {
   return true;
 };
 
-const isImageLinkValid = (imageLink: string) => {
-  const { IMAGE_ENDPOINT } = process.env;
-  const regex = new RegExp(`^${IMAGE_ENDPOINT!}/pupago/.*\.jpg$`, 'g');
+const isValidImageLink = (imageLink: string) => {
+  const regex = new RegExp(RegExpression.IMAGE_LINK, RegExpression.RANGE);
   if (!regex.test(imageLink)) return false;
   return true;
 };
 
-const isMaxParticipants = (participantsCount: number) => {
-  if (participantsCount < MaxParticipants.MAX_PARTICIPANTS) return true;
-  return false;
+const validation = {
+  isValidRoomCode,
+  isValidRoom,
+  isValidRoomDisclosureStatus,
+  isValidTitle,
+  isValidNickname,
+  isValidLanguage,
+  isValidMessage,
+  isValidImageLink,
 };
 
-const validationUtil = {
-  isRoomCodeValid,
-  isRoomValid,
-  isIsPrivateValid,
-  isTitleValid,
-  isNicknameValid,
-  isLanguageValid,
-  isMessageValid,
-  isImageLinkValid,
-  isMaxParticipants,
-};
-
-export default validationUtil;
+export default validation;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
-import { RefreshButton, RefreshButtonTypes } from '../../components/atoms/buttons/RefreshButton';
+import RefreshButton, { RefreshButtonTypes } from '../../components/atoms/buttons/RefreshButton';
 
 export default {
   title: 'pupagoAtom/RefreshButton',

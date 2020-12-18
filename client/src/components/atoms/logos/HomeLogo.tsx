@@ -14,7 +14,7 @@ const StyledLogo = styled.img`
   cursor: pointer;
 `;
 
-export function HomeLogo({ onClick }: HomeLogoType) {
+function HomeLogo({ onClick }: HomeLogoType) {
   return <StyledLogo onClick={onClick} src={Images.HOME_LOGO} alt="pupago home logo" />;
 }
 

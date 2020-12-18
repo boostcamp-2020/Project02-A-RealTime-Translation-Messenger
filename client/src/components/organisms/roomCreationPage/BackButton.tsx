@@ -9,6 +9,7 @@ import useRoom from '../../../hooks/useRoom';
 function BackButton() {
   const { onSetNavigation } = useNavigation();
   const { onResetRoomState } = useRoom();
+
   return (
     <IconButton
       iconType={'ArrowBack'}

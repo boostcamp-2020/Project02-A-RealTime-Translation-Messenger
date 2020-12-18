@@ -9,7 +9,7 @@ const StyledLogo = styled.img`
   height: 16px;
 `;
 
-export function MiniLogo() {
+function MiniLogo() {
   return <StyledLogo src={Images.MINI_LOGO} alt="pupago mini logo" />;
 }
 

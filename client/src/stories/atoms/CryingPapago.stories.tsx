@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
-import { CryingPapago } from '../../components/atoms/resources/CryingPapago';
+import CryingPapago from '../../components/atoms/resources/CryingPapago';
 
 export default {
   title: 'pupagoAtom/CryingPapago',

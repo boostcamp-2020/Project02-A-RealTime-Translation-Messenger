@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import io from 'socket.io-client';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 import ChatLogs from '../components/organisms/chatRoomPage/ChatLogs';
 import SideBar from '../components/organisms/chatRoomPage/SideBar';
@@ -15,8 +15,11 @@ import useChat from '../hooks/useChat';
 import useChatInput from '../hooks/useChatInput';
 import useNavigation from '../hooks/useNavigation';
 import MainPageNavigation from '../@types/mainPageNavigation';
+import LangCode from '../@types/langCode';
+import { LangCodeFormattedForServer } from '../@types/types';
 
 const Wrapper = styled.div`
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -25,7 +28,6 @@ const Wrapper = styled.div`
 `;
 
 const StyledChatRoomBox = styled.div`
-  position: relative;
   width: 1000px;
   height: 720px;
   box-shadow: 5px 5px 100px 0 rgba(0, 0, 0, 0.25);
@@ -50,28 +52,33 @@ function ChatRoomPage() {
   const { onResetChatInput } = useChatInput();
   const { onSetNavigation } = useNavigation();
   const history = useHistory();
+  const location = useLocation();
 
   useEffect(() => {
-    if (socketData !== null) return;
+    if (socketData !== null) {
+      history.replace('/');
+      return;
+    }
     onSetSocket(io(process.env.BASE_URL as string));
-  }, []);
+  }, [location]);
 
   useEffect(() => {
     if (socketData !== null && participantsList.length === 0) {
       socketData.emit('enter chatroom', {
         roomCode: roomData.roomCode,
         nickname: nicknameData,
-        language: languageData === 'ko' ? 'Korean' : 'English',
+        language:
+          languageData === LangCode.KOREAN ? LangCodeFormattedForServer.KOREAN : LangCodeFormattedForServer.ENGLISH,
         imageLink: imageLinkData,
       });
       socketData.on('receive participants list', (participantsList: string) => {
         onSetSocketId(socketData.id);
-        const participants = JSON.parse(participantsList);
-        onSetParticipantsList(participants.participantsList);
+        const participants: any = participantsList;
+        onSetParticipantsList(participants.participants);
         onStackChats({ type: participants.type, diffNickname: participants.diffNickname });
       });
-      socketData.on('receive chat', (receiveChat: string) => {
-        onStackChats(JSON.parse(receiveChat));
+      socketData.on('receive chat', (receiveChat: any) => {
+        onStackChats(receiveChat);
       });
       socketData.on('socket error', (errorMessage: { errorMessage: string }) => {
         alert(errorMessage);

@@ -1,8 +1,8 @@
-import { Request, Response } from 'express';
 import dotenv from 'dotenv';
+import { Request, Response } from 'express';
 
 import StatusCode from '../@types/statusCode';
-import profileImageService from '../services/profileImageService';
+import profileImageService from '../services/profileImage';
 
 dotenv.config();
 

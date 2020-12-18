@@ -1,18 +1,16 @@
 import express from 'express';
 import https from 'https';
 
-import loader from './loaders';
-import optionInitialize from './loaders/option';
+import initializer from './initializer';
+import optionInitializer from './initializer/option';
 
 const startServer = async () => {
   const app = express();
   const { SERVER_PORT } = process.env;
-  const server = https.createServer(optionInitialize, app);
-  await loader(app, server);
+  const server = https.createServer(optionInitializer, app);
+  await initializer(app, server);
 
-  server.listen(SERVER_PORT, () => {
-    console.log(`Express App Init in ${SERVER_PORT}!`);
-  });
+  server.listen(SERVER_PORT, () => {});
 };
 
 startServer();

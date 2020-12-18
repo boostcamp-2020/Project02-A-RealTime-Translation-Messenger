@@ -8,21 +8,28 @@ export type VoiceRecognitionModalPropsType = {
   onClickBackground?: () => void;
 };
 
+const VoiceRecognitionModalWrapper = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 const VoiceRecognitionWrapper = styled.div`
   position: absolute;
   left: 520px;
   top: 240px;
 `;
 
-export const VoiceRecognitionModal = ({ onClickBackground }: VoiceRecognitionModalPropsType) => {
+function VoiceRecognitionModal({ onClickBackground }: VoiceRecognitionModalPropsType) {
   return (
-    <div>
+    <VoiceRecognitionModalWrapper>
       <ChatModalBackground onClick={onClickBackground} />
       <VoiceRecognitionWrapper>
         <VoiceRecognition />
       </VoiceRecognitionWrapper>
-    </div>
+    </VoiceRecognitionModalWrapper>
   );
-};
+}
 
 export default VoiceRecognitionModal;
