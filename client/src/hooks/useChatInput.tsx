@@ -2,11 +2,10 @@ import { useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import CharacterLimit from '../@types/characterLimit';
+import Timer from '../@types/timer';
 import { TranslationCycle } from '../@types/types';
 import { RootState } from '../modules';
 import { getTranslatedText, setChatInput, setTranslation, resetChatInput, setCycle } from '../modules/chatInput';
-
-const DEBOUNCE_TIME = 200;
 
 function useTranslate() {
   const { chatInput, translation, cycle } = useSelector((state: RootState) => state.chatInput);
@@ -21,7 +20,7 @@ function useTranslate() {
     dispatch(setCycle(TranslationCycle.PROCESS));
     const handler = setTimeout(() => {
       dispatch(getTranslatedText({ text: chatInput.data, origin: translation.data.origin }));
-    }, DEBOUNCE_TIME);
+    }, Timer.TRANSLATION_DEBOUNCE);
 
     return () => {
       clearTimeout(handler);
