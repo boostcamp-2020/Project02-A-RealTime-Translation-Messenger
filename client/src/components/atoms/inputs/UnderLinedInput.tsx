@@ -12,7 +12,7 @@ const StyledUnderLinedInput = styled.input<StyledUnderLinedInputPropsType>`
   border-bottom: 1px solid ${palette.PUPAGO_BLUE};
   background-color: transparent;
   font-size: 18px;
-  color: ${(props) => (props.valid ? Palette.BLACK : 'red')};
+  color: ${(props) => (props.valid ? Palette.BLACK : Palette.RED)};
 `;
 
 export type StyledUnderLinedInputPropsType = {
