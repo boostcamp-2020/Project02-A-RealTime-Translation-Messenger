@@ -15,7 +15,7 @@ function useReset() {
   const { onResetSocketId, onResetSocket } = useUser();
   const dispatch = useDispatch();
 
-  const onReset = useCallback(() => {
+  const onResetStates = useCallback(() => {
     onResetSocketId();
     onResetChats();
     onResetChatInput();
@@ -25,7 +25,7 @@ function useReset() {
   }, [dispatch]);
 
   return {
-    onReset,
+    onResetStates,
   };
 }
 
