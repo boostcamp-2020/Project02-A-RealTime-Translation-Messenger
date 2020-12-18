@@ -1,8 +1,8 @@
 import socketsInRoom from '../models/socketsInRoom';
 import roomCodeOnSocket from '../models/roomCodeOnSocket';
 import dateUtil from '../utils/date';
-import { ReceiveChatType, ParticipantType } from '../@types/dataType';
 import { Socket } from 'socket.io';
+import { ReceiveChatType, ParticipantType } from '../@types/dataType';
 
 const getParticipants = async (roomCode: string) => {
   const participantsInDB = await socketsInRoom.getSockets(roomCode);
