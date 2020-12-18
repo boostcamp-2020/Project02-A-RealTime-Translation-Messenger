@@ -12,7 +12,7 @@ protocol SocketEndpointType {
 }
 
 enum SocketEndpoint {
-    static let baseUrl = URL(string: "http://118.67.134.11:3000") ?? URL(fileURLWithPath: "")
+    static let baseUrl = URL(string: "https://pupago-server.kro.kr") ?? URL(fileURLWithPath: "")
     
     case connect
     case enter

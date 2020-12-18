@@ -11,6 +11,15 @@ enum Localize {
     case korean
     case english
     
+    struct UserMessage {
+        let translating: String
+        let enter: String
+        let leave: String
+        let copy: String
+        let roomNotExist: String
+        let unknownedError: String
+    }
+    
     struct SettingLanguageViewText {
         let intro: String
         let description: String
@@ -28,6 +37,7 @@ enum Localize {
         var title: String
         var language: String
         var chatroom: String
+        var blanking: String
     }
     
     struct CreateRoomViewText {
@@ -46,6 +56,21 @@ enum Localize {
     struct ChatroomViewText {
         var language: String
     }
+    
+    struct ParticipantViewText {
+        var title: String
+    }
+    
+    struct SpeechViewText {
+        var assist: String
+    }
+    
+    struct ScanningViewText {
+        var title: String
+        var description: String
+        var originText: String
+        var translationText: String
+    }
 }
 
 extension Localize {
@@ -59,16 +84,44 @@ extension Localize {
         }
     }
     
+    var toLocale: Locale {
+        switch self {
+        case .korean:
+            return Locale(identifier: "ko-KR")
+        case .english:
+            return Locale(identifier: "en-US")
+        }
+    }
+    
+    var userMessage: UserMessage {
+        switch self {
+        case .korean:
+            return .init(translating: "번역중...",
+                         enter: "님이 들어왔습니다.",
+                         leave: "님이 나갔습니다.",
+                         copy: "가 복사되었습니다.",
+                         roomNotExist: "존재하지 않는 방입니다.",
+                         unknownedError: "알수없는 에러가 발생했습니다.")
+        case .english:
+            return .init(translating: "translating...",
+                         enter: " came in.",
+                         leave: " went out.",
+                         copy: " has been copied.",
+                         roomNotExist: "Room does not exist.",
+                         unknownedError: "Undefined erorr occured.")
+        }
+    }
+    
     var languageViewText: SettingLanguageViewText {
         switch self {
         case .korean:
             return .init(intro: "안녕하세요!\n실시간 번역 채팅 서비스입니다\n글로벌 채팅을 즐겨보세요!",
-                            description: "언어를 선택해주세요",
-                            nextButton: "다음")
+                         description: "언어를 선택해주세요",
+                         nextButton: "다음")
         case .english:
             return .init(intro: "Hello!\nWelcome to Realtime Chat\nEnjoy Global Chatting!",
-                            description: "Select your Language",
-                            nextButton: "Next")
+                         description: "Select your Language",
+                         nextButton: "Next")
         }
     }
     
@@ -77,12 +130,12 @@ extension Localize {
         case .korean:
             return .init(intro: "다음으로\n닉네임을 입력해주세요.",
                          inputPlaceholder: "닉네임을 입력해주세요.",
-                         inputConstraint: "닉네임은 2-12자여야 합니다.",
+                         inputConstraint: "닉네임은 2-12자여야 하며, 공백이 없어야 합니다.",
                          nextButton: "시작하기")
         case .english:
             return .init(intro: "Next,\nEnter your nickname.",
                          inputPlaceholder: "Enter your nickname",
-                         inputConstraint: "Nickname must be 2-12 characters.",
+                         inputConstraint: "2-12 characters with No white spaces.",
                          nextButton: "Start")
         }
     }
@@ -92,11 +145,13 @@ extension Localize {
         case .korean:
             return .init(title: "푸파고",
                          language: "한국어",
-                         chatroom: "채팅방")
+                         chatroom: "채팅방",
+                         blanking: "채팅방이 존재하지 않습니다.")
         case .english:
             return .init(title: "Pupago",
                          language: "English",
-                         chatroom: "Chats")
+                         chatroom: "Chats",
+                         blanking: "Chatroom does not exist")
         }
     }
     
@@ -109,7 +164,7 @@ extension Localize {
                          privateRoom: "비공개 채팅방",
                          createButton: "생성하기")
         case .english:
-
+            
             return .init(title: "Create Room",
                          description: "Room must be 2-30 characters.",
                          publicRoom: "Public Chat",
@@ -137,4 +192,38 @@ extension Localize {
             return .init(language: "English")
         }
     }
+    
+    var participantViewText: ParticipantViewText {
+        switch self {
+        case .korean:
+            return .init(title: "대화 상대")
+        case .english:
+            return .init(title: "Contact")
+        }
+    }
+    
+    var speechViewText: SpeechViewText {
+        switch self {
+        case .korean:
+            return .init(assist: "버튼을 눌러\n음성인식을 시작하세요.")
+        case .english:
+            return .init(assist: "Press the button\nto start voice recognition.")
+        }
+    }
+    
+    var scanningViewText: ScanningViewText {
+        switch self {
+        case .korean:
+            return .init(title: "이미지 인식",
+                         description: "이미지 인식을 시작하세요.",
+                         originText: "원본 메시지",
+                         translationText: "번역 메시지")
+        case .english:
+            return .init(title: "Image OCR",
+                         description: "Start image recognition.",
+                         originText: "Origin Message",
+                         translationText: "Translation Message")
+        }
+    }
+    
 }

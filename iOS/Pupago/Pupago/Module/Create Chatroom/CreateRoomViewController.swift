@@ -5,43 +5,43 @@
 //  Created by 김근수 on 2020/11/25.
 //
 
-import UIKit
 import RxSwift
 import RxCocoa
 
 final class CreateRoomViewController: ViewController {
     
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var roomTextField: ValidatingTextField!
-    @IBOutlet weak var closeButton: UIButton!
-    @IBOutlet weak var createButton: Button!
-    @IBOutlet weak var privateSegment: SegmentControl!
-    @IBOutlet weak var centerConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var descriptionLabel: ValidatingLabel!
+    @IBOutlet private weak var roomTextField: ValidatingTextField!
+    @IBOutlet private weak var closeButton: UIButton!
+    @IBOutlet private weak var createButton: Button!
+    @IBOutlet private weak var privateSegment: SegmentControl!
+    @IBOutlet private weak var dimmingView: UIView!
+    @IBOutlet private weak var centerConstraint: NSLayoutConstraint!
     
-    private var keyboardShown: Bool = false
+    // MARK: - Property
+    
+    private let tapGesture = UITapGestureRecognizer()
     
     // MARK: - Object Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        bindKeyboard()
+        configureGesture()
     }
     
     // MARK: - Bind ViewModel
   
     override func bindViewModel() {
         super.bindViewModel()
-        
         guard let viewModel = viewModel as? CreateRoomViewModel else { return }
       
-        let roomName = roomTextField.rx.text.orEmpty.asObservable()
-        let segmentSelection = privateSegment.rx.selectedSegmentIndex.map { $0 == 1 }
-        let createTrigger = createButton.rx.tap.asObservable()
-        let cancelTrigger = closeButton.rx.tap.asObservable()
-
-        let input = CreateRoomViewModel.Input(roomName: roomName,
-                                              privateSelection: segmentSelection,
-                                              createTrigger: createTrigger,
-                                              cancelTrigger: cancelTrigger)
+        let input = CreateRoomViewModel.Input(roomName: roomTextField.rx.text.orEmpty.asObservable(),
+                                              privateDidSelect: privateSegment.rx.selectedSegmentIndex.map { $0 == 1 },
+                                              createButtonTap: createButton.rx.tap.asObservable(),
+                                              cancelButtonTap: closeButton.rx.tap.asObservable(),
+                                              dimmingViewDidTap: tapGesture.rx.event.map {_ in})
         let output = viewModel.transform(input)
         
         output.viewTexts
@@ -54,65 +54,49 @@ final class CreateRoomViewController: ViewController {
             })
             .disposed(by: rx.disposeBag)
         
-        output.hasValidRoomName
-            .drive(onNext: { [unowned self] isValid in
-                self.roomTextField.isValid = isValid
-                self.descriptionLabel.textColor = isValid ? .darkGray : .red
-            })
+        output.isValidRoomName
+            .bind(to: descriptionLabel.rx.isValid, roomTextField.rx.isValid)
             .disposed(by: rx.disposeBag)
         
-        output.activate
-            .drive(onNext: { [unowned self] activate in
-                self.createButton.isUserInteractionEnabled = activate
-                self.createButton.backgroundColor = activate ? UIColor(named: "ButtonColor") : .systemGray6
-            })
+        output.needShake
+            .filter { $0 }
+            .bind(animated: roomTextField.rx.animated.tick(duration: 0.33).isSelected)
+            .disposed(by: rx.disposeBag)
+        
+        output.isActive
+            .drive(createButton.rx.isActive)
             .disposed(by: rx.disposeBag)
         
         output.dismiss
-            .drive(onNext: { [unowned self] () in
+            .emit(onNext: { [unowned self] () in
                 self.navigator.dismiss(sender: self)
+            })
+            .disposed(by: rx.disposeBag)
+        
+    }
+    
+}
+
+private extension CreateRoomViewController {
+    
+    func configureGesture() {
+        dimmingView.addGestureRecognizer(tapGesture)
+    }
+    
+}
+
+extension CreateRoomViewController: KeyboardHandleable {
+    
+    func bindKeyboard() {
+        keyboardHeight
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] keyboardHeight in
+                let constraintHeight = keyboardHeight == 0 ? 0 : keyboardHeight - (view.safeAreaInsets.bottom) * 2
+                
+                centerConstraint.constant = -(constraintHeight) / 2
+                view.layoutIfNeeded()
             })
             .disposed(by: rx.disposeBag)
     }
     
-    override func registerForKeyboardNotifications() {
-        super.registerForKeyboardNotifications()
-        
-        NotificationCenter.default
-            .addObserver(self, selector: #selector(keyboardWillShow),
-                               name: UIResponder.keyboardWillShowNotification,
-                               object: nil)
-        NotificationCenter.default
-            .addObserver(self, selector: #selector(keyboardWillHide),
-                               name: UIResponder.keyboardWillHideNotification,
-                               object: nil)
-    }
-}
-
-// MARK: - KeyBoard Notification
-extension CreateRoomViewController {
-    
-    @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            if keyboardSize.height == 0.0 || keyboardShown { return }
-            
-            UIView.animate(withDuration: 0) {
-                let bottomPadding = self.view.safeAreaInsets.bottom
-                self.centerConstraint.constant -= (keyboardSize.height - bottomPadding) / 2
-                self.keyboardShown = true
-                self.view.layoutIfNeeded()
-            }
-        }
-    }
-    
-    @objc func keyboardWillHide(notification: NSNotification) {
-        if !keyboardShown { return }
-            
-        UIView.animate(withDuration: 0) {
-            self.centerConstraint.constant = 0
-            self.keyboardShown = false
-            self.view.layoutIfNeeded()
-        }
-    }
-  
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import LangCode from '../../../@types/langCode';
 import Palette from '../../../@types/Palette';
 
 export type LanguageSelectButtonPropsType = {
@@ -21,15 +22,15 @@ const StyledButton = styled.button<LanguageSelectButtonPropsType>`
   cursor: pointer;
 `;
 
-export function LanguageSelectButton({
+function LanguageSelectButton({
   selected = true,
-  language = 'Korean',
+  language = LangCode.KOREAN,
   ...props
 }: LanguageSelectButtonPropsType) {
   return (
     <div>
       <StyledButton type="button" selected={selected} language={language} {...props}>
-        {language === 'Korean' ? '가' : 'A'}
+        {language === LangCode.KOREAN ? '가' : 'A'}
       </StyledButton>
     </div>
   );

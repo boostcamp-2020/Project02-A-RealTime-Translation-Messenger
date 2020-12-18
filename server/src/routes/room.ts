@@ -1,11 +1,11 @@
 import express from 'express';
 
-import roomController from '../controllers/roomController';
+import roomController from '../controllers/room';
 
 const router = express.Router();
 
-router.get('/', roomController.getPublicRoomList);
+router.get('/', roomController.getPublicRooms);
 router.post('/', roomController.createRoom);
-router.get('/list/:roomCode', roomController.getParticipantsList);
+router.get('/participants/:roomCode', roomController.getParticipants);
 
 export default router;

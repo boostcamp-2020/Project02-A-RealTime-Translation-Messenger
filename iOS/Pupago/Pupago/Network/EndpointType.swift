@@ -5,7 +5,6 @@
 //  Created by 김근수 on 2020/11/30.
 //
 
-import Foundation
 import RxSwift
 import Alamofire
 
@@ -19,6 +18,6 @@ protocol EndpointType {
 
 extension EndpointType {
     var baseUrl: String {
-        return "http://118.67.134.11:3000/api/"
+        return "https://pupago-server.kro.kr/api/"
     }
 }

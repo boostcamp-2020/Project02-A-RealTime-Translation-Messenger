@@ -1,10 +1,10 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
-import { RoomItemBox, RoomItemBoxTypes } from '../components/atoms/boxes/RoomItemBox';
+import RoomItemBox, { RoomItemBoxTypes } from '../../components/atoms/boxes/RoomItemBox';
 
 export default {
-  title: 'pupago/RoomItemBox',
+  title: 'pupagoAtom/RoomItemBox',
   component: RoomItemBox,
 } as Meta;
 

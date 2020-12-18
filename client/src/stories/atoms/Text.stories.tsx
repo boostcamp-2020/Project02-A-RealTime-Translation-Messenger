@@ -1,9 +1,10 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
-import Text, { TextPropsType } from '../components/atoms/texts/Text';
+
+import Text, { TextPropsType } from '../../components/atoms/texts/Text';
 
 export default {
-  title: 'pupago/Text',
+  title: 'pupagoAtom/Text',
   component: Text,
 } as Meta;
 

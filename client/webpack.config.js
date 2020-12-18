@@ -2,6 +2,7 @@
 
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
   entry: './src/index.tsx',
@@ -10,7 +11,7 @@ module.exports = {
     rules: [
       {
         test: /\.(ts|js)x?$/,
-        use: ['ts-loader', 'babel-loader'],
+        use: ['babel-loader'],
         exclude: /node_modules/,
       },
     ],
@@ -34,5 +35,11 @@ module.exports = {
       template: 'src/index.html',
       inject: false,
     }),
+    new webpack.DefinePlugin({
+      'process.env.BASE_URL': JSON.stringify('https://pupago-server.kro.kr'),
+    }),
   ],
+  node: {
+    fs: 'empty',
+  },
 };

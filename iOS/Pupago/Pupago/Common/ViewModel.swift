@@ -5,7 +5,6 @@
 //  Created by 김근수 on 2020/11/23.
 //
 
-import Foundation
 import RxSwift
 import RxCocoa
 
@@ -17,5 +16,17 @@ protocol ViewModelType {
 }
 
 class ViewModel: NSObject {
-    let localize = BehaviorRelay<Localize>(value: Application.shared.localize)
+    
+    let provider: NetworkProviding
+    let localize: BehaviorRelay<Localize>
+    let socketManager: SocketIOManager
+    
+    init(provider: NetworkProviding) {
+        self.provider = provider
+        localize = BehaviorRelay<Localize>(value: Application.shared.localize)
+        socketManager = SocketIOManager.shared
+        
+        super.init()
+    }
+    
 }

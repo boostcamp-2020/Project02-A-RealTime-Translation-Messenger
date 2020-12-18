@@ -3,10 +3,11 @@ import { Story, Meta } from '@storybook/react/types-6-0';
 
 import ParticipantNotification, {
   ParticipantNotificationPropsType,
-} from '../components/atoms/texts/ParticipantNotification';
+} from '../../components/atoms/texts/ParticipantNotification';
+import LangCode from '../../@types/langCode';
 
 export default {
-  title: 'pupago/ParticiapantNotification',
+  title: 'pupagoAtom/ParticiapantNotification',
   component: ParticipantNotification,
 } as Meta;
 
@@ -16,26 +17,26 @@ export const KoreanEnter = Template.bind({});
 KoreanEnter.args = {
   nickname: '쟈기쟈기쟈기쟈기쟈기쟈기',
   isEnter: true,
-  language: 'KOREAN',
+  language: LangCode.KOREAN,
 };
 
 export const KoreanLeft = Template.bind({});
 KoreanLeft.args = {
   nickname: '쟈기쟈기',
   isEnter: false,
-  language: 'KOREAN',
+  language: LangCode.KOREAN,
 };
 
 export const EnglishEnter = Template.bind({});
 EnglishEnter.args = {
   nickname: 'James',
   isEnter: true,
-  language: 'ENGLISH',
+  language: LangCode.ENGLISH,
 };
 
 export const EnglishLeft = Template.bind({});
 EnglishLeft.args = {
   nickname: 'James',
   isEnter: false,
-  language: 'ENGLISH',
+  language: LangCode.ENGLISH,
 };

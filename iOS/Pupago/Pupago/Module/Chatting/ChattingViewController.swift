@@ -5,115 +5,145 @@
 //  Created by 김근수 on 2020/11/25.
 //
 
-import UIKit
 import RxSwift
 import RxCocoa
 import RxDataSources
+import RxAnimated
+import Toaster
 
-class ChattingViewController: ViewController {
-
-    @IBOutlet weak var languageLabel: UILabel!
-    @IBOutlet weak var codeButton: Button!
-    @IBOutlet weak var inputText: UITextView!
-    @IBOutlet weak var registButton: UIButton!
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var translationTextfield: UITextView!
-    @IBOutlet weak var inputBarBottomConstraint: NSLayoutConstraint!
+final class ChattingViewController: ViewController {
     
-    private var didSetupViewConstraints = false
-    private var keyboardShown: Bool = false
+    // MARK: - IBOutlet
+    
+    @IBOutlet private weak var languageLabel: UILabel!
+    @IBOutlet private weak var codeButton: Button!
+    @IBOutlet private weak var inputText: UITextView!
+    @IBOutlet private weak var sendButton: UIButton!
+    @IBOutlet private weak var micButton: UIButton!
+    @IBOutlet private weak var scanButton: UIButton!
+    @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet private weak var translationTextView: UITextView!
+    @IBOutlet private weak var inputBarBottomConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var translationViewConstraint: NSLayoutConstraint!
+
+    // MARK: - Properties
+    
+    private var rightNavigationItem = UIBarButtonItem(image: UIImage(systemName: "list.bullet"),
+                                                      style: .plain,
+                                                      target: self,
+                                                      action: nil)
+    
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureNavigationButton()
         configureCollectionView()
+        configureToasterView()
+        bindKeyboard()
     }
+    
+    // MARK: Bind ViewModel
     
     override func bindViewModel() {
         super.bindViewModel()
-        
         guard let viewModel = viewModel as? ChattingViewModel else { return }
         
-        let chatText = inputText.rx.text.orEmpty.asObservable()
-        let registTrigger = registButton.rx.tap.map { _ in }
-        let willLeave = rx.viewWillDisappear.map { _ in }
-        let input = ChattingViewModel.Input(chatText: chatText,
-                                            registTrigger: registTrigger,
-                                            willLeave: willLeave)
+        let dataSource = MessageDataSource()
         
+        let input = ChattingViewModel.Input(chatText: inputText.rx.text.orEmpty.asObservable(),
+                                            codeButtonDidTap: codeButton.rx.tap.asObservable(),
+                                            sendButtonDidTap: sendButton.rx.tap.asObservable(),
+                                            micButtonDidTap: micButton.rx.tap.asObservable(),
+                                            scanButtonDidTap: scanButton.rx.tap.asObservable(),
+                                            participantButtonDidTap: rightNavigationItem.rx.tap.asObservable(),
+                                            viewWillDisappear: rx.viewWillDisappear.map {_ in})
         let output = viewModel.transform(input)
         
-        output.viewText
-            .drive(onNext: { [unowned self] text in
-                self.languageLabel.text = text.language
-            })
+        output.viewTexts
+            .map { $0.language }
+            .drive(languageLabel.rx.text)
             .disposed(by: rx.disposeBag)
         
         output.roomInfo
             .drive(onNext: { [unowned self] info in
-                self.navigationItem.title = info.title
-                self.codeButton.setTitle(info.code, for: .normal)
+                navigationItem.title = info.title
+                codeButton.setTitle(info.code, for: .normal)
             })
             .disposed(by: rx.disposeBag)
         
-        let dataSource = RxCollectionViewSectionedReloadDataSource<MessageSection>(configureCell: { _, collectionView, indexPath, item in
-            if item.senderId == SocketIOManager.shared.socket.sid {
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyChattingCell.identifier,
-                                                                    for: indexPath) as? MyChattingCell
-                else { return UICollectionViewCell() }
-                cell.chatTextField.text = item.korean
-                cell.createAtLabel.text = DateManager.stringFormat(of: item.createdAt)
-                return cell
-            } else {
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OthersChattingCell.identifier,
-                                                                    for: indexPath) as? OthersChattingCell
-                else { return UICollectionViewCell() }
-                cell.userNameLabel.text = item.nickname
-                cell.originChatTextView.text = item.korean
-                cell.createAtLabel.text = DateManager.stringFormat(of: item.createdAt)
-                return cell
-            }
-        })
+        output.translationViewState
+            .bind(to: translationTextView.rx.state)
+            .disposed(by: rx.disposeBag)
         
-        output.items.asObservable()
+        output.chats
             .bind(to: self.collectionView.rx.items(dataSource: dataSource))
             .disposed(by: rx.disposeBag)
         
-        output.reset
-            .drive(onNext: { [unowned self] _ in
-                self.inputText.text = ""
-            })
+        output.needResetInput
+            .map { "" }
+            .bind(to: inputText.rx.text)
             .disposed(by: rx.disposeBag)
         
-        output.scroll
-            .drive(onNext: { [unowned self] _ in
+        output.needScrollDown
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] _ in
                 scrollDownChat()
             })
             .disposed(by: rx.disposeBag)
         
-        output.activate
-            .drive(onNext: { [unowned self] activate in
-                self.registButton.isUserInteractionEnabled = activate
-                self.registButton.tintColor = activate ? UIColor(named: "BlueColor") : .lightGray
-                self.translationTextfield.isHidden = !activate
+        output.isActive
+            .bind(animated: sendButton.rx.isActive)
+            .disposed(by: rx.disposeBag)
+        
+        output.toasterMessage
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { msg in
+                Toast(text: msg).show()
+            })
+            .disposed(by: rx.disposeBag)
+        
+        output.showParticipantView
+            .emit(onNext: { [unowned self] viewModel in
+                self.navigator.show(segue: .participant(viewModel: viewModel),
+                                    sender: self,
+                                    transition: .slideIn)
+            })
+            .disposed(by: rx.disposeBag)
+        
+        output.showSpeechView
+            .emit(onNext: { [unowned self] viewModel in
+                self.navigator.show(segue: .speech(viewModel: viewModel),
+                                    sender: self,
+                                    transition: .modal)
+                
+            })
+            .disposed(by: rx.disposeBag)
+        
+        output.showScanView
+            .emit(onNext: { [unowned self] viewModel in
+                navigator.show(segue: .scan(viewModel: viewModel),
+                               sender: self,
+                               transition: .modal)
+            })
+            .disposed(by: rx.disposeBag)
+        
+        translationTextView.rx.text
+            .distinctUntilChanged()
+            .subscribe(onNext: {[unowned self] _ in
+                adjustTranslationViewSize(translationTextView.contentSize.height >= 120)
             })
             .disposed(by: rx.disposeBag)
     }
     
-    override func registerForKeyboardNotifications() {
-        super.registerForKeyboardNotifications()
-        
-        NotificationCenter.default
-            .addObserver(self, selector: #selector(keyboardWillShow),
-                               name: UIResponder.keyboardWillShowNotification,
-                               object: nil)
-        NotificationCenter.default
-            .addObserver(self, selector: #selector(keyboardWillHide),
-                               name: UIResponder.keyboardWillHideNotification,
-                               object: nil)
-    }
 }
 
-extension ChattingViewController {
+private extension ChattingViewController {
+    
+    func configureNavigationButton() {
+        self.navigationItem.rightBarButtonItem = rightNavigationItem
+    }
+    
     func configureCollectionView() {
         let size = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                           heightDimension: .estimated(74))
@@ -131,10 +161,17 @@ extension ChattingViewController {
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         self.collectionView.addGestureRecognizer(tap)
-        
     }
     
-    private func scrollDownChat() {
+    func configureToasterView() {
+        let marginTop: CGFloat = 200
+        let frame = self.view.safeAreaLayoutGuide.layoutFrame
+        
+        ToastView.appearance().bottomOffsetPortrait = max(frame.width, frame.height) - marginTop
+        ToastView.appearance().bottomOffsetLandscape = min(frame.width, frame.height) - marginTop
+    }
+    
+    func scrollDownChat() {
         self.view.layoutIfNeeded()
         
         let lastItemIndex = self.collectionView.numberOfItems(inSection: 0) - 1
@@ -144,39 +181,35 @@ extension ChattingViewController {
         self.collectionView.scrollToItem(at: indexPath, at: .bottom, animated: true)
     }
     
-    @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            if keyboardSize.height == 0.0 || keyboardShown { return }
-            
-            let bottomPadding = self.view.safeAreaInsets.bottom
-            inputBarBottomConstraint.constant = keyboardSize.height - bottomPadding
-            
-            UIView.animate(withDuration: 0) {
-                self.collectionView.contentInset.bottom = keyboardSize.height - bottomPadding
-                self.collectionView.verticalScrollIndicatorInsets.bottom = self.collectionView.contentInset.bottom - bottomPadding
-                self.keyboardShown = true
-                self.scrollDownChat()
-            }
-        }
-        
-    }
-    
-    @objc func keyboardWillHide(notification: NSNotification) {
-        if !keyboardShown { return }
-        self.inputBarBottomConstraint.constant = 0
-            
-        UIView.animate(withDuration: 0) {
-            self.collectionView.contentInset.bottom = 0
-            self.collectionView.verticalScrollIndicatorInsets.bottom = self.collectionView.contentInset.bottom
-            self.keyboardShown = false
-            self.scrollDownChat()
-            self.view.layoutIfNeeded()
-        }
-        
+    func adjustTranslationViewSize(_ isScroll: Bool) {
+        translationViewConstraint.constant = isScroll ? 120 : translationTextView.contentSize.height
+        translationTextView.isScrollEnabled = isScroll
+        view.layoutIfNeeded()
     }
     
     @objc func dismissKeyboard(_ : NSNotification) {
         self.view.endEditing(true)
+    }
+    
+}
+
+extension ChattingViewController: KeyboardHandleable {
+    
+    func bindKeyboard() {
+        keyboardHeight
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] keyboardHeight in
+                let bottomPadding = view.safeAreaInsets.bottom
+                let constraintHeight = keyboardHeight == 0 ? 0 : keyboardHeight - bottomPadding
+                let bottomHeight = keyboardHeight == 0 ? 0 : bottomPadding
+                
+                inputBarBottomConstraint.constant = constraintHeight
+                collectionView.contentInset.bottom = constraintHeight
+                collectionView.verticalScrollIndicatorInsets.bottom = collectionView.contentInset.bottom - bottomHeight
+                view.layoutIfNeeded()
+                scrollDownChat()
+            })
+            .disposed(by: rx.disposeBag)
     }
     
 }

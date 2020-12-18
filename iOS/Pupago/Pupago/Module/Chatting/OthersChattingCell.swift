@@ -6,18 +6,25 @@
 //
 
 import UIKit
+import Kingfisher
 
-class OthersChattingCell: CollectionViewBaseCell {
+final class OthersChattingCell: CollectionViewBaseCell {
     
     static let identifier = "OthersChattingCell"
     
-    @IBOutlet weak var profileImage: UIImageView!
-    @IBOutlet weak var userNameLabel: UILabel!
-    @IBOutlet weak var originChatTextView: UITextView!
-    @IBOutlet weak var translationChatTextView: UITextView!
-    @IBOutlet weak var createAtLabel: UILabel!
+    @IBOutlet private weak var profileImage: UIImageView!
+    @IBOutlet private weak var userNameLabel: UILabel!
+    @IBOutlet private weak var originChatTextView: UITextView!
+    @IBOutlet private weak var translationChatTextView: UITextView!
+    @IBOutlet private weak var createAtLabel: UILabel!
     
-    func bind() {
-        
+    func configure(with item: Message) {
+        let myLang = Application.shared.localize
+        let url = URL(string: Application.shared.thumbnail)
+        userNameLabel.text = item.nickname
+        originChatTextView.text = myLang == .korean ? item.korean : item.english
+        translationChatTextView.text = myLang == .korean ? item.english : item.korean
+        createAtLabel.text = DateManager.stringFormat(of: item.createdAt)
+        profileImage.kf.setImage(with: url)
     }
 }

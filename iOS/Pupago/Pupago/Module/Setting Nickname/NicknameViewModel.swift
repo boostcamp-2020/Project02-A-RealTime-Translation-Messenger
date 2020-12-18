@@ -5,90 +5,91 @@
 //  Created by 김근수 on 2020/11/23.
 //
 
-import Foundation
 import RxSwift
 import RxCocoa
-import SocketIO
 
 final class NicknameViewModel: ViewModel, ViewModelType {
     
+    // MARK: - Input
+    
     struct Input {
-        let nicknameText: Observable<String?>
-        let saveTrigger: Observable<Void>
+        let nickname: Observable<String>
+        let startButtonDidTap: Observable<Void>
     }
+    
+    // MARK: - Output
     
     struct Output {
         let viewTexts: Driver<Localize.SettingNicknameViewText>
-        let hasValidNickname: Driver<Bool>
-        let activate: Driver<Bool>
-        let saved: Driver<ChattingListViewModel>
+        let isValidNickname: Observable<Bool>
+        let isActive: Driver<Bool>
+        let needShake: Observable<Bool>
+        let showChattingListView: Signal<ChattingListViewModel>
     }
     
-    let isEmpty = BehaviorRelay<Bool>(value: true)
-    let isValid = BehaviorRelay<Bool>(value: false)
-    let connected = PublishRelay<SocketIOStatus>()
+    // MARK: - State
+    
+    private let isEmpty = BehaviorRelay<Bool>(value: true)
+    private let isValid = BehaviorRelay<Bool>(value: false)
+    private let nickname = BehaviorRelay<String>(value: "")
+    private let needShake = BehaviorRelay<Bool>(value: false)
+    
+    // MARK: - Transform
     
     func transform(_ input: Input) -> Output {
-        
-        let socket = SocketIOManager.shared.socket
-        
-        socket?.rx.event(.connect)
-            .subscribe(onNext: { [unowned self] _ in
-                print("\n\nConnected Event Received!")
-                self.connected.accept(SocketIOStatus.connected)
+        input.nickname
+            .subscribe(onNext: { [unowned self] in
+                isEmpty.accept($0.isEmpty)
+                isValid.accept(validate(nickname: $0))
+                nickname.accept($0)
+                needShake.accept(validateLength(nickname: $0))
             })
-            .disposed(by: rx.disposeBag)
-        
-        input.nicknameText
-            .map { $0?.isEmpty ?? true }
-            .bind(to: isEmpty)
-            .disposed(by: rx.disposeBag)
-        
-        input.nicknameText
-            .map { self.validate(nickname: $0 ?? "") }
-            .bind(to: isValid)
             .disposed(by: rx.disposeBag)
         
         let viewText = localize.asDriver()
             .map { $0.nicknameViewText }
         
-        let validate = Observable.zip(isEmpty, isValid)
+        let isValidNickname = Observable.combineLatest(isEmpty, isValid)
             .map { $0 || $1 }
-            .asDriver(onErrorJustReturn: false)
         
-        let activate = Observable.zip(isEmpty, isValid)
+        let isActive = Observable.combineLatest(isEmpty, isValid)
             .map { !$0 && $1 }
             .asDriver(onErrorJustReturn: false)
         
-        input.saveTrigger
-            .withLatestFrom(input.nicknameText)
-            .subscribe(onNext: { text in
-                Application.shared.userName = text ?? ""
-                SocketIOManager.shared.establishConnect()
-            })
-            .disposed(by: rx.disposeBag)
+        let showChattingListView = input.startButtonDidTap
+            .asSignal(onErrorJustReturn: ())
+            .map { [unowned self] () -> ChattingListViewModel in
+                saveNickname(nickname: nickname.value)
+                return ChattingListViewModel(provider: provider)
+            }
         
-        let saved = connected
-            .filter { $0 == .connected }
-            .asDriver(onErrorJustReturn: .notConnected)
-            .map { _ in ChattingListViewModel() }
-            
         return Output(viewTexts: viewText,
-                      hasValidNickname: validate,
-                      activate: activate,
-                      saved: saved)
+                      isValidNickname: isValidNickname,
+                      isActive: isActive,
+                      needShake: needShake.asObservable(),
+                      showChattingListView: showChattingListView)
     }
     
 }
 
 private extension NicknameViewModel {
     
-    private func validate(nickname: String) -> Bool {
-        guard nickname.count <= 12 && nickname.count >= 2,
+    func validate(nickname: String) -> Bool {
+        guard nickname.count >= 2,
               RegexManager.validate(of: nickname, for: .nickname)
         else { return false }
         
         return true
+    }
+    
+    func validateLength(nickname: String) -> Bool {
+        guard nickname.count == 12 else { return false }
+        
+        return true
+    }
+    
+    func saveNickname(nickname: String) {
+        Application.shared.userName = nickname
     }
     
 }

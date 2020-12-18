@@ -1,10 +1,10 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
-import { ProfileImage, ProfileImagePropsType } from '../components/atoms/resources/ProfileImage';
+import ProfileImage, { ProfileImagePropsType } from '../../components/atoms/resources/ProfileImage';
 
 export default {
-  title: 'pupago/ProfileImage',
+  title: 'pupagoAtom/ProfileImage',
   component: ProfileImage,
 } as Meta;
 

@@ -5,65 +5,67 @@
 //  Created by 김근수 on 2020/11/23.
 //
 
-import UIKit
 import RxSwift
 import RxCocoa
 
 final class NicknameViewController: ViewController {
     
-    @IBOutlet weak var introLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var nameTextField: ValidatingTextField!
-    @IBOutlet weak var startButton: Button!
-    @IBOutlet weak var inputConstraint: NSLayoutConstraint!
-    @IBOutlet weak var topConstraint: NSLayoutConstraint!
-    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    // MARK: - IBOutlet
     
-    private var keyboardShown: Bool = false
+    @IBOutlet private weak var introLabel: UILabel!
+    @IBOutlet private weak var descriptionLabel: ValidatingLabel!
+    @IBOutlet private weak var nameTextField: ValidatingTextField!
+    @IBOutlet private weak var startButton: Button!
+    
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
+    // MARK: - Bind ViewModel
+    
     override func bindViewModel() {
         super.bindViewModel()
-        
         guard let viewModel = viewModel as? NicknameViewModel else { return }
-        let nameText = nameTextField.rx.text.asObservable()
-        let saveTrigger = startButton.rx.tap.asObservable()
         
-        let input = NicknameViewModel.Input(nicknameText: nameText,
-                                            saveTrigger: saveTrigger)
+        let input = NicknameViewModel.Input(nickname: nameTextField.rx.text.orEmpty.asObservable(),
+                                            startButtonDidTap: startButton.rx.tap.asObservable())
         let output = viewModel.transform(input)
         
         output.viewTexts
             .drive(onNext: { [unowned self] texts in
-                self.introLabel.text = texts.intro
-                self.descriptionLabel.text = texts.inputConstraint
-                self.nameTextField.placeholder = texts.inputPlaceholder
-                self.startButton.setTitle(texts.nextButton, for: .normal)
+                introLabel.text = texts.intro
+                descriptionLabel.text = texts.inputConstraint
+                nameTextField.placeholder = texts.inputPlaceholder
+                startButton.setTitle(texts.nextButton, for: .normal)
             })
             .disposed(by: rx.disposeBag)
         
-        output.hasValidNickname
-            .drive(onNext: { [unowned self] isValid in
-                self.nameTextField.isValid = isValid
-                self.descriptionLabel.textColor = isValid ? .white : .red
-            })
+        output.isValidNickname
+            .bind(to: nameTextField.rx.isValid, descriptionLabel.rx.isValid)
             .disposed(by: rx.disposeBag)
         
-        output.activate
-            .drive(onNext: { [unowned self] activate in
-                self.startButton.isUserInteractionEnabled = activate
-                self.startButton.backgroundColor = activate ? UIColor(named: "ButtonColor") : .systemGray6
-            })
+        output.isActive
+            .drive(startButton.rx.isActive)
             .disposed(by: rx.disposeBag)
         
-        output.saved
-            .drive(onNext: { [unowned self] viewModel in
+        output.needShake
+            .filter { $0 }
+            .bind(animated: nameTextField.rx.animated.tick(duration: 0.33).isSelected)
+            .disposed(by: rx.disposeBag)
+        
+        output.showChattingListView
+            .emit(onNext: { [unowned self] viewModel in
                 guard let window = self.view.window else { return }
-                self.navigator.show(segue: .chatlist(viewModel: viewModel), sender: self, transition: .rootWithNavigation(in: window))
+                startButton.isUserInteractionEnabled = false
+                checkAnimationView.play { _ in
+                    playCheckSoundWithCompletion {
+                        self.navigator.show(segue: .chatlist(viewModel: viewModel), sender: self, transition: .rootWithNavigation(in: window))
+                    }
+                }
             })
             .disposed(by: rx.disposeBag)
     }
+    
 }

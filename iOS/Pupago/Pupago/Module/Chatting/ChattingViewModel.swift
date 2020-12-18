@@ -5,130 +5,179 @@
 //  Created by 김근수 on 2020/11/25.
 //
 
-import Foundation
 import RxSwift
 import RxCocoa
-import RxDataSources
 
-class ChattingViewModel: ViewModel, ViewModelType {
+final class ChattingViewModel: ViewModel, ViewModelType {
     
     typealias RoomInfo = (title: String?, code: String?)
+    typealias TranslationViewState = (text: String, isHidden: Bool)
+    
+    // MARK: - Input
     
     struct Input {
         let chatText: Observable<String>
-        let registTrigger: Observable<Void>
-        let willLeave: Observable<Void>
+        let codeButtonDidTap: Observable<Void>
+        let sendButtonDidTap: Observable<Void>
+        let micButtonDidTap: Observable<Void>
+        let scanButtonDidTap: Observable<Void>
+        let participantButtonDidTap: Observable<Void>
+        let viewWillDisappear: Observable<Void>
     }
+    
+    // MARK: - Output
     
     struct Output {
-        let viewText: Driver<Localize.ChatroomViewText>
+        let viewTexts: Driver<Localize.ChatroomViewText>
         let roomInfo: Driver<RoomInfo>
-        let items: Driver<[MessageSection]>
-        let reset: Driver<Void>
-        let scroll: Driver<Void>
-        let activate: Driver<Bool>
+        let isActive: Driver<Bool>
+        let chats: Observable<[MessageSection]>
+        let translationViewState: Observable<TranslationViewState>
+        let toasterMessage: Observable<String>
+        let needResetInput: Observable<Void>
+        let needScrollDown: Observable<Void>
+        let showParticipantView: Signal<ParticipantViewModel>
+        let showSpeechView: Signal<SpeechViewModel>
+        let showScanView: Signal<ScanningViewModel>
     }
     
-    let chats = BehaviorRelay<[MessageSection]>(value: [MessageSection(header: "Chat", items: [])])
+    // MARK: - State
+    
+    private let chats = BehaviorRelay<[MessageSection]>(value: [MessageSection(header: "Chat", items: [])])
+    private let chatInfo = PublishRelay<Translator.Text>()
+    private let isActive = BehaviorRelay<Bool>(value: false)
+    private let downScroll = PublishRelay<Void>()
+    private let toasterMessage = PublishRelay<String>()
+    private let translationViewState = PublishRelay<TranslationViewState>()
+    private let reset = PublishRelay<Void>()
     let roomInfo = BehaviorRelay<RoomInfo>(value: (nil, nil))
-
-    let langCode = PublishRelay<(lang: Language, text: String)>()
-    let activate = BehaviorRelay<Bool>(value: false)
-    let downScroll = PublishRelay<Void>()
-    let isValid = BehaviorRelay<Bool>(value: false)
-
+    
+    // MARK: - Transform
+    
     func transform(_ input: Input) -> Output {
-        
-        let socketManager = SocketIOManager.shared
-        let provider = PupagoAPI()
         let translator = Translator(provider: provider)
         
-        // MARK: - Observing Socket Events
-        
+        /// Handle receiving message
         socketManager.socket.rx.event(.receiveMessage)
-            .subscribe(onNext: { [unowned self] data in
-                if let msg = self.parse(data) {
-                    updateMessage(message: msg)
-                    downScroll.accept(())
-                }
+            .flatMap { [unowned self] data -> Observable<Message> in parse(data) }
+            .subscribe(onNext: { [unowned self] message in
+                updateMessage(message: message)
+                downScroll.accept(())
+            }, onError: { error in
+                print(error)
             })
             .disposed(by: rx.disposeBag)
         
+        /// Handle receiving participant event
+        /// Event occurs when someone came in or leave out
         socketManager.socket.rx.event(.list)
-            .subscribe(onNext: { data in
-                print("Participant changed!")
+            .flatMap { [unowned self] data -> Observable<Participants> in parse(data) }
+            .subscribe(onNext: { [unowned self] result in
+                toasterMessage.accept(result.stateMessage)
+            }, onError: { error in
+                print(error)
+            })
+            .disposed(by: rx.disposeBag)
+        
+        /// Remove socket handlers when go out
+        input.viewWillDisappear
+            .subscribe(onNext: { [unowned self] in
+                Application.shared.currentRoomCode = ""
+                socketManager.leavChatroom()
+                socketManager.socket.off(SocketEndpoint.receiveMessage.eventName)
+                socketManager.socket.off(SocketEndpoint.list.eventName)
             })
             .disposed(by: rx.disposeBag)
         
         input.chatText
             .distinctUntilChanged()
-            .filter { !$0.isEmpty }
-            .debounce(.milliseconds(500), scheduler: MainScheduler.instance)
+            .debounce(.milliseconds(200), scheduler: MainScheduler.instance)
             .flatMap { translator.translate(with: $0) }
-            .subscribe(onNext: { (korean, english) in
-                print("korean: \(korean), english: \(english)")
-            })
-            .disposed(by: rx.disposeBag)
-
-        input.registTrigger
-            .withLatestFrom(input.chatText)
-            .subscribe(onNext: { msg in
-                socketManager.sendMessage(korean: msg, english: msg, origin: "Korean")
-            })
-            .disposed(by: rx.disposeBag)
-        
-        input.willLeave
-            .subscribe(onNext: {
-                socketManager.leavChatroom()
-                socketManager.socket.removeAllHandlers()
+            .subscribe(onNext: { [unowned self] info in
+                let translatedText = info.lang == "Korean" ? info.english : info.korean
+                translationViewState.accept((translatedText, false))
+                chatInfo.accept(info)
+                isActive.accept(true)
             })
             .disposed(by: rx.disposeBag)
         
         input.chatText
-            .map { self.validate(chat: $0) }
-            .bind(to: isValid)
+            .subscribe(onNext: { [unowned self] text in
+                let status = text.isEmpty ? ("", true) : (localize.value.userMessage.translating, false)
+                translationViewState.accept(status)
+                isActive.accept(false)
+            })
             .disposed(by: rx.disposeBag)
         
-        let viewText = localize.asDriver()
+        input.sendButtonDidTap
+            .withLatestFrom(chatInfo)
+            .subscribe(onNext: { [unowned self] info in
+                socketManager.sendMessage(korean: info.korean,
+                                          english: info.english,
+                                          origin: info.lang)
+                translationViewState.accept(("", true))
+                reset.accept(())
+            })
+            .disposed(by: rx.disposeBag)
+        
+        input.codeButtonDidTap
+            .withLatestFrom(roomInfo)
+            .map { $0.code }
+            .subscribe(onNext: { [unowned self] code in
+                UIPasteboard.general.string = code
+                toasterMessage.accept("\(code ?? "")\(localize.value.userMessage.copy)")
+            })
+            .disposed(by: rx.disposeBag)
+        
+        let viewTexts = localize.asDriver()
             .map { $0.chatroomViewText }
         
-        let info = roomInfo.asDriver(onErrorJustReturn: (nil, nil))
-        let reset = input.registTrigger.asDriver(onErrorJustReturn: ())
-        let activate = isValid.asDriver(onErrorJustReturn: false)
-        let chatItem = chats.asDriver(onErrorJustReturn: [])
+        let showParticipant = input.participantButtonDidTap.asSignal(onErrorJustReturn: ())
+            .map { [unowned self] () -> ParticipantViewModel in
+                return ParticipantViewModel(provider: provider, roomCode: roomInfo.value.code ?? "")
+            }
         
-        return Output(viewText: viewText,
-                      roomInfo: info,
-                      items: chatItem,
-                      reset: reset,
-                      scroll: downScroll.asDriver(onErrorJustReturn: ()),
-                      activate: activate)
+        let showSpeechView = input.micButtonDidTap.asSignal(onErrorJustReturn: ())
+            .map { [unowned self] _ in SpeechViewModel(provider: provider) }
+        
+        let showScanView = input.scanButtonDidTap.asSignal(onErrorJustReturn: ())
+            .map { [unowned self] _ in ScanningViewModel(provider: provider) }
+        
+        return Output(viewTexts: viewTexts,
+                      roomInfo: roomInfo.asDriver(onErrorJustReturn: (nil, nil)),
+                      isActive: isActive.asDriver(onErrorJustReturn: false),
+                      chats: chats.asObservable(),
+                      translationViewState: translationViewState.asObservable(),
+                      toasterMessage: toasterMessage.asObservable(),
+                      needResetInput: reset.asObservable(),
+                      needScrollDown: downScroll.asObservable(),
+                      showParticipantView: showParticipant,
+                      showSpeechView: showSpeechView,
+                      showScanView: showScanView)
     }
     
 }
 
 private extension ChattingViewModel {
     
-    private func updateMessage(message: Message) {
+    func updateMessage(message: Message) {
         guard var section = chats.value.first else { return }
         section.items.append(message)
         chats.accept([section])
     }
     
-    private func parse(_ data: [Any]?) -> Message? {
-        guard
-            let dataString = data?[0] as? String,
-            let data = dataString.data(using: .utf8),
-            let message = try? JSONDecoder().decode(Message.self, from: data)
-        else { return nil }
-
-        return message
-    }
-    
-    private func validate(chat: String) -> Bool {
-        guard chat.count <= 80 && !chat.isEmpty else { return false }
-        
-        return true
+    func parse<ResultType: Decodable>(_ data: [Any]?) -> Observable<ResultType> {
+        return Observable.create { observer in
+            guard let anyData = data?[0] else { return Disposables.create() }
+            do {
+                let data = try JSONSerialization.data(withJSONObject: anyData, options: [])
+                let result = try JSONDecoder().decode(ResultType.self, from: data)
+                observer.onNext(result)
+            } catch {
+                observer.onError(error)
+            }
+            return Disposables.create()
+        }
     }
     
 }

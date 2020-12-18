@@ -16,5 +16,5 @@ struct Room: Codable {
 }
 
 struct RoomList: Codable {
-    let roomList: [Room]
+    let rooms: [Room]
 }

@@ -6,7 +6,7 @@ import Palette from '../../../@types/Palette';
 export type ProfileImagePropsType = {
   size: 'size-88' | 'size-72' | 'size-40' | 'size-24';
   isMe: boolean;
-  image: string;
+  image: string | null;
 };
 
 export type ProfileImageSrcProsType = {
@@ -16,15 +16,15 @@ export type ProfileImageSrcProsType = {
 const setSize = (size: string): [string, string] => {
   switch (size) {
     case 'size-88':
-      return ['88px', '80px'];
+      return ['88px', '76px'];
     case 'size-72':
-      return ['72px', '64px'];
+      return ['72px', '60px'];
     case 'size-40':
-      return ['40px', '36px'];
+      return ['40px', '32px'];
     case 'size-24':
-      return ['24px', '22px'];
+      return ['24px', '18px'];
     default:
-      return ['88px', '80px'];
+      return ['88px', '76px'];
   }
 };
 
@@ -36,6 +36,9 @@ const StyledProfileImageSrc = styled.img<ProfileImageSrcProsType>`
 `;
 
 const StyledProfileImage = styled.div<ProfileImagePropsType>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: ${(props) => setSize(props.size)[0]};
   height: ${(props) => setSize(props.size)[0]};
   ${(props) =>
@@ -46,15 +49,12 @@ const StyledProfileImage = styled.div<ProfileImagePropsType>`
   border: solid 2px ${props.isMe ? Palette.PUPAGO_BLUE : Palette.LIGHT_GREY};`}
   border-radius: 50%;
   background-color: WHITE;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;
 
-export function ProfileImage({ size, isMe, image }: ProfileImagePropsType) {
+function ProfileImage({ size, isMe, image }: ProfileImagePropsType) {
   return (
     <StyledProfileImage size={size} isMe={isMe} image={image}>
-      <StyledProfileImageSrc alt="profile image" src={image} imageSize={size}></StyledProfileImageSrc>
+      {image && <StyledProfileImageSrc alt="profile image" src={image} imageSize={size}></StyledProfileImageSrc>}
     </StyledProfileImage>
   );
 }

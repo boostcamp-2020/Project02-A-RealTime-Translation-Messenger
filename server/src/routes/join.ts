@@ -1,6 +1,6 @@
 import express from 'express';
 
-import joinController from '../controllers/joinController';
+import joinController from '../controllers/join';
 
 const router = express.Router();
 

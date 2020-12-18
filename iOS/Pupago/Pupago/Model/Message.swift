@@ -5,8 +5,6 @@
 //  Created by kimn on 2020/11/28.
 //
 
-import Foundation
-import RxSwift
 import RxDataSources
 
 struct MessageSection {
@@ -19,6 +17,7 @@ struct Message: Decodable {
     let english: String
     let senderId: String
     let nickname: String
+    let imageLink: String?
     let createdAt: String
     
     enum CodingKeys: String, CodingKey {
@@ -26,6 +25,7 @@ struct Message: Decodable {
         case english = "English"
         case senderId = "senderId"
         case nickname = "nickname"
+        case imageLink = "imageLink"
         case createdAt = "createdAt"
     }
 }
