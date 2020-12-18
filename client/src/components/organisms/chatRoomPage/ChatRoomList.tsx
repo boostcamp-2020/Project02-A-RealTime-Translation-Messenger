@@ -5,7 +5,7 @@ import RefreshButton from '../../atoms/buttons/RefreshButton';
 import RoomItem from '../../molecules/common/RoomItem';
 import timeDisplay from '../../../utils/timeDisplay';
 import useRoom from '../../../hooks/useRoom';
-import { JoiningRoomType } from '../../../@types/types';
+import { JoiningRoomType, Size } from '../../../@types/types';
 import ParticipantsLimit from '../../../@types/participantsLimit';
 import useUser from '../../../hooks/useUser';
 import LangCode from '../../../@types/langCode';
@@ -26,13 +26,13 @@ function ChatRoomList({ setIsSwitching, setSwitchingRoom }: ChatRoomListPropsTyp
 
   return (
     <div>
-      <RefreshButton onClickRefresh={onGetRoomList} size={'small'} />
+      <RefreshButton onClickRefresh={onGetRoomList} size={Size.SMALL} />
       {rooms
         ?.filter((room) => room.roomCode !== roomData.roomCode)
         .map((room) => (
           <RoomItem
             key={room.roomCode}
-            size="small"
+            size={Size.SMALL}
             createdAt={
               languageData === LangCode.KOREAN
                 ? timeDisplay.timeSinceKorean(room.createdAt)

@@ -5,17 +5,18 @@ import {
   TranslateTextPropsType,
   TranslateTextReturnType,
   CreatedRoomResponseType,
+  StringifiedBoolean,
 } from '../@types/types';
 
 const backend = axios.create({
   baseURL: process.env.BASE_URL,
 });
 
-const createRoom = async (title: string, isPrivate: 'true' | 'false') => {
+const createRoom = async (title: string, isPrivate: StringifiedBoolean) => {
   return backend.post<CreatedRoomResponseType>('/api/room', { title, isPrivate });
 };
 
-const joinRoom = async (roomCode: string, isPrivate: 'true' | 'false') => {
+const joinRoom = async (roomCode: string, isPrivate: StringifiedBoolean) => {
   return backend.post<CreatedRoomResponseType>('/api/join', { roomCode, isPrivate });
 };
 

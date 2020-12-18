@@ -7,6 +7,7 @@ import Text from '../../atoms/texts/Text';
 import MainButton from '../../atoms/buttons/MainButton';
 import Palette from '../../../@types/Palette';
 import { useIntl } from 'react-intl';
+import { TextSize } from '../../../@types/types';
 
 type RoomSwitchModalPropsType = {
   onClickConfirm: () => void;
@@ -48,7 +49,7 @@ function RoomSwitchModal({ onClickConfirm, onClickCancel, onClickBackground, onC
       <ChatModalBoxWrapper>
         <ChatModalBox onClickClose={onClickClose}>
           <ModalContentWrapper>
-            <Text size={14} color={Palette.DARK_GREY}>
+            <Text size={TextSize.NORMAL} color={Palette.DARK_GREY}>
               {formatMessage({ id: 'switchRoom' })}
             </Text>
             <MainButton disabled={false} onClickButton={onClickConfirm}>

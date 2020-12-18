@@ -5,6 +5,8 @@ import ProfileImage from '../../atoms/resources/ProfileImage';
 import LanguageTag from '../../atoms/resources/LanguageTag';
 import Text from '../../atoms/texts/Text';
 import LangCode from '../../../@types/langCode';
+import { TextSize } from '../../../@types/types';
+import Palette from '../../../@types/Palette';
 
 export type MyProfilePropsType = {
   image: string | null;
@@ -40,7 +42,7 @@ function MyProfile({ image, language, nickname }: MyProfilePropsType) {
       <LanguageTagWrapper>
         <LanguageTag language={language} isMe={true} />
       </LanguageTagWrapper>
-      <NicknameText size={18} weight={'bold'} color={'Black'}>
+      <NicknameText size={TextSize.BIG} weight={'bold'} color={Palette.BLACK}>
         {nickname}
       </NicknameText>
     </MyProfileBox>

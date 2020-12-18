@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import Palette from '../../../@types/Palette';
+import { TextSize } from '../../../@types/types';
 
 import ChatBox from '../../atoms/boxes/ChatBox';
 import ProfileImage from '../../atoms/resources/ProfileImage';
@@ -47,7 +49,7 @@ function ChatItem({ leftMessage, rightMessage, isMe, imageLink, nickname, create
       <ProfileWrapper>
         <Profile isMe={isMe}>
           <ProfileImage size="size-24" isMe={isMe} image={imageLink} />
-          <NickName size={14} color="black" weight="bold">
+          <NickName size={TextSize.NORMAL} color={Palette.BLACK} weight="bold">
             {nickname}
           </NickName>
           <Text>{createdAt}</Text>

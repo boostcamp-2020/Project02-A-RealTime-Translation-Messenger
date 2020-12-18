@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Palette from '../../../@types/Palette';
 
 import palette from '../../../@types/Palette';
 
@@ -11,7 +12,7 @@ const StyledUnderLinedInput = styled.input<StyledUnderLinedInputPropsType>`
   border-bottom: 1px solid ${palette.PUPAGO_BLUE};
   background-color: transparent;
   font-size: 18px;
-  color: ${(props) => (props.valid ? 'black' : 'red')};
+  color: ${(props) => (props.valid ? Palette.BLACK : Palette.RED)};
 `;
 
 export type StyledUnderLinedInputPropsType = {
@@ -26,13 +27,7 @@ export type UnderLinedInputType = {
   valid: boolean;
 };
 
-function UnderLinedInput({
-  value = '',
-  placeholder = '',
-  onChange = undefined,
-  maxLength,
-  valid = true,
-}: UnderLinedInputType) {
+function UnderLinedInput({ value = '', placeholder = '', onChange = undefined, valid = true }: UnderLinedInputType) {
   return (
     <StyledUnderLinedInput type="text" value={value} placeholder={placeholder} onChange={onChange} valid={valid} />
   );

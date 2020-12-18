@@ -6,6 +6,7 @@ import Palette from '../../../@types/Palette';
 import UnderLinedInput from '../../atoms/inputs/UnderLinedInput';
 import Text from '../../atoms/texts/Text';
 import CharacterLimit from '../../../@types/characterLimit';
+import { TextSize } from '../../../@types/types';
 
 type NicknameInputPropsType = {
   nicknameData: string;
@@ -45,7 +46,7 @@ function NicknameInput({ nicknameData, onChangeNickname }: NicknameInputPropsTyp
   return (
     <NicknameInputWrapper>
       {!isNicknameValid && (
-        <NickNameErrorMessage size={12} color={Palette.DARK_GREY}>
+        <NickNameErrorMessage size={TextSize.SMALL} color={Palette.DARK_GREY}>
           {formatMessage({ id: 'nicknameFormatAlert' })}
         </NickNameErrorMessage>
       )}
@@ -65,7 +66,7 @@ function NicknameInput({ nicknameData, onChangeNickname }: NicknameInputPropsTyp
       />
       <InputInfoWrapper>
         <NicknameLength
-          size={14}
+          size={TextSize.NORMAL}
           color={Palette.PUPAGO_BLUE}
         >{`${nicknameData.length} / ${CharacterLimit.NICKNAME}`}</NicknameLength>
       </InputInfoWrapper>

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import IconButton from '../../atoms/buttons/IconButton';
 import Palette from '../../../@types/Palette';
+import { IconType } from '../../../@types/types';
 
 type ChatModalPropsType = {
   children?: React.ReactNode;
@@ -27,7 +28,7 @@ const AbsoluteIcon = styled(IconButton)`
 function ChatModalBox({ onClickClose, children }: ChatModalPropsType) {
   return (
     <StyledChatModalBox>
-      <AbsoluteIcon onClick={onClickClose} iconType="Close" color={Palette.DARK_GREY} />
+      <AbsoluteIcon onClick={onClickClose} iconType={IconType.CLOSE} color={Palette.DARK_GREY} />
       {children}
     </StyledChatModalBox>
   );

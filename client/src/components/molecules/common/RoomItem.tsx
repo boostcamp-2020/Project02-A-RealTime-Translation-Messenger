@@ -5,9 +5,10 @@ import RoomItemBox from '../../atoms/boxes/RoomItemBox';
 import MiniLogo from '../../atoms/logos/MiniLogo';
 import Text from '../../atoms/texts/Text';
 import Palette from '../../../@types/Palette';
+import { Size } from '../../../@types/types';
 
 type RoomItemHeaderWrapperPropsType = {
-  size: 'big' | 'small';
+  size: Size;
 };
 
 const RoomItemHeaderWrapper = styled.div<RoomItemHeaderWrapperPropsType>`
@@ -28,7 +29,7 @@ const MarginedText = styled(Text)`
 `;
 
 export type RoomItemPropsType = {
-  size: 'big' | 'small';
+  size: Size;
   createdAt: string;
   participantCount: number;
   roomCapacity: number;
@@ -40,8 +41,8 @@ export type RoomItemPropsType = {
 const TextWrapper = styled.div<RoomItemHeaderWrapperPropsType>`
   display: flex;
   align-items: center;
-  width: ${(props) => (props.size === 'big' ? '320px' : '216px')};
-  height: ${(props) => (props.size === 'big' ? '46px' : '34px')};
+  width: ${(props) => (props.size === Size.BIG ? '320px' : '216px')};
+  height: ${(props) => (props.size === Size.BIG ? '46px' : '34px')};
 `;
 
 function RoomItem({
@@ -59,17 +60,17 @@ function RoomItem({
         <RoomItemHeaderWrapper size={size}>
           <RoomItemHeaderLeft>
             <MiniLogo />
-            <MarginedText size={size === 'big' ? 14 : 12} color={Palette.PUPAGO_BLUE}>
+            <MarginedText size={size === Size.BIG ? 14 : 12} color={Palette.PUPAGO_BLUE}>
               {createdAt}
             </MarginedText>
           </RoomItemHeaderLeft>
           <Text
-            size={size === 'big' ? 14 : 12}
+            size={size === Size.BIG ? 14 : 12}
             color={Palette.DARK_GREY}
           >{`(${participantCount} / ${roomCapacity})`}</Text>
         </RoomItemHeaderWrapper>
         <TextWrapper size={size}>
-          <Text size={size === 'big' ? 16 : 12} color={Palette.DARK_GREY}>
+          <Text size={size === Size.BIG ? 16 : 12} color={Palette.DARK_GREY}>
             {title}
           </Text>
         </TextWrapper>

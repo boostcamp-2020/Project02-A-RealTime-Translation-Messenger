@@ -9,6 +9,7 @@ import CryingPapago from './CryingPapago';
 import ParticipantsLimit from '../../../@types/participantsLimit';
 import useUser from '../../../hooks/useUser';
 import LangCode from '../../../@types/langCode';
+import { Size } from '../../../@types/types';
 
 type WrapperType = {
   isEmpty: boolean;
@@ -46,7 +47,7 @@ function RoomList() {
         return (
           <RoomItem
             key={room.roomCode}
-            size="big"
+            size={Size.BIG}
             title={room.title}
             createdAt={
               languageData === LangCode.KOREAN

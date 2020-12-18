@@ -1,4 +1,5 @@
 import React from 'react';
+import { Size } from '../../../@types/types';
 
 import useRoomList from '../../../hooks/useRoomList';
 import RefreshButtonAtom from '../../atoms/buttons/RefreshButton';
@@ -9,7 +10,7 @@ const RefreshButton = () => {
   return (
     <div>
       <RefreshButtonAtom
-        size="big"
+        size={Size.BIG}
         onClickRefresh={() => {
           onGetRoomList();
         }}

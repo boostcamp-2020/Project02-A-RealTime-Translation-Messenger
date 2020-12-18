@@ -36,10 +36,15 @@ type CreatedRoomType = {
   isPrivate: boolean;
 };
 
+enum StringifiedBoolean {
+  TRUE = 'true',
+  FALSE = 'false',
+}
+
 type CreatedRoomResponseType = {
   roomCode: string;
   title: string;
-  isPrivate: 'true' | 'false';
+  isPrivate: StringifiedBoolean;
 };
 
 type ChatLogsType = {
@@ -93,6 +98,27 @@ enum TranslationCycle {
   DONE,
 }
 
+enum Size {
+  BIG,
+  SMALL,
+}
+
+enum TextSize {
+  SMALL = 12,
+  NORMAL = 14,
+  BIG = 18,
+  MEGA = 24,
+}
+
+enum IconType {
+  EDIT,
+  ARROW_BACK,
+  SEND,
+  MIC,
+  LEAVE,
+  CLOSE,
+}
+
 export {
   RoomListType,
   ParticipantsType,
@@ -109,4 +135,8 @@ export {
   CreatingRoomType,
   LangCodeFormattedForServer,
   TranslationCycle,
+  Size,
+  TextSize,
+  IconType,
+  StringifiedBoolean,
 };

@@ -2,6 +2,7 @@ import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
 import RoomItem, { RoomItemPropsType } from '../../components/molecules/common/RoomItem';
+import { Size } from '../../@types/types';
 
 export default {
   title: 'pupagoMolecule/RoomItem',
@@ -12,7 +13,7 @@ const Template: Story<RoomItemPropsType> = (args) => <RoomItem {...args} />;
 
 export const Big = Template.bind({});
 Big.args = {
-  size: 'big',
+  size: Size.BIG,
   createdAt: '몇 분 전 생성',
   participantCount: 4,
   roomCapacity: 8,
@@ -21,7 +22,7 @@ Big.args = {
 
 export const Small = Template.bind({});
 Small.args = {
-  size: 'small',
+  size: Size.SMALL,
   createdAt: '몇 분 전 생성',
   participantCount: 3,
   roomCapacity: 8,
