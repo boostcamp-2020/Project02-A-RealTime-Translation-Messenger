@@ -1,6 +1,6 @@
 import SocketIO, { Socket } from 'socket.io';
 
-import socketService from './socketService';
+import socketService from '../services/socket';
 import roomCodeOnSocket from '../models/roomCodeOnSocket';
 import socketsInRoom from '../models/socketsInRoom';
 import roomGroup from '../models/roomGroup';
